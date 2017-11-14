@@ -36,7 +36,7 @@ Examples:
 # To do
 Implement a simple iOS app where a user can pick products from a list and checkout them to get the resulting price. You should get the list of products from [here](https://api.myjson.com/bins/4bwec). We don't need complex animations or layouts, but it should be functional and easy to use.
 
-In Cabify we use RubyMotion to build our iOS app natively while writing Ruby code. We want you to feel comfortable during the exercise, so feel free to pick the best platform for you: Objective-C, Swift or RubyMotion.
+In Cabify we use Swift 4 to build our iOS app. We want you to feel comfortable during the exercise, so feel free to pick the best platform for you: Swift or Objective-C.
 
 
 **The code should:**
