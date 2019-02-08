@@ -36,7 +36,7 @@ Examples:
 
 
 # To do
-Implement an app where a user can pick products from a list and checkout them to get the resulting price. You should get the list of products from [here](https://api.myjson.com/bins/4bwec). We don't need complex animations or layouts, but in terms of
+Implement an app where a user can pick products from a list and checkout them to get the resulting price, and see what discounts are applied. You should get the list of products from [here](https://api.myjson.com/bins/4bwec). In terms of
 functionality, we want you to build an app we could put in the store tomorrow.
 
 In Cabify we use Swift 4 to build our iOS app and Kotlin to build our Android app, but we want you to feel comfortable during the exercise, so feel free to pick the best platform for you: Swift/Objective-C or Kotlin/Java
