@@ -1,6 +1,8 @@
 # Cabify Mobile Challenge
 
-Besides providing exceptional transportation services, Cabify also runs a physical store which sells (only) 3 products:
+Besides providing exceptional transportation services, Cabify also runs a physical store which sells Products. During the year, we apply discounts to them to make it more attractive to clients.
+
+Our products are like this:
 
 ``` 
 Code         | Name                |  Price
@@ -34,10 +36,10 @@ Examples:
 
 
 # To do
-Implement an app where a user can pick products from a list and checkout them to get the resulting price. You should get the list of products from [here](https://api.myjson.com/bins/4bwec). We don't need complex animations or layouts, but it should be functional and easy to use.
+Implement an app where a user can pick products from a list and checkout them to get the resulting price. You should get the list of products from [here](https://api.myjson.com/bins/4bwec). We don't need complex animations or layouts, but in terms of
+functionality, we want you to build an app we could put in the store tomorrow.
 
 In Cabify we use Swift 4 to build our iOS app and Kotlin to build our Android app, but we want you to feel comfortable during the exercise, so feel free to pick the best platform for you: Swift/Objective-C or Kotlin/Java
-
 
 **The code should:**
 - Be written as production-ready code. You will write production code. 
