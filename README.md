@@ -45,3 +45,15 @@ In Cabify we use Swift 4 to build our iOS app and Kotlin to build our Android ap
 - Be written as production-ready code. You will write production code. 
 - Be easy to grow and easy to add new functionality.
 - Have notes attached, explaning the solution and why certain things are included and others are left out.
+
+
+# Done:
+- Code written in RxViper because it is an implementation of a clean architecture. I could use MVVM but I thing that Viper is a good solution to apply SOLID principles. I am not very familiar with other new arquitectures like redux or flux, but I am studying them right now.
+
+- As you can see there is no comments in code because I think like Uncle Bob Martin: "A comment is a failure to express yourself in code.  If you fail, then write a comment; but try not to fail."
+
+- There are some unit tests to test the specifications of the project.
+
+- Developers are not usually good designers as you know, therefore I haven't waste a lot of time in the design of the app and I have focus my work on the code.
+
+- If you have some questions, please, feel free to reach me out.
