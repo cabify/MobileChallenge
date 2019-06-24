@@ -1,6 +1,6 @@
 # Cabify Mobile Challenge
 
-Besides providing exceptional transportation services, Cabify also runs a physical store which sells Products. During the year, we apply discounts to them to make it more attractive to clients.
+Besides providing exceptional transportation services, Cabify also runs a physical store which sells Products.
 
 Our products are like this:
 
@@ -36,12 +36,15 @@ Examples:
 
 
 # To do
-Implement an app where a user can pick products from a list and checkout them to get the resulting price, and see what discounts are applied. You should get the list of products from [here](https://api.myjson.com/bins/4bwec). In terms of
-functionality, we want you to build an app we could put in the store tomorrow.
+- Implement an app where a user can pick products from a list and checkout them to get the resulting price. No need to implement any real payment system, just a fake feedback about the payment has been completed.
+- The discounts can change in the future, depending on the year season we apply different ones.
+- There is no need for a user login screen.
+- We would like to show users what discounts have been applied in their purchase. 
+- You should get the list of products from [here](https://api.myjson.com/bins/4bwec).
 
 In Cabify we use Swift 4 to build our iOS app and Kotlin to build our Android app, but we want you to feel comfortable during the exercise, so feel free to pick the best platform for you: Swift/Objective-C or Kotlin/Java
 
 **The code should:**
-- Be written as production-ready code. You will write production code. 
+- Be written as production-ready code. You will write production code. We would like you to build it in the same way as if you were going to publish to the store.
 - Be easy to grow and easy to add new functionality.
 - Have notes attached, explaning the solution and why certain things are included and others are left out.
