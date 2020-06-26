@@ -40,7 +40,7 @@ Examples:
 - The discounts can change in the future, depending on the year season we apply different ones.
 - There is no need for a user login screen.
 - We would like to show users what discounts have been applied in their purchase. 
-- You should get the list of products from [here](http://shorturl.at/psPQ4).
+- You should get the list of products from [http://shorturl.at/psPQ4](http://shorturl.at/psPQ4).
 
 ## Bonus
 - The app should work also offline, and all that this implies. 
