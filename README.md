@@ -36,17 +36,12 @@ Examples:
 
 
 # To do
-- Implement an app where a user can pick products from a list and checkout them to get the resulting price. No need to implement any real payment system, just a fake feedback about the payment has been completed.
-- The discounts can change in the future, depending on the year season we apply different ones.
+- Implement an app where a user can pick products from a list and checkout them to get the resulting price. No need to implement any real payment system, but we do need a nice user experience where our customers can understand what items are they purchasing, the price and the discount we are applying.
+- You should fetch the list of products from [here](https://gist.githubusercontent.com/palcalde/6c19259bd32dd6aafa327fa557859c2f/raw/ba51779474a150ee4367cda4f4ffacdcca479887/Products.json).
+
+# Considerations
+- Be aware that the discounts are going to change frequently. So the code should support that.
 - There is no need for a user login screen.
-- We would like to show users what discounts have been applied in their purchase. 
-- You should get the list of products from [here](https://gist.githubusercontent.com/palcalde/6c19259bd32dd6aafa327fa557859c2f/raw/ba51779474a150ee4367cda4f4ffacdcca479887/Products.json).
-
-## Bonus
-- The app should work also offline, and all that this implies. 
-
-**The code should:**
-- Be written as production-ready code. You will write production code. We would like you to build it in the same way as if you were going to publish to the store.
-- Be easy to grow and easy to add new functionality.
-- Have notes attached, explaning the solution and why certain things are included and others are left out.
+- Be written as production-ready code. We would like you to build it in the same way as if you were going to publish to the store.
+- Consider explaning the solution and why certain things are included and others are left out.
 - Be written either in Swift or Kotlin, preferably in the latest stable version of the language.
