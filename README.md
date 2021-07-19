@@ -45,3 +45,4 @@ Examples:
 - Be written as production-ready code. We would like you to build it in the same way as if you were going to publish to the store.
 - Consider explaning the solution and why certain things are included and others are left out.
 - Be written either in Swift or Kotlin, preferably in the latest stable version of the language.
+- If possible, use the latest stable version (no Betas) of Xcode or Android Studio.
