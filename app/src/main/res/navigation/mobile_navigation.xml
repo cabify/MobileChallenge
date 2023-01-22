@@ -7,13 +7,13 @@
 
   <fragment
     android:id="@+id/navigation_home"
-    android:name="com.cabify.mobilechallenge.ui.home.HomeFragment"
+    android:name="com.cabify.mobileChallenge.features.home.ui.HomeFragment"
     android:label="@string/title_home"
     tools:layout="@layout/fragment_home" />
 
   <fragment
     android:id="@+id/navigation_cart"
-    android:name="com.cabify.mobilechallenge.ui.cart.CartFragment"
+    android:name="com.cabify.mobilechallenge.features.cart.ui.CartFragment"
     android:label="@string/title_cart"
     tools:layout="@layout/fragment_cart" />
 </navigation>

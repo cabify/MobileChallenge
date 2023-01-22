@@ -1,5 +1,3 @@
 <resources>
   <string name="app_name">MobileChallenge</string>
-  <string name="title_home">Home</string>
-  <string name="title_cart">Cart</string>
 </resources>
