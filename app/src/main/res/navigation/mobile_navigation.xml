@@ -12,8 +12,8 @@
     tools:layout="@layout/fragment_home" />
 
   <fragment
-    android:id="@+id/navigation_dashboard"
-    android:name="com.cabify.mobilechallenge.ui.dashboard.DashboardFragment"
-    android:label="@string/title_dashboard"
-    tools:layout="@layout/fragment_dashboard" />
+    android:id="@+id/navigation_cart"
+    android:name="com.cabify.mobilechallenge.ui.cart.CartFragment"
+    android:label="@string/title_cart"
+    tools:layout="@layout/fragment_cart" />
 </navigation>
