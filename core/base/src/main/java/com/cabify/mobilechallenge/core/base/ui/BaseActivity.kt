@@ -1,4 +1,4 @@
-package com.cabify.core.base.ui
+package com.cabify.mobilechallenge.core.base.ui
 
 import org.koin.androidx.scope.ScopeActivity
 

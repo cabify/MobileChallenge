@@ -20,3 +20,4 @@ include(
 )
 include(":shared:common-ui")
 include(":core:base")
+include(":core:network")

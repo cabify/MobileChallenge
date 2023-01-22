@@ -1,4 +1,4 @@
-package com.cabify.core.base
+package com.cabify.core.network
 
 import org.junit.Test
 

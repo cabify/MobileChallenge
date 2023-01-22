@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.cabify.core.base.ui.BaseFragment
+import com.cabify.mobilechallenge.core.base.ui.BaseFragment
 import com.cabify.mobilechallenge.features.home.presentation.HomeViewModel
 import com.cabify.mobilechallenge.features.home.databinding.FragmentHomeBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel

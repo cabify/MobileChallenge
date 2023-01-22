@@ -1,4 +1,4 @@
-package com.cabify.mobilechallenge
+package com.cabify.core.network
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.cabify.mobilechallenge", appContext.packageName)
+        assertEquals("com.cabify.core.network.test", appContext.packageName)
     }
 }

@@ -2,7 +2,7 @@ package com.cabify.mobilechallenge.features.cart.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.cabify.core.base.presentation.BaseViewModel
+import com.cabify.mobilechallenge.core.base.presentation.BaseViewModel
 
 class CartViewModel : BaseViewModel() {
 

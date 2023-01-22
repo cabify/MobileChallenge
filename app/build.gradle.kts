@@ -5,9 +5,6 @@ plugins {
 apply(from = "${rootProject.projectDir}/shared-android-properties.gradle")
 
 android {
-    namespace = ProjectConfig.namespace
-    compileSdk = ProjectConfig.compileSdkVersion
-
     defaultConfig {
         applicationId = ProjectConfig.applicationId
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -26,6 +23,7 @@ dependencies {
     implementation(project(":features:home"))
     implementation(project(":shared:common-ui"))
     implementation(project(":core:base"))
+    implementation(project(":core:network"))
 
     implementation(UIDependencies.constraintLayout)
     implementation(UIDependencies.material)

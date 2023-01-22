@@ -1,4 +1,4 @@
-package com.cabify.core.base.presentation
+package com.cabify.mobilechallenge.core.base.presentation
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable

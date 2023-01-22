@@ -1,4 +1,4 @@
-package com.cabify.mobilechallenge
+package com.cabify.mobilechallenge.core.base
 
 import org.junit.Test
 
