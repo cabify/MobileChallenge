@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
+
 apply(from = "${rootProject.projectDir}/shared-android-properties.gradle")
 
 dependencies {
@@ -9,9 +10,10 @@ dependencies {
     implementation(CoreDependencies.coreKtx)
     implementation(CoreDependencies.fragmentKtx)
     implementation(CoreDependencies.liveDataKtx)
+    implementation(CoreDependencies.navigationKtx)
     implementation(CoreDependencies.koinAndroid)
     implementation(CoreDependencies.viewModelKtx)
-    implementation(project(":core:base"))
+    implementation(CoreDependencies.rxJava3)
 
     implementation(UIDependencies.constraintLayout)
     implementation(UIDependencies.material)

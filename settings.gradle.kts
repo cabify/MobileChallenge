@@ -18,3 +18,5 @@ include(
     "features:cart",
     "features:home"
 )
+include(":shared:common-ui")
+include(":core:base")

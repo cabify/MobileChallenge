@@ -5,34 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.cabify.core.base.ui.BaseFragment
 import com.cabify.mobilechallenge.features.cart.databinding.FragmentCartBinding
+import com.cabify.mobilechallenge.features.cart.presentation.CartViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CartFragment : Fragment() {
+class CartFragment : BaseFragment() {
 
     private var _binding: FragmentCartBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private val cartViewModel: CartViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val cartViewModel =
-            ViewModelProvider(this)[com.cabify.mobilechallenge.features.cart.presentation.CartViewModel::class.java]
-
         _binding = FragmentCartBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val textView: TextView = binding.textCart
         cartViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-        return root
     }
 
     override fun onDestroyView() {

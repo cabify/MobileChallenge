@@ -2,9 +2,9 @@ package com.cabify.mobilechallenge.features.cart.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.cabify.core.base.presentation.BaseViewModel
 
-class CartViewModel : ViewModel() {
+class CartViewModel : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is cart Fragment"

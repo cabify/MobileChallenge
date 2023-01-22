@@ -6,11 +6,19 @@ plugins {
 apply(from = "${rootProject.projectDir}/shared-android-properties.gradle")
 
 dependencies {
+    implementation(CoreDependencies.appCompat)
+    implementation(CoreDependencies.coreKtx)
+    implementation(CoreDependencies.fragmentKtx)
+    implementation(CoreDependencies.liveDataKtx)
+    implementation(CoreDependencies.koinAndroid)
+    implementation(CoreDependencies.viewModelKtx)
+    implementation(project(":core:base"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.0")
-    implementation("com.google.android.material:material:1.7.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(UIDependencies.constraintLayout)
+    implementation(UIDependencies.material)
+
+    testImplementation(TestingDependencies.JUnit)
+
+    androidTestImplementation(TestingDependencies.espresso)
+    androidTestImplementation(TestingDependencies.JUnitExt)
 }
