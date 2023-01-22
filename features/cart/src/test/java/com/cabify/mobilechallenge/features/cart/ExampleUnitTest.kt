@@ -1,4 +1,4 @@
-package com.cabify.mobileChallenge.features.home
+package com.cabify.mobilechallenge.features.cart
 
 import org.junit.Test
 

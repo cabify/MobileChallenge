@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.cabify.mobilechallenge.features.cart.databinding.FragmentCartBinding
 
 class CartFragment : Fragment() {
 
@@ -22,7 +23,7 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val cartViewModel =
-            ViewModelProvider(this).get(com.cabify.mobilechallenge.features.cart.presentation.CartViewModel::class.java)
+            ViewModelProvider(this)[com.cabify.mobilechallenge.features.cart.presentation.CartViewModel::class.java]
 
         _binding = FragmentCartBinding.inflate(inflater, container, false)
         val root: View = binding.root

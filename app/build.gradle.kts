@@ -2,6 +2,7 @@ plugins {
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
 }
+apply(from = "${rootProject.projectDir}/shared-android-properties.gradle")
 
 android {
   namespace = ProjectConfig.namespace
@@ -9,29 +10,7 @@ android {
 
   defaultConfig {
     applicationId = ProjectConfig.applicationId
-    minSdk = ProjectConfig.minSdkVersion
-    targetSdk = ProjectConfig.targetSdkVersion
-    versionCode = ProjectConfig.versionCode
-    versionName = ProjectConfig.versionName
-
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-    }
-  }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-  }
-  kotlinOptions {
-    jvmTarget = "1.8"
-  }
-  buildFeatures {
-    viewBinding = true
   }
 }
 

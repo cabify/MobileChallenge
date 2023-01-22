@@ -5,4 +5,5 @@ object CoreDependencies {
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.liveDataKtx}"
     const val navigationKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigationKtx}"
     const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewModelKtx}"
+    const val ben_manes = "com.github.ben-manes.versions"
 }

@@ -1,4 +1,4 @@
-package com.cabify.mobileChallenge.features.home.presentation
+package com.cabify.mobilechallenge.features.home.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
