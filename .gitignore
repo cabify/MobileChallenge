@@ -1,0 +1,39 @@
+# Gradle files
+.gradle/
+build/
+.externalNativeBuild
+*.deps
+
+# Local configuration file (sdk path, etc)
+/local.properties
+
+# Log/OS Files
+*.log
+
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
+.DS_Store
+*.aar
+*.ap_
+*.aab
+output-metadata.json
+
+# Files for the ART/Dalvik VM
+*.dex
+*.class
+
+# IntelliJ
+*.iml
+.idea/
+/projectFilesBackup/.idea/*
+
+# Keystore files
+*.jks
+*.keystore
+
+# Android Profiling
+*.hprof
