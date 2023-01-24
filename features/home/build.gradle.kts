@@ -12,7 +12,9 @@ dependencies {
     implementation(CoreDependencies.liveDataKtx)
     implementation(CoreDependencies.koinAndroid)
     implementation(CoreDependencies.viewModelKtx)
+    implementation(CoreDependencies.rxJava3)
     implementation(project(":core:base"))
+    implementation(project(":core:product"))
 
     implementation(UIDependencies.constraintLayout)
     implementation(UIDependencies.material)

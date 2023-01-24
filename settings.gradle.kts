@@ -15,9 +15,12 @@ dependencyResolutionManagement {
 rootProject.name = "MobileChallenge"
 include(
     ":app",
-    "features:cart",
-    "features:home"
+    ":core:base",
+    ":core:network",
+    ":core:persistence",
+    ":core:product",
+    ":features:cart",
+    ":features:home",
+    ":shared:common-ui",
 )
-include(":shared:common-ui")
-include(":core:base")
-include(":core:network")
+include(":library:utils")

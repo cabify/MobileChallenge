@@ -17,6 +17,7 @@ object Versions {
     const val viewModelKtx = "2.5.1"
     const val retrofit = "2.9.0"
     const val retrofitRx3Adapter = "2.9.0"
+    const val rxAndroid3 = "3.0.0"
     const val rxjava3 = "3.1.5"
     const val okhttp = "4.10.0"
 }

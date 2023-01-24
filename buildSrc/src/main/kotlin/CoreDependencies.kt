@@ -9,6 +9,7 @@ object CoreDependencies {
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koinAndroid}"
     const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewModelKtx}"
     const val benManes = "com.github.ben-manes.versions"
+    const val rxAndroid3 = "io.reactivex.rxjava3:rxandroid:${Versions.rxAndroid3}"
     const val rxJava3 = "io.reactivex.rxjava3:rxjava:${Versions.rxjava3}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitRx3Adapter =

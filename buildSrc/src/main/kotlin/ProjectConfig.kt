@@ -7,4 +7,5 @@ object ProjectConfig {
     const val versionName = "1.0"
     const val minSdkVersion = 24
     const val namespace = "com.cabify.mobilechallenge"
+    const val baseUrl = "\"https://gist.githubusercontent.com\""
 }

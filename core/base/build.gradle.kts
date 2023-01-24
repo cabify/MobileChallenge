@@ -13,6 +13,7 @@ dependencies {
     implementation(CoreDependencies.navigationKtx)
     implementation(CoreDependencies.koinAndroid)
     implementation(CoreDependencies.viewModelKtx)
+    implementation(CoreDependencies.rxAndroid3)
     implementation(CoreDependencies.rxJava3)
 
     implementation(UIDependencies.constraintLayout)
