@@ -4,5 +4,7 @@
   <string name="title_home">Home</string>
   <string name="general_error_content_message">Oops! There was an unknown problem.</string>
   <string name="general_error_title_message">Error</string>
+  <string name="add_to_cart">Add to cart</string>
   <string name="empty_products_list">The products list is empty</string>
+  <string name="product_image_desc">Image of the product</string>
 </resources>

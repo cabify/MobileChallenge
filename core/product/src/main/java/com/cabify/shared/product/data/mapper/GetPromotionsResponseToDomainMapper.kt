@@ -14,7 +14,7 @@ internal class GetPromotionsResponseToDomainMapper {
                     acc + BulkyItemsPromotionEntity(
                         id = promotion.id,
                         name = promotion.name.orEmpty(),
-                        productTargetId = promotion.name.orEmpty(),
+                        productTargetId = promotion.productTargetId.orEmpty(),
                         minimumQuantity = promotion.minimumQuantity.orZero(),
                         discountPercentagePerItem = promotion.discountPercentagePerItem.orZero()
                     )
@@ -23,7 +23,7 @@ internal class GetPromotionsResponseToDomainMapper {
                     acc + BuyXGetYFreePromotionEntity(
                         id = promotion.id,
                         name = promotion.name.orEmpty(),
-                        productTargetId = promotion.name.orEmpty(),
+                        productTargetId = promotion.productTargetId.orEmpty(),
                         minimumQuantity = promotion.minimumQuantity.orZero(),
                         freeItemsQuantity = promotion.freeItemsQuantity.orZero(),
                     )
