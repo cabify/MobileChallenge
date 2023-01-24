@@ -4,11 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import com.cabify.library.utils.extensions.displayDialog
+import com.cabify.library.utils.extensions.gone
+import com.cabify.library.utils.extensions.visible
 import com.cabify.mobilechallenge.core.base.ui.BaseFragment
-import com.cabify.mobilechallenge.features.home.presentation.HomeViewModel
+import com.cabify.mobilechallenge.features.home.presentation.viewmodel.HomeViewModel
 import com.cabify.mobilechallenge.features.home.databinding.FragmentHomeBinding
+import com.cabify.mobilechallenge.features.home.presentation.viewstate.Error
+import com.cabify.mobilechallenge.features.home.presentation.viewstate.Loading
+import com.cabify.mobilechallenge.features.home.presentation.viewstate.Success
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.cabify.mobilechallenge.shared.commonui.R
 
 class HomeFragment : BaseFragment() {
 
@@ -16,6 +22,11 @@ class HomeFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private val homeViewModel: HomeViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        homeViewModel.loadProductList()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,11 +39,45 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val textView: TextView = binding.textHome
+        observeViewState()
 
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    }
+
+    private fun observeViewState() {
+        homeViewModel.viewState.observe(viewLifecycleOwner) { viewState ->
+            when (viewState) {
+                is Success -> setSuccessViewState(viewState)
+                is Error -> setErrorViewState()
+                Loading -> setLoadingViewState()
+            }
         }
+    }
+
+    private fun setSuccessViewState(viewState: Success) {
+        binding.progressCircular.gone()
+        if (viewState.isEmpty) {
+            binding.noProductsView.visible()
+            binding.recyclerView.gone()
+        } else {
+            binding.noProductsView.gone()
+            binding.recyclerView.visible()
+        }
+    }
+
+    private fun setLoadingViewState() {
+        binding.progressCircular.visible()
+        binding.noProductsView.gone()
+        binding.recyclerView.gone()
+    }
+
+    private fun setErrorViewState() {
+        binding.progressCircular.gone()
+        binding.noProductsView.gone()
+        binding.recyclerView.gone()
+        requireContext().displayDialog(
+            titleRes = R.string.general_error_title_message,
+            contentRes = R.string.general_error_content_message,
+        )
     }
 
     override fun onDestroyView() {

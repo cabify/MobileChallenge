@@ -8,8 +8,8 @@ internal class GetProductResponseToDomainMapper {
     fun map(getProductsResponse: GetProductsResponse): List<ProductEntity> =
         getProductsResponse.products?.map {
             ProductEntity(
-                id = it?.code.orEmpty(),
-                name = it?.code.orEmpty(),
+                id = it?.id.orEmpty(),
+                name = it?.id.orEmpty(),
                 price = it?.price.orZero()
             )
         }.orEmpty()

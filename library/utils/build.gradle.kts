@@ -1,9 +1,12 @@
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+apply(from = "${rootProject.projectDir}/shared-android-properties.gradle")
+
+dependencies {
+    implementation(CoreDependencies.appCompat)
+    implementation(UIDependencies.material)
+    testImplementation(TestingDependencies.JUnit)
 }

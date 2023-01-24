@@ -9,7 +9,7 @@ internal data class GetProductsResponse(
 ) {
     data class Product(
         @SerializedName("code")
-        val code: String?,
+        val id: String?,
         @SerializedName("name")
         val name: String?,
         @SerializedName("price")

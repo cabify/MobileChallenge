@@ -15,6 +15,8 @@ dependencies {
     implementation(CoreDependencies.rxJava3)
     implementation(project(":core:base"))
     implementation(project(":core:product"))
+    implementation(project(":shared:common-ui"))
+    implementation(project(":library:utils"))
 
     implementation(UIDependencies.constraintLayout)
     implementation(UIDependencies.material)
