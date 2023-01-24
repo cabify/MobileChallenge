@@ -16,6 +16,7 @@ dependencies {
     implementation(project(":core:base"))
     implementation(project(":core:product"))
     implementation(project(":shared:common-ui"))
+    implementation(project(":shared:cart"))
     implementation(project(":libraries:utils"))
 
     implementation(UIDependencies.constraintLayout)

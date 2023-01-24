@@ -11,9 +11,10 @@ import com.cabify.mobilechallenge.features.home.R
 import com.cabify.mobilechallenge.features.home.databinding.ItemProductBinding
 import com.cabify.mobilechallenge.features.home.presentation.model.ProductPresentation
 
-class ProductsAdapter : ListAdapter<ProductPresentation, ProductsAdapter.ViewHolder>(
-    DefaultItemCallback(ProductPresentation::id)
-) {
+class ProductsAdapter(private val onAddToCartClicked: ((String) -> Unit)? = null) :
+    ListAdapter<ProductPresentation, ProductsAdapter.ViewHolder>(
+        DefaultItemCallback(ProductPresentation::id)
+    ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -27,15 +28,21 @@ class ProductsAdapter : ListAdapter<ProductPresentation, ProductsAdapter.ViewHol
 
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemProductBinding    .bind(view)
+        private val binding = ItemProductBinding.bind(view)
         fun bind(item: ProductPresentation) {
             with(binding) {
                 val productDrawable =
-                    ContextCompat.getDrawable(root.context, com.cabify.mobilechallenge.shared.commonui.R.color.purple_200)
+                    ContextCompat.getDrawable(
+                        root.context,
+                        com.cabify.mobilechallenge.shared.commonui.R.color.purple_200
+                    )
                 imageView.setImageDrawable(productDrawable)
                 productName.text = item.name
                 price.text = item.price
                 availablePromotionName.text = item.availablePromotionName
+                binding.addToCartButton.setOnClickListener {
+                    onAddToCartClicked?.invoke(item.id)
+                }
             }
         }
     }

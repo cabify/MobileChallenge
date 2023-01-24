@@ -7,4 +7,5 @@
   <string name="add_to_cart">Add to cart</string>
   <string name="empty_products_list">The products list is empty</string>
   <string name="product_image_desc">Image of the product</string>
+  <string name="product_added_to_cart">Product added to cart</string>
 </resources>

@@ -11,7 +11,11 @@ dependencies {
     implementation(CoreDependencies.liveDataKtx)
     implementation(CoreDependencies.koinAndroid)
     implementation(CoreDependencies.viewModelKtx)
+    implementation(CoreDependencies.rxJava3)
+    implementation(CoreDependencies.rxAndroid3)
     implementation(project(":core:base"))
+    implementation(project(":core:product"))
+    implementation(project(":shared:cart"))
 
     implementation(UIDependencies.constraintLayout)
     implementation(UIDependencies.material)

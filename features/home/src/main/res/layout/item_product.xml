@@ -31,7 +31,7 @@
     app:layout_constraintEnd_toStartOf="@+id/price"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toEndOf="@+id/image_view"
-    app:layout_constraintTop_toTopOf="@+id/add_to_cart"
+    app:layout_constraintTop_toTopOf="@+id/add_to_cart_button"
     app:layout_constraintVertical_chainStyle="spread"
     tools:text="MUG" />
 
@@ -40,7 +40,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/space_l"
-    app:layout_constraintEnd_toStartOf="@+id/add_to_cart"
+    app:layout_constraintEnd_toStartOf="@+id/add_to_cart_button"
     app:layout_constraintStart_toEndOf="@+id/product_name"
     app:layout_constraintTop_toTopOf="@+id/product_name"
     tools:text="18.8$" />
@@ -53,15 +53,15 @@
     android:layout_marginEnd="@dimen/space_l"
     android:ellipsize="end"
     android:maxLines="1"
-    app:layout_constraintBottom_toBottomOf="@+id/add_to_cart"
-    app:layout_constraintEnd_toStartOf="@+id/add_to_cart"
+    app:layout_constraintBottom_toBottomOf="@+id/add_to_cart_button"
+    app:layout_constraintEnd_toStartOf="@+id/add_to_cart_button"
 
     app:layout_constraintStart_toStartOf="@+id/product_name"
     app:layout_constraintTop_toBottomOf="@+id/product_name"
     tools:text="BULKY" />
 
   <com.google.android.material.button.MaterialButton
-    android:id="@+id/add_to_cart"
+    android:id="@+id/add_to_cart_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"

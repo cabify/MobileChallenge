@@ -24,3 +24,4 @@ include(
     ":shared:common-ui",
 )
 include(":libraries:utils")
+include(":shared:cart")

@@ -26,6 +26,7 @@ dependencies {
     implementation(project(":features:cart"))
     implementation(project(":features:home"))
     implementation(project(":shared:common-ui"))
+    implementation(project(":shared:cart"))
     implementation(project(":core:base"))
     implementation(project(":core:network"))
     implementation(project(":core:product"))

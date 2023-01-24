@@ -15,6 +15,8 @@ dependencies {
     implementation(CoreDependencies.viewModelKtx)
     implementation(CoreDependencies.rxAndroid3)
     implementation(CoreDependencies.rxJava3)
+    implementation(project(":libraries:utils"))
+    implementation(project(":shared:common-ui"))
 
     implementation(UIDependencies.constraintLayout)
     implementation(UIDependencies.material)

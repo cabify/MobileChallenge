@@ -4,6 +4,7 @@ import android.app.Application
 import com.cabify.core.network.di.BASE_URL_PROPERTY
 import com.cabify.core.network.di.networkModule
 import com.cabify.mobilechallenge.BuildConfig
+import com.cabify.mobilechallenge.cart.di.cartSharedModule
 import com.cabify.mobilechallenge.core.base.di.coreBaseModule
 import com.cabify.mobilechallenge.features.cart.di.cartModule
 import com.cabify.mobilechallenge.features.home.di.homeModule
@@ -27,7 +28,8 @@ class MobileChallengeApplication : Application() {
                 homeModule,
                 coreBaseModule,
                 coreProductModule,
-                networkModule
+                networkModule,
+                cartSharedModule
             )
             properties(hashMapOf(BASE_URL_PROPERTY to BuildConfig.BASE_URL))
         }

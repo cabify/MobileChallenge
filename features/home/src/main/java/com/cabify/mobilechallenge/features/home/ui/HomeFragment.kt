@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cabify.library.utils.extensions.displayDialog
 import com.cabify.library.utils.extensions.gone
+import com.cabify.library.utils.extensions.showToast
 import com.cabify.library.utils.extensions.visible
 import com.cabify.mobilechallenge.core.base.ui.BaseFragment
 import com.cabify.mobilechallenge.features.home.databinding.FragmentHomeBinding
 import com.cabify.mobilechallenge.features.home.presentation.viewmodel.HomeViewModel
+import com.cabify.mobilechallenge.features.home.presentation.viewstate.AddProductToCartSucceed
 import com.cabify.mobilechallenge.features.home.presentation.viewstate.Error
+import com.cabify.mobilechallenge.features.home.presentation.viewstate.ErrorEvent
 import com.cabify.mobilechallenge.features.home.presentation.viewstate.Loading
 import com.cabify.mobilechallenge.features.home.presentation.viewstate.Success
 import com.cabify.mobilechallenge.features.home.ui.adapter.ProductsAdapter
-import com.cabify.mobilechallenge.shared.commonui.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
@@ -26,7 +27,7 @@ class HomeFragment : BaseFragment() {
     private val homeViewModel: HomeViewModel by viewModel()
 
     private val productsAdapter: ProductsAdapter by lazy {
-        ProductsAdapter()
+        ProductsAdapter(homeViewModel::addProductToCart)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +46,12 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setRecyclerView()
         observeViewState()
+        observeViewEvents()
+    }
+
+    private fun setRecyclerView() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = productsAdapter
@@ -61,6 +67,19 @@ class HomeFragment : BaseFragment() {
                 Loading -> setLoadingViewState()
             }
         }
+    }
+
+    private fun observeViewEvents() {
+        homeViewModel.viewEvent.observe(viewLifecycleOwner) { event ->
+            when (event) {
+                AddProductToCartSucceed -> showProductAddedToCartMessage()
+                is ErrorEvent -> showErrorMessage()
+            }
+        }
+    }
+
+    private fun showProductAddedToCartMessage() {
+        requireContext().showToast(com.cabify.mobilechallenge.shared.commonui.R.string.product_added_to_cart)
     }
 
     private fun setSuccessViewState(viewState: Success) {
@@ -85,10 +104,7 @@ class HomeFragment : BaseFragment() {
         binding.progressCircular.gone()
         binding.noProductsView.gone()
         binding.recyclerView.gone()
-        requireContext().displayDialog(
-            titleRes = R.string.general_error_title_message,
-            contentRes = R.string.general_error_content_message,
-        )
+        showErrorMessage()
     }
 
     override fun onDestroyView() {
