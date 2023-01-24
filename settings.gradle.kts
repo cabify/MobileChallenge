@@ -23,4 +23,4 @@ include(
     ":features:home",
     ":shared:common-ui",
 )
-include(":library:utils")
+include(":libraries:utils")

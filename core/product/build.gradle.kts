@@ -14,6 +14,6 @@ dependencies{
     implementation(CoreDependencies.retrofit)
     implementation(CoreDependencies.retrofitRx3Adapter)
     implementation(CoreDependencies.converterGson)
-    implementation(project(":library:utils"))
+    implementation(project(":libraries:utils"))
     implementation(project(":core:network"))
 }

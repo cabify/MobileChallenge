@@ -11,8 +11,8 @@
 
   <ImageView
     android:id="@+id/image_view"
-    android:layout_width="@dimen/size_xl"
-    android:layout_height="@dimen/size_xl"
+    android:layout_width="@dimen/space_xxxl"
+    android:layout_height="@dimen/space_xxxl"
     android:contentDescription="@string/product_image_desc"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -20,50 +20,60 @@
 
   <TextView
     android:id="@+id/product_name"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/space_m"
+    android:layout_marginEnd="@dimen/space_m"
     android:layout_marginBottom="@dimen/space_xs"
-    app:layout_constraintBottom_toTopOf="@id/price"
-    app:layout_constraintStart_toEndOf="@id/image_view"
-    app:layout_constraintTop_toTopOf="@+id/image_view"
-    app:layout_constraintVertical_chainStyle="packed"
-    tools:text="Mug" />
+    android:ellipsize="end"
+    android:maxLines="1"
+    app:layout_constraintBottom_toTopOf="@+id/available_promotion_name"
+    app:layout_constraintEnd_toStartOf="@+id/price"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/image_view"
+    app:layout_constraintTop_toTopOf="@+id/add_to_cart"
+    app:layout_constraintVertical_chainStyle="spread"
+    tools:text="MUG" />
 
   <TextView
     android:id="@+id/price"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/space_m"
-    android:layout_marginTop="@dimen/space_xs"
-    app:layout_constraintBottom_toBottomOf="@+id/image_view"
-    app:layout_constraintStart_toEndOf="@+id/image_view"
-    app:layout_constraintTop_toBottomOf="@+id/product_name"
+    android:layout_marginEnd="@dimen/space_l"
+    app:layout_constraintEnd_toStartOf="@+id/add_to_cart"
+    app:layout_constraintStart_toEndOf="@+id/product_name"
+    app:layout_constraintTop_toTopOf="@+id/product_name"
     tools:text="18.8$" />
 
   <TextView
     android:id="@+id/available_promotion_name"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/space_m"
-    app:layout_constraintStart_toEndOf="@+id/product_name"
-    app:layout_constraintTop_toTopOf="@+id/product_name"
+    android:layout_marginTop="@dimen/space_xs"
+    android:layout_marginEnd="@dimen/space_l"
+    android:ellipsize="end"
+    android:maxLines="1"
+    app:layout_constraintBottom_toBottomOf="@+id/add_to_cart"
+    app:layout_constraintEnd_toStartOf="@+id/add_to_cart"
+
+    app:layout_constraintStart_toStartOf="@+id/product_name"
+    app:layout_constraintTop_toBottomOf="@+id/product_name"
     tools:text="BULKY" />
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/add_to_cart"
-    android:layout_width="52dp"
-    android:layout_height="52dp"
-    app:icon="@drawable/add_to_cart_24"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:gravity="center"
     android:insetLeft="0dp"
     android:insetTop="0dp"
     android:insetRight="0dp"
     android:insetBottom="0dp"
-    app:iconPadding="0dp"
+    app:icon="@drawable/add_to_cart_24"
     app:iconGravity="textStart"
-    app:layout_constraintBottom_toBottomOf="parent"
+    app:iconPadding="0dp"
+    app:layout_constraintBottom_toBottomOf="@+id/image_view"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="@+id/image_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

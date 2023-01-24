@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cabify.library.utils.recyclerview.DefaultItemCallback
 import com.cabify.mobilechallenge.features.home.R
-import com.cabify.mobilechallenge.features.home.databinding.ItemHomeProductBinding
+import com.cabify.mobilechallenge.features.home.databinding.ItemProductBinding
 import com.cabify.mobilechallenge.features.home.presentation.model.ProductPresentation
 
 class ProductsAdapter : ListAdapter<ProductPresentation, ProductsAdapter.ViewHolder>(
@@ -21,13 +21,13 @@ class ProductsAdapter : ListAdapter<ProductPresentation, ProductsAdapter.ViewHol
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_home_product, viewGroup, false)
+            .inflate(R.layout.item_product, viewGroup, false)
         return ViewHolder(view)
     }
 
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemHomeProductBinding.bind(view)
+        private val binding = ItemProductBinding    .bind(view)
         fun bind(item: ProductPresentation) {
             with(binding) {
                 val productDrawable =
