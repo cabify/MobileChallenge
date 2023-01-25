@@ -3,9 +3,9 @@ package com.cabify.mobilechallenge.features.cart.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cabify.mobilechallenge.core.base.presentation.BaseViewModel
-import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderUseCase
+import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesUseCase
 
-class CartViewModel(private val getOrderUseCase: GetOrderUseCase) : BaseViewModel() {
+class CartViewModel(private val getOrderChangesUseCase: GetOrderChangesUseCase) : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is cart Fragment"
@@ -13,7 +13,7 @@ class CartViewModel(private val getOrderUseCase: GetOrderUseCase) : BaseViewMode
     val text: LiveData<String> = _text
 
     init {
-        addToDisposable(getOrderUseCase.invoke().subscribe({
+        addToDisposable(getOrderChangesUseCase.invoke().subscribe({
             it
         }, {
             it

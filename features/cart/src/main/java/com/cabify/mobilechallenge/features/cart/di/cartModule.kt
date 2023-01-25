@@ -1,10 +1,15 @@
 package com.cabify.mobilechallenge.features.cart.di
 
-import com.cabify.mobilechallenge.features.cart.domain.usecase.BulkyItemsPromotionPriceStrategy
-import com.cabify.mobilechallenge.features.cart.domain.usecase.BuyXGetYFreePromotionPriceStrategy
-import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderInteractor
-import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderUseCase
+import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactory
+import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactoryImpl
+import com.cabify.mobilechallenge.features.cart.domain.processor.BulkyItemsPromotionProcessor
+import com.cabify.mobilechallenge.features.cart.domain.processor.BuyXGetYFreePromotionProcessor
+import com.cabify.mobilechallenge.features.cart.domain.processor.PromotionProcessor
+import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesInteractor
+import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesUseCase
 import com.cabify.mobilechallenge.features.cart.presentation.CartViewModel
+import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
+import com.cabify.shared.product.domain.entities.BuyXGetYFreePromotionEntity
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,13 +17,22 @@ val cartModule = module {
     viewModel {
         CartViewModel(get())
     }
-    single<GetOrderUseCase> {
-        GetOrderInteractor(get(), get(), get(), getAll())
+    single<GetOrderChangesUseCase> {
+        GetOrderChangesInteractor(get(), get(), get(), get())
     }
     single {
-        BuyXGetYFreePromotionPriceStrategy()
+        BuyXGetYFreePromotionProcessor()
     }
     single {
-        BulkyItemsPromotionPriceStrategy()
+        BulkyItemsPromotionProcessor()
+    }
+
+    single<OrderFactory> {
+        OrderFactoryImpl(
+            hashMapOf(
+                BulkyItemsPromotionEntity.APP_INTERNAL_ID to BulkyItemsPromotionProcessor(),
+                BuyXGetYFreePromotionEntity.APP_INTERNAL_ID to BuyXGetYFreePromotionProcessor(),
+            )
+        )
     }
 }

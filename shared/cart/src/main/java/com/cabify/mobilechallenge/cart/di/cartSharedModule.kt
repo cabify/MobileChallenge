@@ -5,6 +5,7 @@ import com.cabify.mobilechallenge.cart.domain.repository.CartRepository
 import com.cabify.mobilechallenge.cart.domain.usecase.AddProductToCartInteractor
 import com.cabify.mobilechallenge.cart.domain.usecase.AddProductToCartUseCase
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import org.koin.dsl.module
 
@@ -16,8 +17,8 @@ val cartSharedModule = module {
             override fun addProductToCart(productId: String, quantity: Int): Completable =
                 Completable.complete()
 
-            override fun getCart(): Single<CartEntity> =
-                Single.just(
+            override fun cartChanges(): Observable<CartEntity> =
+                Observable.just(
                     CartEntity(
                         listOf(
                             CartEntity.Item(productId = "VOUCHER", quantity = 1),
