@@ -1,5 +1,6 @@
 package com.cabify.mobilechallenge.features.cart.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cabify.mobilechallenge.core.base.presentation.BaseViewModel
@@ -13,10 +14,13 @@ class CartViewModel(private val getOrderChangesUseCase: GetOrderChangesUseCase) 
     val text: LiveData<String> = _text
 
     init {
-        addToDisposable(getOrderChangesUseCase.invoke().subscribe({
-            it
+        addToDisposable(getOrderChangesUseCase().subscribe({
+            Log.d(
+                "getOrderChangesUseCase",
+                "Total base price : ${it.totalBasePrice} + Total final price :${it.totalFinalPrice}"
+            )
         }, {
-            it
+            Log.e("getOrderChangesUseCase", it.stackTraceToString())
         }))
     }
 }

@@ -8,9 +8,8 @@ data class Order(
     data class Item(
         val productId: String,
         val productName: String,
-        val quantity: Int,
-        val unitaryBasePrice: Double,
-        val unitaryFinalPrice: Double,
-        val promotionName: String? = null
+        val basePrice: Double,
+        val finalPrice: Double,
+        val promotionNameApplied: String? = null
     )
 }

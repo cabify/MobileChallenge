@@ -12,26 +12,67 @@ class BuyXGetYFreePromotionProcessor : PromotionProcessor {
         cartItem: CartEntity.Item,
         product: ProductEntity,
         promotion: PromotionEntity
-    ): Order.Item {
+    ): List<Order.Item> {
         promotion as BuyXGetYFreePromotionEntity
 
-        val timesToApplyPromotion = cartItem.quantity / promotion.minimumQuantity
-        val matchesPromotion = timesToApplyPromotion > 0
-        val freeItems = timesToApplyPromotion * promotion.freeItemsQuantity
+        val promotionsAppliedQuantity =
+            cartItem.quantity / promotion.minimumQuantity
 
-        val unitaryFinalPrice = if (matchesPromotion) {
-            (product.price * (cartItem.quantity - freeItems)) / cartItem.quantity
-        } else {
-            product.price
-        }
+        val freeItemsQuantity =
+            promotionsAppliedQuantity * promotion.freeItemsQuantity
 
-        return Order.Item(
+        val paidItemsOutsidePromotionQuantity =
+            cartItem.quantity % promotion.minimumQuantity
+
+        val paidItemsInsidePromotionQuantity =
+            (promotion.minimumQuantity - promotion.freeItemsQuantity) * promotionsAppliedQuantity
+
+        return createFreeItems(freeItemsQuantity, product, promotion) +
+            createPaidItemsOutsidePromotion(paidItemsOutsidePromotionQuantity, product) +
+            createPaidItemsInsidePromotion(paidItemsInsidePromotionQuantity, product, promotion)
+    }
+
+    private fun createPaidItemsInsidePromotion(
+        paidItemsInsidePromotionQuantity: Int,
+        product: ProductEntity,
+        promotion: PromotionEntity
+    ) = List(paidItemsInsidePromotionQuantity) {
+        Order.Item(
             productId = product.id,
             productName = product.name,
-            quantity = cartItem.quantity,
-            unitaryBasePrice = product.price,
-            unitaryFinalPrice = unitaryFinalPrice,
-            promotionName = if (matchesPromotion) promotion.name else null
+            basePrice = product.price,
+            finalPrice = product.price,
+            promotionNameApplied = promotion.name
         )
+    }
+
+    private fun createFreeItems(
+        freeItemsQuantity: Int,
+        product: ProductEntity,
+        promotion: PromotionEntity
+    ) = List(freeItemsQuantity) {
+        Order.Item(
+            productId = product.id,
+            productName = product.name,
+            basePrice = product.price,
+            finalPrice = FREE_ITEM_PRICE,
+            promotionNameApplied = promotion.name
+        )
+    }
+
+    private fun createPaidItemsOutsidePromotion(
+        paidItemsOutsidePromotionQuantity: Int,
+        product: ProductEntity
+    ) = List(paidItemsOutsidePromotionQuantity) {
+        Order.Item(
+            productId = product.id,
+            productName = product.name,
+            basePrice = product.price,
+            finalPrice = product.price
+        )
+    }
+
+    companion object {
+        private const val FREE_ITEM_PRICE = 0.0
     }
 }

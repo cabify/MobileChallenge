@@ -12,23 +12,25 @@ class BulkyItemsPromotionProcessor : PromotionProcessor {
         cartItem: CartEntity.Item,
         product: ProductEntity,
         promotion: PromotionEntity
-    ): Order.Item {
+    ): List<Order.Item> {
         promotion as BulkyItemsPromotionEntity
 
-        val matchesPromotion = cartItem.quantity >= promotion.minimumQuantity
-        val unitaryFinalPrice = if (matchesPromotion) {
+        val isMatchingPromotion = cartItem.quantity >= promotion.minimumQuantity
+
+        val finalPrice = if (isMatchingPromotion) {
             product.price - (product.price * promotion.discountPercentagePerItem / 100)
         } else {
             product.price
         }
 
-        return Order.Item(
-            productId = product.id,
-            productName = product.name,
-            quantity = cartItem.quantity,
-            unitaryBasePrice = product.price,
-            unitaryFinalPrice = unitaryFinalPrice,
-            promotionName = if (matchesPromotion) promotion.name else null
-        )
+        return List(cartItem.quantity) {
+            Order.Item(
+                productId = product.id,
+                productName = product.name,
+                basePrice = product.price,
+                finalPrice = finalPrice,
+                promotionNameApplied = if (isMatchingPromotion) promotion.name else null
+            )
+        }
     }
 }

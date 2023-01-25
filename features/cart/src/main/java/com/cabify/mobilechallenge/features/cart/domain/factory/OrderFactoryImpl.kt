@@ -14,8 +14,8 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
         cart: CartEntity, products: List<ProductEntity>, promotions: List<PromotionEntity>
     ): Order {
         val orderItems = createOrderItems(cart, products, promotions)
-        val totalFinalPrice = orderItems.sumOf { it.unitaryFinalPrice * it.quantity }
-        val totalBasePrice = orderItems.sumOf { it.unitaryBasePrice * it.quantity }
+        val totalFinalPrice = orderItems.sumOf { it.finalPrice }
+        val totalBasePrice = orderItems.sumOf { it.basePrice }
         return Order(
             items = orderItems,
             totalBasePrice = totalBasePrice,
@@ -33,7 +33,7 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
         val productIdPromotionMap: Map<String, PromotionEntity> = getPromotionsMap(promotions)
 
         return cart.items.fold(emptyList()) { acc, cartItem ->
-
+            if (cartItem.quantity == 0) return@fold acc
             val product = productIdProductsMap[cartItem.productId] ?: return@fold acc
             val promotion = productIdPromotionMap[cartItem.productId]
             val promotionProcessor = promotionProcessors[promotion?.appInternalId]
@@ -42,9 +42,8 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
                 return@fold acc + Order.Item(
                     productId = product.id,
                     productName = product.name,
-                    unitaryBasePrice = product.price,
-                    unitaryFinalPrice = product.price,
-                    quantity = cartItem.quantity
+                    basePrice = product.price,
+                    finalPrice = product.price
                 )
             }
 
