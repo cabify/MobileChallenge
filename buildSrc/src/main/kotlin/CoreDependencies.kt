@@ -14,4 +14,6 @@ object CoreDependencies {
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitRx3Adapter =
         "com.squareup.retrofit2:adapter-rxjava3:${Versions.retrofitRx3Adapter}"
+    const val mockitoKotlin =
+        "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
 }

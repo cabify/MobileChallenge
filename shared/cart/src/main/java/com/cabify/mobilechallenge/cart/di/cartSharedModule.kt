@@ -34,8 +34,7 @@ val cartSharedModule = module {
                         CartEntity(
                             listOf(
                                 CartEntity.Item(productId = "VOUCHER", quantity = 2),
-                                CartEntity.Item(productId = "TSHIRT", quantity = 1),
-                                CartEntity.Item(productId = "MUG", quantity = 0)
+                                CartEntity.Item(productId = "TSHIRT", quantity = 1)
                             )
                         )
                     )
@@ -44,8 +43,7 @@ val cartSharedModule = module {
                         CartEntity(
                             listOf(
                                 CartEntity.Item(productId = "VOUCHER", quantity = 1),
-                                CartEntity.Item(productId = "TSHIRT", quantity = 4),
-                                CartEntity.Item(productId = "MUG", quantity = 0)
+                                CartEntity.Item(productId = "TSHIRT", quantity = 4)
                             )
                         )
                     )

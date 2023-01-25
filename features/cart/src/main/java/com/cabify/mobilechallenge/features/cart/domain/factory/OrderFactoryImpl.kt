@@ -29,46 +29,30 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
         products: List<ProductEntity>,
         promotions: List<PromotionEntity>
     ): List<Order.Item> {
-        val productIdProductsMap: Map<String, ProductEntity> = getProductMap(products)
-        val productIdPromotionMap: Map<String, PromotionEntity> = getPromotionsMap(promotions)
+        val productIdProductsMap = products.associateBy { it.id }
+        val productIdPromotionMap = promotions.associateBy { it.productTargetId }
 
         return cart.items.fold(emptyList()) { acc, cartItem ->
-            if (cartItem.quantity == 0) return@fold acc
             val product = productIdProductsMap[cartItem.productId] ?: return@fold acc
             val promotion = productIdPromotionMap[cartItem.productId]
             val promotionProcessor = promotionProcessors[promotion?.appInternalId]
 
-            if (promotionProcessor == null || promotion == null) {
-                return@fold acc + Order.Item(
-                    productId = product.id,
-                    productName = product.name,
-                    basePrice = product.price,
-                    finalPrice = product.price
+            acc + if (promotionProcessor == null || promotion == null) {
+                List(cartItem.quantity) {
+                    Order.Item(
+                        productId = product.id,
+                        productName = product.name,
+                        basePrice = product.price,
+                        finalPrice = product.price
+                    )
+                }
+            } else {
+                promotionProcessor.process(
+                    cartItem,
+                    product,
+                    promotion
                 )
             }
-
-            acc + promotionProcessor.process(
-                cartItem,
-                product,
-                promotion
-            )
         }
-    }
-
-    private fun getProductMap(products: List<ProductEntity>): Map<String, ProductEntity> {
-        return HashMap<String, ProductEntity>().apply {
-            products.forEach {
-                this[it.id] = it
-            }
-        }
-    }
-
-    private fun getPromotionsMap(promotions: List<PromotionEntity>): Map<String, PromotionEntity> {
-        return HashMap<String, PromotionEntity>().apply {
-            promotions.forEach {
-                this[it.productTargetId] = it
-            }
-        }
-
     }
 }

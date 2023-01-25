@@ -13,6 +13,7 @@ dependencies {
     implementation(CoreDependencies.viewModelKtx)
     implementation(CoreDependencies.rxJava3)
     implementation(CoreDependencies.rxAndroid3)
+    implementation(CoreDependencies.mockitoKotlin)
     implementation(project(":core:base"))
     implementation(project(":core:product"))
     implementation(project(":shared:cart"))
