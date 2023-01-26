@@ -10,11 +10,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Challenge"
-        tools:targetApi="31">
+        >
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.store.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Challenge">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
