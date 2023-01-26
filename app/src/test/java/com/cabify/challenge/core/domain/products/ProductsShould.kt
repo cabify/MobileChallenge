@@ -90,6 +90,17 @@ class ProductsShould {
 
         thenTheProductsAre(emptyList())
     }
+    @Test
+    fun `get all products`() {
+        val mug = ProductBuilder().mug().build()
+        val voucher = ProductBuilder().voucher().build()
+        val tshirt = ProductBuilder().tshirt().build()
+        givenProductsWith(listOf(mug, voucher, tshirt))
+
+        filteredProducts = products.getAllProducts()
+
+        thenTheProductsAre(listOf(mug, voucher, tshirt))
+    }
 
     private fun givenProductsWith(someProducts: List<Product>) {
         products = Products(someProducts)

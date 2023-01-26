@@ -12,4 +12,7 @@
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
 
     </string>
+    <string name="content_product_image">
+        Image Product
+    </string>
 </resources>

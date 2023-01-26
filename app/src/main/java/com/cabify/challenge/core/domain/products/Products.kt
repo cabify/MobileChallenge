@@ -1,6 +1,10 @@
 package com.cabify.challenge.core.domain.products
 
 data class Products(private val products: List<Product>) {
+    fun getAllProducts(): List<Product> {
+        return products
+    }
+
     fun totalPrice(): Price {
         return if (products.isEmpty()) {
             totalIsZero()
@@ -23,5 +27,6 @@ data class Products(private val products: List<Product>) {
     }
 
     private fun totalIsZero() = Price.eurPrice(0.0)
+
 
 }

@@ -9,6 +9,18 @@ data class Product(
         return price
     }
 
+    fun presentPrice(): String{
+        return price.presentPrice()
+    }
+    fun name(): String {
+        return name
+    }
+
+    fun code(): Code {
+        return code
+    }
+
+
     fun codeIs(code: Code): Boolean {
         return this.code == code
     }

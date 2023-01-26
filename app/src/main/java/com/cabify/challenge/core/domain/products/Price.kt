@@ -14,6 +14,10 @@ data class Price(
         return amount
     }
 
+    fun presentPrice(): String{
+        return "${amount}${currency.symbol}"
+    }
+
     companion object {
         fun eurPrice(amount: Double): Price {
             return Price(amount)
