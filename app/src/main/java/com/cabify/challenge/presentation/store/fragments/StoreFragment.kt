@@ -25,8 +25,6 @@ class StoreFragment : Fragment() {
     private val view = StoreViewModelFactory().create(StoreViewModel::class.java)
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

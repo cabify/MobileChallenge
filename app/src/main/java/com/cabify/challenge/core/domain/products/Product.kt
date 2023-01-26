@@ -9,9 +9,10 @@ data class Product(
         return price
     }
 
-    fun presentPrice(): String{
+    fun presentPrice(): String {
         return price.presentPrice()
     }
+
     fun name(): String {
         return name
     }

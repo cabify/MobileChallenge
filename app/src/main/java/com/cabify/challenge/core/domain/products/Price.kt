@@ -14,7 +14,7 @@ data class Price(
         return amount
     }
 
-    fun presentPrice(): String{
+    fun presentPrice(): String {
         return "${amount}${currency.symbol}"
     }
 
