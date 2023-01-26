@@ -30,15 +30,17 @@ class StoreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentStoreBinding.inflate(inflater, container, false)
+        view.start()
+        observeEvents()
+        return binding.root
 
+    }
+
+    private fun observeEvents() {
         binding.recyclerProducts.layoutManager = LinearLayoutManager(requireContext())
-
         view.products.observe(viewLifecycleOwner) {
             binding.recyclerProducts.adapter = ProductsAdapter(it.getAllProducts())
         }
-
-        return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
