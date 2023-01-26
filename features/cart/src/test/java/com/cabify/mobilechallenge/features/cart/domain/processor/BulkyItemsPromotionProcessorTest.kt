@@ -47,7 +47,7 @@ class BulkyItemsPromotionProcessorTest {
     }
 
     @Test
-    fun `GIVEN the cart item is not matching the promotion WHEN process THEN order items are created without the promotion applied`() {
+    fun `GIVEN the cart item is not matching the promotion WHEN process THEN order items are created without the bulky promotion applied`() {
         val currentOrderItems = bulkyItemsPromotionProcessor.process(
             cartItem = CartEntity.Item(
                 productId = PRODUCT_ID_1,
