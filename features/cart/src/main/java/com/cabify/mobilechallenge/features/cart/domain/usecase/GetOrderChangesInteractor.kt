@@ -1,7 +1,7 @@
 package com.cabify.mobilechallenge.features.cart.domain.usecase
 
 import com.cabify.mobilechallenge.cart.domain.repository.CartRepository
-import com.cabify.mobilechallenge.features.cart.domain.entity.Order
+import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactory
 import com.cabify.shared.product.domain.repository.ProductsRepository
 import com.cabify.shared.product.domain.repository.PromotionsRepository
@@ -15,8 +15,8 @@ class GetOrderChangesInteractor(
     private val orderFactory: OrderFactory
 ) : GetOrderChangesUseCase {
 
-    override fun invoke(): Observable<Order> {
-        return cartRepository.cartChanges()
+    override fun invoke(): Observable<OrderEntity> =
+        cartRepository.cartChanges()
             .switchMapSingle { cart ->
                 Single.zip(
                     productRepository.getProducts(),
@@ -25,5 +25,4 @@ class GetOrderChangesInteractor(
                     orderFactory.create(cart, products, promotions)
                 }
             }
-    }
 }

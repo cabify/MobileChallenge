@@ -1,7 +1,7 @@
 package com.cabify.mobilechallenge.features.cart.domain.factory
 
 import com.cabify.mobilechallenge.cart.domain.entity.CartEntity
-import com.cabify.mobilechallenge.features.cart.domain.entity.Order
+import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.mobilechallenge.features.cart.domain.processor.PromotionProcessor
 import com.cabify.shared.product.domain.entities.ProductEntity
 import com.cabify.shared.product.domain.entities.PromotionEntity
@@ -12,11 +12,11 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
 
     override fun create(
         cart: CartEntity, products: List<ProductEntity>, promotions: List<PromotionEntity>
-    ): Order {
+    ): OrderEntity {
         val orderItems = createOrderItems(cart, products, promotions)
         val totalFinalPrice = orderItems.sumOf { it.finalPrice }
         val totalBasePrice = orderItems.sumOf { it.basePrice }
-        return Order(
+        return OrderEntity(
             items = orderItems,
             totalBasePrice = totalBasePrice,
             totalFinalPrice = totalFinalPrice
@@ -28,7 +28,7 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
         cart: CartEntity,
         products: List<ProductEntity>,
         promotions: List<PromotionEntity>
-    ): List<Order.Item> {
+    ): List<OrderEntity.Item> {
         val productIdProductsMap = products.associateBy { it.id }
         val productIdPromotionMap = promotions.associateBy { it.productTargetId }
 
@@ -39,7 +39,7 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
 
             acc + if (promotionProcessor == null || promotion == null) {
                 List(cartItem.quantity) {
-                    Order.Item(
+                    OrderEntity.Item(
                         productId = product.id,
                         productName = product.name,
                         basePrice = product.price,

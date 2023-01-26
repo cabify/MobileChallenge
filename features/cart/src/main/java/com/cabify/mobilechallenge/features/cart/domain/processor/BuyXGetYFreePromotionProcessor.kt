@@ -1,7 +1,7 @@
 package com.cabify.mobilechallenge.features.cart.domain.processor
 
 import com.cabify.mobilechallenge.cart.domain.entity.CartEntity
-import com.cabify.mobilechallenge.features.cart.domain.entity.Order
+import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.shared.product.domain.entities.BuyXGetYFreePromotionEntity
 import com.cabify.shared.product.domain.entities.ProductEntity
 import com.cabify.shared.product.domain.entities.PromotionEntity
@@ -12,7 +12,7 @@ class BuyXGetYFreePromotionProcessor : PromotionProcessor {
         cartItem: CartEntity.Item,
         product: ProductEntity,
         promotion: PromotionEntity
-    ): List<Order.Item> {
+    ): List<OrderEntity.Item> {
         promotion as BuyXGetYFreePromotionEntity
 
         val promotionsAppliedQuantity =
@@ -37,7 +37,7 @@ class BuyXGetYFreePromotionProcessor : PromotionProcessor {
         product: ProductEntity,
         promotion: PromotionEntity
     ) = List(paidItemsInsidePromotionQuantity) {
-        Order.Item(
+        OrderEntity.Item(
             productId = product.id,
             productName = product.name,
             basePrice = product.price,
@@ -51,7 +51,7 @@ class BuyXGetYFreePromotionProcessor : PromotionProcessor {
         product: ProductEntity,
         promotion: PromotionEntity
     ) = List(freeItemsQuantity) {
-        Order.Item(
+        OrderEntity.Item(
             productId = product.id,
             productName = product.name,
             basePrice = product.price,
@@ -64,7 +64,7 @@ class BuyXGetYFreePromotionProcessor : PromotionProcessor {
         paidItemsOutsidePromotionQuantity: Int,
         product: ProductEntity
     ) = List(paidItemsOutsidePromotionQuantity) {
-        Order.Item(
+        OrderEntity.Item(
             productId = product.id,
             productName = product.name,
             basePrice = product.price,

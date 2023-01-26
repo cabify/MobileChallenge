@@ -1,6 +1,6 @@
 package com.cabify.mobilechallenge.features.cart.domain.entity
 
-data class Order(
+data class OrderEntity(
     val items: List<Item>,
     val totalBasePrice: Double,
     val totalFinalPrice: Double

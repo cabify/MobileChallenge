@@ -1,7 +1,7 @@
 package com.cabify.mobilechallenge.features.cart.domain.processor
 
 import com.cabify.mobilechallenge.cart.domain.entity.CartEntity
-import com.cabify.mobilechallenge.features.cart.domain.entity.Order
+import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
 import com.cabify.shared.product.domain.entities.ProductEntity
 import com.cabify.shared.product.domain.entities.PromotionEntity
@@ -12,7 +12,7 @@ class BulkyItemsPromotionProcessor : PromotionProcessor {
         cartItem: CartEntity.Item,
         product: ProductEntity,
         promotion: PromotionEntity
-    ): List<Order.Item> {
+    ): List<OrderEntity.Item> {
         promotion as BulkyItemsPromotionEntity
 
         val isMatchingPromotion = cartItem.quantity >= promotion.minimumQuantity
@@ -24,7 +24,7 @@ class BulkyItemsPromotionProcessor : PromotionProcessor {
         }
 
         return List(cartItem.quantity) {
-            Order.Item(
+            OrderEntity.Item(
                 productId = product.id,
                 productName = product.name,
                 basePrice = product.price,
