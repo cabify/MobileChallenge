@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.cabify.mobilechallenge.core.base.ui.BaseFragment
 import com.cabify.mobilechallenge.features.cart.databinding.FragmentCartBinding
-import com.cabify.mobilechallenge.features.cart.presentation.CartViewModel
+import com.cabify.mobilechallenge.features.cart.presentation.viewmodel.CartViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CartFragment : BaseFragment() {
@@ -28,9 +28,8 @@ class CartFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val textView: TextView = binding.textCart
-        cartViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        cartViewModel.viewState.observe(viewLifecycleOwner) {
+            
         }
     }
 

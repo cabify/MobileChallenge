@@ -4,10 +4,9 @@ import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactory
 import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactoryImpl
 import com.cabify.mobilechallenge.features.cart.domain.processor.BulkyItemsPromotionProcessor
 import com.cabify.mobilechallenge.features.cart.domain.processor.BuyXGetYFreePromotionProcessor
-import com.cabify.mobilechallenge.features.cart.domain.processor.PromotionProcessor
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesInteractor
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesUseCase
-import com.cabify.mobilechallenge.features.cart.presentation.CartViewModel
+import com.cabify.mobilechallenge.features.cart.presentation.viewmodel.CartViewModel
 import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
 import com.cabify.shared.product.domain.entities.BuyXGetYFreePromotionEntity
 import org.koin.androidx.viewmodel.dsl.viewModel
