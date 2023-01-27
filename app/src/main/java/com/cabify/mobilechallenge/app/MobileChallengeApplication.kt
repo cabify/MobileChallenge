@@ -8,6 +8,7 @@ import com.cabify.mobilechallenge.cart.di.cartSharedModule
 import com.cabify.mobilechallenge.core.base.di.coreBaseModule
 import com.cabify.mobilechallenge.features.cart.di.cartModule
 import com.cabify.mobilechallenge.features.home.di.homeModule
+import com.cabify.mobilechallenge.persistence.di.corePersistenceModule
 import com.cabify.shared.product.di.coreProductModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -28,6 +29,7 @@ class MobileChallengeApplication : Application() {
                 homeModule,
                 coreBaseModule,
                 coreProductModule,
+                corePersistenceModule,
                 networkModule,
                 cartSharedModule
             )

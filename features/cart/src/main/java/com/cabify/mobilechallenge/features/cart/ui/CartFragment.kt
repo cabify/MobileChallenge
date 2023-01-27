@@ -29,7 +29,7 @@ class CartFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cartViewModel.viewState.observe(viewLifecycleOwner) {
-            
+
         }
     }
 

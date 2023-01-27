@@ -12,8 +12,10 @@ object CoreDependencies {
     const val rxAndroid3 = "io.reactivex.rxjava3:rxandroid:${Versions.rxAndroid3}"
     const val rxJava3 = "io.reactivex.rxjava3:rxjava:${Versions.rxjava3}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val roomRxJava3 = "androidx.room:room-rxjava3:${Versions.room}"
     const val retrofitRx3Adapter =
         "com.squareup.retrofit2:adapter-rxjava3:${Versions.retrofitRx3Adapter}"
-    const val mockitoKotlin =
-        "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
+    const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
 }

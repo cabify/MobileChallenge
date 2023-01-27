@@ -29,6 +29,7 @@ dependencies {
     implementation(project(":shared:cart"))
     implementation(project(":core:base"))
     implementation(project(":core:network"))
+    implementation(project(":core:persistence"))
     implementation(project(":core:product"))
 
     implementation(UIDependencies.constraintLayout)

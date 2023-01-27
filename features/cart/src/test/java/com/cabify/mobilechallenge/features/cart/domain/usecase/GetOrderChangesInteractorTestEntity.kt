@@ -71,7 +71,7 @@ class GetOrderChangesInteractorTestEntity {
     }
 
     private fun givenCartUpdate() {
-        whenever(cartRepository.cartChanges()) doReturn Observable.just(anyCartEntity)
+        whenever(cartRepository.changes()) doReturn Observable.just(anyCartEntity)
     }
 
     private val anyProduct = ProductEntity(

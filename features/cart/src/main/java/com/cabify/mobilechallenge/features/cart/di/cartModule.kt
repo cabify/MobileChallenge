@@ -1,5 +1,7 @@
 package com.cabify.mobilechallenge.features.cart.di
 
+import com.cabify.mobilechallenge.core.base.di.OBSERVE_SCHEDULER
+import com.cabify.mobilechallenge.core.base.di.SUBSCRIBE_SCHEDULER
 import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactory
 import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactoryImpl
 import com.cabify.mobilechallenge.features.cart.domain.processor.BulkyItemsPromotionProcessor
@@ -14,7 +16,11 @@ import org.koin.dsl.module
 
 val cartModule = module {
     viewModel {
-        CartViewModel(get())
+        CartViewModel(
+            get(),
+            subscribeScheduler = get(SUBSCRIBE_SCHEDULER),
+            observerScheduler = get(OBSERVE_SCHEDULER)
+        )
     }
     single<GetOrderChangesUseCase> {
         GetOrderChangesInteractor(get(), get(), get(), get())
