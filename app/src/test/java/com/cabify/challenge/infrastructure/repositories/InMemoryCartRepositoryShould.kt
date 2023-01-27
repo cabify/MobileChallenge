@@ -1,19 +1,20 @@
 package com.cabify.challenge.infrastructure.repositories
 
 import com.cabify.challenge.builder.ProductBuilder
+import com.cabify.challenge.core.domain.products.Product
 import com.cabify.challenge.core.domain.products.Products
-import com.cabify.challenge.core.infrastructure.repositories.ProductsRepository
+import com.cabify.challenge.core.infrastructure.repositories.CartRepository
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class InMemoryProductsRepositoryShould {
+class InMemoryCartRepositoryShould {
 
-    private lateinit var repository: ProductsRepository
+    private lateinit var repository: CartRepository
 
     @Before
     fun setUp() {
-        repository = InMemoryProductsRepository()
+        repository = InMemoryCartRepository()
     }
 
     @Test
@@ -30,10 +31,10 @@ class InMemoryProductsRepositoryShould {
 
         whenGetsProducts()
 
-        thenReturnProducts(someProducts)
+        thenReturnProducts(cart)
     }
 
-    private fun thenReturnProducts(products: Products?) {
+    private fun thenReturnProducts(products: Products) {
         assertEquals(resultProducts, products)
     }
 
@@ -42,14 +43,14 @@ class InMemoryProductsRepositoryShould {
     }
 
     private fun givenSomeStoredProducts() {
-        repository.save(someProducts)
+        repository.save(aVoucher)
     }
 
     companion object {
-        private var resultProducts: Products? = null
-        private var noProducts: Products? = null
-        private val someProducts = Products(
-            products = listOf(ProductBuilder().voucher().build())
-        )
+        private var resultProducts: Products = Products(emptyList())
+        private var noProducts: Products = Products(emptyList())
+        private var cart: Products = Products(listOf(ProductBuilder().voucher().build()))
+        private val aVoucher: Product = ProductBuilder().voucher().build()
     }
 }
+

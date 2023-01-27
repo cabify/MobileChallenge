@@ -1,6 +1,8 @@
 package com.cabify.challenge.infrastructure.factory
 
+import com.cabify.challenge.core.actions.AddProductToCart
 import com.cabify.challenge.core.actions.GetProducts
+import com.cabify.challenge.core.actions.GetProductsFromCart
 
 object ActionsFactory {
 
@@ -8,6 +10,18 @@ object ActionsFactory {
         return GetProducts(
             RepositoriesFactory.productsRepository,
             ClientFactory.retrofitClient
+        )
+    }
+
+    fun createAddProductToCartActions(): AddProductToCart {
+        return AddProductToCart(
+            RepositoriesFactory.cartRepository
+        )
+    }
+
+    fun createGetProductToCartActions(): GetProductsFromCart {
+        return GetProductsFromCart(
+            RepositoriesFactory.cartRepository
         )
     }
 }

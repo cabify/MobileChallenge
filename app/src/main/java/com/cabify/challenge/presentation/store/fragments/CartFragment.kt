@@ -9,51 +9,48 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cabify.challenge.R
 import com.cabify.challenge.core.domain.products.Products
-import com.cabify.challenge.databinding.FragmentStoreBinding
-import com.cabify.challenge.presentation.store.adapter.ProductsAdapter
+import com.cabify.challenge.databinding.FragmentCartBinding
+import com.cabify.challenge.presentation.store.adapter.CartAdapter
 import com.cabify.challenge.presentation.store.views.StoreViewModel
 import com.cabify.challenge.presentation.store.views.StoreViewModelFactory
 
-class StoreFragment : Fragment() {
+class CartFragment : Fragment() {
 
-
-    private var _binding: FragmentStoreBinding? = null
+    private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
 
     private val view = StoreViewModelFactory().create(StoreViewModel::class.java)
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStoreBinding.inflate(inflater, container, false)
-        view.start()
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
+
         observeEvents()
         return binding.root
 
     }
 
     private fun observeEvents() {
-        binding.recyclerProducts.layoutManager = LinearLayoutManager(requireContext())
-        view.products.observe(viewLifecycleOwner) {
+        binding.recyclerCart.layoutManager = LinearLayoutManager(requireContext())
+        view.cart.observe(viewLifecycleOwner) {
             createAdapter(it)
         }
     }
 
     private fun createAdapter(it: Products) {
-        binding.recyclerProducts.adapter = ProductsAdapter(
+        binding.recyclerCart.adapter = CartAdapter(
             it.getAllProducts()
-        ) { product ->
-            view.onAddToCart(product)
-        }
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        this.view.getProductsFromCart()
+        binding.buttonSecond.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
 

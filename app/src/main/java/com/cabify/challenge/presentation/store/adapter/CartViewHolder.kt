@@ -7,9 +7,8 @@ import com.cabify.challenge.core.domain.products.Code
 import com.cabify.challenge.core.domain.products.Product
 import com.cabify.challenge.databinding.ItemProductsBinding
 
-class ProductsViewHolder(
-    view: View,
-    private val onAddToCart: (product: Product) -> Unit
+class CartViewHolder(
+    view: View
 ) : ViewHolder(view) {
 
     private val binding = ItemProductsBinding.bind(view)
@@ -17,9 +16,6 @@ class ProductsViewHolder(
         binding.productDescription.text = product.name()
         binding.productPrice.text = product.presentPrice()
         setImageByCode(product.code())
-        binding.addToCart.setOnClickListener {
-            onAddToCart(product)
-        }
     }
 
 
