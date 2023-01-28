@@ -1,11 +1,13 @@
 package com.cabify.mobilechallenge.features.cart.ui.adapter
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.cabify.library.utils.extensions.gone
+import com.cabify.library.utils.extensions.strikeThrough
+import com.cabify.library.utils.extensions.visible
 import com.cabify.library.utils.recyclerview.DiffUtilDefaultItemCallback
 import com.cabify.mobilechallenge.features.cart.R
 import com.cabify.mobilechallenge.features.cart.databinding.ItemOrderItemBinding
@@ -13,7 +15,6 @@ import com.cabify.mobilechallenge.features.cart.databinding.ItemOrderPriceBindin
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderItemPresentation
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderPresentation
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderPricePresentation
-import com.google.android.material.progressindicator.CircularProgressIndicatorSpec
 
 class OrderPresentationAdapter(private val onCheckoutClicked: (() -> Unit)) :
     ListAdapter<OrderPresentation, RecyclerView.ViewHolder>(orderPresentationDiffUtilItemCallback()) {
@@ -51,15 +52,27 @@ class OrderPresentationAdapter(private val onCheckoutClicked: (() -> Unit)) :
 
     inner class OrderItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: ItemOrderItemBinding = ItemOrderItemBinding.bind(view)
+        init {
+            binding.unitBasePrice.strikeThrough()
+        }
         fun bind(item: OrderItemPresentation) {
             with(binding) {
                 productName.text = item.productName
                 //binding.productImage.drawable = ContextCompat.getDrawable(binding.root.context,R.drawable)
-                productPrice.text = item.itemPrice
+                unitBasePrice.text = item.unitBasePrice
                 productQuantity.text = item.quantity
-                promotionName.text = item.promotionPresentation?.promotionName
-                productPromotionInfo.text = item.promotionPresentation?.promotionInfo
-                productSubtotal.text = item.subtotalPrice
+                finalSubtotalPrice.text = item.finalSubtotalPrice
+                unitFinalPrice.text = item.unitFinalPrice
+
+                if (item.promotionPresentation == null) {
+                    promotionName.gone()
+                    productPromotionInfo.gone()
+                    binding.unitBasePrice.gone()
+                } else {
+                    binding.unitBasePrice.visible()
+                    promotionName.text = item.promotionPresentation.promotionName
+                    productPromotionInfo.text = item.promotionPresentation.promotionInfo
+                }
             }
         }
     }

@@ -13,7 +13,9 @@ data class OrderItemPresentation(
     val productId: String,
     val productName: String,
     val quantity: String,
-    val itemPrice: String,
-    val subtotalPrice: String,
+    val unitBasePrice: String,
+    val unitFinalPrice:String,
+    val finalSubtotalPrice: String,
+    val baseSubtotalPrice: String,
     val promotionPresentation: PromotionPresentation?
 ) : OrderPresentation()

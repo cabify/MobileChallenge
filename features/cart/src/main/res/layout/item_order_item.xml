@@ -4,92 +4,107 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content">
+  android:layout_height="wrap_content"
+  android:paddingStart="@dimen/space_m"
+  android:paddingTop="@dimen/space_m"
+  android:paddingEnd="@dimen/space_m"
+  android:paddingBottom="@dimen/space_m">
 
   <com.google.android.material.imageview.ShapeableImageView
     android:id="@+id/product_image"
-    android:layout_width="@dimen/size_m"
-    android:layout_height="@dimen/size_m"
-    android:layout_marginStart="@dimen/space_m"
-    android:layout_marginTop="@dimen/space_m"
-    android:layout_marginBottom="@dimen/space_s"
+    android:layout_width="@dimen/size_l"
+    android:layout_height="@dimen/size_l"
     android:scaleType="centerCrop"
     android:src="@color/design_default_color_error"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraSmall" />
 
   <TextView
     android:id="@+id/product_name"
+    style="@style/TextAppearance.Material3.BodyMedium"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/space_m"
     app:layout_constraintBottom_toTopOf="@id/promotion_name"
     app:layout_constraintStart_toEndOf="@id/product_image"
     app:layout_constraintTop_toTopOf="@+id/product_image"
-    app:layout_constraintVertical_chainStyle="spread_inside"
+    app:layout_constraintVertical_bias="0.0"
+    app:layout_constraintVertical_chainStyle="packed"
     tools:text="T-shirt" />
 
   <TextView
     android:id="@+id/promotion_name"
+    style="@style/TextAppearance.Material3.LabelMedium"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/space_m"
-    app:layout_constraintBottom_toBottomOf="@+id/product_image"
+    android:layout_marginTop="@dimen/space_xs"
+    app:layout_constraintBottom_toTopOf="@id/unit_base_price"
     app:layout_constraintStart_toEndOf="@id/product_image"
     app:layout_constraintTop_toBottomOf="@id/product_name"
     tools:text="2x1 promotion" />
 
   <TextView
     android:id="@+id/product_promotion_info"
+    style="@style/TextAppearance.Material3.BodySmall"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/space_m"
-    app:layout_constraintBottom_toBottomOf="@+id/product_image"
+    android:layout_marginTop="@dimen/space_xs"
+    app:layout_constraintBottom_toTopOf="@id/unit_final_price"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/product_price"
+    app:layout_constraintTop_toBottomOf="@id/final_subtotal_price"
+    app:layout_constraintVertical_chainStyle="spread"
     tools:text="2 items free" />
 
-
   <TextView
-    android:id="@+id/product_price"
+    android:id="@+id/final_subtotal_price"
+    style="@style/TextAppearance.Material3.BodyMedium"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/space_m"
     app:layout_constraintBottom_toTopOf="@+id/product_promotion_info"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/product_image"
-    app:layout_constraintVertical_chainStyle="spread_inside"
+    app:layout_constraintTop_toTopOf="@+id/product_name"
+    app:layout_constraintVertical_bias="0.0"
+    app:layout_constraintVertical_chainStyle="packed"
     tools:text="18.5$" />
+
 
   <TextView
     android:id="@+id/product_quantity"
+    style="@style/TextAppearance.Material3.BodySmall"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/space_s"
-    app:layout_constraintEnd_toStartOf="@+id/product_price"
-    app:layout_constraintTop_toTopOf="@+id/product_price"
+    android:layout_marginStart="@dimen/space_s"
+    app:layout_constraintBottom_toBottomOf="@+id/product_name"
+    app:layout_constraintEnd_toStartOf="@+id/final_subtotal_price"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toEndOf="@+id/product_name"
+    app:layout_constraintTop_toTopOf="@+id/product_name"
     tools:text="5x" />
 
-  <com.google.android.material.divider.MaterialDivider
-    android:id="@+id/separator"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/space_m"
-    app:dividerInsetEnd="@dimen/space_m"
-    app:dividerInsetStart="@dimen/space_m"
-    app:layout_constraintTop_toBottomOf="@id/product_image" />
-
   <TextView
-    android:id="@+id/product_subtotal"
+    android:id="@+id/unit_base_price"
+    style="@style/TextAppearance.Material3.BodySmall"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/space_s"
-    android:layout_marginEnd="@dimen/space_m"
-    android:layout_marginBottom="@dimen/space_m"
-    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginStart="@dimen/space_m"
+    android:layout_marginTop="@dimen/space_xs"
+    app:layout_constraintBottom_toBottomOf="@+id/product_image"
+    app:layout_constraintStart_toEndOf="@id/product_image"
+    app:layout_constraintTop_toBottomOf="@id/product_promotion_info"
+    tools:text="55.5$ unit" />
+
+  <TextView
+    android:id="@+id/unit_final_price"
+    style="@style/TextAppearance.Material3.BodySmall"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/space_xs"
+    app:layout_constraintBottom_toBottomOf="@+id/product_image"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@id/separator"
-    tools:text="Subtotal: 55.5$" />
+    app:layout_constraintTop_toBottomOf="@id/product_promotion_info"
+    tools:text="55.5$ unit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

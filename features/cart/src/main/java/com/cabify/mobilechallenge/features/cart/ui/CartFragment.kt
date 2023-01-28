@@ -78,7 +78,7 @@ class CartFragment : BaseFragment() {
     }
 
     private fun showCheckoutSucceedMessage() {
-        requireContext().showToast(com.cabify.mobilechallenge.shared.commonui.R.string.checkout_failed_message)
+        requireContext().showToast(com.cabify.mobilechallenge.shared.commonui.R.string.checkout_succeed_message)
     }
 
     private fun setSuccessViewState(viewState: Success) {

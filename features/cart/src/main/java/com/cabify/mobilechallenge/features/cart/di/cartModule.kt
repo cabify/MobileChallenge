@@ -50,6 +50,7 @@ val cartModule = module {
     single {
         OrderEntityToPresentationMapper(
             get(),
+            get(),
             mapOf(
                 BulkyItemsPromotionEntity.APP_INTERNAL_ID to BulkyItemsOrderToPromotionPresentationMapper(
                     get()

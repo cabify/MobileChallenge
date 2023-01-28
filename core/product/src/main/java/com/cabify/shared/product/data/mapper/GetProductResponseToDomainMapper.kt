@@ -9,7 +9,7 @@ internal class GetProductResponseToDomainMapper {
         getProductsResponse.products?.map {
             ProductEntity(
                 id = it?.id.orEmpty(),
-                name = it?.id.orEmpty(),
+                name = it?.name.orEmpty(),
                 price = it?.price.orZero()
             )
         }.orEmpty()

@@ -8,6 +8,5 @@ import io.reactivex.rxjava3.core.Single
 interface CartPersistenceDataSource {
     fun changes(): Observable<CartEntity>
     fun upsertQuantity(item: CartEntity.Item): Completable
-    fun getItemFromCart(productId: String): Single<CartEntity.Item>
     fun deleteCart(): Completable
 }

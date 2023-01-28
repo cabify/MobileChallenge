@@ -21,9 +21,6 @@ class CartPersistenceDataSourceImpl(
     override fun upsertQuantity(item: CartEntity.Item): Completable =
         cartDao.upsertQuantity(cartItemEntityMapper.map(item))
 
-    override fun getItemFromCart(productId: String): Single<CartEntity.Item> =
-        cartDao.read(productId).map(cartItemDataMapper::map)
-
     override fun deleteCart(): Completable =
         cartDao.delete()
 }

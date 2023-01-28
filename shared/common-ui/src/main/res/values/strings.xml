@@ -21,4 +21,6 @@
     <item quantity="other">%s items free</item>
   </plurals>
   <string name="checkout_order">Checkout order</string>
+  <string name="quantity_x">x%s</string>
+  <string name="x_price_unit">%s/unit</string>
 </resources>

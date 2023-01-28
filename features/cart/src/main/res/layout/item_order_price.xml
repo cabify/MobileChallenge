@@ -8,6 +8,7 @@
 
   <TextView
     android:id="@+id/final_total_title"
+    style="@style/TextAppearance.Material3.TitleMedium"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/space_m"
@@ -20,16 +21,19 @@
 
   <TextView
     android:id="@+id/final_total_price"
+    style="@style/TextAppearance.Material3.TitleMedium"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/space_m"
     android:textAllCaps="true"
+
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="@+id/final_total_title"
     tools:text="423.5$" />
 
   <TextView
     android:id="@+id/base_total_title"
+    style="@style/TextAppearance.Material3.BodySmall"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/space_m"
@@ -41,6 +45,7 @@
 
   <TextView
     android:id="@+id/base_total_price"
+    style="@style/TextAppearance.Material3.BodySmall"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/space_m"
@@ -51,10 +56,11 @@
 
   <TextView
     android:id="@+id/promotions_discount_title"
+    style="@style/TextAppearance.Material3.BodySmall"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/space_m"
-    android:layout_marginTop="@dimen/space_s"
+    android:layout_marginTop="@dimen/space_xs"
     android:text="@string/promotions_discount"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/base_total_title" />
@@ -62,6 +68,7 @@
 
   <TextView
     android:id="@+id/promotions_discount_price"
+    style="@style/TextAppearance.Material3.BodySmall"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/space_m"
