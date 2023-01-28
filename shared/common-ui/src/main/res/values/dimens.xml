@@ -6,7 +6,7 @@
   <dimen name="space_xl">32dp</dimen>
   <dimen name="space_xxl">40dp</dimen>
   <dimen name="space_xxxl">64dp</dimen>
-
+  <dimen name="size_s">48dp</dimen>
   <dimen name="size_m">56dp</dimen>
   <dimen name="size_l">64dp</dimen>
 </resources>
