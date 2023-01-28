@@ -5,19 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cabify.library.utils.recyclerview.DefaultItemCallback
+import com.cabify.library.utils.recyclerview.DiffUtilDefaultItemCallback
 import com.cabify.mobilechallenge.features.cart.R
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderItemPresentation
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderPresentation
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderPricePresentation
 
-class OrderItemsAdapter() :
-    ListAdapter<OrderPresentation, RecyclerView.ViewHolder>(DefaultItemCallback() {
-        it.hashCode() == it.hashCode()
-    }) {
+class OrderPresentationAdapter : ListAdapter<OrderPresentation, RecyclerView.ViewHolder>(orderPresentationDiffUtilItemCallback()) {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
+        TODO()
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
@@ -42,11 +39,15 @@ class OrderItemsAdapter() :
 
 
     inner class OrderItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
+       init {
+           TODO()
+       }
     }
 
     inner class OrderPriceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
+        init {
+            TODO()
+        }
     }
 
     companion object {
@@ -54,3 +55,11 @@ class OrderItemsAdapter() :
         private const val ORDER_PRICE_VIEW_TYPE = 2
     }
 }
+
+private fun orderPresentationDiffUtilItemCallback(): DiffUtilDefaultItemCallback<OrderPresentation> =
+    DiffUtilDefaultItemCallback {
+        when (it) {
+            is OrderItemPresentation -> it.productId
+            is OrderPricePresentation -> it.orderId
+        }
+    }

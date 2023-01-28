@@ -8,6 +8,7 @@ import com.cabify.mobilechallenge.features.cart.domain.processor.BulkyItemsPromo
 import com.cabify.mobilechallenge.features.cart.domain.processor.BuyXGetYFreePromotionProcessor
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesInteractor
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesUseCase
+import com.cabify.mobilechallenge.features.cart.presentation.mapper.OrderEntityToPresentationMapper
 import com.cabify.mobilechallenge.features.cart.presentation.viewmodel.CartViewModel
 import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
 import com.cabify.shared.product.domain.entities.BuyXGetYFreePromotionEntity
@@ -39,5 +40,8 @@ val cartModule = module {
                 BuyXGetYFreePromotionEntity.APP_INTERNAL_ID to BuyXGetYFreePromotionProcessor(),
             )
         )
+    }
+    single {
+        OrderEntityToPresentationMapper(get())
     }
 }

@@ -17,6 +17,7 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
         val totalFinalPrice = orderItems.sumOf { it.finalPrice }
         val totalBasePrice = orderItems.sumOf { it.basePrice }
         return OrderEntity(
+            orderId = DEFAULT_ORDER_ID,
             items = orderItems,
             totalBasePrice = totalBasePrice,
             totalFinalPrice = totalFinalPrice
@@ -54,5 +55,9 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
                 )
             }
         }
+    }
+
+    companion object {
+        private const val DEFAULT_ORDER_ID = "order_id"
     }
 }

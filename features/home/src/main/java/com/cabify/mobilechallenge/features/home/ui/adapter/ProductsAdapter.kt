@@ -6,15 +6,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cabify.library.utils.recyclerview.DefaultItemCallback
+import com.cabify.library.utils.recyclerview.DiffUtilDefaultItemCallback
 import com.cabify.mobilechallenge.features.home.R
 import com.cabify.mobilechallenge.features.home.databinding.ItemProductBinding
 import com.cabify.mobilechallenge.features.home.presentation.model.ProductPresentation
 
 class ProductsAdapter(private val onAddToCartClicked: ((String) -> Unit)? = null) :
-    ListAdapter<ProductPresentation, ProductsAdapter.ViewHolder>(
-        DefaultItemCallback(ProductPresentation::id)
-    ) {
+    ListAdapter<ProductPresentation, ProductsAdapter.ViewHolder>(DiffUtilDefaultItemCallback(ProductPresentation::id)) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))

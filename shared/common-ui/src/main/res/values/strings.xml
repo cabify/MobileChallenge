@@ -5,7 +5,7 @@
   <string name="general_error_content_message">Oops! There was an unknown problem.</string>
   <string name="general_error_title_message">Error</string>
   <string name="add_to_cart">Add to cart</string>
-  <string name="empty_products_list">The products list is empty</string>
+  <string name="empty_product_list_message">The products list is empty</string>
   <string name="empty_cart">Your cart is empty</string>
   <string name="product_image_desc">Image of the product</string>
   <string name="product_added_to_cart">Product added to cart</string>
