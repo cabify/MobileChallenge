@@ -12,6 +12,7 @@ data class OrderPricePresentation(
 data class OrderItemPresentation(
     val productId: String,
     val productName: String,
+    val productImageUrl: String?,
     val quantity: String,
     val unitBasePrice: String,
     val unitFinalPrice:String,

@@ -4,6 +4,7 @@ object Versions {
     const val coreKtx = "1.9.0"
     const val constraintLayout = "2.1.4"
     const val converterGson = "2.9.0"
+    const val coil = "2.2.1"
     const val espresso = "3.5.1"
     const val fragmentKtx = "2.5.3"
     const val gradle = "7.2.2"

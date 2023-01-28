@@ -44,7 +44,8 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
                     productName = product.name,
                     unitBasePrice = product.price,
                     unitFinalPrice = product.price,
-                    quantity = cartItem.quantity
+                    quantity = cartItem.quantity,
+                    productImageUrl = product.productImageUrl
                 )
             } else {
                 promotionProcessor.process(

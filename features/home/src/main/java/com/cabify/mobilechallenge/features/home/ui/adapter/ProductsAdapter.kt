@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.cabify.library.utils.extensions.gone
 import com.cabify.library.utils.extensions.visible
 import com.cabify.library.utils.recyclerview.DiffUtilDefaultItemCallback
@@ -38,6 +39,11 @@ class ProductsAdapter(private val onAddToCartClicked: ((String) -> Unit)? = null
                 unitPrice.text = item.price
                 addToCartButton.setOnClickListener {
                     onAddToCartClicked?.invoke(item.id)
+                }
+                productImage.load(item.productImageUrl) {
+                    placeholder(com.cabify.mobilechallenge.shared.commonui.R.color.purple_700)
+                    crossfade(true)
+                    error(com.cabify.mobilechallenge.shared.commonui.R.color.purple_700)
                 }
                 if (item.availablePromotionName == null) {
                     promotionName.gone()

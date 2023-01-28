@@ -54,6 +54,7 @@ class OrderEntityToPresentationMapper(
                     currencyUtils.getPriceWithCurrency(item.unitFinalPrice)
                 ),
                 baseSubtotalPrice = currencyUtils.getPriceWithCurrency(baseSubtotalPrice),
+                productImageUrl = item.productImageUrl
             )
         }
 

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.cabify.library.utils.extensions.gone
 import com.cabify.library.utils.extensions.strikeThrough
 import com.cabify.library.utils.extensions.visible
@@ -52,13 +53,19 @@ class OrderPresentationAdapter(private val onCheckoutClicked: (() -> Unit)) :
 
     inner class OrderItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: ItemOrderItemBinding = ItemOrderItemBinding.bind(view)
+
         init {
             binding.unitBasePrice.strikeThrough()
         }
+
         fun bind(item: OrderItemPresentation) {
             with(binding) {
                 productName.text = item.productName
-                //binding.productImage.drawable = ContextCompat.getDrawable(binding.root.context,R.drawable)
+                productImage.load(item.productImageUrl) {
+                    placeholder(com.cabify.mobilechallenge.shared.commonui.R.color.purple_700)
+                    crossfade(true)
+                    error(com.cabify.mobilechallenge.shared.commonui.R.color.purple_700)
+                }
                 unitBasePrice.text = item.unitBasePrice
                 productQuantity.text = item.quantity
                 finalSubtotalPrice.text = item.finalSubtotalPrice

@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":shared:cart"))
     implementation(project(":libraries:utils"))
 
+    implementation(UIDependencies.coil)
     implementation(UIDependencies.constraintLayout)
     implementation(UIDependencies.material)
 

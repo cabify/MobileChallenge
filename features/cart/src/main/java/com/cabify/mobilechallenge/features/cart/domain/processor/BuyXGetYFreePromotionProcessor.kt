@@ -32,7 +32,8 @@ class BuyXGetYFreePromotionProcessor : PromotionProcessor {
             unitBasePrice = product.price,
             unitFinalPrice = unitFinalPrice,
             quantity = cartItem.quantity,
-            promotion = if (isMatchingPromotion) promotion else null
+            promotion = if (isMatchingPromotion) promotion else null,
+            productImageUrl = product.productImageUrl
         )
     }
 }

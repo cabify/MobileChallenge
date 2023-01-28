@@ -11,6 +11,7 @@ data class OrderEntity(
     data class Item(
         val productId: String,
         val productName: String,
+        val productImageUrl: String?,
         val unitBasePrice: Double,
         val unitFinalPrice: Double,
         val quantity: Int,
