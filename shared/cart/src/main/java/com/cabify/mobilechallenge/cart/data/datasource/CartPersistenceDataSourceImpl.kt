@@ -23,4 +23,7 @@ class CartPersistenceDataSourceImpl(
 
     override fun getItemFromCart(productId: String): Single<CartEntity.Item> =
         cartDao.read(productId).map(cartItemDataMapper::map)
+
+    override fun deleteCart(): Completable =
+        cartDao.delete()
 }

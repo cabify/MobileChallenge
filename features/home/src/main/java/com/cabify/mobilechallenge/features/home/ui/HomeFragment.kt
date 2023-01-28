@@ -27,7 +27,7 @@ class HomeFragment : BaseFragment() {
     private val homeViewModel: HomeViewModel by viewModel()
 
     private val productsAdapter: ProductsAdapter by lazy {
-        ProductsAdapter(homeViewModel::addProductToCart)
+        ProductsAdapter(::addProductToCart)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,6 +105,10 @@ class HomeFragment : BaseFragment() {
         binding.noProductsView.gone()
         binding.recyclerView.gone()
         showErrorMessage()
+    }
+
+    private fun addProductToCart(productId: String) {
+        homeViewModel.addProductToCart(productId)
     }
 
     override fun onDestroyView() {

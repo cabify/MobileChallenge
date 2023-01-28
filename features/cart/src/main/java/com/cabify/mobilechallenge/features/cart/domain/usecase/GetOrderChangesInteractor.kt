@@ -16,13 +16,11 @@ class GetOrderChangesInteractor(
 ) : GetOrderChangesUseCase {
 
     override fun invoke(): Observable<OrderEntity> =
-        cartRepository.changes()
-            .switchMapSingle { cart ->
-                Single.zip(
-                    productRepository.getProducts(),
-                    promotionsRepository.getPromotions()
-                ) { products, promotions ->
-                    orderFactory.create(cart, products, promotions)
-                }
-            }
+        Observable.combineLatest(
+            productRepository.getProducts().toObservable(),
+            promotionsRepository.getPromotions().toObservable(),
+            cartRepository.changes()
+        ) { products, promotions, cart ->
+            orderFactory.create(cart, products, promotions)
+        }
 }

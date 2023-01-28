@@ -1,5 +1,6 @@
 package com.cabify.mobilechallenge.features.cart.ui.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,9 @@ import com.cabify.mobilechallenge.features.cart.databinding.ItemOrderPriceBindin
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderItemPresentation
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderPresentation
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderPricePresentation
+import com.google.android.material.progressindicator.CircularProgressIndicatorSpec
 
-class OrderPresentationAdapter :
+class OrderPresentationAdapter(private val onCheckoutClicked: (() -> Unit)) :
     ListAdapter<OrderPresentation, RecyclerView.ViewHolder>(orderPresentationDiffUtilItemCallback()) {
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
         is OrderItemPresentation -> ORDER_ITEM_VIEW_TYPE
@@ -24,7 +26,10 @@ class OrderPresentationAdapter :
         val item = getItem(position)
         when (holder) {
             is OrderItemViewHolder -> holder.bind(item as OrderItemPresentation)
-            is OrderPriceViewHolder -> holder.bind(item as OrderPricePresentation)
+            is OrderPriceViewHolder -> holder.bind(
+                item as OrderPricePresentation,
+                onCheckoutClicked
+            )
         }
     }
 
@@ -51,7 +56,7 @@ class OrderPresentationAdapter :
                 productName.text = item.productName
                 //binding.productImage.drawable = ContextCompat.getDrawable(binding.root.context,R.drawable)
                 productPrice.text = item.itemPrice
-                productQuantity.text = item.quantity //TODO add string with x
+                productQuantity.text = item.quantity
                 promotionName.text = item.promotionPresentation?.promotionName
                 productPromotionInfo.text = item.promotionPresentation?.promotionInfo
                 productSubtotal.text = item.subtotalPrice
@@ -62,8 +67,11 @@ class OrderPresentationAdapter :
     inner class OrderPriceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: ItemOrderPriceBinding = ItemOrderPriceBinding.bind(view)
 
-        fun bind(item: OrderPricePresentation) {
+        fun bind(item: OrderPricePresentation, onCheckoutClicked: () -> Unit) {
             with(binding) {
+                binding.checkoutOrderButton.setOnClickListener {
+                    onCheckoutClicked()
+                }
                 baseTotalPrice.text = item.baseTotalPrice
                 promotionsDiscountPrice.text = item.promotionDiscountedPrice
                 finalTotalPrice.text = item.totalPrice

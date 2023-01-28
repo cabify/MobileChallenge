@@ -9,14 +9,15 @@ class BuyXGetYOrderToPromotionPresentationMapper(private val stringsProvider: St
     OrderEntityToPromotionPresentationMapper {
     override fun map(orderItem: OrderEntity.Item): PromotionPresentation {
         val promotion = orderItem.promotion
-        if (promotion!is BuyXGetYFreePromotionEntity) throw java.lang.IllegalArgumentException("BuyXGetYFreePromotionProcessor only supports BuyXGetYFreePromotionEntity")
+        if (promotion !is BuyXGetYFreePromotionEntity) throw java.lang.IllegalArgumentException("BuyXGetYFreePromotionProcessor only supports BuyXGetYFreePromotionEntity")
 
         val timesMatchingPromotion = orderItem.quantity / promotion.minimumQuantity
         val freeItemsQuantity = timesMatchingPromotion * promotion.freeItemsQuantity
         return PromotionPresentation(
             promotionName = promotion.name,
-            promotionInfo = stringsProvider.getString(
-                com.cabify.mobilechallenge.shared.commonui.R.string.buy_x_get_y_promotion_info,
+            promotionInfo = stringsProvider.getPlural(
+                com.cabify.mobilechallenge.shared.commonui.R.plurals.buy_x_get_y_promotion_info,
+                freeItemsQuantity,
                 freeItemsQuantity
             )
         )

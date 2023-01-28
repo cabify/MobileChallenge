@@ -16,7 +16,7 @@ class BulkyItemsOrderToPromotionPresentationMapper(private val stringsProvider: 
             promotionName = orderItem.promotion.name,
             promotionInfo = stringsProvider.getString(
                 com.cabify.mobilechallenge.shared.commonui.R.string.bulky_items_promotion_info,
-                "%${promotion.discountPercentagePerItem}"
+                promotion.discountPercentagePerItem
             )
         )
     }

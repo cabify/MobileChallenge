@@ -7,11 +7,18 @@
   <string name="add_to_cart">Add to cart</string>
   <string name="empty_product_list_message">The products list is empty</string>
   <string name="empty_cart">Your cart is empty</string>
-  <string name="product_image_desc">Image of the product</string>
+  <string name="product_image_desc">Image of the product</string>S
   <string name="product_added_to_cart">Product added to cart</string>
+  <string name="checkout_succeed_message">Checkout completed successfully</string>
+  <string name="checkout_failed_message">Checkout failed, try again!</string>
   <string name="total">Total</string>
   <string name="base_total">Base total</string>
   <string name="promotions_discount">Promotions discount</string>
-  <string name="bulky_items_promotion_info">%s disc/unit</string>
-  <string name="buy_x_get_y_promotion_info">%s items free</string>
+  <string name="bulky_items_promotion_info">%s%% disc/unit</string>
+
+  <plurals name="buy_x_get_y_promotion_info">
+    <item quantity="one">%s item free</item>
+    <item quantity="other">%s items free</item>
+  </plurals>
+  <string name="checkout_order">Checkout order</string>
 </resources>

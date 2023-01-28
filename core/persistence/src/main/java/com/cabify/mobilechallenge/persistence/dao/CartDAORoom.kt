@@ -3,7 +3,6 @@ package com.cabify.mobilechallenge.persistence.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
 import androidx.room.rxjava3.EmptyResultSetException
 import com.cabify.mobilechallenge.persistence.entity.CartItemData
@@ -35,4 +34,7 @@ interface CartDAORoom : CartDAO<CartItemData> {
 
     @Query("SELECT * FROM cartItemData WHERE productId= :id LIMIT 1")
     override fun read(id: String): Single<CartItemData>
+
+    @Query("DELETE FROM cartItemData")
+    override fun delete(): Completable
 }

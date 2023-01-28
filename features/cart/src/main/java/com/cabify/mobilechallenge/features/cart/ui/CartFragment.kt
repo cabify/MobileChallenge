@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cabify.library.utils.extensions.gone
+import com.cabify.library.utils.extensions.showToast
 import com.cabify.library.utils.extensions.visible
 import com.cabify.mobilechallenge.core.base.ui.BaseFragment
 import com.cabify.mobilechallenge.features.cart.databinding.FragmentCartBinding
 import com.cabify.mobilechallenge.features.cart.presentation.viewmodel.CartViewModel
+import com.cabify.mobilechallenge.features.cart.presentation.viewstate.CheckoutSucceed
+import com.cabify.mobilechallenge.features.cart.presentation.viewstate.CheckoutFailed
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.Error
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.Loading
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.Success
@@ -24,7 +27,7 @@ class CartFragment : BaseFragment() {
     private val cartViewModel: CartViewModel by viewModel()
 
     private val productsAdapter: OrderPresentationAdapter by lazy {
-        OrderPresentationAdapter()
+        OrderPresentationAdapter(::checkoutOrder)
     }
 
     override fun onCreateView(
@@ -35,10 +38,12 @@ class CartFragment : BaseFragment() {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView()
         observeViewState()
+        observeViewEvent()
     }
 
     private fun setRecyclerView() {
@@ -57,6 +62,23 @@ class CartFragment : BaseFragment() {
                 Loading -> setLoadingViewState()
             }
         }
+    }
+
+    private fun observeViewEvent() {
+        cartViewModel.viewEvent.observe(viewLifecycleOwner) { event ->
+            when (event) {
+                CheckoutSucceed -> showCheckoutSucceedMessage()
+                CheckoutFailed -> showCheckoutFailedMessage()
+            }
+        }
+    }
+
+    private fun showCheckoutFailedMessage() {
+        requireContext().showToast(com.cabify.mobilechallenge.shared.commonui.R.string.checkout_failed_message)
+    }
+
+    private fun showCheckoutSucceedMessage() {
+        requireContext().showToast(com.cabify.mobilechallenge.shared.commonui.R.string.checkout_failed_message)
     }
 
     private fun setSuccessViewState(viewState: Success) {
@@ -82,6 +104,10 @@ class CartFragment : BaseFragment() {
         binding.emptyCartView.gone()
         binding.recyclerView.gone()
         showErrorMessage()
+    }
+
+    private fun checkoutOrder() {
+        cartViewModel.checkoutOrder()
     }
 
     override fun onDestroyView() {

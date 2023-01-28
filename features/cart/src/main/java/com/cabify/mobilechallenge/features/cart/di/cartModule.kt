@@ -6,6 +6,8 @@ import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactory
 import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactoryImpl
 import com.cabify.mobilechallenge.features.cart.domain.processor.BulkyItemsPromotionProcessor
 import com.cabify.mobilechallenge.features.cart.domain.processor.BuyXGetYFreePromotionProcessor
+import com.cabify.mobilechallenge.features.cart.domain.usecase.CheckoutOrderInteractor
+import com.cabify.mobilechallenge.features.cart.domain.usecase.CheckoutOrderUseCase
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesInteractor
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesUseCase
 import com.cabify.mobilechallenge.features.cart.presentation.mapper.BulkyItemsOrderToPromotionPresentationMapper
@@ -20,6 +22,7 @@ import org.koin.dsl.module
 val cartModule = module {
     viewModel {
         CartViewModel(
+            get(),
             get(),
             get(),
             subscribeScheduler = get(SUBSCRIBE_SCHEDULER),
@@ -56,5 +59,8 @@ val cartModule = module {
                 )
             )
         )
+    }
+    single<CheckoutOrderUseCase> {
+        CheckoutOrderInteractor(get())
     }
 }

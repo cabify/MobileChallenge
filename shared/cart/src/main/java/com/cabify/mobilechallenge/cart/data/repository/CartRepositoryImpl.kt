@@ -18,4 +18,8 @@ class CartRepositoryImpl(private val cartPersistenceDataSource: CartPersistenceD
 
     override fun getItemFromCart(productId: String): Single<CartEntity.Item> =
         cartPersistenceDataSource.getItemFromCart(productId)
+
+    override fun deleteCart(): Completable =
+        cartPersistenceDataSource.deleteCart()
+
 }

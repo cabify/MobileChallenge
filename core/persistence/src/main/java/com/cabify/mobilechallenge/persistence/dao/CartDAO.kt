@@ -10,4 +10,5 @@ interface CartDAO<T : Any> {
     fun update(model: T): Completable
     fun changes(): Observable<List<T>>
     fun read(id: String): Single<T>
+    fun delete(): Completable
 }
