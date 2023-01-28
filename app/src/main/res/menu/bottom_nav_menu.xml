@@ -8,7 +8,7 @@
 
   <item
     android:id="@+id/navigation_cart"
-    android:icon="@drawable/ic_cart_black_24dp"
+    android:icon="@drawable/ic_cart_24dp"
     android:title="@string/title_cart" />
 
 </menu>

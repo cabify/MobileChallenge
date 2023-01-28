@@ -22,7 +22,7 @@ class CartViewModel(
             .subscribeOn(subscribeScheduler)
             .observeOn(observerScheduler)
             .subscribe({
-                it
+
             }, {
                 Log.e("getOrderChangesUseCase", it.stackTraceToString())
             })

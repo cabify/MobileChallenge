@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <com.google.android.material.divider.MaterialDivider
+    android:id="@+id/separator"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/space_l"
+    app:dividerInsetEnd="@dimen/space_m"
+    app:dividerInsetStart="@dimen/space_m"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+  <TextView
+    android:id="@+id/final_total_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/space_m"
+    android:layout_marginTop="@dimen/space_m"
+    android:text="@string/total"
+    android:layout_marginBottom="@dimen/space_l"
+    android:textAllCaps="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/promotions_discount_title" />
+
+  <TextView
+    android:id="@+id/final_total_price"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/space_m"
+    android:textAllCaps="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/final_total_title"
+    tools:text="423.5$" />
+
+  <TextView
+    android:id="@+id/base_total_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/space_m"
+    android:layout_marginTop="@dimen/space_l"
+    android:text="@string/base_total"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/separator" />
+
+
+  <TextView
+    android:id="@+id/base_total_price"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/space_m"
+    android:textAllCaps="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/base_total_title"
+    tools:text="453.5$" />
+
+  <TextView
+    android:id="@+id/promotions_discount_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/space_m"
+    android:layout_marginTop="@dimen/space_s"
+    android:text="@string/promotions_discount"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/base_total_title" />
+
+
+  <TextView
+    android:id="@+id/promotions_discount_price"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/space_m"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/promotions_discount_title"
+    tools:text="-30$" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
