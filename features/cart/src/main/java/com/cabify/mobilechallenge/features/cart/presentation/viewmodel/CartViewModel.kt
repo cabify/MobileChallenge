@@ -6,6 +6,7 @@ import com.cabify.mobilechallenge.core.base.presentation.BaseViewModel
 import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesUseCase
 import com.cabify.mobilechallenge.features.cart.presentation.mapper.OrderEntityToPresentationMapper
+import com.cabify.mobilechallenge.features.cart.presentation.model.OrderItemPresentation
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.CartViewState
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.Loading
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.Error
@@ -39,6 +40,8 @@ class CartViewModel(
         )
     }
 
-    private fun mapToViewState(orderEntity: OrderEntity): CartViewState =
-        Success(orderEntityToPresentationMapper.map(orderEntity))
+    private fun mapToViewState(orderEntity: OrderEntity): CartViewState {
+        val orderPresentations = orderEntityToPresentationMapper.map(orderEntity)
+        return Success(orderPresentations)
+    }
 }

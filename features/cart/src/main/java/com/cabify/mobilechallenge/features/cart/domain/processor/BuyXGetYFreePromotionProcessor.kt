@@ -13,24 +13,15 @@ class BuyXGetYFreePromotionProcessor : PromotionProcessor {
         product: ProductEntity,
         promotion: PromotionEntity
     ): OrderEntity.Item {
-        promotion as BuyXGetYFreePromotionEntity
+        if (promotion !is BuyXGetYFreePromotionEntity) throw java.lang.IllegalArgumentException("BuyXGetYFreePromotionProcessor only supports BuyXGetYFreePromotionEntity")
 
         val timesMatchingPromotion = cartItem.quantity / promotion.minimumQuantity
         val isMatchingPromotion = timesMatchingPromotion > 0
 
         val unitFinalPrice = if (isMatchingPromotion) {
             val freeItemsQuantity = timesMatchingPromotion * promotion.freeItemsQuantity
-            val itemsInsidePromotionQuantity = timesMatchingPromotion * promotion.minimumQuantity
-            val itemsOutsidePromotion = cartItem.quantity - itemsInsidePromotionQuantity
-
-            val priceUnitPerPromotionItems =
-                (product.price * (itemsInsidePromotionQuantity - freeItemsQuantity)) / (itemsInsidePromotionQuantity)
-
-            val priceUnitPerOutsidePromotionItems =
-                if (itemsOutsidePromotion > 0) product.price * itemsOutsidePromotion / itemsOutsidePromotion else 0.0
-
-            priceUnitPerOutsidePromotionItems + priceUnitPerPromotionItems
-
+            val itemsToPay = cartItem.quantity - freeItemsQuantity
+            (product.price * itemsToPay) / cartItem.quantity
         } else {
             product.price
         }

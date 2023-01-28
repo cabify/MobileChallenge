@@ -12,4 +12,6 @@
   <string name="total">Total</string>
   <string name="base_total">Base total</string>
   <string name="promotions_discount">Promotions discount</string>
+  <string name="bulky_items_promotion_info">%s disc/unit</string>
+  <string name="buy_x_get_y_promotion_info">%s items free</string>
 </resources>

@@ -8,6 +8,8 @@ import com.cabify.mobilechallenge.features.cart.domain.processor.BulkyItemsPromo
 import com.cabify.mobilechallenge.features.cart.domain.processor.BuyXGetYFreePromotionProcessor
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesInteractor
 import com.cabify.mobilechallenge.features.cart.domain.usecase.GetOrderChangesUseCase
+import com.cabify.mobilechallenge.features.cart.presentation.mapper.BulkyItemsOrderToPromotionPresentationMapper
+import com.cabify.mobilechallenge.features.cart.presentation.mapper.BuyXGetYOrderToPromotionPresentationMapper
 import com.cabify.mobilechallenge.features.cart.presentation.mapper.OrderEntityToPresentationMapper
 import com.cabify.mobilechallenge.features.cart.presentation.viewmodel.CartViewModel
 import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
@@ -36,13 +38,23 @@ val cartModule = module {
 
     single<OrderFactory> {
         OrderFactoryImpl(
-            hashMapOf(
+            mapOf(
                 BulkyItemsPromotionEntity.APP_INTERNAL_ID to BulkyItemsPromotionProcessor(),
-                BuyXGetYFreePromotionEntity.APP_INTERNAL_ID to BuyXGetYFreePromotionProcessor(),
+                BuyXGetYFreePromotionEntity.APP_INTERNAL_ID to BuyXGetYFreePromotionProcessor()
             )
         )
     }
     single {
-        OrderEntityToPresentationMapper(get())
+        OrderEntityToPresentationMapper(
+            get(),
+            mapOf(
+                BulkyItemsPromotionEntity.APP_INTERNAL_ID to BulkyItemsOrderToPromotionPresentationMapper(
+                    get()
+                ),
+                BuyXGetYFreePromotionEntity.APP_INTERNAL_ID to BuyXGetYOrderToPromotionPresentationMapper(
+                    get()
+                )
+            )
+        )
     }
 }

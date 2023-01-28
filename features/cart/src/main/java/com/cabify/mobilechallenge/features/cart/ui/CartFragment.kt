@@ -39,7 +39,6 @@ class CartFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView()
         observeViewState()
-        observeViewEvents()
     }
 
     private fun setRecyclerView() {
@@ -58,10 +57,6 @@ class CartFragment : BaseFragment() {
                 Loading -> setLoadingViewState()
             }
         }
-    }
-
-    private fun observeViewEvents() {
-        TODO()
     }
 
     private fun setSuccessViewState(viewState: Success) {

@@ -19,7 +19,7 @@ class ProductsPromotionsDomainToPresentationMapper(private val currencyUtils: Cu
             ProductPresentation(
                 id = product.id,
                 name = product.name,
-                price = currencyUtils.getPriceWithCurrencySymbol(product.price),
+                price = currencyUtils.getPriceWithCurrency(product.price),
                 availablePromotionName = productIdPromotionsMap[product.id]?.name
             )
         }

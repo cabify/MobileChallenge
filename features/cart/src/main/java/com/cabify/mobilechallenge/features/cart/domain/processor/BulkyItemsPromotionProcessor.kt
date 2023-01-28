@@ -5,16 +5,14 @@ import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
 import com.cabify.shared.product.domain.entities.ProductEntity
 import com.cabify.shared.product.domain.entities.PromotionEntity
-import net.bytebuddy.pool.TypePool.Resolution.Illegal
 
 class BulkyItemsPromotionProcessor : PromotionProcessor {
-
     override fun process(
         cartItem: CartEntity.Item,
         product: ProductEntity,
         promotion: PromotionEntity
     ): OrderEntity.Item {
-        promotion as BulkyItemsPromotionEntity
+        if (promotion !is BulkyItemsPromotionEntity) throw java.lang.IllegalArgumentException("BulkyItemsPromotionProcessor only supports BulkyItemsPromotionEntity")
 
         val isMatchingPromotion = cartItem.quantity >= promotion.minimumQuantity
 

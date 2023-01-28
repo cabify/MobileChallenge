@@ -81,7 +81,7 @@ class BuyXGetYFreePromotionProcessorTest {
         )
 
         //THEN
-        val expectedUnitFinalPrice = product.price / 3 + product.price
+        val expectedUnitFinalPrice = product.price*2/ QUANTITY_4
         val expectedOrderItems = OrderEntity.Item(
             productId = product.id,
             productName = product.name,

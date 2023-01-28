@@ -14,8 +14,8 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
         cart: CartEntity, products: List<ProductEntity>, promotions: List<PromotionEntity>
     ): OrderEntity {
         val orderItems = createOrderItems(cart, products, promotions)
-        val totalFinalPrice = orderItems.sumOf { it.unitFinalPrice }
-        val totalBasePrice = orderItems.sumOf { it.unitBasePrice }
+        val totalFinalPrice = orderItems.sumOf { it.unitFinalPrice * it.quantity }
+        val totalBasePrice = orderItems.sumOf { it.unitBasePrice * it.quantity }
         return OrderEntity(
             orderId = DEFAULT_ORDER_ID,
             items = orderItems,
