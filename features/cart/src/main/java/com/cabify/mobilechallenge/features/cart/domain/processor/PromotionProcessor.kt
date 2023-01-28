@@ -10,5 +10,5 @@ interface PromotionProcessor {
         cartItem: CartEntity.Item,
         product: ProductEntity,
         promotion: PromotionEntity
-    ): List<OrderEntity.Item>
+    ): OrderEntity.Item
 }

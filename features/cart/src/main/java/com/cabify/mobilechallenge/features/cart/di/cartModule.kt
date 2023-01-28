@@ -19,6 +19,7 @@ val cartModule = module {
     viewModel {
         CartViewModel(
             get(),
+            get(),
             subscribeScheduler = get(SUBSCRIBE_SCHEDULER),
             observerScheduler = get(OBSERVE_SCHEDULER)
         )

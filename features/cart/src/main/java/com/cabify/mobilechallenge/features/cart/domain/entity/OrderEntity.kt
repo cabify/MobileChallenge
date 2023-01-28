@@ -1,5 +1,7 @@
 package com.cabify.mobilechallenge.features.cart.domain.entity
 
+import com.cabify.shared.product.domain.entities.PromotionEntity
+
 data class OrderEntity(
     val orderId: String,
     val items: List<Item>,
@@ -9,8 +11,9 @@ data class OrderEntity(
     data class Item(
         val productId: String,
         val productName: String,
-        val basePrice: Double,
-        val finalPrice: Double,
-        val promotionNameApplied: String? = null
+        val unitBasePrice: Double,
+        val unitFinalPrice: Double,
+        val quantity: Int,
+        val promotion: PromotionEntity? = null
     )
 }

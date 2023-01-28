@@ -25,12 +25,12 @@ class OrderEntityToPresentationMapper(private val currencyUtils: CurrencyUtils) 
             val productId = productIdOrderItemMap.key
             val quantity = productIdOrderItemMap.value.size
             val subtotalPrice =
-                currencyUtils.getPriceWithCurrencySymbol(price = productIdOrderItemMap.value.sumOf { it.finalPrice })
+                currencyUtils.getPriceWithCurrencySymbol(price = productIdOrderItemMap.value.sumOf { it.unitFinalPrice })
             OrderItemPresentation(
                 productId = productId,
                 productName = productItem.productName,
                 quantity = quantity.toString(),
-                itemPrice = currencyUtils.getPriceWithCurrencySymbol(price = productItem.basePrice),
+                itemPrice = currencyUtils.getPriceWithCurrencySymbol(price = productItem.unitBasePrice),
                 subtotalPrice = subtotalPrice,
                 promotionName = null,
                 promotionInfo = null

@@ -14,8 +14,8 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
         cart: CartEntity, products: List<ProductEntity>, promotions: List<PromotionEntity>
     ): OrderEntity {
         val orderItems = createOrderItems(cart, products, promotions)
-        val totalFinalPrice = orderItems.sumOf { it.finalPrice }
-        val totalBasePrice = orderItems.sumOf { it.basePrice }
+        val totalFinalPrice = orderItems.sumOf { it.unitFinalPrice }
+        val totalBasePrice = orderItems.sumOf { it.unitBasePrice }
         return OrderEntity(
             orderId = DEFAULT_ORDER_ID,
             items = orderItems,
@@ -39,14 +39,13 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
             val promotionProcessor = promotionProcessors[promotion?.appInternalId]
 
             acc + if (promotionProcessor == null || promotion == null) {
-                List(cartItem.quantity) {
-                    OrderEntity.Item(
-                        productId = product.id,
-                        productName = product.name,
-                        basePrice = product.price,
-                        finalPrice = product.price
-                    )
-                }
+                OrderEntity.Item(
+                    productId = product.id,
+                    productName = product.name,
+                    unitBasePrice = product.price,
+                    unitFinalPrice = product.price,
+                    quantity = cartItem.quantity
+                )
             } else {
                 promotionProcessor.process(
                     cartItem,
@@ -58,6 +57,8 @@ class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionPro
     }
 
     companion object {
-        private const val DEFAULT_ORDER_ID = "order_id"
+        //the orderID should be provided by the server but it is not the case and due to
+        //we are handling one order maximum at the same time it will have the same id
+        const val DEFAULT_ORDER_ID = "order_id"
     }
 }

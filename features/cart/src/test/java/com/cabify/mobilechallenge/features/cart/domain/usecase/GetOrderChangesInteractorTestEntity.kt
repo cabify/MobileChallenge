@@ -4,6 +4,7 @@ import com.cabify.mobilechallenge.cart.domain.entity.CartEntity
 import com.cabify.mobilechallenge.cart.domain.repository.CartRepository
 import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactory
+import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactoryImpl
 import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
 import com.cabify.shared.product.domain.entities.ProductEntity
 import com.cabify.shared.product.domain.repository.ProductsRepository
@@ -91,6 +92,9 @@ class GetOrderChangesInteractorTestEntity {
 
 
     private val anyOrderEntity = OrderEntity(
-        items = listOf(), totalBasePrice = 0.0, totalFinalPrice = 0.0
+        items = listOf(),
+        totalBasePrice = 0.0,
+        totalFinalPrice = 0.0,
+        orderId = OrderFactoryImpl.DEFAULT_ORDER_ID
     )
 }

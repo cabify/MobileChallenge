@@ -83,27 +83,31 @@ class OrderFactoryImplTest {
     private val cartItemProduct3 = cartItem.copy(productId = PRODUCT_ID_3)
 
     @Test
-    fun `GIVEN the cart contains orders WHEN create order THEN the order contains these items AND final prices`() {
+    fun `GIVEN the cart contains items WHEN create order THEN the order contains these items AND final prices`() {
         val orderEntityItemProduct1WithDiscount = OrderEntity.Item(
             productId = PRODUCT_ID_1,
             productName = PRODUCT_NAME_1,
-            basePrice = PRODUCT_PRICE_1,
-            finalPrice = PRODUCT_PRICE_1_WITH_DISCOUNT,
-            promotionNameApplied = PROMOTION_NAME_1
+            unitBasePrice = PRODUCT_PRICE_1,
+            unitFinalPrice = PRODUCT_PRICE_1_WITH_DISCOUNT,
+            promotion = anyPromotion1,
+            quantity = 1
+
         )
         val orderEntityItemProduct2WithDiscount = OrderEntity.Item(
             productId = PRODUCT_ID_2,
             productName = PRODUCT_NAME_2,
-            basePrice = PRODUCT_PRICE_2,
-            finalPrice = PRODUCT_PRICE_2_WITH_DISCOUNT,
-            promotionNameApplied = PROMOTION_NAME_2
+            unitBasePrice = PRODUCT_PRICE_2,
+            unitFinalPrice = PRODUCT_PRICE_2_WITH_DISCOUNT,
+            promotion = anyPromotion2,
+            quantity = 1
         )
         val orderEntityItemProduct3 = OrderEntity.Item(
             productId = PRODUCT_ID_3,
             productName = PRODUCT_NAME_3,
-            basePrice = PRODUCT_PRICE_3,
-            finalPrice = PRODUCT_PRICE_3,
-            promotionNameApplied = null
+            unitBasePrice = PRODUCT_PRICE_3,
+            unitFinalPrice = PRODUCT_PRICE_3,
+            promotion = null,
+            quantity = 1
         )
         givenBulkyPromotionProcessorReturns(orderEntityItemProduct1WithDiscount)
         givenBuyXGetYFreePromotionProcessorReturns(orderEntityItemProduct2WithDiscount)
@@ -133,16 +137,21 @@ class OrderFactoryImplTest {
                 orderEntityItemProduct3
             ),
             totalBasePrice = 63.0,
-            totalFinalPrice = 60.0
+            totalFinalPrice = 60.0,
+            orderId = OrderFactoryImpl.DEFAULT_ORDER_ID
         )
 
         Assert.assertEquals(expectedOrderEntity, currentOrder)
     }
 
     private fun givenBulkyPromotionProcessorReturns(orderEntityItemProduct1WithDiscount: OrderEntity.Item) {
-        whenever(bulkyPromotionProcessor.process(any(), any(), any())) doReturn listOf(
-            orderEntityItemProduct1WithDiscount
-        )
+        whenever(
+            bulkyPromotionProcessor.process(
+                any(),
+                any(),
+                any()
+            )
+        ) doReturn orderEntityItemProduct1WithDiscount
     }
 
     @Test
@@ -165,7 +174,8 @@ class OrderFactoryImplTest {
         val expectedOrderEntity = OrderEntity(
             items = emptyList(),
             totalBasePrice = 0.0,
-            totalFinalPrice = 0.0
+            totalFinalPrice = 0.0,
+            orderId = OrderFactoryImpl.DEFAULT_ORDER_ID
         )
 
         Assert.assertEquals(expectedOrderEntity, currentOrder)
@@ -176,9 +186,10 @@ class OrderFactoryImplTest {
         val orderEntityItemProduct2WithDiscount = OrderEntity.Item(
             productId = PRODUCT_ID_2,
             productName = PRODUCT_NAME_2,
-            basePrice = PRODUCT_PRICE_2,
-            finalPrice = PRODUCT_PRICE_2_WITH_DISCOUNT,
-            promotionNameApplied = PROMOTION_NAME_2
+            unitBasePrice = PRODUCT_PRICE_2,
+            unitFinalPrice = PRODUCT_PRICE_2_WITH_DISCOUNT,
+            promotion = anyPromotion2,
+            quantity = 1
         )
         givenBuyXGetYFreePromotionProcessorReturns(orderEntityItemProduct2WithDiscount)
 
@@ -203,26 +214,30 @@ class OrderFactoryImplTest {
                 orderEntityItemProduct2WithDiscount
             ),
             totalBasePrice = 23.0,
-            totalFinalPrice = 22.0
+            totalFinalPrice = 22.0,
+            orderId = OrderFactoryImpl.DEFAULT_ORDER_ID
         )
 
         Assert.assertEquals(expectedOrderEntity, currentOrder)
     }
 
     private fun givenBuyXGetYFreePromotionProcessorReturns(orderEntityItemProduct2WithDiscount: OrderEntity.Item) {
-        whenever(buyXGetYFreePromotionProcessor.process(any(), any(), any())) doReturn listOf(
-            orderEntityItemProduct2WithDiscount
-        )
+        whenever(
+            buyXGetYFreePromotionProcessor.process(
+                any(),
+                any(),
+                any()
+            )
+        ) doReturn orderEntityItemProduct2WithDiscount
     }
 
     @Test
-    fun `GIVEN a cart item with a promotion associated BUT without promotion processor defined WHEN create order THEN the default prices are applied`() {
+    fun `GIVEN a cart item with a promotion associated BUT without promotion processor defined WHEN create order THEN the base prices are applied`() {
 
         val currentOrder = OrderFactoryImpl(
             promotionProcessors = mapOf()
         ).create(
             cart = cartEntity.copy(items = listOf(cartItemProduct1, cartItemProduct2)),
-
             products = listOf(productEntity2),
             promotions = listOf(
                 bulkyItemsPromotionProductId1,
@@ -235,13 +250,15 @@ class OrderFactoryImplTest {
                 OrderEntity.Item(
                     productId = PRODUCT_ID_2,
                     productName = PRODUCT_NAME_2,
-                    basePrice = PRODUCT_PRICE_2,
-                    finalPrice = PRODUCT_PRICE_2,
-                    promotionNameApplied = null
+                    unitBasePrice = PRODUCT_PRICE_2,
+                    unitFinalPrice = PRODUCT_PRICE_2,
+                    promotion = null,
+                    quantity = 1
                 )
             ),
             totalBasePrice = 23.0,
-            totalFinalPrice = 23.0
+            totalFinalPrice = 23.0,
+            orderId = OrderFactoryImpl.DEFAULT_ORDER_ID
         )
 
         Assert.assertEquals(expectedOrderEntity, currentOrder)
@@ -270,24 +287,39 @@ class OrderFactoryImplTest {
                 OrderEntity.Item(
                     productId = PRODUCT_ID_1,
                     productName = PRODUCT_NAME_1,
-                    basePrice = PRODUCT_PRICE_1,
-                    finalPrice = PRODUCT_PRICE_1,
-                    promotionNameApplied = null
+                    unitBasePrice = PRODUCT_PRICE_1,
+                    unitFinalPrice = PRODUCT_PRICE_1,
+                    promotion = null,
+                    quantity = 1
                 ),
                 OrderEntity.Item(
                     productId = PRODUCT_ID_2,
                     productName = PRODUCT_NAME_2,
-                    basePrice = PRODUCT_PRICE_2,
-                    finalPrice = PRODUCT_PRICE_2,
-                    promotionNameApplied = null
+                    unitBasePrice = PRODUCT_PRICE_2,
+                    unitFinalPrice = PRODUCT_PRICE_2,
+                    promotion = null,
+                    quantity = 1
                 )
             ),
             totalBasePrice = 53.0,
-            totalFinalPrice = 53.0
+            totalFinalPrice = 53.0,
+            orderId = OrderFactoryImpl.DEFAULT_ORDER_ID
         )
 
         Assert.assertEquals(expectedOrderEntity, currentOrder)
     }
+
+    private val anyPromotion1 = BulkyItemsPromotionEntity(
+        id = "1",
+        name = "",
+        productTargetId = "",
+        minimumQuantity = 0,
+        discountPercentagePerItem = 0
+
+    )
+    private val anyPromotion2 = BuyXGetYFreePromotionEntity(
+        id = "2", name = "", productTargetId = "", minimumQuantity = 0, freeItemsQuantity = 0
+    )
 
     companion object {
         private const val PRODUCT_ID_1 = "1"
@@ -304,7 +336,5 @@ class OrderFactoryImplTest {
         private const val PRODUCT_PRICE_2_WITH_DISCOUNT = 22.0
         private const val PRODUCT_PRICE_3 = 10.0
 
-        private const val PROMOTION_NAME_1 = "PROMOTION_NAME_1"
-        private const val PROMOTION_NAME_2 = "PROMOTION_NAME_2"
     }
 }

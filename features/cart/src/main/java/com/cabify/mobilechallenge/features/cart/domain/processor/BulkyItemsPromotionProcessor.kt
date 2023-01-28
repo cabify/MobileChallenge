@@ -5,6 +5,7 @@ import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
 import com.cabify.shared.product.domain.entities.ProductEntity
 import com.cabify.shared.product.domain.entities.PromotionEntity
+import net.bytebuddy.pool.TypePool.Resolution.Illegal
 
 class BulkyItemsPromotionProcessor : PromotionProcessor {
 
@@ -12,7 +13,7 @@ class BulkyItemsPromotionProcessor : PromotionProcessor {
         cartItem: CartEntity.Item,
         product: ProductEntity,
         promotion: PromotionEntity
-    ): List<OrderEntity.Item> {
+    ): OrderEntity.Item {
         promotion as BulkyItemsPromotionEntity
 
         val isMatchingPromotion = cartItem.quantity >= promotion.minimumQuantity
@@ -23,14 +24,13 @@ class BulkyItemsPromotionProcessor : PromotionProcessor {
             product.price
         }
 
-        return List(cartItem.quantity) {
-            OrderEntity.Item(
-                productId = product.id,
-                productName = product.name,
-                basePrice = product.price,
-                finalPrice = finalPrice,
-                promotionNameApplied = if (isMatchingPromotion) promotion.name else null
-            )
-        }
+        return OrderEntity.Item(
+            productId = product.id,
+            productName = product.name,
+            unitBasePrice = product.price,
+            unitFinalPrice = finalPrice,
+            quantity = cartItem.quantity,
+            promotion = if (isMatchingPromotion) promotion else null
+        )
     }
 }

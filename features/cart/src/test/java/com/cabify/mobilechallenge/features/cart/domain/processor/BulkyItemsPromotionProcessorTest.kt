@@ -15,66 +15,84 @@ class BulkyItemsPromotionProcessorTest {
         BulkyItemsPromotionProcessor()
 
     @Test
-    fun `GIVEN the cart item is matching the promotion WHEN process THEN the order items are created with the bulky promotion applied`() {
-        val currentOrderItems = bulkyItemsPromotionProcessor.process(
-            cartItem = CartEntity.Item(
-                productId = PRODUCT_ID_1,
-                quantity = QUANTITY_4
-            ), product = ProductEntity(
-                id = PRODUCT_ID_1,
-                name = PRODUCT_NAME_1,
-                price = PRICE_1
-            ),
-            promotion = BulkyItemsPromotionEntity(
-                id = PROMOTION_ID,
-                name = PROMOTION_NAME,
-                productTargetId = PRODUCT_ID_1,
-                minimumQuantity = MINIMUM_QUANTITY,
-                discountPercentagePerItem = FIVE_PERCENTAGE
-            )
+    fun `GIVEN the cart item is matching the promotion WHEN process THEN the order item is created with the bulky promotion applied`() {
+        //GIVEN
+        val bulkyPromotion = BulkyItemsPromotionEntity(
+            id = PROMOTION_ID,
+            name = PROMOTION_NAME,
+            productTargetId = PRODUCT_ID_1,
+            minimumQuantity = MINIMUM_QUANTITY_4,
+            discountPercentagePerItem = FIVE_PERCENTAGE
         )
+        val cartItem = CartEntity.Item(
+            productId = PRODUCT_ID_1,
+            quantity = QUANTITY_4
+        )
+        val product = ProductEntity(
+            id = PRODUCT_ID_1,
+            name = PRODUCT_NAME_1,
+            price = PRICE_1
+        )
+
+        //WHEN
+        val currentOrderItem = bulkyItemsPromotionProcessor.process(
+            cartItem = cartItem,
+            product = product,
+            promotion = bulkyPromotion
+        )
+
+        //THEN
         val expectedFinalPrice = 20.9
-        val expectedOrderItems = List(QUANTITY_4) {
-            OrderEntity.Item(
-                productId = PRODUCT_ID_1,
-                productName = PRODUCT_NAME_1,
-                basePrice = PRICE_1,
-                finalPrice = expectedFinalPrice,
-                promotionNameApplied = PROMOTION_NAME
-            )
-        }
-        Assert.assertEquals(expectedOrderItems, currentOrderItems)
+
+        val expectedOrderItems = OrderEntity.Item(
+            productId = product.id,
+            productName = product.name,
+            unitBasePrice = product.price,
+            unitFinalPrice = expectedFinalPrice,
+            promotion = bulkyPromotion,
+            quantity = cartItem.quantity
+        )
+        Assert.assertEquals(expectedOrderItems, currentOrderItem)
     }
 
     @Test
     fun `GIVEN the cart item is not matching the promotion WHEN process THEN order items are created without the bulky promotion applied`() {
-        val currentOrderItems = bulkyItemsPromotionProcessor.process(
-            cartItem = CartEntity.Item(
-                productId = PRODUCT_ID_1,
-                quantity = QUANTITY_1
-            ), product = ProductEntity(
-                id = PRODUCT_ID_1,
-                name = PRODUCT_NAME_1,
-                price = PRICE_1
-            ),
-            promotion = BulkyItemsPromotionEntity(
-                id = PROMOTION_ID,
-                name = PROMOTION_NAME,
-                productTargetId = PRODUCT_ID_1,
-                minimumQuantity = MINIMUM_QUANTITY,
-                discountPercentagePerItem = FIVE_PERCENTAGE
-            )
+        //GIVEN
+        val cartItem = CartEntity.Item(
+            productId = PRODUCT_ID_1,
+            quantity = QUANTITY_1
         )
-        val expectedOrderItems = List(QUANTITY_1) {
-            OrderEntity.Item(
-                productId = PRODUCT_ID_1,
-                productName = PRODUCT_NAME_1,
-                basePrice = PRICE_1,
-                finalPrice = PRICE_1,
-                promotionNameApplied = null
-            )
-        }
-        Assert.assertEquals(expectedOrderItems, currentOrderItems)
+        val product = ProductEntity(
+            id = PRODUCT_ID_1,
+            name = PRODUCT_NAME_1,
+            price = PRICE_1
+        )
+        val promotion = BulkyItemsPromotionEntity(
+            id = PROMOTION_ID,
+            name = PROMOTION_NAME,
+            productTargetId = PRODUCT_ID_1,
+            minimumQuantity = MINIMUM_QUANTITY_4,
+            discountPercentagePerItem = FIVE_PERCENTAGE
+        )
+
+        //WHEN
+        val currentOrderItems = bulkyItemsPromotionProcessor.process(
+            cartItem = cartItem,
+            product = product,
+            promotion = promotion
+        )
+
+        //THEN
+        val expectedOrderItem = OrderEntity.Item(
+            productId = product.id,
+            productName = product.name,
+            unitBasePrice = product.price,
+            unitFinalPrice = product.price,
+            promotion = null,
+            quantity = cartItem.quantity
+        )
+
+        Assert.assertEquals(expectedOrderItem, currentOrderItems)
     }
 
     companion object {
@@ -85,7 +103,7 @@ class BulkyItemsPromotionProcessorTest {
         private const val PRICE_1 = 22.0
         private const val QUANTITY_4 = 4
         private const val QUANTITY_1 = 1
-        private const val MINIMUM_QUANTITY = 4
+        private const val MINIMUM_QUANTITY_4 = 4
         private const val FIVE_PERCENTAGE = 5
     }
 }
