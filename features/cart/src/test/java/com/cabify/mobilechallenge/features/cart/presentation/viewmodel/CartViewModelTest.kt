@@ -13,12 +13,12 @@ import com.cabify.mobilechallenge.features.cart.presentation.viewstate.CartViewE
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.CartViewState
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.CheckoutFailed
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.CheckoutSucceed
+import com.cabify.mobilechallenge.features.cart.presentation.viewstate.Error
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.Loading
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.Success
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -93,9 +93,12 @@ class CartViewModelTest {
 
     @Before
     fun setup() {
-        publishSubject = PublishSubject.create()
-        whenever(getOrderChangesUseCase()) doReturn publishSubject
+        setupPublishSubject()
+        setupViewModel()
+        setupObservers()
+    }
 
+    private fun setupViewModel() {
         cartViewModel = CartViewModel(
             getOrderChangesUseCase = getOrderChangesUseCase,
             checkoutOrderUseCase = checkoutOrderUseCase,
@@ -103,14 +106,26 @@ class CartViewModelTest {
             subscribeScheduler = testScheduler,
             observerScheduler = testScheduler
         )
+    }
+
+    private fun setupObservers() {
         cartViewModel.viewState.observeForever(viewStateObserver)
         cartViewModel.viewEvent.observeForever(viewEventObserver)
     }
 
+    private fun setupPublishSubject() {
+        publishSubject = PublishSubject.create()
+        whenever(getOrderChangesUseCase()) doReturn publishSubject
+    }
+
     @Test
     fun `GIVEN there is a subscription to getOrderChangesUseCase succeeding WHEN there is a new order change THEN set a new success order view state`() {
-        whenever(orderEntityToPresentationMapper.map(any())) doReturn orderPresentations
-        publishSubject.onNext(anyOrderEntity)
+        givenOrderEntityToPresentationSucceed()
+        whenOrderSucceedUpdate()
+        thenSetSuccessViewState()
+    }
+
+    private fun thenSetSuccessViewState() {
         argumentCaptor {
             verify(viewStateObserver, times(2)).onChanged(capture())
             assertEquals(secondValue, Success(orderPresentations))
@@ -119,37 +134,77 @@ class CartViewModelTest {
 
     @Test
     fun `GIVEN there is a subscription to getOrderChangesUseCase failing WHEN there is a new order change THEN set a new error order view state`() {
-        publishSubject.onError(anyThrowable)
+        whenOrderFailUpdate()
+        thenSetErrorViewState()
+    }
+
+    private fun thenSetErrorViewState() {
         argumentCaptor {
             verify(viewStateObserver, times(2)).onChanged(capture())
             assertEquals(
                 secondValue,
-                com.cabify.mobilechallenge.features.cart.presentation.viewstate.Error(anyThrowable)
+                Error(anyThrowable)
             )
         }
     }
 
+    private fun whenOrderFailUpdate() {
+        publishSubject.onError(anyThrowable)
+    }
+
     @Test
     fun `GIVEN there is a new subscription to getOrderChangesUseCase failing WHEN subscription starts THEN set a new Loading order view state`() {
-        whenever(orderEntityToPresentationMapper.map(any())) doReturn orderPresentations
-        publishSubject.onNext(anyOrderEntity)
+        givenOrderEntityToPresentationSucceed()
+        whenOrderSucceedUpdate()
+        thenSetLoadingViewState()
+    }
+
+    private fun thenSetLoadingViewState() {
         argumentCaptor {
             verify(viewStateObserver, times(2)).onChanged(capture())
             assertEquals(firstValue, Loading)
         }
     }
 
+    private fun whenOrderSucceedUpdate() {
+        publishSubject.onNext(anyOrderEntity)
+    }
+
+    private fun givenOrderEntityToPresentationSucceed() {
+        whenever(orderEntityToPresentationMapper.map(any())) doReturn orderPresentations
+    }
+
     @Test
     fun `GIVEN checkout order succeed WHEN checkout the order THEN trigger CheckoutSucceed event`() {
-        whenever(checkoutOrderUseCase()) doReturn Completable.complete()
-        cartViewModel.checkoutOrder()
+        givenCheckoutOrderSucceed()
+        whenCheckoutOrder()
+        thenTriggerCheckoutSucceedEvent()
+    }
+
+    private fun thenTriggerCheckoutSucceedEvent() {
         verify(viewEventObserver).onChanged(CheckoutSucceed)
+    }
+
+    private fun givenCheckoutOrderSucceed() {
+        whenever(checkoutOrderUseCase()) doReturn Completable.complete()
     }
 
     @Test
     fun `GIVEN checkout order failed WHEN checkout the order THEN trigger CheckoutFailed event`() {
-        whenever(checkoutOrderUseCase()) doReturn Completable.error(anyThrowable)
-        cartViewModel.checkoutOrder()
+        givenCheckoutOrderFailed()
+        whenCheckoutOrder()
+        thenTriggerCheckoutFailed()
+    }
+
+    private fun thenTriggerCheckoutFailed() {
         verify(viewEventObserver).onChanged(CheckoutFailed)
+    }
+
+    private fun givenCheckoutOrderFailed() {
+        whenever(checkoutOrderUseCase()) doReturn Completable.error(anyThrowable)
+    }
+
+    private fun whenCheckoutOrder() {
+        cartViewModel.checkoutOrder()
     }
 }

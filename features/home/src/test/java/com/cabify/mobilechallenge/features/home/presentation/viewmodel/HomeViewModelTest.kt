@@ -109,6 +109,11 @@ class HomeViewModelTest {
 
     @Before
     fun setup() {
+        setupViewModel()
+        setupObservers()
+    }
+
+    private fun setupViewModel() {
         homeViewModel = HomeViewModel(
             getPromotionsUseCase = getPromotionsUseCase,
             getProductsUseCase = getProductsUseCase,
@@ -117,6 +122,9 @@ class HomeViewModelTest {
             subscribeScheduler = testScheduler,
             observerScheduler = testScheduler
         )
+    }
+
+    private fun setupObservers() {
         homeViewModel.viewState.observeForever(viewStateObserver)
         homeViewModel.viewEvent.observeForever(viewEventObserver)
     }
