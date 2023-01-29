@@ -23,9 +23,9 @@ val cartSharedModule = module {
         CartRepositoryImpl(get())
     }
     single<CartPersistenceDataSource> {
-        CartPersistenceDataSourceImpl(get(), get(), get(), get())
+        CartPersistenceDataSourceImpl(get(), get<CartItemsDataMapper>(), get<CartItemEntityMapper>(), )
     }
-    single { CartItemsDataMapper(get()) }
+    single { CartItemsDataMapper(get<CartItemDataMapper>()) }
     single { CartItemDataMapper() }
     single { CartItemEntityMapper() }
 }

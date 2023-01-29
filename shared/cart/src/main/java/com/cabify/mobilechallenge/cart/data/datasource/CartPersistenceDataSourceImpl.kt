@@ -1,5 +1,4 @@
 import com.cabify.mobilechallenge.cart.data.datasource.CartPersistenceDataSource
-import com.cabify.mobilechallenge.cart.data.mapper.CartItemDataMapper
 import com.cabify.mobilechallenge.cart.data.mapper.CartItemsDataMapper
 import com.cabify.mobilechallenge.cart.data.mapper.CartItemEntityMapper
 import com.cabify.mobilechallenge.cart.domain.entity.CartEntity
@@ -11,9 +10,8 @@ import io.reactivex.rxjava3.core.Observable
 
 class CartPersistenceDataSourceImpl(
     private val cartDao: CartDAO<CartItemData>,
-    private val cartItemDataMapper: CartItemDataMapper,
-    private val cartItemsDataMapper: CartItemsDataMapper,
-    private val cartItemEntityMapper: CartItemEntityMapper
+    private val cartItemsDataMapper: Mapper<List<CartItemData>, CartEntity>,
+    private val cartItemEntityMapper: Mapper<CartEntity.Item, CartItemData>
 ) :
     CartPersistenceDataSource {
 

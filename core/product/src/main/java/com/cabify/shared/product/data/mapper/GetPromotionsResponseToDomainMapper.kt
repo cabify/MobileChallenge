@@ -1,14 +1,16 @@
 package com.cabify.shared.product.data.mapper
 
 import com.cabify.library.utils.extensions.orZero
+import com.cabify.mobilechallenge.core.base.mapper.Mapper
 import com.cabify.shared.product.data.model.GetPromotionsResponse
 import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
 import com.cabify.shared.product.domain.entities.BuyXGetYFreePromotionEntity
 import com.cabify.shared.product.domain.entities.PromotionEntity
 
-internal class GetPromotionsResponseToDomainMapper {
-    fun map(getPromotionsResponse: GetPromotionsResponse): List<PromotionEntity> =
-        getPromotionsResponse.promotions?.fold(emptyList<PromotionEntity>()) { acc, promotion ->
+internal class GetPromotionsResponseToDomainMapper :
+    Mapper<GetPromotionsResponse, List<PromotionEntity>> {
+    override fun map(input: GetPromotionsResponse): List<PromotionEntity> =
+        input.promotions?.fold(emptyList<PromotionEntity>()) { acc, promotion ->
             when (promotion.id) {
                 BULKY_ITEM_ID -> {
                     acc + BulkyItemsPromotionEntity(

@@ -29,8 +29,8 @@ val coreProductModule = module {
     single<GetPromotionsUseCase> { GetPromotionsInteractor(get()) }
     single<ProductsRepository> { ProductsRepositoryImpl(get()) }
     single<PromotionsRepository> { PromotionsRepositoryImpl(get()) }
-    single<ProductsNetworkDataSource> { ProductsNetworkDataSourceImpl(get(), get()) }
-    single<PromotionsNetworkDataSource> { PromotionsNetworkDataSourceImpl(get(), get()) }
+    single<ProductsNetworkDataSource> { ProductsNetworkDataSourceImpl(get(), get<GetProductResponseToDomainMapper>()) }
+    single<PromotionsNetworkDataSource> { PromotionsNetworkDataSourceImpl(get(), get<GetPromotionsResponseToDomainMapper>()) }
     single { GetProductResponseToDomainMapper() }
     single { GetPromotionsResponseToDomainMapper() }
     single { get<ServiceBuilder>().build<ProductsService>() }
