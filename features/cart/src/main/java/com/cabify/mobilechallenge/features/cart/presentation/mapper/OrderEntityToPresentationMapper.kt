@@ -2,6 +2,7 @@ package com.cabify.mobilechallenge.features.cart.presentation.mapper
 
 import com.cabify.library.utils.CurrencyUtils
 import com.cabify.library.utils.provider.StringsProvider
+import com.cabify.mobilechallenge.core.base.mapper.Mapper
 import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderItemPresentation
 import com.cabify.mobilechallenge.features.cart.presentation.model.OrderPresentation
@@ -13,19 +14,19 @@ class OrderEntityToPresentationMapper(
     private val currencyUtils: CurrencyUtils,
     private val stringsProvider: StringsProvider,
     private val orderToPromotionPresentationMapperMap: Map<String, OrderEntityToPromotionPresentationMapper>
-) {
-    fun map(orderEntity: OrderEntity): List<OrderPresentation> {
-        if (orderEntity.items.isEmpty()) {
+) : Mapper<OrderEntity, List<OrderPresentation>> {
+    override fun map(input: OrderEntity): List<OrderPresentation> {
+        if (input.items.isEmpty()) {
             return emptyList()
         }
         return mutableListOf<OrderPresentation>().apply {
-            addAll(map(orderEntity.items))
+            addAll(map(input.items))
             add(
                 OrderPricePresentation(
-                    orderId = orderEntity.orderId,
-                    totalPrice = currencyUtils.getPriceWithCurrency(orderEntity.totalFinalPrice),
-                    baseTotalPrice = currencyUtils.getPriceWithCurrency(orderEntity.totalBasePrice),
-                    promotionDiscountedPrice = currencyUtils.getPriceWithCurrency(orderEntity.totalFinalPrice - orderEntity.totalBasePrice)
+                    orderId = input.orderId,
+                    totalPrice = currencyUtils.getPriceWithCurrency(input.totalFinalPrice),
+                    baseTotalPrice = currencyUtils.getPriceWithCurrency(input.totalBasePrice),
+                    promotionDiscountedPrice = currencyUtils.getPriceWithCurrency(input.totalFinalPrice - input.totalBasePrice)
                 )
             )
         }
@@ -49,7 +50,7 @@ class OrderEntityToPresentationMapper(
                 ),
                 finalSubtotalPrice = currencyUtils.getPriceWithCurrency(finalSubtotalPrice),
                 promotionPresentation = getPromotionPresentationMapper(item),
-                unitFinalPrice =  stringsProvider.getString(
+                unitFinalPrice = stringsProvider.getString(
                     R.string.x_price_unit,
                     currencyUtils.getPriceWithCurrency(item.unitFinalPrice)
                 ),

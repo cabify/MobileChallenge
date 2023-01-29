@@ -24,6 +24,8 @@ dependencies {
     implementation(UIDependencies.material)
 
     testImplementation(TestingDependencies.JUnit)
+    testImplementation(TestingDependencies.mockitoKotlin)
+    testImplementation(TestingDependencies.JUnitExt)
 
     androidTestImplementation(TestingDependencies.espresso)
     androidTestImplementation(TestingDependencies.JUnitExt)

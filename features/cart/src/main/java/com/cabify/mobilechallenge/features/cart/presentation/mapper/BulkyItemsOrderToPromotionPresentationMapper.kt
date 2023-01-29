@@ -8,12 +8,12 @@ import com.cabify.shared.product.domain.entities.BulkyItemsPromotionEntity
 
 class BulkyItemsOrderToPromotionPresentationMapper(private val stringsProvider: StringsProvider) :
     OrderEntityToPromotionPresentationMapper {
-    override fun map(orderItem: OrderEntity.Item): PromotionPresentation {
-        val promotion = orderItem.promotion
+    override fun map(input: OrderEntity.Item): PromotionPresentation {
+        val promotion = input.promotion
         if (promotion !is BulkyItemsPromotionEntity) throw java.lang.IllegalArgumentException("BulkyItemsPromotionToPresentationMapper only supports BulkyItemsPromotionEntity")
 
         return PromotionPresentation(
-            promotionName = orderItem.promotion.name,
+            promotionName = input.promotion.name,
             promotionInfo = stringsProvider.getString(
                 com.cabify.mobilechallenge.shared.commonui.R.string.bulky_items_promotion_info,
                 promotion.discountPercentagePerItem

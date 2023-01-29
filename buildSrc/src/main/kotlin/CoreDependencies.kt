@@ -17,5 +17,4 @@ object CoreDependencies {
     const val roomRxJava3 = "androidx.room:room-rxjava3:${Versions.room}"
     const val retrofitRx3Adapter =
         "com.squareup.retrofit2:adapter-rxjava3:${Versions.retrofitRx3Adapter}"
-    const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
 }

@@ -16,4 +16,5 @@ dependencies{
     implementation(CoreDependencies.converterGson)
     implementation(project(":libraries:utils"))
     implementation(project(":core:network"))
+    implementation(project(":core:base"))
 }

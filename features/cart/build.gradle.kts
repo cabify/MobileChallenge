@@ -13,7 +13,6 @@ dependencies {
     implementation(CoreDependencies.viewModelKtx)
     implementation(CoreDependencies.rxJava3)
     implementation(CoreDependencies.rxAndroid3)
-    implementation(CoreDependencies.mockitoKotlin)
     implementation(project(":core:base"))
     implementation(project(":core:product"))
     implementation(project(":shared:common-ui"))
@@ -25,6 +24,8 @@ dependencies {
     implementation(UIDependencies.material)
 
     testImplementation(TestingDependencies.JUnit)
+    testImplementation(TestingDependencies.mockitoKotlin)
+    testImplementation(TestingDependencies.JUnitExt)
 
     androidTestImplementation(TestingDependencies.espresso)
     androidTestImplementation(TestingDependencies.JUnitExt)

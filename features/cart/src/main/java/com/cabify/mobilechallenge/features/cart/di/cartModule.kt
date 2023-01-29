@@ -24,7 +24,7 @@ val cartModule = module {
         CartViewModel(
             get(),
             get(),
-            get(),
+            get<OrderEntityToPresentationMapper>(),
             subscribeScheduler = get(SUBSCRIBE_SCHEDULER),
             observerScheduler = get(OBSERVE_SCHEDULER)
         )
@@ -43,7 +43,7 @@ val cartModule = module {
         OrderFactoryImpl(
             mapOf(
                 BulkyItemsPromotionEntity.APP_INTERNAL_ID to BulkyItemsPromotionProcessor(),
-                BuyXGetYFreePromotionEntity.APP_INTERNAL_ID to BuyXGetYFreePromotionProcessor()
+                BuyXGetYFreePromotionEntity.INTERNAL_ID to BuyXGetYFreePromotionProcessor()
             )
         )
     }
@@ -55,7 +55,7 @@ val cartModule = module {
                 BulkyItemsPromotionEntity.APP_INTERNAL_ID to BulkyItemsOrderToPromotionPresentationMapper(
                     get()
                 ),
-                BuyXGetYFreePromotionEntity.APP_INTERNAL_ID to BuyXGetYOrderToPromotionPresentationMapper(
+                BuyXGetYFreePromotionEntity.INTERNAL_ID to BuyXGetYOrderToPromotionPresentationMapper(
                     get()
                 )
             )

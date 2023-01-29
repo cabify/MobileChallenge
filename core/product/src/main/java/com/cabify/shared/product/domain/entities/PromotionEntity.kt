@@ -30,8 +30,8 @@ data class BuyXGetYFreePromotionEntity(
     val freeItemsQuantity: Int
 ) : PromotionEntity(){
     override val appInternalId: String
-        get() = APP_INTERNAL_ID
+        get() = INTERNAL_ID
     companion object{
-         const val APP_INTERNAL_ID = "BUY_X_GET_Y_FREE_ID"
+         const val INTERNAL_ID = "BUY_X_GET_Y_FREE_ID"
     }
 }
