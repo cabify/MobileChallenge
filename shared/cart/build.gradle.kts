@@ -13,4 +13,7 @@ dependencies {
     implementation(project(":core:persistence"))
 
     testImplementation(TestingDependencies.JUnit)
+    testImplementation(TestingDependencies.JUnitExt)
+    testImplementation(TestingDependencies.mockitoKotlin)
+    testImplementation(TestingDependencies.androidArchTest)
 }
