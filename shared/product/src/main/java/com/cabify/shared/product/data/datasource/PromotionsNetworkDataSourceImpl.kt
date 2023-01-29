@@ -10,7 +10,7 @@ internal class PromotionsNetworkDataSourceImpl(
     private val promotionsService: PromotionsService,
     private val getPromotionsResponseToDomainMapper: Mapper<GetPromotionsResponse, List<PromotionEntity>>
 ) :
-    com.cabify.shared.product.data.datasource.PromotionsNetworkDataSource {
+    PromotionsNetworkDataSource {
     override fun getPromotions(): Single<List<PromotionEntity>> =
         promotionsService.getPromotions().map(getPromotionsResponseToDomainMapper::map)
 }

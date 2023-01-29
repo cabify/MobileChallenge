@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.cabify.library.utils.extensions.debounceClick
 import com.cabify.library.utils.extensions.gone
 import com.cabify.library.utils.extensions.strikeThrough
 import com.cabify.library.utils.extensions.visible
@@ -89,7 +90,7 @@ class OrderPresentationAdapter(private val onCheckoutClicked: (() -> Unit)) :
 
         fun bind(item: OrderPricePresentation, onCheckoutClicked: () -> Unit) {
             with(binding) {
-                binding.checkoutOrderButton.setOnClickListener {
+                binding.checkoutOrderButton.debounceClick {
                     onCheckoutClicked()
                 }
                 baseTotalPrice.text = item.baseTotalPrice

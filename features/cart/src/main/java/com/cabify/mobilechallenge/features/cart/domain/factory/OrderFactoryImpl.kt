@@ -6,7 +6,9 @@ import com.cabify.mobilechallenge.features.cart.domain.processor.PromotionProces
 import com.cabify.shared.product.domain.entities.ProductEntity
 import com.cabify.shared.product.domain.entities.PromotionEntity
 
-
+//This class responsibility is the order creation given the a cart, products and promotions
+//in order to be flexible we are using promotionProcessors that will be the responsible for applying
+//the promotion logics attending on the product as
 class OrderFactoryImpl(private val promotionProcessors: Map<String, PromotionProcessor>) :
     OrderFactory {
 

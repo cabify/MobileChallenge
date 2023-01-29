@@ -16,9 +16,9 @@ data class BulkyItemsPromotionEntity(
     val discountPercentagePerItem: Int
 ) : PromotionEntity(){
     override val appInternalId: String
-        get() = APP_INTERNAL_ID
+        get() = INTERNAL_ID
     companion object{
-         const val APP_INTERNAL_ID = "BULKY_ITEM_ID"
+         const val INTERNAL_ID = "BULKY_ITEM_ID"
     }
 }
 

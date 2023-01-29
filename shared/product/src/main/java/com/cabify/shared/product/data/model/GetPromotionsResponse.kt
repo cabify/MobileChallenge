@@ -3,7 +3,7 @@ package com.cabify.shared.product.data.model
 
 import com.google.gson.annotations.SerializedName
 
-internal data class GetPromotionsResponse(
+data class GetPromotionsResponse(
     @SerializedName("promotions")
     val promotions: List<Promotion>?
 ) {

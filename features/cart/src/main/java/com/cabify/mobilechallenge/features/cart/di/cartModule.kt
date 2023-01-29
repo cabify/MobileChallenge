@@ -40,19 +40,25 @@ val cartModule = module {
     }
 
     single<OrderFactory> {
+        //In order to apply SOLID open close principle we are injecting the different promotion processors
+        //of this way the code is open for extension (adding more promotion processors) and closed for modification
+        //you don't have to modify OrderFactoryImpl to support more promotion types
         OrderFactoryImpl(
             mapOf(
-                BulkyItemsPromotionEntity.APP_INTERNAL_ID to BulkyItemsPromotionProcessor(),
+                BulkyItemsPromotionEntity.INTERNAL_ID to BulkyItemsPromotionProcessor(),
                 BuyXGetYFreePromotionEntity.INTERNAL_ID to BuyXGetYFreePromotionProcessor()
             )
         )
     }
     single {
+        //In order to apply SOLID open close principle we are injecting the different promotion mappers
+        //of this way the code is open for extension(adding more promotion to presentation mappers) and closed
+        //for modification you don't have to change the logic in OrderEntityToPresentationMapper
         OrderEntityToPresentationMapper(
             get(),
             get(),
             mapOf(
-                BulkyItemsPromotionEntity.APP_INTERNAL_ID to BulkyItemsOrderToPromotionPresentationMapper(
+                BulkyItemsPromotionEntity.INTERNAL_ID to BulkyItemsOrderToPromotionPresentationMapper(
                     get()
                 ),
                 BuyXGetYFreePromotionEntity.INTERNAL_ID to BuyXGetYOrderToPromotionPresentationMapper(

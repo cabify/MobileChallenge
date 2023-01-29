@@ -34,7 +34,7 @@ class OrderFactoryImplTest {
     fun setup() {
         orderFactoryImpl = OrderFactoryImpl(
             promotionProcessors = mapOf(
-                BulkyItemsPromotionEntity.APP_INTERNAL_ID to bulkyPromotionProcessor,
+                BulkyItemsPromotionEntity.INTERNAL_ID to bulkyPromotionProcessor,
                 BuyXGetYFreePromotionEntity.INTERNAL_ID to buyXGetYFreePromotionProcessor
             )
         )

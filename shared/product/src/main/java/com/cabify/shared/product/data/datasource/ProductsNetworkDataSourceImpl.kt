@@ -10,7 +10,7 @@ internal class ProductsNetworkDataSourceImpl(
     private val productsService: ProductsService,
     private val getProductResponseToDomainMapper: Mapper<GetProductsResponse, List<ProductEntity>>
 ) :
-    com.cabify.shared.product.data.datasource.ProductsNetworkDataSource {
+    ProductsNetworkDataSource {
     override fun getProducts(): Single<List<ProductEntity>> =
         productsService.getProducts().map(getProductResponseToDomainMapper::map)
 }
