@@ -12,7 +12,7 @@ internal class GetPromotionsResponseToDomainMapper :
     override fun map(input: GetPromotionsResponse): List<PromotionEntity> =
         input.promotions?.fold(emptyList<PromotionEntity>()) { acc, promotion ->
             when (promotion.id) {
-                BULKY_ITEM_ID -> {
+                BULKY_ITEM_DATA_ID -> {
                     acc + BulkyItemsPromotionEntity(
                         id = promotion.id,
                         name = promotion.name.orEmpty(),
@@ -21,7 +21,7 @@ internal class GetPromotionsResponseToDomainMapper :
                         discountPercentagePerItem = promotion.discountPercentagePerItem.orZero()
                     )
                 }
-                BUY_X_GET_Y_FREE_ID -> {
+                BUY_X_GET_Y_FREE_DATA_ID -> {
                     acc + BuyXGetYFreePromotionEntity(
                         id = promotion.id,
                         name = promotion.name.orEmpty(),
@@ -35,7 +35,7 @@ internal class GetPromotionsResponseToDomainMapper :
         }.orEmpty()
 
     companion object {
-        private const val BULKY_ITEM_ID = "BULKY_ITEMS"
-        private const val BUY_X_GET_Y_FREE_ID = "BUY_X_GET_Y_FREE"
+        private const val BULKY_ITEM_DATA_ID = "BULKY_ITEMS"
+        private const val BUY_X_GET_Y_FREE_DATA_ID = "BUY_X_GET_Y_FREE"
     }
 }

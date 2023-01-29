@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
 @Dao
-interface CartDAORoom : CartDAO<CartItemData> {
+internal interface CartDAORoom : CartDAO<CartItemData> {
     override fun upsertQuantity(model: CartItemData): Completable =
         read(model.productId).flatMapCompletable {
             update(it.copy(quantity = it.quantity + model.quantity))

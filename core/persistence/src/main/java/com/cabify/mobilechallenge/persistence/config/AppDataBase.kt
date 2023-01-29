@@ -11,11 +11,11 @@ private const val DB_VERSION = 1
 private const val DB_NAME = "cart-items-db"
 
 @Database(entities = [CartItemData::class], version = DB_VERSION)
-abstract class AppDatabase : RoomDatabase() {
+internal abstract class AppDatabase : RoomDatabase() {
     abstract fun cartDao(): CartDAORoom
 }
 
-fun createDb(applicationContext: Context): AppDatabase =
+internal fun createDb(applicationContext: Context): AppDatabase =
     Room.databaseBuilder(
         applicationContext,
         AppDatabase::class.java, DB_NAME

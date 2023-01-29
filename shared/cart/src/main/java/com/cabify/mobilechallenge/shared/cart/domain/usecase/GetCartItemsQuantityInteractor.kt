@@ -4,7 +4,7 @@ import com.cabify.mobilechallenge.shared.cart.domain.entity.CartEntity
 import com.cabify.mobilechallenge.shared.cart.domain.repository.CartRepository
 import io.reactivex.rxjava3.core.Observable
 
-class GetCartItemsQuantityInteractor(private val cartRepository: CartRepository) :
+internal class GetCartItemsQuantityInteractor(private val cartRepository: CartRepository) :
     GetCartItemsQuantityUseCase {
     override fun invoke(): Observable<Int> =
         cartRepository.changes().map {
