@@ -57,11 +57,15 @@ I used a modular architecture which is divided mainly in five parts:
 - App: these modules can depend on the rest of the modules in order to create the Android application
 - Features: these modules depend on the shared and core modules to build themselves
 - Shared: these modules are shared by the outer layer modules, through them the features are created
-- Core: these modules contain strong parts of the project without them you couldn't make an api request, access to ddbb, or even access to base Android classes (BaseActivity, BaseFragment...)
+- Core: these modules contain strong parts of the project without them you couldn't make an api request, access to database, or even access to base Android classes (BaseActivity, BaseFragment...)
+- Rest of the modules like: Common-UI, Utils which depend on nobody, they are the low level modules, any module can depend on them
 
+The project is based on a Clean architecture by package, each feature has data, domain, presentation and ui layers in order to preserve the structure.
+In the presentation layer I used MVVM.
 
+https://github.com/ivancarras/graphfity ->
 <br/>
-<img src="https://github.com/ivan-carrasco-dev/MobileChallenge/blob/develop/graphfity/project.dot.png" width=600> 
+<img src="https://github.com/ivan-carrasco-dev/MobileChallenge/blob/develop/graphfity/project.dot.png" width=600>
 <br/>
 
 ## Functionality 
