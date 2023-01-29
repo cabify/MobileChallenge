@@ -46,3 +46,28 @@ Examples:
 - Consider explaning the solution and why certain things are included and others are left out.
 - Be written either in Swift or Kotlin, preferably in the latest stable version of the language.
 - If possible, use the latest stable version (no Betas) of Xcode or Android Studio.
+
+
+# Iván Carrasco - Code challenge
+
+
+## Project architecture
+
+I used a modular architecture which is divided mainly in five parts: 
+- App: these modules can depend on the rest of the modules in order to create the Android application
+- Features: these modules depend on the shared and core modules to build themselves
+- Shared: these modules are shared by the outer layer modules, through them the features are created
+- Core: these modules contain strong parts of the project without them you couldn't make an api request, access to ddbb, or even access to base Android classes (BaseActivity, BaseFragment...)
+
+
+<br/>
+<img src="https://github.com/ivan-carrasco-dev/MobileChallenge/blob/develop/graphfity/project.dot.png" width=600> 
+<br/>
+
+## Functionality 
+
+![device-2023-01-29-195337](https://user-images.githubusercontent.com/123424830/215350350-b64b2ffd-0206-44b8-87de-83194f0b9764.gif)
+
+
+
+
