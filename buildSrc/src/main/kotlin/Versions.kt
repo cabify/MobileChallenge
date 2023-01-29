@@ -1,4 +1,5 @@
 object Versions {
+    const val androidArchTest="2.1.0"
     const val appCompat = "1.6.0"
     const val benManes = "0.42.0"
     const val coreKtx = "1.9.0"

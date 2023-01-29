@@ -108,11 +108,16 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun addProductToCart(productId: String) {
-        homeViewModel.addProductToCart(productId)
+        homeViewModel.addProductToCart(productId, quantity = ONE_QUANTITY)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object{
+        private const val ONE_QUANTITY = 1 //We didn't add the option of add various items at the same time
+        //but the use case is perfectly working if we add more than one quantitiess
     }
 }

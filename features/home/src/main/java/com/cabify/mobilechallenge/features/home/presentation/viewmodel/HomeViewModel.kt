@@ -3,7 +3,6 @@ package com.cabify.mobilechallenge.features.home.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cabify.library.utils.lifecycle.SingleLiveEvent
-import com.cabify.mobilechallenge.cart.domain.entity.CartEntity
 import com.cabify.mobilechallenge.cart.domain.usecase.AddProductToCartUseCase
 import com.cabify.mobilechallenge.core.base.mapper.Mapper
 import com.cabify.mobilechallenge.core.base.presentation.BaseViewModel
@@ -62,10 +61,10 @@ class HomeViewModel(
             )
         )
 
-    fun addProductToCart(productId: String) {
+    fun addProductToCart(productId: String, quantity: Int) {
         addToDisposable(
             addProductToCartUseCase(
-                CartEntity.Item(productId = productId, quantity = 1)
+                productId = productId, quantity = quantity
             )
                 .subscribeOn(subscribeScheduler)
                 .observeOn(observerScheduler)

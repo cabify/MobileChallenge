@@ -6,6 +6,6 @@ import io.reactivex.rxjava3.core.Completable
 
 internal class AddProductToCartInteractor(private val cartRepository: CartRepository) :
     AddProductToCartUseCase {
-    override fun invoke(item: CartEntity.Item): Completable =
-        cartRepository.upsertQuantity(item)
+    override fun invoke(productId: String, quantity: Int): Completable =
+        cartRepository.upsertQuantity(CartEntity.Item(productId = productId, quantity = 1))
 }

@@ -3,4 +3,5 @@ object TestingDependencies {
     const val JUnitExt = "androidx.test.ext:junit:${Versions.jUnitExt}"
     const val JUnit = "junit:junit:${Versions.jUnit}"
     const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
+    const val androidArchTest = "androidx.arch.core:core-testing:${Versions.androidArchTest}"
 }
