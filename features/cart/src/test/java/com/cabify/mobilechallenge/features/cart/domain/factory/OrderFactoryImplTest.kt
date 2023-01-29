@@ -44,13 +44,15 @@ class OrderFactoryImplTest {
     private val productEntity1 = ProductEntity(
         id = PRODUCT_ID_1,
         name = PRODUCT_NAME_1,
-        price = PRODUCT_PRICE_1
+        price = PRODUCT_PRICE_1,
+        productImageUrl = ANY_PRODUCT_IMAGE_URL
     )
 
     private val productEntity2 = ProductEntity(
         id = PRODUCT_ID_2,
         name = PRODUCT_NAME_2,
-        price = PRODUCT_PRICE_2
+        price = PRODUCT_PRICE_2,
+        productImageUrl = ANY_PRODUCT_IMAGE_URL
     )
 
     private val bulkyItemsPromotionProductId1 = BulkyItemsPromotionEntity(
@@ -64,7 +66,8 @@ class OrderFactoryImplTest {
     private val productEntity3 = ProductEntity(
         id = PRODUCT_ID_3,
         name = PRODUCT_NAME_3,
-        price = PRODUCT_PRICE_3
+        price = PRODUCT_PRICE_3,
+        productImageUrl = ANY_PRODUCT_IMAGE_URL
     )
 
     private val buyXGetYFreePromotionProductId2 = BuyXGetYFreePromotionEntity(
@@ -90,8 +93,8 @@ class OrderFactoryImplTest {
             unitBasePrice = PRODUCT_PRICE_1,
             unitFinalPrice = PRODUCT_PRICE_1_WITH_DISCOUNT,
             promotion = anyPromotion1,
-            quantity = 1
-
+            quantity = 1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         val orderEntityItemProduct2WithDiscount = OrderEntity.Item(
             productId = PRODUCT_ID_2,
@@ -99,7 +102,8 @@ class OrderFactoryImplTest {
             unitBasePrice = PRODUCT_PRICE_2,
             unitFinalPrice = PRODUCT_PRICE_2_WITH_DISCOUNT,
             promotion = anyPromotion2,
-            quantity = 1
+            quantity = 1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         val orderEntityItemProduct3 = OrderEntity.Item(
             productId = PRODUCT_ID_3,
@@ -107,7 +111,8 @@ class OrderFactoryImplTest {
             unitBasePrice = PRODUCT_PRICE_3,
             unitFinalPrice = PRODUCT_PRICE_3,
             promotion = null,
-            quantity = 1
+            quantity = 1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         givenBulkyPromotionProcessorReturns(orderEntityItemProduct1WithDiscount)
         givenBuyXGetYFreePromotionProcessorReturns(orderEntityItemProduct2WithDiscount)
@@ -189,7 +194,8 @@ class OrderFactoryImplTest {
             unitBasePrice = PRODUCT_PRICE_2,
             unitFinalPrice = PRODUCT_PRICE_2_WITH_DISCOUNT,
             promotion = anyPromotion2,
-            quantity = 1
+            quantity = 1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         givenBuyXGetYFreePromotionProcessorReturns(orderEntityItemProduct2WithDiscount)
 
@@ -253,7 +259,8 @@ class OrderFactoryImplTest {
                     unitBasePrice = PRODUCT_PRICE_2,
                     unitFinalPrice = PRODUCT_PRICE_2,
                     promotion = null,
-                    quantity = 1
+                    quantity = 1,
+                    productImageUrl = ANY_PRODUCT_IMAGE_URL
                 )
             ),
             totalBasePrice = 23.0,
@@ -290,7 +297,8 @@ class OrderFactoryImplTest {
                     unitBasePrice = PRODUCT_PRICE_1,
                     unitFinalPrice = PRODUCT_PRICE_1,
                     promotion = null,
-                    quantity = 1
+                    quantity = 1,
+                    productImageUrl = ANY_PRODUCT_IMAGE_URL
                 ),
                 OrderEntity.Item(
                     productId = PRODUCT_ID_2,
@@ -298,7 +306,8 @@ class OrderFactoryImplTest {
                     unitBasePrice = PRODUCT_PRICE_2,
                     unitFinalPrice = PRODUCT_PRICE_2,
                     promotion = null,
-                    quantity = 1
+                    quantity = 1,
+                    productImageUrl = ANY_PRODUCT_IMAGE_URL
                 )
             ),
             totalBasePrice = 53.0,
@@ -329,6 +338,8 @@ class OrderFactoryImplTest {
         private const val PRODUCT_NAME_1 = "1"
         private const val PRODUCT_NAME_2 = "2"
         private const val PRODUCT_NAME_3 = "3"
+
+        private const val ANY_PRODUCT_IMAGE_URL ="any_pic"
 
         private const val PRODUCT_PRICE_1 = 30.0
         private const val PRODUCT_PRICE_1_WITH_DISCOUNT = 28.0

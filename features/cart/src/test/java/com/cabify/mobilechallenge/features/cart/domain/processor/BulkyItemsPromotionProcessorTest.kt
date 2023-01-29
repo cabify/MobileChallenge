@@ -31,7 +31,8 @@ class BulkyItemsPromotionProcessorTest {
         val product = ProductEntity(
             id = PRODUCT_ID_1,
             name = PRODUCT_NAME_1,
-            price = PRICE_1
+            price = PRICE_1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
 
         //WHEN
@@ -50,7 +51,8 @@ class BulkyItemsPromotionProcessorTest {
             unitBasePrice = product.price,
             unitFinalPrice = expectedFinalPrice,
             promotion = bulkyPromotion,
-            quantity = cartItem.quantity
+            quantity = cartItem.quantity,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         Assert.assertEquals(expectedOrderItems, currentOrderItem)
     }
@@ -65,7 +67,8 @@ class BulkyItemsPromotionProcessorTest {
         val product = ProductEntity(
             id = PRODUCT_ID_1,
             name = PRODUCT_NAME_1,
-            price = PRICE_1
+            price = PRICE_1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         val promotion = BulkyItemsPromotionEntity(
             id = PROMOTION_ID,
@@ -89,7 +92,8 @@ class BulkyItemsPromotionProcessorTest {
             unitBasePrice = product.price,
             unitFinalPrice = product.price,
             promotion = null,
-            quantity = cartItem.quantity
+            quantity = cartItem.quantity,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
 
         Assert.assertEquals(expectedOrderItem, currentOrderItems)
@@ -100,6 +104,7 @@ class BulkyItemsPromotionProcessorTest {
         private const val PRODUCT_NAME_1 = "product name 1"
         private const val PROMOTION_ID = "Bulky"
         private const val PROMOTION_NAME = "Bulky"
+        private const val ANY_PRODUCT_IMAGE_URL ="any_pic"
         private const val PRICE_1 = 22.0
         private const val QUANTITY_4 = 4
         private const val QUANTITY_1 = 1

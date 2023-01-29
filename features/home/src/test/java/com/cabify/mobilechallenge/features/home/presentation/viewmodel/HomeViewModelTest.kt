@@ -95,7 +95,6 @@ class HomeViewModelTest {
 
     private val anyThrowable = Throwable("Test error")
 
-
     private val anyProductPresentation = ProductPresentation(
         id = "",
         name = "",

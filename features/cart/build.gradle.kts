@@ -26,6 +26,7 @@ dependencies {
     testImplementation(TestingDependencies.JUnit)
     testImplementation(TestingDependencies.mockitoKotlin)
     testImplementation(TestingDependencies.JUnitExt)
+    testImplementation(TestingDependencies.androidArchTest)
 
     androidTestImplementation(TestingDependencies.espresso)
     androidTestImplementation(TestingDependencies.JUnitExt)

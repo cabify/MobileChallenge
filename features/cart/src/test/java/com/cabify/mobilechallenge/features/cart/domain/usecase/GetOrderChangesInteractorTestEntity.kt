@@ -76,7 +76,7 @@ class GetOrderChangesInteractorTestEntity {
     }
 
     private val anyProduct = ProductEntity(
-        id = "", name = "", price = 0.0
+        id = "", name = "", price = 0.0, productImageUrl = null
     )
 
     private val anyCartEntity = CartEntity(
@@ -97,4 +97,5 @@ class GetOrderChangesInteractorTestEntity {
         totalFinalPrice = 0.0,
         orderId = OrderFactoryImpl.DEFAULT_ORDER_ID
     )
+
 }

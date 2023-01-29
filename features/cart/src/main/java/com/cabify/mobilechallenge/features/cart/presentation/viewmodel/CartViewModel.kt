@@ -39,6 +39,7 @@ class CartViewModel(
                 .observeOn(observerScheduler)
                 .map(::mapToViewState)
                 .startWithItem(Loading)
+                .distinctUntilChanged()
                 .subscribe({ successViewState ->
                     _viewState.value = successViewState
                 }, { throwable ->
@@ -58,12 +59,8 @@ class CartViewModel(
                 .subscribeOn(subscribeScheduler)
                 .observeOn(observerScheduler)
                 .subscribe(
-                    {
-                        _viewEvent.value = CheckoutSucceed
-                    },
-                    {
-                        _viewEvent.value = CheckoutFailed
-                    }
+                    { _viewEvent.value = CheckoutSucceed },
+                    { _viewEvent.value = CheckoutFailed }
                 )
         )
     }

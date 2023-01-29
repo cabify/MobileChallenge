@@ -33,7 +33,8 @@ class BuyXGetYFreePromotionProcessorTest {
         val product = ProductEntity(
             id = PRODUCT_ID_1,
             name = PRODUCT_NAME_1,
-            price = PRICE_1
+            price = PRICE_1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         val currentOrderItems = buyXGetYFreePromotionProcessor.process(
             cartItem = cartItem,
@@ -48,7 +49,8 @@ class BuyXGetYFreePromotionProcessorTest {
             unitBasePrice = product.price,
             promotion = buyXGetYFreePromotion,
             unitFinalPrice = expectedUnitFinalPrice,
-            quantity = cartItem.quantity
+            quantity = cartItem.quantity,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         Assert.assertEquals(expectedOrderItems, currentOrderItems)
     }
@@ -72,7 +74,8 @@ class BuyXGetYFreePromotionProcessorTest {
         val product = ProductEntity(
             id = PRODUCT_ID_1,
             name = PRODUCT_NAME_1,
-            price = PRICE_1
+            price = PRICE_1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         val currentOrderItems = buyXGetYFreePromotionProcessor.process(
             cartItem = cartItem,
@@ -88,7 +91,8 @@ class BuyXGetYFreePromotionProcessorTest {
             unitBasePrice = product.price,
             promotion = buyXGetYFreePromotion,
             unitFinalPrice = expectedUnitFinalPrice,
-            quantity = cartItem.quantity
+            quantity = cartItem.quantity,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         Assert.assertEquals(expectedOrderItems, currentOrderItems)
     }
@@ -103,7 +107,8 @@ class BuyXGetYFreePromotionProcessorTest {
         val productEntity = ProductEntity(
             id = PRODUCT_ID_1,
             name = PRODUCT_NAME_1,
-            price = PRICE_1
+            price = PRICE_1,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         val promotion = BuyXGetYFreePromotionEntity(
             id = PROMOTION_ID,
@@ -127,7 +132,8 @@ class BuyXGetYFreePromotionProcessorTest {
             unitBasePrice = productEntity.price,
             unitFinalPrice = productEntity.price,
             promotion = null,
-            quantity = cartItem.quantity
+            quantity = cartItem.quantity,
+            productImageUrl = ANY_PRODUCT_IMAGE_URL
         )
         Assert.assertEquals(expectedOrderItems, currentOrderItems)
     }
@@ -137,6 +143,7 @@ class BuyXGetYFreePromotionProcessorTest {
         private const val PRODUCT_NAME_1 = "product name 1"
         private const val PROMOTION_ID = "2x1"
         private const val PROMOTION_NAME = "2x1 promo"
+        private const val ANY_PRODUCT_IMAGE_URL ="any_pic"
         private const val PRICE_1 = 22.0
         private const val QUANTITY_2 = 2
         private const val QUANTITY_4 = 4
