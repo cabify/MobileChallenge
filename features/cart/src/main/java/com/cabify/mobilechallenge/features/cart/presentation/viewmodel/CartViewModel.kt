@@ -35,11 +35,11 @@ class CartViewModel(
     init {
         addToDisposable(
             getOrderChangesUseCase()
-                .subscribeOn(subscribeScheduler)
-                .observeOn(observerScheduler)
                 .map(::mapToViewState)
                 .startWithItem(Loading)
                 .distinctUntilChanged()
+                .subscribeOn(subscribeScheduler)
+                .observeOn(observerScheduler)
                 .subscribe({ successViewState ->
                     _viewState.value = successViewState
                 }, { throwable ->

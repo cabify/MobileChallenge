@@ -18,6 +18,7 @@ class MainViewModel(
     init {
         addToDisposable(
             getCartItemsQuantityUseCase()
+                .distinctUntilChanged()
                 .subscribeOn(subscribeScheduler)
                 .observeOn(observerScheduler)
                 .subscribe({
