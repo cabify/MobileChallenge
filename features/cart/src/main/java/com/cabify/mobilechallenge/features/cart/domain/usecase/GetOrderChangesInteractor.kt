@@ -1,6 +1,6 @@
 package com.cabify.mobilechallenge.features.cart.domain.usecase
 
-import com.cabify.mobilechallenge.cart.domain.repository.CartRepository
+import com.cabify.mobilechallenge.shared.cart.domain.repository.CartRepository
 import com.cabify.mobilechallenge.features.cart.domain.entity.OrderEntity
 import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactory
 import com.cabify.shared.product.domain.repository.ProductsRepository

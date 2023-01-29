@@ -3,7 +3,6 @@ package com.cabify.mobilechallenge.features.home.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cabify.library.utils.lifecycle.SingleLiveEvent
-import com.cabify.mobilechallenge.cart.domain.usecase.AddProductToCartUseCase
 import com.cabify.mobilechallenge.core.base.mapper.Mapper
 import com.cabify.mobilechallenge.core.base.presentation.BaseViewModel
 import com.cabify.mobilechallenge.features.home.presentation.model.ProductPresentation
@@ -15,6 +14,7 @@ import com.cabify.mobilechallenge.features.home.presentation.viewstate.HomeViewE
 import com.cabify.mobilechallenge.features.home.presentation.viewstate.HomeViewState
 import com.cabify.mobilechallenge.features.home.presentation.viewstate.Loading
 import com.cabify.mobilechallenge.features.home.presentation.viewstate.Success
+import com.cabify.mobilechallenge.shared.cart.domain.usecase.AddProductToCartUseCase
 import com.cabify.shared.product.domain.usecase.GetProductsUseCase
 import com.cabify.shared.product.domain.usecase.GetPromotionsUseCase
 import io.reactivex.rxjava3.core.Scheduler

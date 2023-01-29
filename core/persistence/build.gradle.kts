@@ -8,6 +8,16 @@ plugins {
 
 apply(from = "${rootProject.projectDir}/shared-android-properties.gradle")
 
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments(mapOf("room.schemaLocation" to "$projectDir/schemas"))
+            }
+        }
+    }
+}
+
 dependencies {
     testImplementation(TestingDependencies.JUnit)
     kapt(CoreDependencies.roomCompiler)

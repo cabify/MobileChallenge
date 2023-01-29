@@ -2,7 +2,7 @@ package com.cabify.mobilechallenge.features.home.presentation.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.cabify.mobilechallenge.cart.domain.usecase.AddProductToCartUseCase
+import com.cabify.mobilechallenge.shared.cart.domain.usecase.AddProductToCartUseCase
 import com.cabify.mobilechallenge.core.base.mapper.Mapper
 import com.cabify.mobilechallenge.features.home.presentation.model.ProductPresentation
 import com.cabify.mobilechallenge.features.home.presentation.model.ProductsPromotions

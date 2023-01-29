@@ -2,7 +2,7 @@ package com.cabify.mobilechallenge.app.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.cabify.mobilechallenge.cart.domain.usecase.GetCartItemsQuantityUseCase
+import com.cabify.mobilechallenge.shared.cart.domain.usecase.GetCartItemsQuantityUseCase
 import com.cabify.mobilechallenge.core.base.presentation.BaseViewModel
 import io.reactivex.rxjava3.core.Scheduler
 

@@ -21,6 +21,13 @@
     "fillColor": "#FFACFA"
   },
   {
+    "name": "Common-UI",
+    "regex": ":common-ui",
+    "isEnabled": true,
+    "shape": "tab",
+    "fillColor": "#FFACFA"
+  },
+  {
     "name": "Core",
     "regex": "^:core.*$",
     "isEnabled": true,
@@ -28,8 +35,8 @@
     "fillColor": "#D5625A"
   },
   {
-    "name": "Data",
-    "regex": ":data.*$",
+    "name": "Shared",
+    "regex": ":shared.*$",
     "isEnabled": true,
     "shape": "tab",
     "fillColor": "#D4F1F4"

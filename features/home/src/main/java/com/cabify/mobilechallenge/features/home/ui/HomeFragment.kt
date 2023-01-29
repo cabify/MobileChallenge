@@ -116,8 +116,9 @@ class HomeFragment : BaseFragment() {
         _binding = null
     }
 
-    companion object{
-        private const val ONE_QUANTITY = 1 //We didn't add the option of add various items at the same time
+    companion object {
+        private const val ONE_QUANTITY =
+            1 //We didn't add the option of add various items at the same time
         //but the use case is perfectly working if we add more than one quantitiess
     }
 }

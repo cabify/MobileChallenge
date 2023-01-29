@@ -26,11 +26,11 @@ dependencies {
     implementation(project(":features:cart"))
     implementation(project(":features:home"))
     implementation(project(":common-ui"))
-    implementation(project(":data:cart"))
+    implementation(project(":shared:cart"))
     implementation(project(":core:base"))
     implementation(project(":core:network"))
     implementation(project(":core:persistence"))
-    implementation(project(":data:product"))
+    implementation(project(":shared:product"))
 
     implementation(UIDependencies.constraintLayout)
     implementation(UIDependencies.material)

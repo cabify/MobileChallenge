@@ -18,11 +18,10 @@ include(
     ":core:base",
     ":core:network",
     ":core:persistence",
-    ":data:product",
-    ":data:cart",
+    ":shared:product",
+    ":shared:cart",
     ":features:cart",
     ":features:home",
     ":common-ui",
+    ":utils"
 )
-include(":utils")
-include(":shared:cart")

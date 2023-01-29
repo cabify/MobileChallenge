@@ -3,7 +3,7 @@ package com.cabify.mobilechallenge.app.preentation.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.cabify.mobilechallenge.app.presentation.viewmodel.MainViewModel
-import com.cabify.mobilechallenge.cart.domain.usecase.GetCartItemsQuantityUseCase
+import com.cabify.mobilechallenge.shared.cart.domain.usecase.GetCartItemsQuantityUseCase
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject

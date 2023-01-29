@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cabify.library.utils.extensions.gone
 import com.cabify.library.utils.extensions.showToast
 import com.cabify.library.utils.extensions.visible
 import com.cabify.mobilechallenge.core.base.ui.BaseFragment
+import com.cabify.mobilechallenge.features.cart.R
 import com.cabify.mobilechallenge.features.cart.databinding.FragmentCartBinding
 import com.cabify.mobilechallenge.features.cart.presentation.viewmodel.CartViewModel
 import com.cabify.mobilechallenge.features.cart.presentation.viewstate.CheckoutSucceed

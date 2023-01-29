@@ -14,9 +14,9 @@ dependencies {
     implementation(CoreDependencies.viewModelKtx)
     implementation(CoreDependencies.rxJava3)
     implementation(project(":core:base"))
-    implementation(project(":data:product"))
+    implementation(project(":shared:product"))
     implementation(project(":common-ui"))
-    implementation(project(":data:cart"))
+    implementation(project(":shared:cart"))
     implementation(project(":utils"))
 
     implementation(UIDependencies.coil)
