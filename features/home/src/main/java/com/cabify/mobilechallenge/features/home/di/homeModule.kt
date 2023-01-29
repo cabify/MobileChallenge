@@ -3,10 +3,7 @@ package com.cabify.mobilechallenge.features.home.di
 import com.cabify.library.utils.CurrencyUtils
 import com.cabify.mobilechallenge.core.base.di.OBSERVE_SCHEDULER
 import com.cabify.mobilechallenge.core.base.di.SUBSCRIBE_SCHEDULER
-import com.cabify.mobilechallenge.core.base.mapper.Mapper
 import com.cabify.mobilechallenge.features.home.presentation.mapper.ProductsPromotionsDomainToPresentationMapper
-import com.cabify.mobilechallenge.features.home.presentation.model.ProductPresentation
-import com.cabify.mobilechallenge.features.home.presentation.model.ProductsPromotions
 import com.cabify.mobilechallenge.features.home.presentation.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

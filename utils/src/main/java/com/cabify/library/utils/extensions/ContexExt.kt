@@ -1,7 +1,6 @@
 package com.cabify.library.utils.extensions
 
 import android.content.Context
-import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.StringRes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

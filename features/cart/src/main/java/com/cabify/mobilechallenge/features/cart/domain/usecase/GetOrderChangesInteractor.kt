@@ -6,7 +6,6 @@ import com.cabify.mobilechallenge.features.cart.domain.factory.OrderFactory
 import com.cabify.shared.product.domain.repository.ProductsRepository
 import com.cabify.shared.product.domain.repository.PromotionsRepository
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
 
 class GetOrderChangesInteractor(
     private val cartRepository: CartRepository,

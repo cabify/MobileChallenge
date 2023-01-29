@@ -9,6 +9,7 @@ object Versions {
     const val espresso = "3.5.1"
     const val fragmentKtx = "2.5.3"
     const val gradle = "7.2.2"
+    const val graphfity = "1.0.0"
     const val jUnitExt = "1.1.5"
     const val jUnit = "4.13.2"
     const val kotlin = "1.7.0"

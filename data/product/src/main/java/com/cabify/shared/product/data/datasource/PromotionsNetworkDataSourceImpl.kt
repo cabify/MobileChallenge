@@ -1,7 +1,6 @@
 package com.cabify.shared.product.data.datasource
 
 import com.cabify.mobilechallenge.core.base.mapper.Mapper
-import com.cabify.shared.product.data.mapper.GetPromotionsResponseToDomainMapper
 import com.cabify.shared.product.data.model.GetPromotionsResponse
 import com.cabify.shared.product.data.service.PromotionsService
 import com.cabify.shared.product.domain.entities.PromotionEntity

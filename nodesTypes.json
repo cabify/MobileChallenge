@@ -1,0 +1,37 @@
+[
+  {
+    "name": "App",
+    "regex": ":app$",
+    "isEnabled": true,
+    "shape": "box3d",
+    "fillColor": "#BAFFC9"
+  },
+  {
+    "name": "Feature",
+    "regex": ":feature.*$",
+    "isEnabled": true,
+    "shape": "tab",
+    "fillColor": "#E6F98A"
+  },
+  {
+    "name": "Utils",
+    "regex": ":utils",
+    "isEnabled": true,
+    "shape": "tab",
+    "fillColor": "#FFACFA"
+  },
+  {
+    "name": "Core",
+    "regex": "^:core.*$",
+    "isEnabled": true,
+    "shape": "hexagon",
+    "fillColor": "#D5625A"
+  },
+  {
+    "name": "Data",
+    "regex": ":data.*$",
+    "isEnabled": true,
+    "shape": "tab",
+    "fillColor": "#D4F1F4"
+  }
+]
