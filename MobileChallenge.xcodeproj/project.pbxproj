@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDDD29843AC1002CD30A /* ProductsList.swift */; };
+		3385CDDF29843AD1002CD30A /* ProductsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDDD29843AC1002CD30A /* ProductsList.swift */; };
 		3385CDE92987E8C7002CD30A /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE82987E8C7002CD30A /* Requestable.swift */; };
 		3385CDEA2987E8C7002CD30A /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE82987E8C7002CD30A /* Requestable.swift */; };
 		3385CDEC2987E9E1002CD30A /* ApiExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */; };
@@ -52,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3385CDDD29843AC1002CD30A /* ProductsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsList.swift; sourceTree = "<group>"; };
 		3385CDE82987E8C7002CD30A /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiExecutable.swift; sourceTree = "<group>"; };
 		3385CDEE2987EADC002CD30A /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
@@ -102,9 +105,18 @@
 		3385CDDB29843A76002CD30A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				3385CDDC29843AA6002CD30A /* Entities */,
 				3385CDFC298855BE002CD30A /* Interfaces */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		3385CDDC29843AA6002CD30A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				3385CDDD29843AC1002CD30A /* ProductsList.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 			sourceTree = "<group>";
@@ -178,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */,
+				3385CDDB29843A76002CD30A /* Domain */,
 				33D6A2662982EBE8005CF1D0 /* ContentView.swift */,
 				33D6A2682982EBE9005CF1D0 /* Assets.xcassets */,
 				33D6A26D2982EBE9005CF1D0 /* Persistence.swift */,
@@ -350,6 +363,7 @@
 				33D6A26E2982EBE9005CF1D0 /* Persistence.swift in Sources */,
 				33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */,
 				3385CDEF2987EADC002CD30A /* ApiClient.swift in Sources */,
+				3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */,
 				33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */,
 				3385CE0229885A71002CD30A /* ProductsListDTO.swift in Sources */,
 				33D6A2712982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld in Sources */,
@@ -368,6 +382,7 @@
 				3385CDED2987E9E1002CD30A /* ApiExecutable.swift in Sources */,
 				3385CDF62987FCC8002CD30A /* RequestConvertable.swift in Sources */,
 				3385CDF02987EADC002CD30A /* ApiClient.swift in Sources */,
+				3385CDDF29843AD1002CD30A /* ProductsList.swift in Sources */,
 				3385CDF32987EBC1002CD30A /* ApiErrors.swift in Sources */,
 				3385CE0329885A71002CD30A /* ProductsListDTO.swift in Sources */,
 			);
