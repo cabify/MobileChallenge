@@ -33,7 +33,7 @@ protocol Requestable {
     var header: [String: String]? { get }
     var parser: ResponseParser? { get }
     var errorParser: ErrorParserType? { get }
-    func parameter() -> [String: Any]?
+    var parameter: [String: Any]? { get }
 }
 
 // Default values
