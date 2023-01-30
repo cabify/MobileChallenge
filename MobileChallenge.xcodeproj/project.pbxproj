@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3385CDE92987E8C7002CD30A /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE82987E8C7002CD30A /* Requestable.swift */; };
+		3385CDEA2987E8C7002CD30A /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE82987E8C7002CD30A /* Requestable.swift */; };
+		3385CDEC2987E9E1002CD30A /* ApiExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */; };
+		3385CDED2987E9E1002CD30A /* ApiExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */; };
+		3385CDEF2987EADC002CD30A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDEE2987EADC002CD30A /* ApiClient.swift */; };
+		3385CDF02987EADC002CD30A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDEE2987EADC002CD30A /* ApiClient.swift */; };
+		3385CDF22987EBC1002CD30A /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF12987EBC1002CD30A /* ApiErrors.swift */; };
+		3385CDF32987EBC1002CD30A /* ApiErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF12987EBC1002CD30A /* ApiErrors.swift */; };
+		3385CDF52987FCC8002CD30A /* RequestConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF42987FCC8002CD30A /* RequestConvertable.swift */; };
+		3385CDF62987FCC8002CD30A /* RequestConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF42987FCC8002CD30A /* RequestConvertable.swift */; };
+		3385CDF82987FFC7002CD30A /* ParameterEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF72987FFC7002CD30A /* ParameterEncodable.swift */; };
+		3385CDF92987FFC7002CD30A /* ParameterEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF72987FFC7002CD30A /* ParameterEncodable.swift */; };
 		33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */; };
 		33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2662982EBE8005CF1D0 /* ContentView.swift */; };
 		33D6A2692982EBE9005CF1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A2682982EBE9005CF1D0 /* Assets.xcassets */; };
@@ -36,6 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3385CDE82987E8C7002CD30A /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiExecutable.swift; sourceTree = "<group>"; };
+		3385CDEE2987EADC002CD30A /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		3385CDF12987EBC1002CD30A /* ApiErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrors.swift; sourceTree = "<group>"; };
+		3385CDF42987FCC8002CD30A /* RequestConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConvertable.swift; sourceTree = "<group>"; };
+		3385CDF72987FFC7002CD30A /* ParameterEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodable.swift; sourceTree = "<group>"; };
 		33D6A2612982EBE8005CF1D0 /* MobileChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeApp.swift; sourceTree = "<group>"; };
 		33D6A2662982EBE8005CF1D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +93,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3385CDE52987E866002CD30A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3385CDE62987E8AE002CD30A /* Network */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3385CDE62987E8AE002CD30A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3385CDE72987E8B8002CD30A /* Protocols */,
+				3385CDF12987EBC1002CD30A /* ApiErrors.swift */,
+				3385CDEE2987EADC002CD30A /* ApiClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3385CDE72987E8B8002CD30A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3385CDF72987FFC7002CD30A /* ParameterEncodable.swift */,
+				3385CDE82987E8C7002CD30A /* Requestable.swift */,
+				3385CDF42987FCC8002CD30A /* RequestConvertable.swift */,
+				3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		33D6A2582982EBE8005CF1D0 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */,
+				3385CDE52987E866002CD30A /* Utilities */,
 				33D6A2662982EBE8005CF1D0 /* ContentView.swift */,
 				33D6A2682982EBE9005CF1D0 /* Assets.xcassets */,
 				33D6A26D2982EBE9005CF1D0 /* Persistence.swift */,
@@ -263,8 +311,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3385CDF52987FCC8002CD30A /* RequestConvertable.swift in Sources */,
+				3385CDE92987E8C7002CD30A /* Requestable.swift in Sources */,
+				3385CDEC2987E9E1002CD30A /* ApiExecutable.swift in Sources */,
+				3385CDF22987EBC1002CD30A /* ApiErrors.swift in Sources */,
+				3385CDF82987FFC7002CD30A /* ParameterEncodable.swift in Sources */,
 				33D6A26E2982EBE9005CF1D0 /* Persistence.swift in Sources */,
 				33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */,
+				3385CDEF2987EADC002CD30A /* ApiClient.swift in Sources */,
 				33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */,
 				33D6A2712982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld in Sources */,
 			);
@@ -274,7 +328,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3385CDEA2987E8C7002CD30A /* Requestable.swift in Sources */,
+				3385CDF92987FFC7002CD30A /* ParameterEncodable.swift in Sources */,
 				33D6A27B2982EBEA005CF1D0 /* MobileChallengeTests.swift in Sources */,
+				3385CDED2987E9E1002CD30A /* ApiExecutable.swift in Sources */,
+				3385CDF62987FCC8002CD30A /* RequestConvertable.swift in Sources */,
+				3385CDF02987EADC002CD30A /* ApiClient.swift in Sources */,
+				3385CDF32987EBC1002CD30A /* ApiErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
