@@ -1,7 +1,7 @@
 package com.cabify.challenge.core.domain.products
 
-enum class Code {
-    MUG,
-    TSHIRT,
-    VOUCHER
+enum class Code(val description: String) {
+    MUG("Cabify Coffee Mug"),
+    TSHIRT("Cabify T-Shirt"),
+    VOUCHER("Cabify Voucher")
 }

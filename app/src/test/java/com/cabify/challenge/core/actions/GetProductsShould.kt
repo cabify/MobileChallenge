@@ -1,21 +1,31 @@
 package com.cabify.challenge.core.actions
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.cabify.challenge.builder.ProductBuilder
 import com.cabify.challenge.core.domain.products.Products
 import com.cabify.challenge.core.infrastructure.client.ProductsClient
 import com.cabify.challenge.core.infrastructure.repositories.ProductsRepository
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import junit.framework.TestCase.assertEquals
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class GetProductsShould {
 
     private lateinit var productsRepository: ProductsRepository
     private lateinit var productsClient: ProductsClient
     private lateinit var getProducts: GetProducts
+
+
+    @get:Rule
+    var rule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
@@ -23,8 +33,9 @@ class GetProductsShould {
         productsClient = mockk()
     }
 
+
     @Test
-    fun `return empty products`() {
+    fun `return empty products`() = runTest {
         givenAGetProducts()
         givenA(emptyProducts)
 
@@ -35,7 +46,7 @@ class GetProductsShould {
 
 
     @Test
-    fun `return the products stored`() {
+    fun `return the products stored`() = runTest {
         givenAGetProducts()
         givenA(someProducts)
 
@@ -45,7 +56,7 @@ class GetProductsShould {
     }
 
     @Test
-    fun `store products retrieved from client when there is not products stored`() {
+    fun `store products retrieved from client when there is not products stored`() = runTest {
         givenAGetProducts()
         givenA(noProducts)
         givenProductsFromClient()
@@ -60,7 +71,7 @@ class GetProductsShould {
     }
 
     private fun givenProductsFromClient() {
-        every { productsClient.getProducts() } returns someProducts
+        coEvery { productsClient.getProducts() } returns someProducts
     }
 
     private fun givenAGetProducts() {
@@ -71,7 +82,7 @@ class GetProductsShould {
         every { productsRepository.get() } returns noProducts
     }
 
-    private fun whenGetsProducts() {
+    private suspend fun whenGetsProducts() {
         resultProducts = getProducts()
     }
 

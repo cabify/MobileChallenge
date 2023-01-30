@@ -38,7 +38,7 @@ class ProductBuilder {
 
         val tshirt = Product(
             code = Code.TSHIRT,
-            name = "Cabify Coffee Mug",
+            name = "Cabify T-Shirt",
             price = Price.eurPrice(amount = 20.0)
         )
 
@@ -50,4 +50,3 @@ class ProductBuilder {
     }
 }
 
-class BuilderException : Throwable(message = "You have to build some product")

@@ -3,9 +3,14 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="store_label">Store</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
+    <string name="buy">BUY</string>
+
+
+    <string name="confirm">CONFIRM</string>
     <string name="previous">Previous</string>
+    <string name="challenge_store">Challenge Store</string>
+    <string name="total_amount_no_promo">Total Amount No Promo</string>
+    <string name="total_amount_promo">Total Amount Promo</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -15,4 +20,5 @@
     <string name="content_product_image">
         Image Product
     </string>
+    <string name="plus_icon">Plus Icon</string>
 </resources>

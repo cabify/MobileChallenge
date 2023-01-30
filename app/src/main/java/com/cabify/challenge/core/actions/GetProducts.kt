@@ -8,12 +8,12 @@ class GetProducts(
     private val productsRepository: ProductsRepository,
     private val productsClient: ProductsClient
 ) {
-    operator fun invoke(): Products {
+    suspend operator fun invoke(): Products {
         val storedProducts = productsRepository.get()
         return storedProducts ?: findAndReturnProducts()
     }
 
-    private fun findAndReturnProducts(): Products {
+    private suspend fun findAndReturnProducts(): Products {
         val products = productsClient.getProducts()
         productsRepository.save(products)
         return products

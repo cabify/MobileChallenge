@@ -6,4 +6,5 @@ import com.cabify.challenge.core.domain.products.Products
 interface CartRepository {
     fun get(): Products
     fun save(product: Product)
+    fun clear()
 }

@@ -14,4 +14,8 @@ class InMemoryCartRepository(private var cart: MutableList<Product> = mutableLis
     override fun save(product: Product) {
         cart.add(product)
     }
+
+    override fun clear() {
+        cart = mutableListOf()
+    }
 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.cabify.challenge.presentation.store.fragments.StoreFragment"
+        android:name="com.cabify.challenge.presentation.fragments.StoreFragment"
         android:label="@string/store_label"
         tools:layout="@layout/fragment_store">
 
@@ -17,8 +17,8 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.cabify.challenge.presentation.store.fragments.CartFragment"
-        android:label="@string/second_fragment_label"
+        android:name="com.cabify.challenge.presentation.fragments.CartFragment"
+        android:label="@string/store_label"
         tools:layout="@layout/fragment_cart">
 
         <action

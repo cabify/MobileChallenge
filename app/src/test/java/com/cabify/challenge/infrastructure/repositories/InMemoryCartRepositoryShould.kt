@@ -34,6 +34,24 @@ class InMemoryCartRepositoryShould {
         thenReturnProducts(cart)
     }
 
+    @Test
+    fun `clear stored products`() {
+        givenSomeStoredProducts()
+
+        whenClearRepository()
+
+        thenCartIsClear()
+    }
+
+    private fun whenClearRepository() {
+        repository.clear()
+    }
+
+    private fun thenCartIsClear() {
+        assertEquals(repository.get(), Products(mutableListOf()))
+    }
+
+
     private fun thenReturnProducts(products: Products) {
         assertEquals(resultProducts, products)
     }

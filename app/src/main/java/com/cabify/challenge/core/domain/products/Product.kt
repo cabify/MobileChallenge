@@ -25,4 +25,5 @@ data class Product(
     fun codeIs(code: Code): Boolean {
         return this.code == code
     }
+
 }

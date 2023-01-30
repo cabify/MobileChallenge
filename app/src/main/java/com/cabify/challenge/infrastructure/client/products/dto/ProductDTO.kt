@@ -1,7 +1,9 @@
 package com.cabify.challenge.infrastructure.client.products.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class ProductDTO(
-    private val code: String,
-    private val name: String,
-    private val price: String
+    @SerializedName("code")  val code: String,
+    @SerializedName("name")  val name: String,
+    @SerializedName("price")  val price: Double
 )
