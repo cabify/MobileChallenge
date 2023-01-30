@@ -26,6 +26,8 @@
 		3385CDFF29885607002CD30A /* ProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDFD29885607002CD30A /* ProductsListRepository.swift */; };
 		3385CE0229885A71002CD30A /* ProductsListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0129885A71002CD30A /* ProductsListDTO.swift */; };
 		3385CE0329885A71002CD30A /* ProductsListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0129885A71002CD30A /* ProductsListDTO.swift */; };
+		3385CE0929885F45002CD30A /* DefaultProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */; };
+		3385CE0A29885F45002CD30A /* DefaultProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */; };
 		33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */; };
 		33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2662982EBE8005CF1D0 /* ContentView.swift */; };
 		33D6A2692982EBE9005CF1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A2682982EBE9005CF1D0 /* Assets.xcassets */; };
@@ -65,6 +67,7 @@
 		3385CDF72987FFC7002CD30A /* ParameterEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodable.swift; sourceTree = "<group>"; };
 		3385CDFD29885607002CD30A /* ProductsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListRepository.swift; sourceTree = "<group>"; };
 		3385CE0129885A71002CD30A /* ProductsListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListDTO.swift; sourceTree = "<group>"; };
+		3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProductsListRepository.swift; sourceTree = "<group>"; };
 		33D6A2612982EBE8005CF1D0 /* MobileChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeApp.swift; sourceTree = "<group>"; };
 		33D6A2662982EBE8005CF1D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 		3385CDFB298853DE002CD30A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3385CE0429885C30002CD30A /* Repositories */,
 				3385CDE62987E8AE002CD30A /* Network */,
 			);
 			path = Data;
@@ -173,6 +177,14 @@
 				3385CE0129885A71002CD30A /* ProductsListDTO.swift */,
 			);
 			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		3385CE0429885C30002CD30A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		33D6A2582982EBE8005CF1D0 = {
@@ -200,6 +212,7 @@
 			children = (
 				33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */,
 				3385CDDB29843A76002CD30A /* Domain */,
+				3385CDFB298853DE002CD30A /* Data */,
 				33D6A2662982EBE8005CF1D0 /* ContentView.swift */,
 				33D6A2682982EBE9005CF1D0 /* Assets.xcassets */,
 				33D6A26D2982EBE9005CF1D0 /* Persistence.swift */,
@@ -374,6 +387,7 @@
 				33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */,
 				3385CDEF2987EADC002CD30A /* ApiClient.swift in Sources */,
 				3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */,
+				3385CE0929885F45002CD30A /* DefaultProductsListRepository.swift in Sources */,
 				33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */,
 				3385CE0229885A71002CD30A /* ProductsListDTO.swift in Sources */,
 				33D6A2712982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld in Sources */,
@@ -392,6 +406,7 @@
 				3385CDED2987E9E1002CD30A /* ApiExecutable.swift in Sources */,
 				3385CDF62987FCC8002CD30A /* RequestConvertable.swift in Sources */,
 				3385CDF02987EADC002CD30A /* ApiClient.swift in Sources */,
+				3385CE0A29885F45002CD30A /* DefaultProductsListRepository.swift in Sources */,
 				3385CDDF29843AD1002CD30A /* ProductsList.swift in Sources */,
 				3385CDF32987EBC1002CD30A /* ApiErrors.swift in Sources */,
 				3385CE0329885A71002CD30A /* ProductsListDTO.swift in Sources */,
