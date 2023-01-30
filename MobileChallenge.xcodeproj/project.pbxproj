@@ -93,12 +93,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3385CDE52987E866002CD30A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				3385CDE62987E8AE002CD30A /* Network */,
 			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 		3385CDE62987E8AE002CD30A /* Network */ = {
@@ -120,6 +117,14 @@
 				3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		3385CDFB298853DE002CD30A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3385CDE62987E8AE002CD30A /* Network */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		33D6A2582982EBE8005CF1D0 = {
@@ -146,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */,
-				3385CDE52987E866002CD30A /* Utilities */,
 				33D6A2662982EBE8005CF1D0 /* ContentView.swift */,
 				33D6A2682982EBE9005CF1D0 /* Assets.xcassets */,
 				33D6A26D2982EBE9005CF1D0 /* Persistence.swift */,
