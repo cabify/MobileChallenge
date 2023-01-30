@@ -136,9 +136,10 @@
 		3385CDE62987E8AE002CD30A /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				3385CDE72987E8B8002CD30A /* Protocols */,
-				3385CDF12987EBC1002CD30A /* ApiErrors.swift */,
 				3385CDEE2987EADC002CD30A /* ApiClient.swift */,
+				3385CDF12987EBC1002CD30A /* ApiErrors.swift */,
+				3385CDE72987E8B8002CD30A /* Protocols */,
+				3385CE0029885A3A002CD30A /* DataMapping */,
 			);
 			path = Network;
 			sourceTree = "<group>";
