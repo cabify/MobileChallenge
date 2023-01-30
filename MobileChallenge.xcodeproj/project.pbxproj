@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDDD29843AC1002CD30A /* ProductsList.swift */; };
 		3385CDDF29843AD1002CD30A /* ProductsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDDD29843AC1002CD30A /* ProductsList.swift */; };
+		3385CDE429843C80002CD30A /* GetProductsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE329843C80002CD30A /* GetProductsListUseCase.swift */; };
 		3385CDE92987E8C7002CD30A /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE82987E8C7002CD30A /* Requestable.swift */; };
 		3385CDEA2987E8C7002CD30A /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE82987E8C7002CD30A /* Requestable.swift */; };
 		3385CDEC2987E9E1002CD30A /* ApiExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		3385CDDD29843AC1002CD30A /* ProductsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsList.swift; sourceTree = "<group>"; };
+		3385CDE329843C80002CD30A /* GetProductsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsListUseCase.swift; sourceTree = "<group>"; };
 		3385CDE82987E8C7002CD30A /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		3385CDEB2987E9E1002CD30A /* ApiExecutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiExecutable.swift; sourceTree = "<group>"; };
 		3385CDEE2987EADC002CD30A /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				3385CDDC29843AA6002CD30A /* Entities */,
+				3385CDE029843BF2002CD30A /* UseCases */,
 				3385CDFC298855BE002CD30A /* Interfaces */,
 			);
 			path = Domain;
@@ -119,6 +122,12 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		3385CDE029843BF2002CD30A /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				3385CDE329843C80002CD30A /* GetProductsListUseCase.swift */,
+			);
+			path = UseCases;
 			sourceTree = "<group>";
 		};
 		3385CDE62987E8AE002CD30A /* Network */ = {
@@ -356,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3385CDF52987FCC8002CD30A /* RequestConvertable.swift in Sources */,
+				3385CDE429843C80002CD30A /* GetProductsListUseCase.swift in Sources */,
 				3385CDE92987E8C7002CD30A /* Requestable.swift in Sources */,
 				3385CDEC2987E9E1002CD30A /* ApiExecutable.swift in Sources */,
 				3385CDF22987EBC1002CD30A /* ApiErrors.swift in Sources */,
