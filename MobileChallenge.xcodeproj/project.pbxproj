@@ -19,6 +19,8 @@
 		3385CDF62987FCC8002CD30A /* RequestConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF42987FCC8002CD30A /* RequestConvertable.swift */; };
 		3385CDF82987FFC7002CD30A /* ParameterEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF72987FFC7002CD30A /* ParameterEncodable.swift */; };
 		3385CDF92987FFC7002CD30A /* ParameterEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDF72987FFC7002CD30A /* ParameterEncodable.swift */; };
+		3385CDFE29885607002CD30A /* ProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDFD29885607002CD30A /* ProductsListRepository.swift */; };
+		3385CDFF29885607002CD30A /* ProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDFD29885607002CD30A /* ProductsListRepository.swift */; };
 		3385CE0229885A71002CD30A /* ProductsListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0129885A71002CD30A /* ProductsListDTO.swift */; };
 		3385CE0329885A71002CD30A /* ProductsListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0129885A71002CD30A /* ProductsListDTO.swift */; };
 		33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */; };
@@ -56,6 +58,7 @@
 		3385CDF12987EBC1002CD30A /* ApiErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrors.swift; sourceTree = "<group>"; };
 		3385CDF42987FCC8002CD30A /* RequestConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConvertable.swift; sourceTree = "<group>"; };
 		3385CDF72987FFC7002CD30A /* ParameterEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodable.swift; sourceTree = "<group>"; };
+		3385CDFD29885607002CD30A /* ProductsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListRepository.swift; sourceTree = "<group>"; };
 		3385CE0129885A71002CD30A /* ProductsListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListDTO.swift; sourceTree = "<group>"; };
 		33D6A2612982EBE8005CF1D0 /* MobileChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeApp.swift; sourceTree = "<group>"; };
@@ -96,9 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3385CDDB29843A76002CD30A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				3385CDFC298855BE002CD30A /* Interfaces */,
 			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 			sourceTree = "<group>";
 		};
 		3385CDE62987E8AE002CD30A /* Network */ = {
@@ -128,6 +136,14 @@
 				3385CDE62987E8AE002CD30A /* Network */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		3385CDFC298855BE002CD30A /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				3385CDFD29885607002CD30A /* ProductsListRepository.swift */,
+			);
+			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		3385CE0029885A3A002CD30A /* DataMapping */ = {
@@ -337,6 +353,7 @@
 				33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */,
 				3385CE0229885A71002CD30A /* ProductsListDTO.swift in Sources */,
 				33D6A2712982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld in Sources */,
+				3385CDFE29885607002CD30A /* ProductsListRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +364,7 @@
 				3385CDEA2987E8C7002CD30A /* Requestable.swift in Sources */,
 				3385CDF92987FFC7002CD30A /* ParameterEncodable.swift in Sources */,
 				33D6A27B2982EBEA005CF1D0 /* MobileChallengeTests.swift in Sources */,
+				3385CDFF29885607002CD30A /* ProductsListRepository.swift in Sources */,
 				3385CDED2987E9E1002CD30A /* ApiExecutable.swift in Sources */,
 				3385CDF62987FCC8002CD30A /* RequestConvertable.swift in Sources */,
 				3385CDF02987EADC002CD30A /* ApiClient.swift in Sources */,
