@@ -19,6 +19,7 @@ struct CartView: View {
                 Text("Cart 1")
                 Text("Cart 2")
                 Text("Cart 3")
+                Text("Cart 4")
                 
             }
             .navigationTitle(Text("Products list"))
