@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct MobileChallengeApp: App {
+    
+    @StateObject var coordinator = ProductsListCoordinator()
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ProductsListCoordinatorView(coordinatorObject: coordinator)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
