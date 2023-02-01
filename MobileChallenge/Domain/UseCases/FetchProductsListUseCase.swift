@@ -1,5 +1,5 @@
 //
-//  GetProductsListUseCase.swift
+//  FetchProductsListUseCase.swift
 //  MobileChallenge
 //
 //  Created by thomas pereira on 27/01/2023.
@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-protocol GetProductsListUseCase {
+protocol FetchProductsListUseCase {
     func getProductsList() -> AnyPublisher<ProductsList, Error>
 }
 
-final class DefaultGetProductsListUseCase: GetProductsListUseCase {
+final class DefaultFetchProductsListUseCase: FetchProductsListUseCase {
     
     private let productsListRepository: ProductsListRepository
     
