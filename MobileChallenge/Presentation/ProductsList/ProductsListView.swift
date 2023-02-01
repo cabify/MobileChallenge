@@ -45,7 +45,7 @@ struct ProductsListView: View {
 #if DEBUG
 struct ProductsListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductsListView(viewModel: ProductsListViewModel(coordinator: ProductsListCoordinator()))
+        ProductsListView(viewModel: ProductsListViewModel.preview)
     }
 }
 #endif
