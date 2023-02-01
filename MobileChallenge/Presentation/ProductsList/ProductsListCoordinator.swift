@@ -21,3 +21,11 @@ final class ProductsListCoordinator: ObservableObject {
         return CartViewModel(coordinator: self)
     }
 }
+
+#if DEBUG
+extension ProductsListCoordinator {
+    static var preview: Self {
+        .init(productsListRepository: DefaultProductsListRepository.preview)
+    }
+}
+#endif

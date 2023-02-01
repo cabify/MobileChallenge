@@ -15,3 +15,11 @@ final class CartViewModel: ObservableObject, Identifiable {
         self.coordinator = coordinator
     }
 }
+
+#if DEBUG
+extension CartViewModel {
+    static var preview: Self {
+        .init(coordinator: ProductsListCoordinator.preview)
+    }
+}
+#endif

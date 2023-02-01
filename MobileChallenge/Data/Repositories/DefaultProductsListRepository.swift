@@ -10,7 +10,7 @@ import Combine
 
 final class DefaultProductsListRepository {
     
-    fileprivate struct ProductsListResponseParser: ResponseParserType {
+    struct ProductsListResponseParser: ResponseParserType {
         typealias Response = ProductsListDTO
         
         func parse(data: Data) throws -> ProductsListDTO? {
@@ -18,7 +18,7 @@ final class DefaultProductsListRepository {
         }
     }
     
-    fileprivate struct ProductsListRequest: RequestConvertable {
+    struct ProductsListRequest: RequestConvertable {
         typealias Response = ProductsListDTO
         typealias ResponseParser = ProductsListResponseParser
         
@@ -47,4 +47,12 @@ extension DefaultProductsListRepository: ProductsListRepository {
             .eraseToAnyPublisher()
     }
 }
+
+#if DEBUG
+extension DefaultProductsListRepository {
+    static var preview: Self {
+        .init(productsListRequest: DefaultProductsListRepository.ProductsListRequest())
+    }
+}
+#endif
 

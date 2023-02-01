@@ -24,3 +24,11 @@ final class DefaultFetchProductsListUseCase: FetchProductsListUseCase {
         return productsListRepository.fetchProductsList()
     }
 }
+
+#if DEBUG
+extension DefaultFetchProductsListUseCase {
+    static var preview: Self {
+        .init(productsListRepository: DefaultProductsListRepository.preview)
+    }
+}
+#endif

@@ -20,3 +20,11 @@ final class ProductsListViewModel: ObservableObject {
         return self.coordinator.openCart()
     }
 }
+
+#if DEBUG
+extension ProductsListViewModel {
+    static var preview: Self {
+        .init(coordinator: ProductsListCoordinator.preview, productsListUseCase: DefaultFetchProductsListUseCase.preview)
+    }
+}
+#endif
