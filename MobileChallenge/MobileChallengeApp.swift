@@ -10,7 +10,11 @@ import SwiftUI
 @main
 struct MobileChallengeApp: App {
     
-    @StateObject var coordinator = ProductsListCoordinator()
+    @StateObject var coordinator = ProductsListCoordinator(
+        productsListRepository: DefaultProductsListRepository(
+            productsListRequest: DefaultProductsListRepository.ProductsListRequest()
+        )
+    )
     let persistenceController = PersistenceController.shared
     
     var body: some Scene {

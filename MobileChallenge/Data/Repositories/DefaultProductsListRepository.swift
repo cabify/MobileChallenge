@@ -31,11 +31,11 @@ final class DefaultProductsListRepository {
     }
     
     private let apiClient: ApiExecutable
-    fileprivate let productsListRequest: ProductsListRequest
+    let productsListRequest: ProductsListRequest
     
-    init(apiClient: ApiExecutable = ApiClient()) {
-        self.apiClient = apiClient
-        self.productsListRequest = ProductsListRequest()
+    init(productsListRequest: ProductsListRequest) {
+        self.apiClient = ApiClient()
+        self.productsListRequest = productsListRequest
     }
 }
 
