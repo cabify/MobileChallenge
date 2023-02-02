@@ -8,24 +8,34 @@
 import Foundation
 import Combine
 
-final class ProductsListViewModel: ObservableObject {
+final class ProductsListViewModel: LoadableObject {
+    
+    typealias Output = [SingleProduct]
     
     private unowned let coordinator: ProductsListCoordinator
     private let productsListUseCase: FetchProductsListUseCase
     private var cancellables = Set<AnyCancellable>()
-    @Published var products = [SingleProduct]()
-    @Published var isPresented: Bool = false
+    @Published var state: LoadableState<[SingleProduct]> = .idle
     
     init(coordinator: ProductsListCoordinator, productsListUseCase: FetchProductsListUseCase) {
         self.coordinator = coordinator
         self.productsListUseCase = productsListUseCase
     }
     
-    func fetchProducts() {
+    func load() {
+        state = .loading
+        
         productsListUseCase.getProductsList()
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] productList in
-                self?.products = productList.products.compactMap({ SingleProduct(product: $0) })
-            })
+            .map { productList in
+                let products = productList.products.compactMap({ SingleProduct(product: $0) })
+                return .loaded(products)
+            }
+            .catch { error in
+                Just(LoadableState.failed(error))
+            }
+            .sink { [weak self] state in
+                self?.state = state
+            }
             .store(in: &cancellables)
     }
     

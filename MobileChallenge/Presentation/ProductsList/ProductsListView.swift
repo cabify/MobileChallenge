@@ -14,19 +14,18 @@ struct ProductsListView<CartModifier: ViewModifier>: View {
     let cartModifier: CartModifier
     
     var body: some View {
-        List(viewModel.products) { aProduct in
-            ProductListCell(product: aProduct)
+        LoadableContentView(source: viewModel) { products in
+            List(products) { aProduct in
+                ProductListCell(product: aProduct)
+            }
+            // Hack to disable row selection and allow
+            // the tap on inner buttons
+            .onTapGesture { return }
         }
-        // Hack to disable row selection and allow
-        // the tap on inner buttons
-        .onTapGesture { return }
         .navigationTitle(Text("Products list"))
         .toolbar {
             CartButtonView(tapAction: viewModel.openCart)
                 .modifier(cartModifier)
-        }
-        .onAppear {
-            viewModel.fetchProducts()
         }
     }
 }
