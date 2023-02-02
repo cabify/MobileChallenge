@@ -31,18 +31,19 @@ struct EmptyStateView: View {
     var emptyType: EmptyType
     
     var body: some View {
-        VStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .center) {
             Image(systemName: emptyType.imageNamed)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 120, height: 120)
+                .frame(width: 100, height: 100)
+                .padding(.all, 20)
                 .foregroundColor(.purple)
             
             Text(emptyType.emptyText)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.purple)
         }
-        .padding(.all, 40)
+        .padding(.all, 20)
     }
 }
 
