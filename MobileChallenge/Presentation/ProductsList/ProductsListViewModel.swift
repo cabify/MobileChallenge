@@ -10,9 +10,34 @@ import Combine
 
 final class ProductsListViewModel: ObservableObject {
     
-    // ViewModel of single product
+    private unowned let coordinator: ProductsListCoordinator
+    private let productsListUseCase: FetchProductsListUseCase
+    private var cancellables = Set<AnyCancellable>()
+    @Published var products = [SingleProduct]()
+    @Published var isPresented: Bool = false
+    
+    init(coordinator: ProductsListCoordinator, productsListUseCase: FetchProductsListUseCase) {
+        self.coordinator = coordinator
+        self.productsListUseCase = productsListUseCase
+    }
+    
+    func fetchProducts() {
+        productsListUseCase.getProductsList()
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] productList in
+                self?.products = productList.products.compactMap({ SingleProduct(product: $0) })
+            })
+            .store(in: &cancellables)
+    }
+    
+    func openCart() {
+        self.coordinator.openCart()
+    }
+}
+
+// MARK: - ViewModel of a single product
+extension ProductsListViewModel {
+    
     struct SingleProduct: Identifiable {
-        
         static let defaultType: ProductType = .voucher
         // Types
         enum ProductType: String {
@@ -45,8 +70,8 @@ final class ProductsListViewModel: ObservableObject {
             self.productType = productType
             self.name = product.name
             self.formattedPrice = String(format: "%.2f€", product.price)
-            self.showSpecialPrice = false
-            self.formattedSpecialPrice = String(format: "%.2f€", product.price)
+            self.showSpecialPrice = false // true
+            self.formattedSpecialPrice = nil // String(format: "%.2f€", 19.0)
             self.showDiscountBadge = productType.discountBadgeText != nil
             self.cartCount = 0
         }
@@ -56,29 +81,6 @@ final class ProductsListViewModel: ObservableObject {
             ProductsList.preview.products.compactMap({ .init(product: $0) })
         }
         #endif
-    }
-    
-    private unowned let coordinator: ProductsListCoordinator
-    private let productsListUseCase: FetchProductsListUseCase
-    private var cancellables = Set<AnyCancellable>()
-    @Published var products = [SingleProduct]()
-    @Published var isPresented: Bool = false
-    
-    init(coordinator: ProductsListCoordinator, productsListUseCase: FetchProductsListUseCase) {
-        self.coordinator = coordinator
-        self.productsListUseCase = productsListUseCase
-    }
-    
-    func fetchProducts() {
-        productsListUseCase.getProductsList()
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] productList in
-                self?.products = productList.products.compactMap({ SingleProduct(product: $0) })
-            })
-            .store(in: &cancellables)
-    }
-    
-    func openCart() {
-        self.coordinator.openCart()
     }
 }
 
