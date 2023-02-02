@@ -136,7 +136,7 @@
 			children = (
 				3371D976298921DE00774082 /* ProductsList */,
 				3371D980298933E300774082 /* Cart */,
-				33C4F9E0298BD077004B8352 /* Helper */,
+				33C4F9E0298BD077004B8352 /* Helpers */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -255,12 +255,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		33C4F9E0298BD077004B8352 /* Helper */ = {
+		33C4F9E0298BD077004B8352 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				33C4F9E1298BD0F7004B8352 /* SheetModifier.swift */,
 			);
-			path = Helper;
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 			sourceTree = "<group>";
 		};
 		33D6A2582982EBE8005CF1D0 = {
