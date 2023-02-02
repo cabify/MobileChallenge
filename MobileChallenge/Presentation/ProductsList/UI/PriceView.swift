@@ -9,9 +9,6 @@ import SwiftUI
 
 struct PriceView: View {
     
-    // Constant
-    static let fontSize: CGFloat = 16
-    
     // Properties
     var price: String
     var specialPrice: String?
@@ -25,21 +22,21 @@ struct PriceView: View {
     }
     
     var body: some View {
-        HStack {
-            // Price
-            priceLabel
-            
+        VStack(alignment: .trailing) {
             // Special price
             if let specialPrice = self.specialPrice,
                showSpecialPrice {
                 specialPriceLabel(specialPrice)
             }
+            
+            // Price
+            priceLabel
         }
     }
     
     @ViewBuilder
     private var priceLabel: some View {
-        let fontSize: CGFloat = showSpecialPrice ? 14 : PriceView.fontSize
+        let fontSize: CGFloat = showSpecialPrice ? 14 : 16
         let opacity = showSpecialPrice ? 0.8 : 1
         
         Text(price)
@@ -51,8 +48,8 @@ struct PriceView: View {
     @ViewBuilder
     private func specialPriceLabel(_ specialPrice: String) -> some View {
         Text(specialPrice)
-            .font(.system(size: PriceView.fontSize, weight: .bold))
-            .foregroundColor(.green)
+            .font(.system(size: 18, weight: .bold))
+            .foregroundColor(.purple)
     }
 }
 

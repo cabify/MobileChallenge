@@ -12,19 +12,21 @@ struct CartQuantityView: View {
     @State var cartQuantity: Int
     
     var body: some View {
-        HStack {
-            // Minus button
-            quantityButton(imageNamed: "minus.rectangle") {
-                cartQuantity -= 1
-            }.disabled(cartQuantity <= 0)
-            
-            // Current quantity
-            Text("\(cartQuantity)")
-                .font(.system(size: 16))
-            
-            // Plus button
-            quantityButton(imageNamed: "plus.rectangle") {
-                cartQuantity += 1
+        VStack(alignment: .trailing) {
+            HStack {
+                // Minus button
+                quantityButton(imageNamed: "minus.rectangle") {
+                    cartQuantity -= 1
+                }.disabled(cartQuantity <= 0)
+                
+                // Current quantity
+                Text("\(cartQuantity)")
+                    .font(.system(size: 16))
+                
+                // Plus button
+                quantityButton(imageNamed: "plus.rectangle") {
+                    cartQuantity += 1
+                }
             }
         }
         .buttonStyle(BorderlessButtonStyle())

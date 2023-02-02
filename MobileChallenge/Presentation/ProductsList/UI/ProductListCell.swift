@@ -13,24 +13,33 @@ struct ProductListCell: View {
     var product: ProductsListViewModel.SingleProduct
     
     var body: some View {
-        VStack(spacing: 5) {
-            // Product info
-            HStack(spacing: 10) {
-                Text(product.name)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.black)
-                Spacer()
-                CartQuantityView(cartQuantity: 1)
-                PriceView(price: product.formattedPrice)
-                    .frame(width: 60, alignment: .trailing)
+        HStack(alignment: .firstTextBaseline, spacing: 10) {
+            // Product name, badge and cart counting
+            VStack(alignment: .leading, spacing: 5) {
+                // Product name and cart counting
+                HStack {
+                    // Name
+                    Text(product.name)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    // Cart counting
+                    CartQuantityView(cartQuantity: product.cartCount)
+                }
+                
+                // Badge
+                if let badgeText = product.productType.discountBadgeText {
+                    DiscountBadgeView(badgeText: badgeText)
+                }
             }
             
-            // Discount badge
-            if let badgeText = product.productType.discountBadgeText {
-                DiscountBadgeView(badgeText: badgeText)
-            }
+            // Product price
+            PriceView(price: product.formattedPrice, specialPrice: product.formattedSpecialPrice)
+                .frame(alignment: .trailing)
         }
-        .padding(.bottom, 10)
+        .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
     }
 }
 
