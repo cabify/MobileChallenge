@@ -38,6 +38,7 @@
 		339697C6298ADDDE009091CB /* CartQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339697C5298ADDDE009091CB /* CartQuantityView.swift */; };
 		33C4F9DB298B1DB4004B8352 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9DA298B1DB4004B8352 /* PriceView.swift */; };
 		33C4F9DD298B24BD004B8352 /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9DC298B24BD004B8352 /* ProductListCell.swift */; };
+		33C4F9DF298BC5D3004B8352 /* CartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */; };
 		33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */; };
 		33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2662982EBE8005CF1D0 /* ContentView.swift */; };
 		33D6A2692982EBE9005CF1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A2682982EBE9005CF1D0 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		339697C5298ADDDE009091CB /* CartQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartQuantityView.swift; sourceTree = "<group>"; };
 		33C4F9DA298B1DB4004B8352 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		33C4F9DC298B24BD004B8352 /* ProductListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
+		33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonView.swift; sourceTree = "<group>"; };
 		33D6A2612982EBE8005CF1D0 /* MobileChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeApp.swift; sourceTree = "<group>"; };
 		33D6A2662982EBE8005CF1D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		339697C2298ADAD6009091CB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */,
 				339697C3298ADB6B009091CB /* DiscountBadgeView.swift */,
 				339697C5298ADDDE009091CB /* CartQuantityView.swift */,
 				33C4F9DA298B1DB4004B8352 /* PriceView.swift */,
@@ -440,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33C4F9DF298BC5D3004B8352 /* CartButtonView.swift in Sources */,
 				3371D9882989389400774082 /* ProductsListCoordinatorView.swift in Sources */,
 				3385CDF52987FCC8002CD30A /* RequestConvertable.swift in Sources */,
 				3385CDE429843C80002CD30A /* FetchProductsListUseCase.swift in Sources */,

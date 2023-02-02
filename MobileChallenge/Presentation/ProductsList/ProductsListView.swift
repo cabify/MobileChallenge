@@ -21,22 +21,16 @@ struct ProductsListView: View {
         }
         .navigationTitle(Text("Products list"))
         .toolbar {
-            cartButton
+            CartButtonView(tapAction: {
+                isPresented.toggle()
+            })
+            .sheet(isPresented: $isPresented) {
+                CartView(viewModel: viewModel.openCart())
+            }
+            .onChange(of: isPresented) { isPresented in
+                viewModel.isPresented = isPresented
+            }
         }
-    }
-    
-    @ViewBuilder
-    private var cartButton: some View {
-        Button {
-            isPresented.toggle()
-        } label: {
-            Image(systemName: "cart")
-        }
-        .sheet(isPresented: $isPresented) {
-            CartView(viewModel: viewModel.openCart())
-        }
-        .onChange(of: isPresented) { isPresented in
-            viewModel.isPresented = isPresented
         }
     }
 }
