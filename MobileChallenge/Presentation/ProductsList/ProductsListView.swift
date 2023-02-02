@@ -32,6 +32,8 @@ struct ProductsListView: View {
                 viewModel.isPresented = isPresented
             }
         }
+        .onAppear {
+            viewModel.fetchProducts()
         }
     }
 }
