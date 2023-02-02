@@ -18,3 +18,13 @@ struct ProductsListCoordinatorView: View {
         }
     }
 }
+
+// MARK: - Preview
+#if DEBUG
+struct ProductsListCoordinatorView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProductsListCoordinatorView(coordinatorObject: ProductsListCoordinator.preview)
+    }
+}
+#endif
+
