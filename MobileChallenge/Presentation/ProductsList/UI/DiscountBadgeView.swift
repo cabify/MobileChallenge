@@ -17,7 +17,7 @@ struct DiscountBadgeView: View {
                 .font(.system(size: 12))
                 .padding(.all, 6)
                 .foregroundColor(.white)
-                .background(.green)
+                .background(.purple)
                 .cornerRadius(8.0)
             Spacer()
         }

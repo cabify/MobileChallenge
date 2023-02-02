@@ -17,6 +17,7 @@ struct CartButtonView: View {
         } label: {
             Image(systemName: "cart")
         }
+        .tint(.purple)
     }
 }
 
