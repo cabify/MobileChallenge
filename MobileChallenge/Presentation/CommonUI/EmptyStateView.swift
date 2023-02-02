@@ -33,14 +33,21 @@ struct EmptyStateView: View {
             case .error(let error): return error.localizedDescription
             }
         }
+        
+        var retryButtonText: String? {
+            switch self {
+            case .cart: return "Continue shopping"
+            case .error: return "Retry"
+            default: return nil
             }
         }
     }
     
     var emptyType: EmptyType
+    var onRetryAction: (() -> Void)?
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack {
             Image(systemName: emptyType.imageNamed)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -51,8 +58,15 @@ struct EmptyStateView: View {
             Text(emptyType.emptyText)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.purple)
+            
+            Spacer()
+            
+            if let retryButtonText = emptyType.retryButtonText,
+               let onRetryAction = onRetryAction {
+                PrimaryButtonView(buttonText: retryButtonText, onTapAction: onRetryAction)
+            }
         }
-        .padding(.all, 20)
+        .padding(.all, 40)
     }
 }
 
@@ -62,7 +76,7 @@ struct EmptyStateView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             EmptyStateView(emptyType: .products)
-            EmptyStateView(emptyType: .cart)
+            EmptyStateView(emptyType: .cart, onRetryAction: { })
         }
     }
 }

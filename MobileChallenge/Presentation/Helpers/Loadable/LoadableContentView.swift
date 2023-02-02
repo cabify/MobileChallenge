@@ -27,9 +27,16 @@ struct LoadableContentView<Source: LoadableObject, Content: View>: View {
                 .controlSize(.large)
                 .tint(.purple)
             
-        case .loaded(let output): content(output)
         case .failed(let error):
             EmptyStateView(emptyType: .error(error))
+            
+        case .loaded(let output):
+            if let outputArray = output as? [Any], outputArray.isEmpty {
+                EmptyStateView(emptyType: source.emptyStateType)
+                
+            } else {
+                content(output)
+            }
         }
     }
 }
