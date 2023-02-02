@@ -12,12 +12,15 @@ struct DiscountBadgeView: View {
     var badgeText: String
     
     var body: some View {
-        Text(badgeText)
-            .font(.system(size: 12))
-            .padding(.all, 6)
-            .foregroundColor(.white)
-            .background(.green)
-            .cornerRadius(8.0)
+        HStack {
+            Text(badgeText)
+                .font(.system(size: 12))
+                .padding(.all, 6)
+                .foregroundColor(.white)
+                .background(.green)
+                .cornerRadius(8.0)
+            Spacer()
+        }
     }
 }
 
