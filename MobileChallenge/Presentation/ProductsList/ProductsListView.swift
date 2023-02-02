@@ -18,13 +18,13 @@ struct ProductsListView<CartModifier: ViewModifier>: View {
             List(products) { aProduct in
                 ProductListCell(product: aProduct)
             }
-            // Hack to disable row selection and allow
+            // Hack to disable row selection to allow
             // the tap on inner buttons
             .onTapGesture { return }
         }
         .navigationTitle(Text("Products list"))
         .toolbar {
-            CartButtonView(tapAction: viewModel.openCart)
+            CartButtonView(onTapAction: viewModel.openCart)
                 .modifier(cartModifier)
         }
     }

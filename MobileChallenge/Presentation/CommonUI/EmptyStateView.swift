@@ -12,11 +12,17 @@ struct EmptyStateView: View {
     enum EmptyType {
         case products
         case cart
+        case error(Error)
         
         var imageNamed: String {
             switch self {
             case .products: return "tray.fill"
             case .cart: return "cart.fill"
+            case .error(let error):
+                switch error {
+                case ConnectionError.noNetworkAvailable: return "wifi.slash"
+                default: return "icloud.slash.fill"
+                }
             }
         }
         
@@ -24,6 +30,9 @@ struct EmptyStateView: View {
             switch self {
             case .products: return "Ops... we are updating our stocks!"
             case .cart: return "Your cart is empty. Go enjoy our discounts!"
+            case .error(let error): return error.localizedDescription
+            }
+        }
             }
         }
     }

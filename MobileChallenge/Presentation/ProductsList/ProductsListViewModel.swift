@@ -16,6 +16,7 @@ final class ProductsListViewModel: LoadableObject {
     private let productsListUseCase: FetchProductsListUseCase
     private var cancellables = Set<AnyCancellable>()
     @Published var state: LoadableState<[SingleProduct]> = .idle
+    var emptyStateType: EmptyStateView.EmptyType { .products }
     
     init(coordinator: ProductsListCoordinator, productsListUseCase: FetchProductsListUseCase) {
         self.coordinator = coordinator

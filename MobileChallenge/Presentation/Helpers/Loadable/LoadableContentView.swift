@@ -27,8 +27,9 @@ struct LoadableContentView<Source: LoadableObject, Content: View>: View {
                 .controlSize(.large)
                 .tint(.purple)
             
-        case .failed(let error): EmptyView() // TODO ErrorView(error: error, retryHandler: source.load)
         case .loaded(let output): content(output)
+        case .failed(let error):
+            EmptyStateView(emptyType: .error(error))
         }
     }
 }
