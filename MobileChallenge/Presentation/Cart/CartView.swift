@@ -15,14 +15,9 @@ struct CartView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                Text("Cart 1")
-                Text("Cart 2")
-                Text("Cart 3")
-                Text("Cart 4")
-                
-            }
-            .navigationTitle(Text("Products list"))
+            EmptyStateView(emptyType: .cart, onRetryAction: {
+                dismiss()
+            })
             .toolbar {
                 Button("Close") {
                     dismiss()
