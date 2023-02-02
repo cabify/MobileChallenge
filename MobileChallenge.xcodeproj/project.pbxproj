@@ -40,6 +40,9 @@
 		33C4F9DD298B24BD004B8352 /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9DC298B24BD004B8352 /* ProductListCell.swift */; };
 		33C4F9DF298BC5D3004B8352 /* CartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */; };
 		33C4F9E2298BD0F7004B8352 /* SheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9E1298BD0F7004B8352 /* SheetModifier.swift */; };
+		33C4F9E7298BF494004B8352 /* LoadableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9E6298BF494004B8352 /* LoadableState.swift */; };
+		33C4F9E9298BF4CD004B8352 /* LoadableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9E8298BF4CD004B8352 /* LoadableObject.swift */; };
+		33C4F9EB298BF575004B8352 /* LoadableContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9EA298BF575004B8352 /* LoadableContentView.swift */; };
 		33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */; };
 		33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2662982EBE8005CF1D0 /* ContentView.swift */; };
 		33D6A2692982EBE9005CF1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A2682982EBE9005CF1D0 /* Assets.xcassets */; };
@@ -92,6 +95,9 @@
 		33C4F9DC298B24BD004B8352 /* ProductListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
 		33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonView.swift; sourceTree = "<group>"; };
 		33C4F9E1298BD0F7004B8352 /* SheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetModifier.swift; sourceTree = "<group>"; };
+		33C4F9E6298BF494004B8352 /* LoadableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableState.swift; sourceTree = "<group>"; };
+		33C4F9E8298BF4CD004B8352 /* LoadableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableObject.swift; sourceTree = "<group>"; };
+		33C4F9EA298BF575004B8352 /* LoadableContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableContentView.swift; sourceTree = "<group>"; };
 		33D6A2612982EBE8005CF1D0 /* MobileChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeApp.swift; sourceTree = "<group>"; };
 		33D6A2662982EBE8005CF1D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -258,11 +264,20 @@
 		33C4F9E0298BD077004B8352 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				33C4F9E5298BF47D004B8352 /* Loadable */,
 				33C4F9E1298BD0F7004B8352 /* SheetModifier.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		33C4F9E5298BF47D004B8352 /* Loadable */ = {
+			isa = PBXGroup;
+			children = (
+				33C4F9E6298BF494004B8352 /* LoadableState.swift */,
+				33C4F9E8298BF4CD004B8352 /* LoadableObject.swift */,
+				33C4F9EA298BF575004B8352 /* LoadableContentView.swift */,
+			);
+			path = Loadable;
 			sourceTree = "<group>";
 		};
 		33D6A2582982EBE8005CF1D0 = {
@@ -464,14 +479,17 @@
 				3385CDE92987E8C7002CD30A /* Requestable.swift in Sources */,
 				3385CDEC2987E9E1002CD30A /* ApiExecutable.swift in Sources */,
 				3385CDF22987EBC1002CD30A /* ApiErrors.swift in Sources */,
+				33C4F9E7298BF494004B8352 /* LoadableState.swift in Sources */,
 				3385CDF82987FFC7002CD30A /* ParameterEncodable.swift in Sources */,
 				33C4F9DB298B1DB4004B8352 /* PriceView.swift in Sources */,
 				33C4F9DD298B24BD004B8352 /* ProductListCell.swift in Sources */,
 				33D6A26E2982EBE9005CF1D0 /* Persistence.swift in Sources */,
 				33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */,
+				33C4F9EB298BF575004B8352 /* LoadableContentView.swift in Sources */,
 				3371D984298933FA00774082 /* CartViewModel.swift in Sources */,
 				339697C4298ADB6B009091CB /* DiscountBadgeView.swift in Sources */,
 				3385CDEF2987EADC002CD30A /* ApiClient.swift in Sources */,
+				33C4F9E9298BF4CD004B8352 /* LoadableObject.swift in Sources */,
 				3371D982298933F200774082 /* CartView.swift in Sources */,
 				33C4F9E2298BD0F7004B8352 /* SheetModifier.swift in Sources */,
 				3371D9862989386000774082 /* ProductsListCoordinator.swift in Sources */,
