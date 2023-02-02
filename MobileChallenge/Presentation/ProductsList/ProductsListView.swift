@@ -14,11 +14,12 @@ struct ProductsListView: View {
     @State var isPresented: Bool = false
     
     var body: some View {
-        List {
-            Text("Product 1")
-            Text("Product 2")
-            Text("Product 3")
+        List(viewModel.products) { aProduct in
+            ProductListCell(product: aProduct)
         }
+        // Hack to disable row selection and allow
+        // the tap on inner buttons
+        .onTapGesture { return }
         .navigationTitle(Text("Products list"))
         .toolbar {
             CartButtonView(tapAction: {

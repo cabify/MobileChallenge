@@ -27,6 +27,7 @@ struct CartQuantityView: View {
                 cartQuantity += 1
             }
         }
+        .buttonStyle(BorderlessButtonStyle())
     }
     
     @ViewBuilder
