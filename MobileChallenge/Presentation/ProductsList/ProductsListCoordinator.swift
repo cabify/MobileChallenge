@@ -11,14 +11,19 @@ final class ProductsListCoordinator: ObservableObject {
     
     // MARK: - Properties
     @Published private(set) var productsListViewModel: ProductsListViewModel!
+    @Published var cartViewModel: CartViewModel?
     
     init(productsListRepository: DefaultProductsListRepository) {
         let productsListUseCase = DefaultFetchProductsListUseCase(productsListRepository: productsListRepository)
         self.productsListViewModel = ProductsListViewModel(coordinator: self, productsListUseCase: productsListUseCase)
     }
     
-    func openCart() -> CartViewModel {
-        return CartViewModel(coordinator: self)
+    func openCart() {
+        self.cartViewModel = CartViewModel(coordinator: self)
+    }
+    
+    func closeCart() {
+        self.cartViewModel = nil
     }
 }
 

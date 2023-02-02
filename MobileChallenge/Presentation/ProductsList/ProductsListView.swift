@@ -8,10 +8,10 @@
 import SwiftUI
 import Combine
 
-struct ProductsListView: View {
+struct ProductsListView<CartModifier: ViewModifier>: View {
     
     @ObservedObject var viewModel: ProductsListViewModel
-    @State var isPresented: Bool = false
+    let cartModifier: CartModifier
     
     var body: some View {
         List(viewModel.products) { aProduct in
@@ -22,15 +22,8 @@ struct ProductsListView: View {
         .onTapGesture { return }
         .navigationTitle(Text("Products list"))
         .toolbar {
-            CartButtonView(tapAction: {
-                isPresented.toggle()
-            })
-            .sheet(isPresented: $isPresented) {
-                CartView(viewModel: viewModel.openCart())
-            }
-            .onChange(of: isPresented) { isPresented in
-                viewModel.isPresented = isPresented
-            }
+            CartButtonView(tapAction: viewModel.openCart)
+                .modifier(cartModifier)
         }
         .onAppear {
             viewModel.fetchProducts()
@@ -42,7 +35,12 @@ struct ProductsListView: View {
 #if DEBUG
 struct ProductsListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductsListView(viewModel: ProductsListViewModel.preview)
+        ProductsListView(
+            viewModel: ProductsListViewModel.preview,
+            cartModifier: SheetModifier(item: .constant(CartViewModel.preview)) { viewModel in
+                CartView(viewModel: viewModel)
+            }
+        )
     }
 }
 #endif

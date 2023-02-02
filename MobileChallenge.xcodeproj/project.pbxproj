@@ -39,6 +39,7 @@
 		33C4F9DB298B1DB4004B8352 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9DA298B1DB4004B8352 /* PriceView.swift */; };
 		33C4F9DD298B24BD004B8352 /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9DC298B24BD004B8352 /* ProductListCell.swift */; };
 		33C4F9DF298BC5D3004B8352 /* CartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */; };
+		33C4F9E2298BD0F7004B8352 /* SheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9E1298BD0F7004B8352 /* SheetModifier.swift */; };
 		33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */; };
 		33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2662982EBE8005CF1D0 /* ContentView.swift */; };
 		33D6A2692982EBE9005CF1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A2682982EBE9005CF1D0 /* Assets.xcassets */; };
@@ -90,6 +91,7 @@
 		33C4F9DA298B1DB4004B8352 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		33C4F9DC298B24BD004B8352 /* ProductListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
 		33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButtonView.swift; sourceTree = "<group>"; };
+		33C4F9E1298BD0F7004B8352 /* SheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetModifier.swift; sourceTree = "<group>"; };
 		33D6A2612982EBE8005CF1D0 /* MobileChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeApp.swift; sourceTree = "<group>"; };
 		33D6A2662982EBE8005CF1D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				3371D976298921DE00774082 /* ProductsList */,
 				3371D980298933E300774082 /* Cart */,
+				33C4F9E0298BD077004B8352 /* Helper */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -250,6 +253,14 @@
 				33C4F9DC298B24BD004B8352 /* ProductListCell.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		33C4F9E0298BD077004B8352 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				33C4F9E1298BD0F7004B8352 /* SheetModifier.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		33D6A2582982EBE8005CF1D0 = {
@@ -460,6 +471,7 @@
 				339697C4298ADB6B009091CB /* DiscountBadgeView.swift in Sources */,
 				3385CDEF2987EADC002CD30A /* ApiClient.swift in Sources */,
 				3371D982298933F200774082 /* CartView.swift in Sources */,
+				33C4F9E2298BD0F7004B8352 /* SheetModifier.swift in Sources */,
 				3371D9862989386000774082 /* ProductsListCoordinator.swift in Sources */,
 				339697C6298ADDDE009091CB /* CartQuantityView.swift in Sources */,
 				3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */,

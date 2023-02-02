@@ -77,8 +77,8 @@ final class ProductsListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func openCart() -> CartViewModel {
-        return self.coordinator.openCart()
+    func openCart() {
+        self.coordinator.openCart()
     }
 }
 
