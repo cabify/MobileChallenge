@@ -37,7 +37,7 @@ struct ProductListCell: View {
             
             // Product price
             PriceView(price: product.formattedPrice, specialPrice: product.formattedSpecialPrice)
-                .frame(alignment: .trailing)
+                .frame(minWidth: 60, alignment: .trailing)
         }
         .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
     }
