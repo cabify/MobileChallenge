@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CartButtonView: View {
     
-    var tapAction: () -> Void
+    var onTapAction: () -> Void
     
     var body: some View {
         Button {
-            tapAction()
+            onTapAction()
         } label: {
             Image(systemName: "cart")
         }
@@ -25,7 +25,7 @@ struct CartButtonView: View {
 #if DEBUG
 struct OpenCartButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        CartButtonView(tapAction: { })
+        CartButtonView(onTapAction: { })
     }
 }
 #endif
