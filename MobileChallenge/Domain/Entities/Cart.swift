@@ -9,18 +9,21 @@ import Foundation
 
 struct Cart {
     
-    struct CartItem {
+    struct Item {
         let code: Int
         let quantity: Int
     }
     
-    let items: [CartItem]
+    let createdAt: TimeInterval
+    let items: [Item]
 }
 
 #if DEBUG
 extension Cart {
     static var preview: Self {
-        .init(items: [
+        .init(
+            createdAt: Date.now.timeIntervalSince1970,
+            items: [
             .init(code: ProductType.voucher.hashValue, quantity: 0),
             .init(code: ProductType.tShirt.hashValue, quantity: 0),
             .init(code: ProductType.mug.hashValue, quantity: 0)
