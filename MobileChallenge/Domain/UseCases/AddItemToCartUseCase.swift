@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol AddItemToCartUseCase {
-    func addItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error>
+    func addItem(_ item: Cart.Item, toCart cart: Cart) -> AnyPublisher<Cart, Error>
 }
 
 final class DefaultAddItemToCartUseCase: AddItemToCartUseCase {
@@ -20,8 +20,8 @@ final class DefaultAddItemToCartUseCase: AddItemToCartUseCase {
         self.cartRepository = cartRepository
     }
     
-    func addItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error> {
-        return cartRepository.addItem(item)
+    func addItem(_ item: Cart.Item, toCart cart: Cart) -> AnyPublisher<Cart, Error> {
+        return cartRepository.addItem(item, toCart: cart)
     }
 }
 
