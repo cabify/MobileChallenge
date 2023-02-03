@@ -49,21 +49,8 @@ final class ProductsListViewModel: LoadableObject {
 extension ProductsListViewModel {
     
     struct SingleProduct: Identifiable {
+        
         static let defaultType: ProductType = .voucher
-        // Types
-        enum ProductType: String {
-            case voucher = "VOUCHER"
-            case shirt = "TSHIRT"
-            case mug = "MUG"
-            
-            var discountBadgeText: String? {
-                switch self {
-                case .voucher: return "Buy 2 and get 1 free"
-                case .shirt: return "€1 discount per unit for 3+"
-                default: return nil
-                }
-            }
-        }
         
         typealias Identifier = UUID
         
