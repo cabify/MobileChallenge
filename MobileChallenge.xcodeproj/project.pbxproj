@@ -34,6 +34,7 @@
 		3385CE0329885A71002CD30A /* ProductsListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0129885A71002CD30A /* ProductsListDTO.swift */; };
 		3385CE0929885F45002CD30A /* DefaultProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */; };
 		3385CE0A29885F45002CD30A /* DefaultProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */; };
+		338F7FC7298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC5298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld */; };
 		339697C4298ADB6B009091CB /* DiscountBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339697C3298ADB6B009091CB /* DiscountBadgeView.swift */; };
 		339697C6298ADDDE009091CB /* CartQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339697C5298ADDDE009091CB /* CartQuantityView.swift */; };
 		33B3496F298C1F2000BED8C2 /* PrimaryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B3496E298C1F2000BED8C2 /* PrimaryButtonView.swift */; };
@@ -50,7 +51,6 @@
 		33D6A2692982EBE9005CF1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A2682982EBE9005CF1D0 /* Assets.xcassets */; };
 		33D6A26C2982EBE9005CF1D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A26B2982EBE9005CF1D0 /* Preview Assets.xcassets */; };
 		33D6A26E2982EBE9005CF1D0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A26D2982EBE9005CF1D0 /* Persistence.swift */; };
-		33D6A2712982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A26F2982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld */; };
 		33D6A27B2982EBEA005CF1D0 /* MobileChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A27A2982EBEA005CF1D0 /* MobileChallengeTests.swift */; };
 		33D6A2852982EBEA005CF1D0 /* MobileChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2842982EBEA005CF1D0 /* MobileChallengeUITests.swift */; };
 		33D6A2872982EBEA005CF1D0 /* MobileChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2862982EBEA005CF1D0 /* MobileChallengeUITestsLaunchTests.swift */; };
@@ -91,6 +91,7 @@
 		3385CDFD29885607002CD30A /* ProductsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListRepository.swift; sourceTree = "<group>"; };
 		3385CE0129885A71002CD30A /* ProductsListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListDTO.swift; sourceTree = "<group>"; };
 		3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProductsListRepository.swift; sourceTree = "<group>"; };
+		338F7FC6298D4D0900BBA7DC /* MobileChallenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MobileChallenge.xcdatamodel; sourceTree = "<group>"; };
 		339697C3298ADB6B009091CB /* DiscountBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountBadgeView.swift; sourceTree = "<group>"; };
 		339697C5298ADDDE009091CB /* CartQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartQuantityView.swift; sourceTree = "<group>"; };
 		33B3496E298C1F2000BED8C2 /* PrimaryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonView.swift; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 		33D6A2682982EBE9005CF1D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33D6A26B2982EBE9005CF1D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		33D6A26D2982EBE9005CF1D0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		33D6A2702982EBE9005CF1D0 /* MobileChallenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MobileChallenge.xcdatamodel; sourceTree = "<group>"; };
 		33D6A2762982EBEA005CF1D0 /* MobileChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A27A2982EBEA005CF1D0 /* MobileChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeTests.swift; sourceTree = "<group>"; };
 		33D6A2802982EBEA005CF1D0 /* MobileChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +226,7 @@
 			children = (
 				3385CE0429885C30002CD30A /* Repositories */,
 				3385CDE62987E8AE002CD30A /* Network */,
+				33B34970298C231C00BED8C2 /* Storage */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -324,7 +325,6 @@
 				33D6A2662982EBE8005CF1D0 /* ContentView.swift */,
 				33D6A2682982EBE9005CF1D0 /* Assets.xcassets */,
 				33D6A26D2982EBE9005CF1D0 /* Persistence.swift */,
-				33D6A26F2982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld */,
 				33D6A26A2982EBE9005CF1D0 /* Preview Content */,
 			);
 			path = MobileChallenge;
@@ -512,10 +512,10 @@
 				339697C6298ADDDE009091CB /* CartQuantityView.swift in Sources */,
 				3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */,
 				3371D97F2989333A00774082 /* ProductsListViewModel.swift in Sources */,
+				338F7FC7298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld in Sources */,
 				3385CE0929885F45002CD30A /* DefaultProductsListRepository.swift in Sources */,
 				33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */,
 				3385CE0229885A71002CD30A /* ProductsListDTO.swift in Sources */,
-				33D6A2712982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld in Sources */,
 				3385CDFE29885607002CD30A /* ProductsListRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -853,12 +853,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		33D6A26F2982EBE9005CF1D0 /* MobileChallenge.xcdatamodeld */ = {
+		338F7FC5298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				33D6A2702982EBE9005CF1D0 /* MobileChallenge.xcdatamodel */,
+				338F7FC6298D4D0900BBA7DC /* MobileChallenge.xcdatamodel */,
 			);
-			currentVersion = 33D6A2702982EBE9005CF1D0 /* MobileChallenge.xcdatamodel */;
+			currentVersion = 338F7FC6298D4D0900BBA7DC /* MobileChallenge.xcdatamodel */;
 			path = MobileChallenge.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
