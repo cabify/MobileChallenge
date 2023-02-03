@@ -48,7 +48,6 @@
 		33C4F9EB298BF575004B8352 /* LoadableContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9EA298BF575004B8352 /* LoadableContentView.swift */; };
 		33C4F9EE298BFEE5004B8352 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4F9ED298BFEE5004B8352 /* EmptyStateView.swift */; };
 		33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */; };
-		33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2662982EBE8005CF1D0 /* ContentView.swift */; };
 		33D6A2692982EBE9005CF1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A2682982EBE9005CF1D0 /* Assets.xcassets */; };
 		33D6A26C2982EBE9005CF1D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A26B2982EBE9005CF1D0 /* Preview Assets.xcassets */; };
 		33D6A26E2982EBE9005CF1D0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A26D2982EBE9005CF1D0 /* Persistence.swift */; };
@@ -108,7 +107,6 @@
 		33C4F9ED298BFEE5004B8352 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		33D6A2612982EBE8005CF1D0 /* MobileChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeApp.swift; sourceTree = "<group>"; };
-		33D6A2662982EBE8005CF1D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		33D6A2682982EBE9005CF1D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33D6A26B2982EBE9005CF1D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		33D6A26D2982EBE9005CF1D0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 				3385CDDB29843A76002CD30A /* Domain */,
 				3371D9752989218600774082 /* Presentation */,
 				3385CDFB298853DE002CD30A /* Data */,
-				33D6A2662982EBE8005CF1D0 /* ContentView.swift */,
 				33D6A2682982EBE9005CF1D0 /* Assets.xcassets */,
 				33D6A26D2982EBE9005CF1D0 /* Persistence.swift */,
 				33D6A26A2982EBE9005CF1D0 /* Preview Content */,
@@ -512,7 +509,6 @@
 				33C4F9DD298B24BD004B8352 /* ProductListCell.swift in Sources */,
 				33D6A26E2982EBE9005CF1D0 /* Persistence.swift in Sources */,
 				33B3496F298C1F2000BED8C2 /* PrimaryButtonView.swift in Sources */,
-				33D6A2672982EBE8005CF1D0 /* ContentView.swift in Sources */,
 				33C4F9EB298BF575004B8352 /* LoadableContentView.swift in Sources */,
 				3371D984298933FA00774082 /* CartViewModel.swift in Sources */,
 				339697C4298ADB6B009091CB /* DiscountBadgeView.swift in Sources */,
