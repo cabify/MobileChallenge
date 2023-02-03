@@ -12,5 +12,5 @@ protocol CartRepository {
     @discardableResult
     func addItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error>
     func removeItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error>
-    func cleanCart() -> AnyPublisher<Cart, Error>
+    func clearCart() -> AnyPublisher<Cart, Error>
 }
