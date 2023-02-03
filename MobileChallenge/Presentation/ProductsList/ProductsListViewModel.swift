@@ -13,12 +13,12 @@ final class ProductsListViewModel: LoadableObject {
     typealias Output = [SingleProduct]
     
     private unowned let coordinator: ProductsListCoordinator
-    private let productsListUseCase: FetchProductsListUseCase
+    private let productsListUseCase: GetProductsListUseCase
     private var cancellables = Set<AnyCancellable>()
     @Published var state: LoadableState<[SingleProduct]> = .idle
     var emptyStateType: EmptyStateView.EmptyType { .products }
     
-    init(coordinator: ProductsListCoordinator, productsListUseCase: FetchProductsListUseCase) {
+    init(coordinator: ProductsListCoordinator, productsListUseCase: GetProductsListUseCase) {
         self.coordinator = coordinator
         self.productsListUseCase = productsListUseCase
     }
@@ -85,7 +85,7 @@ extension ProductsListViewModel {
 #if DEBUG
 extension ProductsListViewModel {
     static var preview: Self {
-        .init(coordinator: ProductsListCoordinator.preview, productsListUseCase: DefaultFetchProductsListUseCase.preview)
+        .init(coordinator: ProductsListCoordinator.preview, productsListUseCase: DefaultGetProductsListUseCase.preview)
     }
 }
 #endif

@@ -14,7 +14,7 @@ final class ProductsListCoordinator: ObservableObject {
     @Published var cartViewModel: CartViewModel?
     
     init(productsListRepository: DefaultProductsListRepository) {
-        let productsListUseCase = DefaultFetchProductsListUseCase(productsListRepository: productsListRepository)
+        let productsListUseCase = DefaultGetProductsListUseCase(productsListRepository: productsListRepository)
         self.productsListViewModel = ProductsListViewModel(coordinator: self, productsListUseCase: productsListUseCase)
     }
     
