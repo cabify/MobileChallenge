@@ -11,7 +11,7 @@ import Foundation
 enum ProductType: Int, RawRepresentable {
     
     case voucher = 0
-    case shirt
+    case tShirt
     case mug
     
     // MARK: - RawRepresentable
@@ -20,7 +20,7 @@ enum ProductType: Int, RawRepresentable {
     var rawValue: String {
         switch self {
         case .voucher: return "VOUCHER"
-        case .shirt: return "TSHIRT"
+        case .tShirt: return "TSHIRT"
         case .mug: return "MUG"
         }
     }
@@ -28,7 +28,7 @@ enum ProductType: Int, RawRepresentable {
     init?(rawValue: String) {
         switch rawValue {
         case "VOUCHER": self = .voucher
-        case "TSHIRT": self = .shirt
+        case "TSHIRT": self = .tShirt
         case "MUG": self = .mug
         default: return nil
         }
@@ -37,7 +37,7 @@ enum ProductType: Int, RawRepresentable {
     var discountBadgeText: String? {
         switch self {
         case .voucher: return "Buy 2 and get 1 free"
-        case .shirt: return "€1 discount per unit for 3+"
+        case .tShirt: return "€1 discount per unit for 3+"
         default: return nil
         }
     }
