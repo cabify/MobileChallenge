@@ -15,12 +15,14 @@ struct MobileChallengeApp: App {
             productsListRequest: DefaultProductsListRepository.ProductsListRequest()
         )
     )
-    let persistenceController = PersistenceController.shared
+    
+    init() {
+        CoreDataManager.setup(storage: CoreDataStorage())
+    }
     
     var body: some Scene {
         WindowGroup {
             ProductsListCoordinatorView(coordinatorObject: coordinator)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
