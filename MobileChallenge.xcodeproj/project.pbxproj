@@ -37,6 +37,7 @@
 		338F7FC7298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC5298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld */; };
 		338F7FCA298D502200BBA7DC /* ProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC9298D502200BBA7DC /* ProductType.swift */; };
 		338F7FCD298D545A00BBA7DC /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FCC298D545A00BBA7DC /* Cart.swift */; };
+		338F7FD1298D57D000BBA7DC /* CartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FD0298D57D000BBA7DC /* CartRepository.swift */; };
 		339697C4298ADB6B009091CB /* DiscountBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339697C3298ADB6B009091CB /* DiscountBadgeView.swift */; };
 		339697C6298ADDDE009091CB /* CartQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339697C5298ADDDE009091CB /* CartQuantityView.swift */; };
 		33B3496F298C1F2000BED8C2 /* PrimaryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B3496E298C1F2000BED8C2 /* PrimaryButtonView.swift */; };
@@ -95,6 +96,7 @@
 		338F7FC8298D4EF900BBA7DC /* MobileChallenge >1.0.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "MobileChallenge >1.0.0.xcdatamodel"; sourceTree = "<group>"; };
 		338F7FC9298D502200BBA7DC /* ProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductType.swift; sourceTree = "<group>"; };
 		338F7FCC298D545A00BBA7DC /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		338F7FD0298D57D000BBA7DC /* CartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRepository.swift; sourceTree = "<group>"; };
 		339697C3298ADB6B009091CB /* DiscountBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountBadgeView.swift; sourceTree = "<group>"; };
 		339697C5298ADDDE009091CB /* CartQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartQuantityView.swift; sourceTree = "<group>"; };
 		33B3496E298C1F2000BED8C2 /* PrimaryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				3385CDFD29885607002CD30A /* ProductsListRepository.swift */,
+				338F7FD0298D57D000BBA7DC /* CartRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				339697C6298ADDDE009091CB /* CartQuantityView.swift in Sources */,
 				3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */,
 				3371D97F2989333A00774082 /* ProductsListViewModel.swift in Sources */,
+				338F7FD1298D57D000BBA7DC /* CartRepository.swift in Sources */,
 				338F7FC7298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld in Sources */,
 				3385CE0929885F45002CD30A /* DefaultProductsListRepository.swift in Sources */,
 				33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */,
