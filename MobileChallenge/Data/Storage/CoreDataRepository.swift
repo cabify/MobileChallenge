@@ -60,9 +60,14 @@ extension CoreDataRepository: StorageProtocol where Entity: Storable {
         .eraseToAnyPublisher()
     }
     
-    func create(_ body: @escaping (inout Entity) -> Void) -> AnyPublisher<Entity, Error> {
+    func create(_ entity: Entity? = nil, body: @escaping (inout Entity) -> Void) -> AnyPublisher<Entity, Error> {
         Deferred { [context] in
-            Future  { promise in
+            Future { promise in
+                if let anEntity = entity {
+                    promise(.success(anEntity))
+                    return
+                }
+                
                 context.perform {
                     var entity = Entity(context: context)
                     body(&entity)
