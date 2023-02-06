@@ -11,11 +11,11 @@ import Foundation
 extension CartEntity {
     var domainObject: Cart {
         let items: [Cart.Item] = self.itemEntities.compactMap { $0.domainObject }
-        return .init(createdAt: TimeInterval(integerLiteral: createdAt), items: items)
+        return .init(items: items)
     }
     
     var itemEntities: [CartItemEntity] {
-        guard let itemEntities = Array(arrayLiteral: items) as? [CartItemEntity] else { return [] }
+        guard let itemEntities = items?.allObjects as? [CartItemEntity] else { return [] }
         return itemEntities
     }
 }

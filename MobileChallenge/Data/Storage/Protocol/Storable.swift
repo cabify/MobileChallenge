@@ -7,7 +7,4 @@
 
 import Foundation
 
-protocol Storable {
-    static var predicateFormat: String { get }
-    var primaryKey: String { get }
-}
+protocol Storable { }

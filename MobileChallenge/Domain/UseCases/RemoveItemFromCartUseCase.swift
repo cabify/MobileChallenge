@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol RemoveItemFromCartUseCase {
-    func removeItem(_ item: Cart.Item, fromCart cart: Cart) -> AnyPublisher<Cart, Error>
+    func removeItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error>
 }
 
 final class DefaultRemoveItemFromCartUseCase: RemoveItemFromCartUseCase {
@@ -20,8 +20,8 @@ final class DefaultRemoveItemFromCartUseCase: RemoveItemFromCartUseCase {
         self.cartRepository = cartRepository
     }
     
-    func removeItem(_ item: Cart.Item, fromCart cart: Cart) -> AnyPublisher<Cart, Error> {
-        return cartRepository.removeItem(item, fromCart: cart)
+    func removeItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error> {
+        return cartRepository.removeItem(item)
     }
 }
 

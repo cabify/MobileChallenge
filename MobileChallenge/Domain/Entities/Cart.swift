@@ -14,7 +14,6 @@ struct Cart {
         let quantity: Int
     }
     
-    let createdAt: TimeInterval
     let items: [Item]
 }
 
@@ -22,12 +21,12 @@ struct Cart {
 extension Cart {
     static var preview: Self {
         .init(
-            createdAt: Date.now.timeIntervalSince1970,
             items: [
-            .init(code: ProductType.voucher.hashValue, quantity: 0),
-            .init(code: ProductType.tShirt.hashValue, quantity: 0),
-            .init(code: ProductType.mug.hashValue, quantity: 0)
-        ])
+                .init(code: ProductType.voucher.hashValue, quantity: 0),
+                .init(code: ProductType.tShirt.hashValue, quantity: 0),
+                .init(code: ProductType.mug.hashValue, quantity: 0)
+            ]
+        )
     }
 }
 #endif

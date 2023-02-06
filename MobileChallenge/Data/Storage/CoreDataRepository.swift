@@ -40,27 +40,7 @@ extension CoreDataRepository: StorageProtocol where Entity: Storable {
         .eraseToAnyPublisher()
     }
     
-    func objectWith(primaryKey: String) -> AnyPublisher<Entity?, Error> {
-        Deferred { [context] in
-            Future { promise in
-                context.perform {
-                    let request = Entity.fetchRequest()
-                    request.predicate = NSPredicate(format: Entity.predicateFormat, primaryKey)
-                    
-                    guard let results = try? context.fetch(request) as? [Entity],
-                            let entity = results.first else {
-                        promise(.success(nil))
-                        return
-                    }
-                    promise(.success(entity))
-                }
-            }
-        }
-        .receive(on: DispatchQueue.main)
-        .eraseToAnyPublisher()
-    }
-    
-    func create(_ entity: Entity? = nil, body: @escaping (inout Entity) -> Void) -> AnyPublisher<Entity, Error> {
+    func create(_ entity: Entity? = nil, body: ((inout Entity) -> Void)? = nil) -> AnyPublisher<Entity, Error> {
         Deferred { [context] in
             Future { promise in
                 if let anEntity = entity {
@@ -70,7 +50,7 @@ extension CoreDataRepository: StorageProtocol where Entity: Storable {
                 
                 context.perform {
                     var entity = Entity(context: context)
-                    body(&entity)
+                    body?(&entity)
                     do {
                         try context.save()
                         promise(.success(entity))
@@ -83,13 +63,13 @@ extension CoreDataRepository: StorageProtocol where Entity: Storable {
         .eraseToAnyPublisher()
     }
     
-    func update(_ entity: Entity) -> AnyPublisher<Entity, Error> {
+    func update(_ entity: Entity) -> AnyPublisher<Void, Error> {
         Deferred { [context] in
             Future { promise in
                 context.perform {
                     do {
                         try context.save()
-                        promise(.success((entity)))
+                        promise(.success(()))
                     } catch {
                         promise(.failure(error))
                     }

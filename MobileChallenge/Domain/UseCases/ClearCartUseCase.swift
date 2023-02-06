@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ClearCartUseCase {
-    func clearCart(_ cart: Cart) -> AnyPublisher<Cart, Error>
+    func clearCart() -> AnyPublisher<Cart, Error>
 }
 
 final class DefaultClearCartUseCase: ClearCartUseCase {
@@ -20,8 +20,8 @@ final class DefaultClearCartUseCase: ClearCartUseCase {
         self.cartRepository = cartRepository
     }
     
-    func clearCart(_ cart: Cart) -> AnyPublisher<Cart, Error> {
-        return cartRepository.clearCart(cart)
+    func clearCart() -> AnyPublisher<Cart, Error> {
+        return cartRepository.clearCart()
     }
 }
 

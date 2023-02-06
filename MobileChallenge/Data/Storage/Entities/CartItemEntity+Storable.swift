@@ -7,12 +7,4 @@
 
 import Foundation
 
-extension CartItemEntity: Storable {
-    static var predicateFormat: String {
-        return "cart.createdAt = %@"
-    }
-    
-    var primaryKey: String {
-        return NSNumber(value: cart?.createdAt ?? Int64(Date().timeIntervalSince1970)).stringValue
-    }
-}
+extension CartItemEntity: Storable { }
