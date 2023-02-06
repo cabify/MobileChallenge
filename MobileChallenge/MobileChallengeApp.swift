@@ -11,9 +11,8 @@ import SwiftUI
 struct MobileChallengeApp: App {
     
     @StateObject var coordinator = ProductsListCoordinator(
-        productsListRepository: DefaultProductsListRepository(
-            productsListRequest: DefaultProductsListRepository.ProductsListRequest()
-        )
+        productsListRepository: DefaultProductsListRepository(),
+        cartRepository: DefaultCartRepository(context: CoreDataManager.shared.context)
     )
     
     init() {
