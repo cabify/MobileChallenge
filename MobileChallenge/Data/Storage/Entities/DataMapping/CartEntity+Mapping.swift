@@ -10,13 +10,13 @@ import Foundation
 // MARK: - Mapping database entity to domain
 extension CartEntity {
     var domainObject: Cart {
-        var items: [Cart.Item] = []
-        
-        if let setItems = Array(arrayLiteral: items) as? [CartItemEntity] {
-            items = setItems.compactMap({ $0.domainObject })
-        }
-        
+        let items: [Cart.Item] = self.itemEntities.compactMap { $0.domainObject }
         return .init(createdAt: TimeInterval(integerLiteral: createdAt), items: items)
+    }
+    
+    var itemEntities: [CartItemEntity] {
+        guard let itemEntities = Array(arrayLiteral: items) as? [CartItemEntity] else { return [] }
+        return itemEntities
     }
 }
 
