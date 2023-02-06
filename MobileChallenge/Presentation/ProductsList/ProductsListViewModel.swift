@@ -65,17 +65,18 @@ extension ProductsListViewModel {
         let showSpecialPrice: Bool
         let formattedSpecialPrice: String?
         let showDiscountBadge: Bool
-        let cartCount: Int
+        let quantity: Int
         
         init?(product: ProductsList.Product) {
             guard let productType = ProductType(rawValue: product.code) else { return nil }
             self.productType = productType
             self.name = product.name
+            self.quantity = 0
             self.formattedPrice = String(format: "%.2f€", product.price)
             self.showSpecialPrice = false // true
             self.formattedSpecialPrice = nil // String(format: "%.2f€", 19.0)
             self.showDiscountBadge = productType.discountBadgeText != nil
-            self.cartCount = 0
+        }
         }
         
         #if DEBUG

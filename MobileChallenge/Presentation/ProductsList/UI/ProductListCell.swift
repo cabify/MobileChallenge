@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductListCell: View {
     
     // Properties
-    var product: ProductsListViewModel.SingleCartItem
+    var singleCartItem: ProductsListViewModel.SingleCartItem
     
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -19,24 +19,24 @@ struct ProductListCell: View {
                 // Product name and cart counting
                 HStack {
                     // Name
-                    Text(product.name)
+                    Text(singleCartItem.name)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.black)
                     
                     Spacer()
                     
                     // Cart counting
-                    CartQuantityView(cartQuantity: product.cartCount)
+                    CartQuantityView(cartQuantity: singleCartItem.quantity)
                 }
                 
                 // Badge
-                if let badgeText = product.productType.discountBadgeText {
+                if let badgeText = singleCartItem.productType.discountBadgeText {
                     DiscountBadgeView(badgeText: badgeText)
                 }
             }
             
             // Product price
-            PriceView(price: product.formattedPrice, specialPrice: product.formattedSpecialPrice)
+            PriceView(price: singleCartItem.formattedPrice, specialPrice: singleCartItem.formattedSpecialPrice)
                 .frame(minWidth: 60, alignment: .trailing)
         }
         .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
@@ -48,7 +48,7 @@ struct ProductListCell: View {
 struct ProductListCell_Previews: PreviewProvider {
     static var previews: some View {
         List(ProductsListViewModel.SingleCartItem.preview) { aProduct in
-            ProductListCell(product: aProduct)
+            ProductListCell(singleCartItem: aProduct)
         }
     }
 }
