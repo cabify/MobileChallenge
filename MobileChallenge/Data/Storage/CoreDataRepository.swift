@@ -78,13 +78,13 @@ extension CoreDataRepository: StorageProtocol where Entity: Storable {
         .eraseToAnyPublisher()
     }
     
-    func update(_ entity: Entity) -> AnyPublisher<Void, Error> {
+    func update(_ entity: Entity) -> AnyPublisher<Entity, Error> {
         Deferred { [context] in
             Future { promise in
                 context.perform {
                     do {
                         try context.save()
-                        promise(.success(()))
+                        promise(.success((entity)))
                     } catch {
                         promise(.failure(error))
                     }
