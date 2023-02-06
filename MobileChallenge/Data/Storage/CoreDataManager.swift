@@ -28,8 +28,6 @@ final class CoreDataManager {
         }
         return context
     }
-    // Public
-    lazy var cartRepository = CoreDataRepository<CartEntity>(context: context)
     
     // MARK: - Init
     private init() { }

@@ -27,3 +27,11 @@ final class CoreDataStorage {
         self.context?.persistentStoreCoordinator = coordinator
     }
 }
+
+#if DEBUG
+extension CoreDataStorage {
+    static var preview: Self {
+        .init(configuration: .basic(identifier: "MobileChallengePreview"))
+    }
+}
+#endif
