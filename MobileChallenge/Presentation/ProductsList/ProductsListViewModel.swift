@@ -10,14 +10,14 @@ import Combine
 
 final class ProductsListViewModel: LoadableObject {
     
-    typealias Output = [SingleProduct]
+    typealias Output = [SingleCartItem]
     
     private unowned let coordinator: ProductsListCoordinator
     private let productsListUseCase: GetProductsListUseCase
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
     private var cancellables = Set<AnyCancellable>()
-    @Published var state: LoadableState<[SingleProduct]> = .idle
+    @Published var state: LoadableState<[SingleCartItem]> = .idle
     var emptyStateType: EmptyStateView.EmptyType { .products }
     
     init(coordinator: ProductsListCoordinator, productsListUseCase: GetProductsListUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
@@ -32,7 +32,7 @@ final class ProductsListViewModel: LoadableObject {
         
         productsListUseCase.getProductsList()
             .map { productList in
-                let products = productList.products.compactMap({ SingleProduct(product: $0) })
+                let products = productList.products.compactMap({ SingleCartItem(product: $0) })
                 return .loaded(products)
             }
             .catch { error in
@@ -52,7 +52,7 @@ final class ProductsListViewModel: LoadableObject {
 // MARK: - ViewModel of a single product
 extension ProductsListViewModel {
     
-    struct SingleProduct: Identifiable {
+    struct SingleCartItem: Identifiable {
         
         static let defaultType: ProductType = .voucher
         

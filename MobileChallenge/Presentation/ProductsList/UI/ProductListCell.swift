@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductListCell: View {
     
     // Properties
-    var product: ProductsListViewModel.SingleProduct
+    var product: ProductsListViewModel.SingleCartItem
     
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -47,7 +47,7 @@ struct ProductListCell: View {
 #if DEBUG
 struct ProductListCell_Previews: PreviewProvider {
     static var previews: some View {
-        List(ProductsListViewModel.SingleProduct.preview) { aProduct in
+        List(ProductsListViewModel.SingleCartItem.preview) { aProduct in
             ProductListCell(product: aProduct)
         }
     }
