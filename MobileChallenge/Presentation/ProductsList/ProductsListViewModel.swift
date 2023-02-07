@@ -14,6 +14,7 @@ final class ProductsListViewModel: LoadableObject {
     
     private unowned let coordinator: ProductsListCoordinator
     private let getProductsListUseCase: GetProductsListUseCase
+    private let getCartUseCase: GetCartUseCase
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
     private var cancellables = Set<AnyCancellable>()
@@ -23,6 +24,7 @@ final class ProductsListViewModel: LoadableObject {
     init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
         self.coordinator = coordinator
         self.getProductsListUseCase = getProductsListUseCase
+        self.getCartUseCase = getCartUseCase
         self.addItemToCartUseCase = addItemToCartUseCase
         self.removeItemToCartUseCase = removeItemToCartUseCase
     }
