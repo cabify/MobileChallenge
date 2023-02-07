@@ -80,6 +80,10 @@ final class ProductsListViewModel: LoadableObject {
             })
             .store(in: &cancellables)
     }
+    
+    // MARK: - Navigation
+    func openCart() {
+        self.coordinator.openCart()
     }
 }
 
