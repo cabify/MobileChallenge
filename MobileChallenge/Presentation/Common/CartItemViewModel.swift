@@ -1,5 +1,5 @@
 //
-//  SingleCartItemViewModel.swift
+//  CartItemViewModel.swift
 //  MobileChallenge
 //
 //  Created by thomas pereira on 07/02/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SingleCartItemViewModel: Identifiable {
+struct CartItemViewModel: Identifiable {
     
     static let defaultType: ProductType = .voucher(quantity: 0, price: 0)
     static let priceFormat: String = "%.2f€"
@@ -25,13 +25,13 @@ struct SingleCartItemViewModel: Identifiable {
     }
     var formattedSpecialPrice: String? {
         guard let specialPrice = productType.specialPrice else { return nil }
-        return String(format: SingleCartItemViewModel.priceFormat, specialPrice)
+        return String(format: CartItemViewModel.priceFormat, specialPrice)
     }
     var showDiscountBadge: Bool {
         return productType.discountBadgeText != nil
     }
     var domainObject: Cart.Item {
-        return .init(code: productType.intValue, quantity: cartQuantity)
+        return .init(code: productType.intValue, name: name, quantity: cartQuantity, price: price)
     }
     
     init?(product: ProductsList.Product, cartQuantity: Int = 0) {
@@ -39,7 +39,7 @@ struct SingleCartItemViewModel: Identifiable {
         self.productType = productType
         self.name = product.name
         self.price = product.price
-        self.formattedPrice = String(format: SingleCartItemViewModel.priceFormat, product.price)
+        self.formattedPrice = String(format: CartItemViewModel.priceFormat, product.price)
         self.cartQuantity = cartQuantity
     }
     

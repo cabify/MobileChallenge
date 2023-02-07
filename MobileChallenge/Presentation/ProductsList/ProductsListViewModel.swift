@@ -10,7 +10,7 @@ import Combine
 
 final class ProductsListViewModel: LoadableObject {
     
-    typealias Output = [SingleCartItemViewModel]
+    typealias Output = [CartItemViewModel]
     
     private unowned let coordinator: ProductsListCoordinator
     private let getProductsListUseCase: GetProductsListUseCase
@@ -18,7 +18,7 @@ final class ProductsListViewModel: LoadableObject {
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
     private var cancellables = Set<AnyCancellable>()
-    @Published var state: LoadableState<[SingleCartItemViewModel]> = .idle
+    @Published var state: LoadableState<[CartItemViewModel]> = .idle
     var emptyStateType: EmptyStateView.EmptyType { .products }
     
     init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
@@ -41,7 +41,7 @@ final class ProductsListViewModel: LoadableObject {
                             let cartQuantity = cart.items.first(where: { cartItem in
                                 cartItem.code == ProductType.init(code: product.code)?.intValue
                             })?.quantity ?? 0
-                            return SingleCartItemViewModel(product: product, cartQuantity: cartQuantity)
+                            return CartItemViewModel(product: product, cartQuantity: cartQuantity)
                         })
                         return .loaded(products)
                     }
@@ -56,7 +56,7 @@ final class ProductsListViewModel: LoadableObject {
     }
     
     // MARK: - Add/remove items
-    private func updateItem(_ item: SingleCartItemViewModel, newCartQuantity: Int) {
+    private func updateItem(_ item: CartItemViewModel, newCartQuantity: Int) {
         guard case .loaded(let items) = state else { return }
         
         var updatedStateList = items
@@ -70,7 +70,7 @@ final class ProductsListViewModel: LoadableObject {
         self.state = .loaded(updatedStateList)
     }
     
-    func addItemToCart(_ item: SingleCartItemViewModel) {
+    func addItemToCart(_ item: CartItemViewModel) {
         addItemToCartUseCase.addItem(item.domainObject)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] newQuantity in
                 self?.updateItem(item, newCartQuantity: newQuantity)
@@ -78,7 +78,7 @@ final class ProductsListViewModel: LoadableObject {
             .store(in: &cancellables)
     }
     
-    func removeItemFromCart(_ item: SingleCartItemViewModel) {
+    func removeItemFromCart(_ item: CartItemViewModel) {
         removeItemToCartUseCase.removeItem(item.domainObject)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] newQuantity in
                 self?.updateItem(item, newCartQuantity: newQuantity)
