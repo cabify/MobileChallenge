@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductListCell: View {
     
     // Properties
-    var singleCartItem: ProductsListViewModel.SingleCartItem
+    var singleCartItem: SingleCartItemViewModel
     
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {

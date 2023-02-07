@@ -10,14 +10,14 @@ import Combine
 
 final class ProductsListViewModel: LoadableObject {
     
-    typealias Output = [SingleCartItem]
+    typealias Output = [SingleCartItemViewModel]
     
     private unowned let coordinator: ProductsListCoordinator
     private let productsListUseCase: GetProductsListUseCase
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
     private var cancellables = Set<AnyCancellable>()
-    @Published var state: LoadableState<[SingleCartItem]> = .idle
+    @Published var state: LoadableState<[SingleCartItemViewModel]> = .idle
     var emptyStateType: EmptyStateView.EmptyType { .products }
     
     init(coordinator: ProductsListCoordinator, productsListUseCase: GetProductsListUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
@@ -44,46 +44,10 @@ final class ProductsListViewModel: LoadableObject {
             .store(in: &cancellables)
     }
     
-    func openCart() {
-        self.coordinator.openCart()
-    }
-}
-
-// MARK: - ViewModel of a single product
-extension ProductsListViewModel {
-    
-    struct SingleCartItem: Identifiable {
         
-        static let defaultType: ProductType = .voucher
         
-        typealias Identifier = UUID
-        
-        let id = Identifier()
-        let productType: ProductType
-        let name: String
-        let formattedPrice: String
-        let showSpecialPrice: Bool
-        let formattedSpecialPrice: String?
-        let showDiscountBadge: Bool
-        let quantity: Int
-        
-        init?(product: ProductsList.Product) {
-            guard let productType = ProductType(rawValue: product.code) else { return nil }
-            self.productType = productType
-            self.name = product.name
-            self.quantity = 0
-            self.formattedPrice = String(format: "%.2f€", product.price)
-            self.showSpecialPrice = false // true
-            self.formattedSpecialPrice = nil // String(format: "%.2f€", 19.0)
-            self.showDiscountBadge = productType.discountBadgeText != nil
-        }
         }
         
-        #if DEBUG
-        static var preview: [Self] {
-            ProductsList.preview.products.compactMap({ .init(product: $0) })
-        }
-        #endif
     }
 }
 
