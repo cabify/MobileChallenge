@@ -37,7 +37,12 @@ final class ProductsListViewModel: LoadableObject {
             .flatMap { cart in
                 self.getProductsListUseCase.getProductsList()
                     .map { productList in
-                        let products = productList.products.compactMap({ SingleCartItemViewModel(product: $0, cart: cart) })
+                        let products = productList.products.compactMap({ product in
+                            let cartQuantity = cart.items.first(where: { cartItem in
+                                cartItem.code == ProductType.init(code: product.code)?.intValue
+                            })?.quantity ?? 0
+                            return SingleCartItemViewModel(product: product, cartQuantity: cartQuantity)
+                        })
                         return .loaded(products)
                     }
             }

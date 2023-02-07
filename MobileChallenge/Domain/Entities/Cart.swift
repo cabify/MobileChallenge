@@ -22,9 +22,9 @@ extension Cart {
     static var preview: Self {
         .init(
             items: [
-                .init(code: ProductType.voucher.hashValue, quantity: 0),
-                .init(code: ProductType.tShirt.hashValue, quantity: 0),
-                .init(code: ProductType.mug.hashValue, quantity: 0)
+                .init(code: ProductType.voucher().intValue, quantity: 0),
+                .init(code: ProductType.tShirt().intValue, quantity: 0),
+                .init(code: ProductType.mug().intValue, quantity: 0)
             ]
         )
     }

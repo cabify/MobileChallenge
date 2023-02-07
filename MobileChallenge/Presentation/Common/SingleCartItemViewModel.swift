@@ -9,44 +9,42 @@ import Foundation
 
 struct SingleCartItemViewModel: Identifiable {
     
-    static let defaultType: ProductType = .voucher
+    static let defaultType: ProductType = .voucher(quantity: 0, price: 0)
+    static let priceFormat: String = "%.2f€"
     
     typealias Identifier = UUID
     
     let id = Identifier()
-    let productType: ProductType
+    private(set) var productType: ProductType
     let name: String
+    private let price: Double
     let formattedPrice: String
     private(set) var cartQuantity: Int
-    let showSpecialPrice: Bool
-    let formattedSpecialPrice: String?
-    let showDiscountBadge: Bool
+    var showSpecialPrice: Bool {
+        return productType.specialPrice != nil
+    }
+    var formattedSpecialPrice: String? {
+        guard let specialPrice = productType.specialPrice else { return nil }
+        return String(format: SingleCartItemViewModel.priceFormat, specialPrice)
+    }
+    var showDiscountBadge: Bool {
+        return productType.discountBadgeText != nil
+    }
     var domainObject: Cart.Item {
-        return .init(code: productType.rawValue, quantity: cartQuantity)
+        return .init(code: productType.intValue, quantity: cartQuantity)
     }
     
-    init?(product: ProductsList.Product, cart: Cart? = nil) {
-        guard let productType = ProductType(stringValue: product.code) else { return nil }
+    init?(product: ProductsList.Product, cartQuantity: Int = 0) {
+        guard let productType = ProductType(code: product.code, quantity: cartQuantity, price: product.price) else { return nil }
         self.productType = productType
         self.name = product.name
-        self.formattedPrice = String(format: "%.2f€", product.price)
-        
-        // Cart info
-        if let cartItem = cart?.items.first(where: { $0.code == productType.rawValue }) {
-            self.cartQuantity = cartItem.quantity
-            self.showSpecialPrice = false
-            self.formattedSpecialPrice = nil
-            
-        } else {
-            self.cartQuantity = 0
-            self.showSpecialPrice = false
-            self.formattedSpecialPrice = nil
-        }
-        
-        self.showDiscountBadge = productType.discountBadgeText != nil
+        self.price = product.price
+        self.formattedPrice = String(format: SingleCartItemViewModel.priceFormat, product.price)
+        self.cartQuantity = cartQuantity
     }
     
     mutating func updateCartQuantity(_ cartQuantity: Int) {
+        self.productType = ProductType(code: productType.stringValue, quantity: cartQuantity, price: price) ?? productType
         self.cartQuantity = cartQuantity
     }
     
