@@ -11,7 +11,7 @@ import Combine
 protocol CartRepository {
     @discardableResult
     func getCart() -> AnyPublisher<Cart, Error>
-    func addItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error>
-    func removeItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error>
+    func addItem(_ item: Cart.Item) -> AnyPublisher<Int, Error>
+    func removeItem(_ item: Cart.Item) -> AnyPublisher<Int, Error>
     func clearCart() -> AnyPublisher<Cart, Error>
 }
