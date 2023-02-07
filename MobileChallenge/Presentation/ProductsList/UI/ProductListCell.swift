@@ -11,6 +11,8 @@ struct ProductListCell: View {
     
     // Properties
     var singleCartItem: SingleCartItemViewModel
+    var onIncreaseAction: () -> Void
+    var onDecreaseAction: () -> Void
     
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -26,7 +28,11 @@ struct ProductListCell: View {
                     Spacer()
                     
                     // Cart counting
-                    CartQuantityView(cartQuantity: singleCartItem.quantity)
+                    CartQuantityView(
+                        cartQuantity: singleCartItem.cartQuantity,
+                        onIncreaseAction: onIncreaseAction,
+                        onDecreaseAction: onDecreaseAction
+                    )
                 }
                 
                 // Badge
@@ -47,8 +53,12 @@ struct ProductListCell: View {
 #if DEBUG
 struct ProductListCell_Previews: PreviewProvider {
     static var previews: some View {
-        List(ProductsListViewModel.SingleCartItem.preview) { aProduct in
-            ProductListCell(singleCartItem: aProduct)
+        List(SingleCartItemViewModel.preview) { aProduct in
+            ProductListCell(
+                singleCartItem: aProduct,
+                onIncreaseAction: { },
+                onDecreaseAction: { }
+            )
         }
     }
 }

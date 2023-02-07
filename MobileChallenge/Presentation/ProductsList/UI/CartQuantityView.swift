@@ -10,6 +10,8 @@ import SwiftUI
 struct CartQuantityView: View {
     
     @State var cartQuantity: Int
+    var onIncreaseAction: () -> Void
+    var onDecreaseAction: () -> Void
     
     var body: some View {
         VStack(alignment: .trailing) {
@@ -17,6 +19,7 @@ struct CartQuantityView: View {
                 // Minus button
                 quantityButton(imageNamed: "minus.rectangle") {
                     cartQuantity -= 1
+                    onDecreaseAction()
                 }.disabled(cartQuantity <= 0)
                 
                 // Current quantity
@@ -26,6 +29,7 @@ struct CartQuantityView: View {
                 // Plus button
                 quantityButton(imageNamed: "plus.rectangle") {
                     cartQuantity += 1
+                    onIncreaseAction()
                 }
             }
         }
@@ -47,7 +51,11 @@ struct CartQuantityView: View {
 #if DEBUG
 struct CartQuantityView_Previews: PreviewProvider {
     static var previews: some View {
-        CartQuantityView(cartQuantity: 0)
+        CartQuantityView(
+            cartQuantity: 0,
+            onIncreaseAction: { },
+            onDecreaseAction: { }
+        )
     }
 }
 #endif

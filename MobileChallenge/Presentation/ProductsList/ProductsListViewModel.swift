@@ -50,10 +50,36 @@ final class ProductsListViewModel: LoadableObject {
             .store(in: &cancellables)
     }
     
+    // MARK: - Add/remove items
+    private func updateItem(_ item: SingleCartItemViewModel, newCartQuantity: Int) {
+        guard case .loaded(let items) = state else { return }
         
+        var updatedStateList = items
+        var updatedItem = item
+        updatedItem.updateCartQuantity(newCartQuantity)
         
+        if let indexOf = updatedStateList.firstIndex(where: { $0.productType == updatedItem.productType }) {
+            updatedStateList[indexOf] = updatedItem
         }
         
+        self.state = .loaded(updatedStateList)
+    }
+    
+    func addItemToCart(_ item: SingleCartItemViewModel) {
+        addItemToCartUseCase.addItem(item.domainObject)
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] newQuantity in
+                self?.updateItem(item, newCartQuantity: newQuantity)
+            })
+            .store(in: &cancellables)
+    }
+    
+    func removeItemFromCart(_ item: SingleCartItemViewModel) {
+        removeItemToCartUseCase.removeItem(item.domainObject)
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] newQuantity in
+                self?.updateItem(item, newCartQuantity: newQuantity)
+            })
+            .store(in: &cancellables)
+    }
     }
 }
 

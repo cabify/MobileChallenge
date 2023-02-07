@@ -15,8 +15,15 @@ struct ProductsListView<CartModifier: ViewModifier>: View {
     
     var body: some View {
         LoadableContentView(source: viewModel) { products in
-            List(products) { aProduct in
-                ProductListCell(singleCartItem: aProduct)
+            List(products) { aCartItem in
+                ProductListCell(
+                    singleCartItem: aCartItem,
+                    onIncreaseAction: {
+                        self.viewModel.addItemToCart(aCartItem)
+                        
+                }, onDecreaseAction: {
+                    self.viewModel.removeItemFromCart(aCartItem)
+                })
             }
             // Hack to disable row selection to allow
             // the tap on inner buttons
