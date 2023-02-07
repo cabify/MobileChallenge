@@ -22,7 +22,7 @@ protocol StorageProtocol {
     // Create
     func create(_ entity: Entity?, body: ((inout Entity) -> Void)?) -> AnyPublisher<Entity, Error>
     // Update
-    func update(_ entity: Entity) -> AnyPublisher<Void, Error>
+    func update(_ entity: Entity, body: ((inout Entity) -> Void)?) -> AnyPublisher<Entity, Error>
     // Delete
     func delete(_ entity: Entity) -> AnyPublisher<Void, Error>
 }

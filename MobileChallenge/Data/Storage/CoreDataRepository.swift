@@ -60,16 +60,20 @@ extension CoreDataRepository: StorageProtocol where Entity: Storable {
                 }
             }
         }
+        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
     
-    func update(_ entity: Entity) -> AnyPublisher<Void, Error> {
+    func update(_ entity: Entity, body: ((inout Entity) -> Void)? = nil) -> AnyPublisher<Entity, Error> {
         Deferred { [context] in
             Future { promise in
+                
                 context.perform {
+                    var updatedEntity = entity
+                    body?(&updatedEntity)
                     do {
                         try context.save()
-                        promise(.success(()))
+                        promise(.success(updatedEntity))
                     } catch {
                         promise(.failure(error))
                     }
