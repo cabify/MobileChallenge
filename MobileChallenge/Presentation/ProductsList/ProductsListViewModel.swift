@@ -29,13 +29,17 @@ final class ProductsListViewModel: LoadableObject {
         self.removeItemToCartUseCase = removeItemToCartUseCase
     }
     
+    // MARK: - Fetch
     func load() {
         state = .loading
         
-        productsListUseCase.getProductsList()
-            .map { productList in
-                let products = productList.products.compactMap({ SingleCartItem(product: $0) })
-                return .loaded(products)
+        getCartUseCase.getCart()
+            .flatMap { cart in
+                self.getProductsListUseCase.getProductsList()
+                    .map { productList in
+                        let products = productList.products.compactMap({ SingleCartItemViewModel(product: $0, cart: cart) })
+                        return .loaded(products)
+                    }
             }
             .catch { error in
                 Just(LoadableState.failed(error))
