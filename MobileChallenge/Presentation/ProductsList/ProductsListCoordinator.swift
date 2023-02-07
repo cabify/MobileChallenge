@@ -17,13 +17,12 @@ final class ProductsListCoordinator: ObservableObject {
     init(productsListRepository: ProductsListRepository, cartRepository: CartRepository) {
         self.cartRepository = cartRepository
         
-        let productsListUseCase = DefaultGetProductsListUseCase(productsListRepository: productsListRepository)
         let addItemToCartUseCase = DefaultAddItemToCartUseCase(cartRepository: cartRepository)
         let removeItemToCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: cartRepository)
+        let defaultGetProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: productsListRepository)
         
         self.productsListViewModel = ProductsListViewModel(
             coordinator: self,
-            productsListUseCase: productsListUseCase,
             addItemToCartUseCase: addItemToCartUseCase,
             removeItemToCartUseCase: removeItemToCartUseCase
         )

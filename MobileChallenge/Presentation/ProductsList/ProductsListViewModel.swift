@@ -13,16 +13,16 @@ final class ProductsListViewModel: LoadableObject {
     typealias Output = [SingleCartItemViewModel]
     
     private unowned let coordinator: ProductsListCoordinator
-    private let productsListUseCase: GetProductsListUseCase
+    private let getProductsListUseCase: GetProductsListUseCase
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
     private var cancellables = Set<AnyCancellable>()
     @Published var state: LoadableState<[SingleCartItemViewModel]> = .idle
     var emptyStateType: EmptyStateView.EmptyType { .products }
     
-    init(coordinator: ProductsListCoordinator, productsListUseCase: GetProductsListUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
+    init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
         self.coordinator = coordinator
-        self.productsListUseCase = productsListUseCase
+        self.getProductsListUseCase = getProductsListUseCase
         self.addItemToCartUseCase = addItemToCartUseCase
         self.removeItemToCartUseCase = removeItemToCartUseCase
     }
@@ -56,7 +56,8 @@ extension ProductsListViewModel {
     static var preview: Self {
         .init(
             coordinator: ProductsListCoordinator.preview,
-            productsListUseCase: DefaultGetProductsListUseCase.preview,
+            getProductsListUseCase: DefaultGetProductsListUseCase.preview,
+            getCartUseCase: DefaultGetCartUseCase.preview,
             addItemToCartUseCase: DefaultAddItemToCartUseCase.preview,
             removeItemToCartUseCase: DefaultRemoveItemFromCartUseCase.preview
         )
