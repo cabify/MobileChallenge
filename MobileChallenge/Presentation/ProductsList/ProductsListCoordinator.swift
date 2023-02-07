@@ -11,7 +11,7 @@ final class ProductsListCoordinator: ObservableObject {
     
     // MARK: - Properties
     @Published private(set) var productsListViewModel: ProductsListViewModel!
-    @Published var cartViewModel: CartViewModel?
+    @Published var cartViewModel: CartDetailViewModel?
     private let cartRepository: CartRepository
     
     init(productsListRepository: ProductsListRepository, cartRepository: CartRepository) {
@@ -32,7 +32,7 @@ final class ProductsListCoordinator: ObservableObject {
     }
     
     func openCart() {
-        self.cartViewModel = CartViewModel(
+        self.cartViewModel = CartDetailViewModel(
             coordinator: self,
             getCartUseCase: DefaultGetCartUseCase(cartRepository: cartRepository),
             addItemToCartUseCase: DefaultAddItemToCartUseCase(cartRepository: cartRepository),

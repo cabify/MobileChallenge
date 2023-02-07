@@ -43,8 +43,8 @@ struct ProductsListView_Previews: PreviewProvider {
     static var previews: some View {
         ProductsListView(
             viewModel: ProductsListViewModel.preview,
-            cartModifier: SheetModifier(item: .constant(CartViewModel.preview)) { viewModel in
-                CartView(viewModel: viewModel)
+            cartModifier: SheetModifier(item: .constant(CartDetailViewModel.preview)) { viewModel in
+                CartDetailView(viewModel: viewModel)
             }
         )
     }

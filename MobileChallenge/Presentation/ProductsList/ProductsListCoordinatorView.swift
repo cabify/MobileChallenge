@@ -17,7 +17,7 @@ struct ProductsListCoordinatorView: View {
             ProductsListView(
                 viewModel: coordinatorObject.productsListViewModel,
                 cartModifier: SheetModifier(item: $coordinatorObject.cartViewModel) { viewModel in
-                CartView(viewModel: viewModel)
+                CartDetailView(viewModel: viewModel)
             })
         }
     }
