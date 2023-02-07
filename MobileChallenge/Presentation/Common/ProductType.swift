@@ -8,25 +8,16 @@
 import Foundation
 
 // Product types
-enum ProductType: Int, RawRepresentable {
+enum ProductType: Int {
     
     case voucher = 0
     case tShirt
     case mug
     
-    // MARK: - RawRepresentable
-    typealias RawValue = String
-    // RawValue
-    var rawValue: String {
-        switch self {
-        case .voucher: return "VOUCHER"
-        case .tShirt: return "TSHIRT"
-        case .mug: return "MUG"
-        }
-    }
-    // Init from RawValue
-    init?(rawValue: String) {
-        switch rawValue {
+    // MARK: - String
+    // Init with string
+    init?(stringValue: String) {
+        switch stringValue {
         case "VOUCHER": self = .voucher
         case "TSHIRT": self = .tShirt
         case "MUG": self = .mug
