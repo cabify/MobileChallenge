@@ -8,7 +8,7 @@
 import Foundation
 
 // Product types
-enum ProductType: Equatable {
+enum ProductType {
     case voucher(quantity: Int = 0, price: Double = 0)
     case tShirt(quantity: Int = 0, price: Double = 0)
     case mug(quantity: Int = 0, price: Double = 0)
@@ -57,6 +57,17 @@ enum ProductType: Equatable {
         switch self {
         case .tShirt(let quantity, let price): return quantity < 3 ? nil : price - 1.0
         default: return nil
+        }
+    }
+}
+
+extension ProductType: Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.voucher, .voucher): return true
+        case (.tShirt, .tShirt): return true
+        case (.mug, .mug): return true
+        default: return false
         }
     }
 }
