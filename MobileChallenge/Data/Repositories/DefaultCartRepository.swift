@@ -37,51 +37,44 @@ extension DefaultCartRepository: CartRepository {
             .eraseToAnyPublisher()
     }
     
-    private func addNewItem(_ item: Cart.Item, toCart cartEntity: CartEntity) -> AnyPublisher<Cart, Error> {
-        return cartItemRepository.create { newItem in
-            newItem.cart = cartEntity
-            newItem.code = Int16(item.code)
-            newItem.quantity = Int16(item.quantity)
-            
-            cartEntity.addToItems(newItem)
-        }
-        .tryMap { _ in cartEntity.domainObject }
-        .eraseToAnyPublisher()
-    }
-    
-    private func updateItem(_ item: Cart.Item, increase: Bool = true) -> AnyPublisher<Cart, Error> {
-        return cartOrNew()
-            .compactMap { cartEntity -> Cart in
-                if let existingItem = cartEntity.itemEntities.first(where: { $0.code == item.code }) {
-                    if increase {
-                        existingItem.quantity += 1
-                    } else {
-                        existingItem.quantity -= 1
-                    }
-                    _ = self.cartItemRepository.update(existingItem)
-                    
-                } else if increase {
-                    _ = self.cartItemRepository.create(body: { newItem in
-                        newItem.cart = cartEntity
-                        newItem.code = Int16(item.code)
-                        newItem.quantity = 1
-                        
-                        cartEntity.addToItems(newItem)
-                        _ = self.cartRepository.update(cartEntity)
-                    })
-                }
-                
-                return cartEntity.domainObject
+    private func cartItemOrNew(cartEntity: CartEntity, item: Cart.Item) -> AnyPublisher<CartItemEntity, Error> {
+        let predicate = NSPredicate(format: "self.cart == %@ AND self.code == %d", cartEntity, item.code)
+        return cartItemRepository.fetch(predicate: predicate)
+            .flatMap { Just($0.first) }
+            .flatMap { cartItemQuantity in
+                self.cartItemRepository.create(cartItemQuantity, body: { newItem in
+                    newItem.cart = cartEntity
+                    newItem.code = Int16(item.code)
+                    cartEntity.addToItems(newItem)
+                })
             }
             .eraseToAnyPublisher()
     }
     
-    func addItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error> {
+    private func updateItem(_ item: Cart.Item, increase: Bool = true) -> AnyPublisher<Int, Error> {
+        return cartOrNew()
+            .flatMap { cartEntity in
+                self.cartItemOrNew(cartEntity: cartEntity, item: item)
+            }
+            .flatMap { cartItemEntity in
+                self.cartItemRepository.update(cartItemEntity, body: { updatedItem in
+                    if increase {
+                        updatedItem.quantity += 1
+                    } else {
+                        updatedItem.quantity -= 1
+                    }
+                })
+                .compactMap { Int($0.quantity)}
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func addItem(_ item: Cart.Item) -> AnyPublisher<Int, Error> {
         return updateItem(item)
             .eraseToAnyPublisher()
     }
     
-    func removeItem(_ item: Cart.Item) -> AnyPublisher<Cart, Error> {
+    func removeItem(_ item: Cart.Item) -> AnyPublisher<Int, Error> {
         return updateItem(item, increase: false)
             .eraseToAnyPublisher()
     }
