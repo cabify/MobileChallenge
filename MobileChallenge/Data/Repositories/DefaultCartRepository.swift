@@ -45,6 +45,8 @@ extension DefaultCartRepository: CartRepository {
                 self.cartItemRepository.create(cartItemQuantity, body: { newItem in
                     newItem.cart = cartEntity
                     newItem.code = Int16(item.code)
+                    newItem.name = item.name
+                    newItem.price = item.price
                     cartEntity.addToItems(newItem)
                 })
             }

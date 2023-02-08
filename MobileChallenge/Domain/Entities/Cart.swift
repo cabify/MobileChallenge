@@ -11,7 +11,9 @@ struct Cart {
     
     struct Item {
         let code: Int
+        let name: String
         let quantity: Int
+        let price: Double
     }
     
     let items: [Item]
@@ -20,13 +22,11 @@ struct Cart {
 #if DEBUG
 extension Cart {
     static var preview: Self {
-        .init(
-            items: [
-                .init(code: ProductType.voucher().intValue, quantity: 0),
-                .init(code: ProductType.tShirt().intValue, quantity: 0),
-                .init(code: ProductType.mug().intValue, quantity: 0)
-            ]
-        )
+        .init(items: [
+            .init(code: 0, name: "Cabify Voucher", quantity: 0, price: 5),
+            .init(code: 1, name: "Cabify T-Shirt", quantity: 0, price: 20),
+            .init(code: 2, name: "Cabify Coffee Mug", quantity: 0, price: 7.5)
+        ])
     }
 }
 #endif

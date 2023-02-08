@@ -22,6 +22,6 @@ extension CartEntity {
 
 extension CartItemEntity {
     var domainObject: Cart.Item {
-        return .init(code: Int(code), quantity: Int(quantity))
+        return .init(code: Int(code), name: name!, quantity: Int(quantity), price: price)
     }
 }
