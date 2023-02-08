@@ -14,16 +14,31 @@ struct ProductsListView<CartModifier: ViewModifier>: View {
     let cartModifier: CartModifier
     
     var body: some View {
-        LoadableContentView(source: viewModel) { products in
-            List(products) { aCartItem in
+        switch viewModel.state {
+        case .idle:
+            // Render a clear color and start the loading process
+            // when the view first appears, which should make the
+            // view model transition into its loading state:
+            Color.clear.onAppear(perform: viewModel.load)
+            
+        case .loading:
+            ProgressView()
+                .controlSize(.large)
+                .tint(.purple)
+            
+        case .failed(let error):
+            EmptyStateView(emptyType: .error(error))
+            
+        case .loaded(let cart):
+            List(cart.items) { aCartItem in
                 ProductListCell(
                     cartItemViewModel: aCartItem,
                     onIncreaseAction: {
                         self.viewModel.addItemToCart(aCartItem)
                         
-                }, onDecreaseAction: {
-                    self.viewModel.removeItemFromCart(aCartItem)
-                })
+                    }, onDecreaseAction: {
+                        self.viewModel.removeItemFromCart(aCartItem)
+                    })
             }
             // Hack to disable row selection to allow
             // the tap on inner buttons

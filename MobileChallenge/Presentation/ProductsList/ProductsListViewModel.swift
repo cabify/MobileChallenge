@@ -8,18 +8,22 @@
 import Foundation
 import Combine
 
-final class ProductsListViewModel: LoadableObject {
+final class ProductsListViewModel: ObservableObject {
     
-    typealias Output = [CartItemViewModel]
+    enum State {
+        case idle
+        case loading
+        case failed(Error)
+        case loaded(CartLayoutViewModel)
+    }
     
     private unowned let coordinator: ProductsListCoordinator
     private let getProductsListUseCase: GetProductsListUseCase
     private let getCartUseCase: GetCartUseCase
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
+    @Published private(set) var state = State.idle
     private var cancellables = Set<AnyCancellable>()
-    @Published var state: LoadableState<[CartItemViewModel]> = .idle
-    var emptyStateType: EmptyStateView.EmptyType { .products }
     
     init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
         self.coordinator = coordinator
@@ -37,17 +41,16 @@ final class ProductsListViewModel: LoadableObject {
             .flatMap { cart in
                 self.getProductsListUseCase.getProductsList()
                     .map { productList in
-                        let products = productList.products.compactMap({ product in
-                            let cartQuantity = cart.items.first(where: { cartItem in
-                                cartItem.code == ProductType.init(code: product.code)?.intValue
-                            })?.quantity ?? 0
-                            return CartItemViewModel(product: product, cartQuantity: cartQuantity)
+                        let products = productList.products.compactMap({ product -> Cart.Item? in
+                            guard let productType = ProductType.init(code: product.code) else { return nil }
+                            let cartQuantity = cart.items.first(where: { cartItem in cartItem.code == productType.intValue })?.quantity ?? 0
+                            return Cart.Item(code: productType.intValue, name: product.name, quantity: cartQuantity, price: product.price)
                         })
-                        return .loaded(products)
+                        return .loaded(CartLayoutViewModel(cart: Cart(items: products)))
                     }
             }
             .catch { error in
-                Just(LoadableState.failed(error))
+                Just(.failed(error))
             }
             .sink { [weak self] state in
                 self?.state = state
@@ -56,21 +59,16 @@ final class ProductsListViewModel: LoadableObject {
     }
     
     // MARK: - Add/remove items
-    private func updateItem(_ item: CartItemViewModel, newCartQuantity: Int) {
-        guard case .loaded(let items) = state else { return }
+    private func updateItem(_ item: CartLayoutViewModel.CartItem, newCartQuantity: Int) {
+        guard case .loaded(let cart) = self.state else { return }
         
-        var updatedStateList = items
-        var updatedItem = item
-        updatedItem.updateCartQuantity(newCartQuantity)
+        var updatedCart = cart
+        updatedCart.updateItem(item, newCartQuantity: newCartQuantity)
         
-        if let indexOf = updatedStateList.firstIndex(where: { $0.productType == updatedItem.productType }) {
-            updatedStateList[indexOf] = updatedItem
-        }
-        
-        self.state = .loaded(updatedStateList)
+        self.state = .loaded(updatedCart)
     }
     
-    func addItemToCart(_ item: CartItemViewModel) {
+    func addItemToCart(_ item: CartLayoutViewModel.CartItem) {
         addItemToCartUseCase.addItem(item.domainObject)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] newQuantity in
                 self?.updateItem(item, newCartQuantity: newQuantity)
@@ -78,7 +76,7 @@ final class ProductsListViewModel: LoadableObject {
             .store(in: &cancellables)
     }
     
-    func removeItemFromCart(_ item: CartItemViewModel) {
+    func removeItemFromCart(_ item: CartLayoutViewModel.CartItem) {
         removeItemToCartUseCase.removeItem(item.domainObject)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] newQuantity in
                 self?.updateItem(item, newCartQuantity: newQuantity)
