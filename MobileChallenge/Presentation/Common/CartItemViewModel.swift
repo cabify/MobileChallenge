@@ -54,6 +54,18 @@ struct CartItemViewModel: Identifiable {
         default: return 0.0
         }
     }
+    // Total
+    var totalPrice: Double {
+        return self.price * Double(self.cartQuantity)
+    }
+    var formattedTotalPrice: String {
+        return self.totalPrice.currency
+    }
+    var totalPriceWithDiscounts: Double {
+        return (self.specialPrice ?? self.price) * Double(self.cartQuantity)
+    }
+    var formattedTotalPriceWithDiscounts: String {
+        return self.totalPriceWithDiscounts.currency
     }
     // To domain
     var domainObject: Cart.Item {
