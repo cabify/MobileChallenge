@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3371D97D298932B600774082 /* ProductsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97C298932B600774082 /* ProductsListView.swift */; };
-		3371D97F2989333A00774082 /* ProductsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97E2989333A00774082 /* ProductsListViewModel.swift */; };
+		3371D97D298932B600774082 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97C298932B600774082 /* ProductsView.swift */; };
+		3371D97F2989333A00774082 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97E2989333A00774082 /* ProductsViewModel.swift */; };
 		3371D982298933F200774082 /* CartDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D981298933F200774082 /* CartDetailView.swift */; };
 		3371D9862989386000774082 /* ProductsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D9852989386000774082 /* ProductsListCoordinator.swift */; };
 		3371D9882989389400774082 /* ProductsListCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D9872989389400774082 /* ProductsListCoordinatorView.swift */; };
@@ -90,8 +90,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3371D97C298932B600774082 /* ProductsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListView.swift; sourceTree = "<group>"; };
-		3371D97E2989333A00774082 /* ProductsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewModel.swift; sourceTree = "<group>"; };
+		3371D97C298932B600774082 /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
+		3371D97E2989333A00774082 /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
 		3371D981298933F200774082 /* CartDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDetailView.swift; sourceTree = "<group>"; };
 		3371D9852989386000774082 /* ProductsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListCoordinator.swift; sourceTree = "<group>"; };
 		3371D9872989389400774082 /* ProductsListCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListCoordinatorView.swift; sourceTree = "<group>"; };
@@ -190,8 +190,8 @@
 			children = (
 				3371D9852989386000774082 /* ProductsListCoordinator.swift */,
 				3371D9872989389400774082 /* ProductsListCoordinatorView.swift */,
-				3371D97E2989333A00774082 /* ProductsListViewModel.swift */,
-				3371D97C298932B600774082 /* ProductsListView.swift */,
+				3371D97E2989333A00774082 /* ProductsViewModel.swift */,
+				3371D97C298932B600774082 /* ProductsView.swift */,
 				339697C2298ADAD6009091CB /* UI */,
 			);
 			path = ProductsList;
@@ -599,7 +599,7 @@
 				3385CDF52987FCC8002CD30A /* RequestConvertable.swift in Sources */,
 				3379280129931E7500CD219A /* Double+Extension.swift in Sources */,
 				3385CDE429843C80002CD30A /* GetProductsListUseCase.swift in Sources */,
-				3371D97D298932B600774082 /* ProductsListView.swift in Sources */,
+				3371D97D298932B600774082 /* ProductsView.swift in Sources */,
 				3385CDE92987E8C7002CD30A /* Requestable.swift in Sources */,
 				3385CDEC2987E9E1002CD30A /* ApiExecutable.swift in Sources */,
 				338F7FE3298D65AF00BBA7DC /* CoreDataManager.swift in Sources */,
@@ -626,7 +626,7 @@
 				33C4F9EE298BFEE5004B8352 /* EmptyStateView.swift in Sources */,
 				339697C6298ADDDE009091CB /* CartQuantityView.swift in Sources */,
 				3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */,
-				3371D97F2989333A00774082 /* ProductsListViewModel.swift in Sources */,
+				3371D97F2989333A00774082 /* ProductsViewModel.swift in Sources */,
 				338F7FCF298D578900BBA7DC /* AddItemToCartUseCase.swift in Sources */,
 				338F7FD1298D57D000BBA7DC /* CartRepository.swift in Sources */,
 				338F7FC7298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld in Sources */,

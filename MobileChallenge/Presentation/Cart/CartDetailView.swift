@@ -11,7 +11,7 @@ import Combine
 struct CartDetailView: View {
     
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel: ProductsListViewModel
+    @ObservedObject var viewModel: ProductsViewModel
     
     var body: some View {
         NavigationView {
@@ -70,7 +70,7 @@ struct CartDetailView: View {
 #if DEBUG
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
-        CartDetailView(viewModel: ProductsListViewModel.preview)
+        CartDetailView(viewModel: ProductsViewModel.preview)
     }
 }
 #endif

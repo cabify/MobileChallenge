@@ -10,7 +10,7 @@ import Combine
 final class ProductsListCoordinator: ObservableObject {
     
     // MARK: - Properties
-    @Published private(set) var productsListViewModel: ProductsListViewModel!
+    @Published private(set) var productsListViewModel: ProductsViewModel!
     
     init(productsListRepository: ProductsListRepository, cartRepository: CartRepository) {
         let defaultGetProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: productsListRepository)
@@ -19,7 +19,7 @@ final class ProductsListCoordinator: ObservableObject {
         let defaultRemoveItemToCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: cartRepository)
         let defaultClearCartUseCase = DefaultClearCartUseCase(cartRepository: cartRepository)
         
-        self.productsListViewModel = ProductsListViewModel(
+        self.productsListViewModel = ProductsViewModel(
             coordinator: self,
             getProductsListUseCase: defaultGetProductsListUseCase,
             getCartUseCase: defaultGetCartUseCase,

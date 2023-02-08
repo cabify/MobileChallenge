@@ -1,5 +1,5 @@
 //
-//  ProductsListView.swift
+//  ProductsView.swift
 //  MobileChallenge
 //
 //  Created by thomas pereira on 31/01/2023.
@@ -8,9 +8,9 @@
 import SwiftUI
 import Combine
 
-struct ProductsListView: View {
+struct ProductsView: View {
     
-    @ObservedObject var viewModel: ProductsListViewModel
+    @ObservedObject var viewModel: ProductsViewModel
     
     var body: some View {
         switch viewModel.state {
@@ -50,7 +50,7 @@ struct ProductsListView: View {
 #if DEBUG
 struct ProductsListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductsListView(viewModel: ProductsListViewModel.preview)
+        ProductsView(viewModel: ProductsViewModel.preview)
     }
 }
 #endif

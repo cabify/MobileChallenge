@@ -1,5 +1,5 @@
 //
-//  ProductsListViewModel.swift
+//  ProductsViewModel.swift
 //  MobileChallenge
 //
 //  Created by thomas pereira on 31/01/2023.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class ProductsListViewModel: ObservableObject {
+final class ProductsViewModel: ObservableObject {
     
     enum State {
         case idle
@@ -96,7 +96,7 @@ final class ProductsListViewModel: ObservableObject {
 }
 
 #if DEBUG
-extension ProductsListViewModel {
+extension ProductsViewModel {
     static var preview: Self {
         .init(
             coordinator: ProductsListCoordinator.preview,

@@ -15,7 +15,7 @@ struct ProductsListCoordinatorView: View {
     
     var body: some View {
         NavigationView {
-            ProductsListView(viewModel: coordinatorObject.productsListViewModel)
+            ProductsView(viewModel: coordinatorObject.productsListViewModel)
             .navigationTitle(Text("Products list"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
