@@ -8,10 +8,10 @@
 import Foundation
 
 // Product types
-enum ProductType {
-    case voucher(quantity: Int = 0, price: Double = 0)
-    case tShirt(quantity: Int = 0, price: Double = 0)
-    case mug(quantity: Int = 0, price: Double = 0)
+enum ProductType: Int {
+    case voucher = 0
+    case tShirt
+    case mug
     
     // MARK: - Int
     // Value
@@ -25,11 +25,11 @@ enum ProductType {
     
     // MARK: - String
     // Init with string
-    init?(code: String, quantity: Int = 0, price: Double = 0) {
+    init?(code: String) {
         switch code {
-        case "VOUCHER": self = .voucher(quantity: quantity, price: price)
-        case "TSHIRT": self = .tShirt(quantity: quantity, price: price)
-        case "MUG": self = .mug(quantity: quantity, price: price)
+        case "VOUCHER": self = .voucher
+        case "TSHIRT": self = .tShirt
+        case "MUG": self = .mug
         default: return nil
         }
     }
@@ -48,14 +48,6 @@ enum ProductType {
         switch self {
         case .voucher: return "Buy 2 and get 1 free"
         case .tShirt: return "€1 discount per unit for 3+"
-        default: return nil
-        }
-    }
-    
-    // Special price
-    var specialPrice: Double? {
-        switch self {
-        case .tShirt(let quantity, let price): return quantity < 3 ? nil : price - 1.0
         default: return nil
         }
     }
