@@ -19,7 +19,6 @@ struct DiscountBadgeView: View {
                 .foregroundColor(.white)
                 .background(.purple)
                 .cornerRadius(8.0)
-            Spacer()
         }
     }
 }
