@@ -11,14 +11,21 @@ import Combine
 struct ProductsListCoordinatorView: View {
     
     @ObservedObject var coordinatorObject: ProductsListCoordinator
+    @State private var showingSheet = false
     
     var body: some View {
         NavigationView {
-            ProductsListView(
-                viewModel: coordinatorObject.productsListViewModel,
-                cartModifier: SheetModifier(item: $coordinatorObject.cartViewModel) { viewModel in
-                CartDetailView(viewModel: viewModel)
-            })
+            ProductsListView(viewModel: coordinatorObject.productsListViewModel)
+            .navigationTitle(Text("Products list"))
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                CartButtonView(onTapAction: {
+                    self.showingSheet.toggle()
+                })
+                .sheet(isPresented: $showingSheet) {
+                    CartDetailView(viewModel: coordinatorObject.productsListViewModel)
+                }
+            }
         }
     }
 }

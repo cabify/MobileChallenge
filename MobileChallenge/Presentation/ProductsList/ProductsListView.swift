@@ -8,10 +8,9 @@
 import SwiftUI
 import Combine
 
-struct ProductsListView<CartModifier: ViewModifier>: View {
+struct ProductsListView: View {
     
     @ObservedObject var viewModel: ProductsListViewModel
-    let cartModifier: CartModifier
     
     var body: some View {
         switch viewModel.state {
@@ -44,11 +43,6 @@ struct ProductsListView<CartModifier: ViewModifier>: View {
             // the tap on inner buttons
             .onTapGesture { return }
         }
-        .navigationTitle(Text("Products list"))
-        .toolbar {
-            CartButtonView(onTapAction: viewModel.openCart)
-                .modifier(cartModifier)
-        }
     }
 }
 
@@ -56,12 +50,7 @@ struct ProductsListView<CartModifier: ViewModifier>: View {
 #if DEBUG
 struct ProductsListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductsListView(
-            viewModel: ProductsListViewModel.preview,
-            cartModifier: SheetModifier(item: .constant(CartDetailViewModel.preview)) { viewModel in
-                CartDetailView(viewModel: viewModel)
-            }
-        )
+        ProductsListView(viewModel: ProductsListViewModel.preview)
     }
 }
 #endif

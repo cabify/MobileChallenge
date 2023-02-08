@@ -11,11 +11,12 @@ import Combine
 struct CartDetailView: View {
     
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel: CartDetailViewModel
+    @ObservedObject var viewModel: ProductsListViewModel
     
     var body: some View {
-        LoadableContentView(source: viewModel) { cart in
-            NavigationView {
+        NavigationView {
+            switch viewModel.state {
+            case .loaded(let cart):
                 VStack(spacing: 10) {
                     CartSummaryView(cartViewModel: cart)
                     
@@ -55,6 +56,11 @@ struct CartDetailView: View {
                 // Hack to disable row selection to allow
                 // the tap on inner buttons
                 .onTapGesture { return }
+                
+            default:
+                EmptyStateView(emptyType: .cart, onRetryAction: {
+                    dismiss()
+                })
             }
         }
     }
@@ -64,7 +70,7 @@ struct CartDetailView: View {
 #if DEBUG
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
-        CartDetailView(viewModel: CartDetailViewModel.preview)
+        CartDetailView(viewModel: ProductsListViewModel.preview)
     }
 }
 #endif

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CartSummaryView: View {
     
-    var cartViewModel: CartViewModel
+    var cartViewModel: CartLayoutViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -70,7 +70,7 @@ struct CartSummaryView: View {
 #if DEBUG
 struct CartSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        CartSummaryView(cartViewModel: CartViewModel.preview)
+        CartSummaryView(cartViewModel: CartLayoutViewModel.preview)
     }
 }
 #endif

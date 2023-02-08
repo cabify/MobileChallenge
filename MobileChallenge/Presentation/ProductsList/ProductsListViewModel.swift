@@ -22,15 +22,17 @@ final class ProductsListViewModel: ObservableObject {
     private let getCartUseCase: GetCartUseCase
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
+    private let clearCartUseCase: ClearCartUseCase
     @Published private(set) var state = State.idle
     private var cancellables = Set<AnyCancellable>()
     
-    init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
+    init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase, clearCartUseCase: ClearCartUseCase) {
         self.coordinator = coordinator
         self.getProductsListUseCase = getProductsListUseCase
         self.getCartUseCase = getCartUseCase
         self.addItemToCartUseCase = addItemToCartUseCase
         self.removeItemToCartUseCase = removeItemToCartUseCase
+        self.clearCartUseCase = clearCartUseCase
     }
     
     // MARK: - Fetch
@@ -84,9 +86,12 @@ final class ProductsListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    // MARK: - Navigation
-    func openCart() {
-        self.coordinator.openCart()
+    func clearCart() {
+        clearCartUseCase.clearCart()
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] clearedCart in
+                self?.state = .loaded(.init(cart: clearedCart))
+            })
+            .store(in: &cancellables)
     }
 }
 
@@ -98,7 +103,8 @@ extension ProductsListViewModel {
             getProductsListUseCase: DefaultGetProductsListUseCase.preview,
             getCartUseCase: DefaultGetCartUseCase.preview,
             addItemToCartUseCase: DefaultAddItemToCartUseCase.preview,
-            removeItemToCartUseCase: DefaultRemoveItemFromCartUseCase.preview
+            removeItemToCartUseCase: DefaultRemoveItemFromCartUseCase.preview,
+            clearCartUseCase: DefaultClearCartUseCase.preview
         )
     }
 }

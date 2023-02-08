@@ -11,38 +11,22 @@ final class ProductsListCoordinator: ObservableObject {
     
     // MARK: - Properties
     @Published private(set) var productsListViewModel: ProductsListViewModel!
-    @Published var cartViewModel: CartDetailViewModel?
-    private let cartRepository: CartRepository
     
     init(productsListRepository: ProductsListRepository, cartRepository: CartRepository) {
-        self.cartRepository = cartRepository
-        
         let defaultGetProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: productsListRepository)
         let defaultGetCartUseCase = DefaultGetCartUseCase(cartRepository: cartRepository)
         let defaultAddItemToCartUseCase = DefaultAddItemToCartUseCase(cartRepository: cartRepository)
         let defaultRemoveItemToCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: cartRepository)
+        let defaultClearCartUseCase = DefaultClearCartUseCase(cartRepository: cartRepository)
         
         self.productsListViewModel = ProductsListViewModel(
             coordinator: self,
             getProductsListUseCase: defaultGetProductsListUseCase,
             getCartUseCase: defaultGetCartUseCase,
             addItemToCartUseCase: defaultAddItemToCartUseCase,
-            removeItemToCartUseCase: defaultRemoveItemToCartUseCase
+            removeItemToCartUseCase: defaultRemoveItemToCartUseCase,
+            clearCartUseCase: defaultClearCartUseCase
         )
-    }
-    
-    func openCart() {
-        self.cartViewModel = CartDetailViewModel(
-            coordinator: self,
-            getCartUseCase: DefaultGetCartUseCase(cartRepository: cartRepository),
-            addItemToCartUseCase: DefaultAddItemToCartUseCase(cartRepository: cartRepository),
-            removeItemToCartUseCase: DefaultRemoveItemFromCartUseCase(cartRepository: cartRepository),
-            clearCartUseCase: DefaultClearCartUseCase(cartRepository: cartRepository)
-        )
-    }
-    
-    func closeCart() {
-        self.cartViewModel = nil
     }
 }
 
