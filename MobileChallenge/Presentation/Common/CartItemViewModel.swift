@@ -11,17 +11,21 @@ struct CartItemViewModel: Identifiable {
     
     static let defaultType: ProductType = .voucher
     
+    // MARK: - Properties
+    // ID
     typealias Identifier = UUID
-    
     let id = Identifier()
+    // Main info
     private(set) var productType: ProductType
     let name: String
     var showDiscountBadge: Bool {
         return productType.discountBadgeText != nil
     }
+    private(set) var cartQuantity: Int
+    // Prices
+    // Regular price
     private let price: Double
     let formattedPrice: String
-    private(set) var cartQuantity: Int
     var showSpecialPrice: Bool {
         return self.specialPrice != nil
     }
@@ -30,10 +34,13 @@ struct CartItemViewModel: Identifiable {
         return specialPrice
     }
     }
+    // To domain
     var domainObject: Cart.Item {
         return .init(code: productType.intValue, name: name, quantity: cartQuantity, price: price)
     }
     
+    // MARK: - Init
+    // From product
     init?(product: ProductsList.Product, cartQuantity: Int = 0) {
         guard let productType = ProductType(code: product.code) else { return nil }
         self.productType = productType
@@ -43,6 +50,7 @@ struct CartItemViewModel: Identifiable {
         self.cartQuantity = cartQuantity
     }
     
+    // MARK: - Setter
     mutating func updateCartQuantity(_ cartQuantity: Int) {
         self.cartQuantity = cartQuantity
     }
