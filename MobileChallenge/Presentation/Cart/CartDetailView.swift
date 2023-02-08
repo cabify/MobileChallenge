@@ -23,10 +23,10 @@ struct CartDetailView: View {
                         CartItemCell(
                             cartItemViewModel: aCartItem,
                             onIncreaseAction: {
-                                // self.viewModel.addItemToCart(aCartItem)
+                                self.viewModel.addItemToCart(aCartItem)
                                 
                             }, onDecreaseAction: {
-                                // self.viewModel.removeItemFromCart(aCartItem)
+                                self.viewModel.removeItemFromCart(aCartItem)
                             }
                         )
                     }
