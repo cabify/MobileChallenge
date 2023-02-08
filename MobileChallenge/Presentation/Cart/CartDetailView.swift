@@ -14,15 +14,28 @@ struct CartDetailView: View {
     @ObservedObject var viewModel: CartDetailViewModel
     
     var body: some View {
-        NavigationView {
-            EmptyStateView(emptyType: .cart, onRetryAction: {
-                dismiss()
-            })
-            .toolbar {
-                Button("Close") {
-                    dismiss()
+        LoadableContentView(source: viewModel) { cart in
+            NavigationView {
+                List(cart.items) { aCartItem in
+                    CartItemCell(
+                        singleCartItem: aCartItem,
+                        onIncreaseAction: {
+                            
+                        }, onDecreaseAction: {
+                        }
+                    )
                 }
-                .tint(.purple)
+                .navigationTitle("Place your order")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar() {
+                    Button("Close") {
+                        dismiss()
+                    }
+                    .tint(.purple)
+                }
+                // Hack to disable row selection to allow
+                // the tap on inner buttons
+                .onTapGesture { return }
             }
         }
     }
