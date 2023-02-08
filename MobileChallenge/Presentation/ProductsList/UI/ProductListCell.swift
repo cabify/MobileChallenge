@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductListCell: View {
     
     // Properties
-    var cartItemViewModel: CartItemViewModel
+    var cartItemViewModel: CartLayoutViewModel.CartItem
     var onIncreaseAction: () -> Void
     var onDecreaseAction: () -> Void
     
@@ -53,7 +53,7 @@ struct ProductListCell: View {
 #if DEBUG
 struct ProductListCell_Previews: PreviewProvider {
     static var previews: some View {
-        List(CartItemViewModel.productsListPreview) { aCartItem in
+        List(CartLayoutViewModel.CartItem.productsListPreview) { aCartItem in
             ProductListCell(
                 cartItemViewModel: aCartItem,
                 onIncreaseAction: { },

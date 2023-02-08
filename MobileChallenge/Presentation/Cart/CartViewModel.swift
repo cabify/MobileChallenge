@@ -46,10 +46,10 @@ struct CartViewModel {
     var formattedTotal: String {
         return self.total.currency
     }
-    private(set) var items: [CartItemViewModel]
+    private(set) var items: [CartLayoutViewModel.CartItem]
     
     init(cart: Cart) {
-        let items: [CartItemViewModel] = cart.items
+        let items: [CartLayoutViewModel.CartItem] = cart.items
             .filter { $0.quantity > 0 }
             .compactMap { .init(cartItem: $0) }
         
@@ -58,7 +58,7 @@ struct CartViewModel {
     }
     
     // MARK: - Setter
-    mutating func updateItem(_ item: CartItemViewModel, newCartQuantity: Int) {
+    mutating func updateItem(_ item: CartLayoutViewModel.CartItem, newCartQuantity: Int) {
         guard let indexOf = self.items.firstIndex(where: { $0.productType == item.productType }) else { return }
         
         var updatedItems = self.items

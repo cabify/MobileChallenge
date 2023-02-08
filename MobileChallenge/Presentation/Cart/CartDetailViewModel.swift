@@ -47,7 +47,7 @@ final class CartDetailViewModel: LoadableObject, Identifiable {
     }
     
     // MARK: - Add/remove items
-    private func updateItem(_ item: CartItemViewModel, newCartQuantity: Int) {
+    private func updateItem(_ item: CartLayoutViewModel.CartItem, newCartQuantity: Int) {
         guard case .loaded(let cart) = state else { return }
         
         var updatedCart = cart
@@ -55,7 +55,7 @@ final class CartDetailViewModel: LoadableObject, Identifiable {
         self.state = .loaded(updatedCart)
     }
     
-    func addItemToCart(_ item: CartItemViewModel) {
+    func addItemToCart(_ item: CartLayoutViewModel.CartItem) {
         addItemToCartUseCase.addItem(item.domainObject)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] newQuantity in
                 self?.updateItem(item, newCartQuantity: newQuantity)
@@ -63,7 +63,7 @@ final class CartDetailViewModel: LoadableObject, Identifiable {
             .store(in: &cancellables)
     }
     
-    func removeItemFromCart(_ item: CartItemViewModel) {
+    func removeItemFromCart(_ item: CartLayoutViewModel.CartItem) {
         removeItemToCartUseCase.removeItem(item.domainObject)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] newQuantity in
                 self?.updateItem(item, newCartQuantity: newQuantity)
