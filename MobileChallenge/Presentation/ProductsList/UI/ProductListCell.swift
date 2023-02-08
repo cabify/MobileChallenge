@@ -10,9 +10,8 @@ import SwiftUI
 struct ProductListCell: View {
     
     // Properties
-    var cartItemViewModel: CartLayoutViewModel.CartItem
-    var onIncreaseAction: () -> Void
-    var onDecreaseAction: () -> Void
+    var cartItem: CartLayoutViewModel.CartItem
+    var onChangeQuantityAction: ProductsView.ProductsViewActionBlock
     
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -21,7 +20,7 @@ struct ProductListCell: View {
                 // Product name and cart counting
                 HStack {
                     // Name
-                    Text(cartItemViewModel.name)
+                    Text(cartItem.name)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.black)
                     
@@ -29,21 +28,23 @@ struct ProductListCell: View {
                     
                     // Cart counting
                     CartQuantityView(
-                        cartQuantity: cartItemViewModel.cartQuantity,
-                        onIncreaseAction: onIncreaseAction,
-                        onDecreaseAction: onDecreaseAction
+                        cartItem: cartItem,
+                        onChangeQuantityAction: onChangeQuantityAction
                     )
                 }
                 
                 // Badge
-                if let badgeText = cartItemViewModel.productType.discountBadgeText {
+                if let badgeText = cartItem.productType.discountBadgeText {
                     DiscountBadgeView(badgeText: badgeText)
                 }
             }
             
             // Product price
-            PriceView(price: cartItemViewModel.formattedPrice, specialPrice: cartItemViewModel.formattedSpecialPrice)
-                .frame(minWidth: 60, alignment: .trailing)
+            PriceView(
+                price: cartItem.formattedPrice,
+                specialPrice: cartItem.formattedSpecialPrice
+            )
+            .frame(minWidth: 60, alignment: .trailing)
         }
         .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
     }
@@ -55,9 +56,8 @@ struct ProductListCell_Previews: PreviewProvider {
     static var previews: some View {
         List(CartLayoutViewModel.CartItem.productsListPreview) { aCartItem in
             ProductListCell(
-                cartItemViewModel: aCartItem,
-                onIncreaseAction: { },
-                onDecreaseAction: { }
+                cartItem: aCartItem,
+                onChangeQuantityAction: { _ in }
             )
         }
     }

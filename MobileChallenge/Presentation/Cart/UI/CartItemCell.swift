@@ -10,23 +10,22 @@ import SwiftUI
 struct CartItemCell: View {
     
     // Properties
-    var cartItemViewModel: CartLayoutViewModel.CartItem
-    var onIncreaseAction: () -> Void
-    var onDecreaseAction: () -> Void
+    var cartItem: CartLayoutViewModel.CartItem
+    var onChangeQuantityAction: ProductsView.ProductsViewActionBlock
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             // Product name and discount badge
             HStack(alignment: .center) {
                 // Name
-                Text(cartItemViewModel.name)
+                Text(cartItem.name)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.black)
                 
                 Spacer()
                 
                 // Badge
-                if let badgeText = cartItemViewModel.productType.discountBadgeText {
+                if let badgeText = cartItem.productType.discountBadgeText {
                     DiscountBadgeView(badgeText: badgeText)
                         .frame(alignment: .trailing)
                 }
@@ -35,17 +34,16 @@ struct CartItemCell: View {
             HStack(alignment: .center) {
                 // Cart counting
                 CartQuantityView(
-                    cartQuantity: cartItemViewModel.cartQuantity,
-                    onIncreaseAction: onIncreaseAction,
-                    onDecreaseAction: onDecreaseAction
+                    cartItem: cartItem,
+                    onChangeQuantityAction: onChangeQuantityAction
                 )
                 
                 Spacer()
                 
                 // Product price
                 PriceView(
-                    price: cartItemViewModel.formattedTotalPrice,
-                    specialPrice: cartItemViewModel.formattedTotalPriceWithDiscounts,
+                    price: cartItem.formattedTotalPrice,
+                    specialPrice: cartItem.formattedTotalPriceWithDiscounts,
                     inline: true
                 )
                 .frame(minWidth: 60, alignment: .trailing)
@@ -60,9 +58,8 @@ struct CartItemCell_Previews: PreviewProvider {
     static var previews: some View {
         List(CartLayoutViewModel.CartItem.cartItemsPreview) { aCartItem in
             CartItemCell(
-                cartItemViewModel: aCartItem,
-                onIncreaseAction: { },
-                onDecreaseAction: { }
+                cartItem: aCartItem,
+                onChangeQuantityAction: { _ in }
             )
         }
     }

@@ -10,6 +10,13 @@ import Combine
 
 struct ProductsView: View {
     
+    // Actions
+    enum Actions {
+        case add(CartLayoutViewModel.CartItem)
+        case remove(CartLayoutViewModel.CartItem)
+    }
+    typealias ProductsViewActionBlock = ((Actions) -> Void)
+    
     @ObservedObject var viewModel: ProductsViewModel
     
     var body: some View {
@@ -29,26 +36,24 @@ struct ProductsView: View {
             EmptyStateView(emptyType: .error(error))
             
         case .loaded(let cart):
-            List(cart.items) { aCartItem in
-                ProductListCell(
-                    cartItemViewModel: aCartItem,
-                    onIncreaseAction: {
-                        self.viewModel.addItemToCart(aCartItem)
-                        
-                    }, onDecreaseAction: {
-                        self.viewModel.removeItemFromCart(aCartItem)
-                    })
+            if cart.items.isEmpty {
+                EmptyStateView(emptyType: .products)
+                
+            } else {
+                ProductsListView(cart: cart) { anAction in
+                    switch anAction {
+                    case .add(let cartItem): self.viewModel.addItemToCart(cartItem)
+                    case .remove(let cartItem): self.viewModel.removeItemFromCart(cartItem)
+                    }
+                }
             }
-            // Hack to disable row selection to allow
-            // the tap on inner buttons
-            .onTapGesture { return }
         }
     }
 }
 
 // MARK: - Preview
 #if DEBUG
-struct ProductsListView_Previews: PreviewProvider {
+struct ProductsView_Previews: PreviewProvider {
     static var previews: some View {
         ProductsView(viewModel: ProductsViewModel.preview)
     }

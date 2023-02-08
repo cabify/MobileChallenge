@@ -23,15 +23,12 @@ struct CartDetailView: View {
                     if !cart.items.isEmpty {
                         Section(content: {
                             List(cart.items) { aCartItem in
-                                CartItemCell(
-                                    cartItemViewModel: aCartItem,
-                                    onIncreaseAction: {
-                                        self.viewModel.addItemToCart(aCartItem)
-                                        
-                                    }, onDecreaseAction: {
-                                        self.viewModel.removeItemFromCart(aCartItem)
+                                CartItemCell(cartItem: aCartItem) { anAction in
+                                    switch anAction {
+                                    case .add(let cartItem): self.viewModel.addItemToCart(cartItem)
+                                    case .remove(let cartItem): self.viewModel.removeItemFromCart(cartItem)
                                     }
-                                )
+                                }
                             }
                         }, header: {
                             PrimaryButtonView(buttonText: "Clear cart", onTapAction: {

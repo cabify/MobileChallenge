@@ -13,6 +13,7 @@
 		3371D9862989386000774082 /* ProductsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D9852989386000774082 /* ProductsListCoordinator.swift */; };
 		3371D9882989389400774082 /* ProductsListCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D9872989389400774082 /* ProductsListCoordinatorView.swift */; };
 		3378A22E2994067200BB9A5E /* CartLayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3378A22D2994067200BB9A5E /* CartLayoutViewModel.swift */; };
+		3378A2302994392F00BB9A5E /* ProductsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3378A22F2994392F00BB9A5E /* ProductsListView.swift */; };
 		337927F429916AEE00CD219A /* ProductsListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337927F329916AEE00CD219A /* ProductsListRequest.swift */; };
 		337927F6299198F600CD219A /* GetCartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337927F5299198F600CD219A /* GetCartUseCase.swift */; };
 		3379280129931E7500CD219A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379280029931E7500CD219A /* Double+Extension.swift */; };
@@ -96,6 +97,7 @@
 		3371D9852989386000774082 /* ProductsListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListCoordinator.swift; sourceTree = "<group>"; };
 		3371D9872989389400774082 /* ProductsListCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListCoordinatorView.swift; sourceTree = "<group>"; };
 		3378A22D2994067200BB9A5E /* CartLayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartLayoutViewModel.swift; sourceTree = "<group>"; };
+		3378A22F2994392F00BB9A5E /* ProductsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListView.swift; sourceTree = "<group>"; };
 		337927F329916AEE00CD219A /* ProductsListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListRequest.swift; sourceTree = "<group>"; };
 		337927F5299198F600CD219A /* GetCartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCartUseCase.swift; sourceTree = "<group>"; };
 		3379280029931E7500CD219A /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */,
+				3378A22F2994392F00BB9A5E /* ProductsListView.swift */,
 				33C4F9DC298B24BD004B8352 /* ProductListCell.swift */,
 			);
 			path = UI;
@@ -595,6 +598,7 @@
 				3378A22E2994067200BB9A5E /* CartLayoutViewModel.swift in Sources */,
 				3371D9882989389400774082 /* ProductsListCoordinatorView.swift in Sources */,
 				338F7FD3298D5A4100BBA7DC /* DefaultCartRepository.swift in Sources */,
+				3378A2302994392F00BB9A5E /* ProductsListView.swift in Sources */,
 				338F7FB9298D21B200BBA7DC /* StorageProtocol.swift in Sources */,
 				3385CDF52987FCC8002CD30A /* RequestConvertable.swift in Sources */,
 				3379280129931E7500CD219A /* Double+Extension.swift in Sources */,

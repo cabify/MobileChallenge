@@ -9,27 +9,33 @@ import SwiftUI
 
 struct CartQuantityView: View {
     
-    @State var cartQuantity: Int
-    var onIncreaseAction: () -> Void
-    var onDecreaseAction: () -> Void
+    var cartItem: CartLayoutViewModel.CartItem
+    @State private var cartQuantity: Int = 0
+    var onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    
+    init(cartItem: CartLayoutViewModel.CartItem, onChangeQuantityAction: @escaping ProductsView.ProductsViewActionBlock) {
+        self.cartItem = cartItem
+        self.onChangeQuantityAction = onChangeQuantityAction
+        self.cartQuantity = cartItem.cartQuantity
+    }
     
     var body: some View {
         VStack(alignment: .trailing) {
             HStack {
                 // Minus button
                 quantityButton(imageNamed: "minus.rectangle") {
-                    cartQuantity -= 1
-                    onDecreaseAction()
+                    onChangeQuantityAction(.remove(cartItem))
+                    self.cartQuantity -= 1
                 }.disabled(cartQuantity <= 0)
                 
                 // Current quantity
-                Text("\(cartQuantity)")
+                Text("\(cartItem.cartQuantity)")
                     .font(.system(size: 16))
                 
                 // Plus button
                 quantityButton(imageNamed: "plus.rectangle") {
-                    cartQuantity += 1
-                    onIncreaseAction()
+                    onChangeQuantityAction(.add(cartItem))
+                    self.cartQuantity += 1
                 }
             }
         }
@@ -51,11 +57,12 @@ struct CartQuantityView: View {
 #if DEBUG
 struct CartQuantityView_Previews: PreviewProvider {
     static var previews: some View {
-        CartQuantityView(
-            cartQuantity: 0,
-            onIncreaseAction: { },
-            onDecreaseAction: { }
-        )
+        List(CartLayoutViewModel.CartItem.cartItemsPreview) { aCartItem in
+            CartQuantityView(
+                cartItem: aCartItem,
+                onChangeQuantityAction: { _ in }
+            )
+        }
     }
 }
 #endif
