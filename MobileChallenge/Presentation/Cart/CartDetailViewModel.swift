@@ -9,7 +9,7 @@ import Combine
 
 final class CartDetailViewModel: LoadableObject, Identifiable {
     
-    typealias Output = [SingleCartItemViewModel]
+    typealias Output = CartViewModel
     
     private unowned let coordinator: ProductsListCoordinator
     private let getCartUseCase: GetCartUseCase
@@ -17,7 +17,7 @@ final class CartDetailViewModel: LoadableObject, Identifiable {
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
     private let clearCartUseCase: ClearCartUseCase
     private var cancellables = Set<AnyCancellable>()
-    @Published var state: LoadableState<[SingleCartItemViewModel]> = .idle
+    @Published var state: LoadableState<CartViewModel> = .idle
     var emptyStateType: EmptyStateView.EmptyType { .cart }
     
     init(coordinator: ProductsListCoordinator, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase, clearCartUseCase: ClearCartUseCase) {
@@ -33,17 +33,9 @@ final class CartDetailViewModel: LoadableObject, Identifiable {
         state = .loading
         
         getCartUseCase.getCart()
-            .flatMap { cart in
-                self.getProductsListUseCase.getProductsList()
-                    .map { productList in
-                        let products = productList.products.compactMap({ product in
-                            let cartQuantity = cart.items.first(where: { cartItem in
-                                cartItem.code == ProductType.init(code: product.code)?.intValue
-                            })?.quantity ?? 0
-                            return SingleCartItemViewModel(product: product, cartQuantity: cartQuantity)
-                        })
-                        return .loaded(products)
-                    }
+            .map { cart in
+                let cart = CartViewModel(cart: cart)
+                return .loaded(cart)
             }
             .catch { error in
                 Just(LoadableState.failed(error))
