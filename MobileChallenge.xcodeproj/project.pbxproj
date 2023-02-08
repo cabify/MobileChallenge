@@ -360,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				33C4F9DE298BC5D3004B8352 /* CartButtonView.swift */,
+				33C4F9DC298B24BD004B8352 /* ProductListCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -404,7 +405,6 @@
 				339697C3298ADB6B009091CB /* DiscountBadgeView.swift */,
 				339697C5298ADDDE009091CB /* CartQuantityView.swift */,
 				33C4F9DA298B1DB4004B8352 /* PriceView.swift */,
-				33C4F9DC298B24BD004B8352 /* ProductListCell.swift */,
 				33C4F9ED298BFEE5004B8352 /* EmptyStateView.swift */,
 				33B3496E298C1F2000BED8C2 /* PrimaryButtonView.swift */,
 			);
