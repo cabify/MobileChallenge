@@ -31,7 +31,7 @@ final class CoreDataStorage {
 #if DEBUG
 extension CoreDataStorage {
     static var preview: Self {
-        .init(configuration: .basic(identifier: "MobileChallengePreview"))
+        .init(configuration: .basic(identifier: "MobileChallenge"))
     }
 }
 #endif
