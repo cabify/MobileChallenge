@@ -9,7 +9,8 @@ import Foundation
 
 struct CartViewModel {
     
-    struct Discount {
+    struct Discount: Identifiable {
+        let id = UUID()
         let text: String
         let value: Double
         var formattedValue: String {
@@ -18,11 +19,15 @@ struct CartViewModel {
     }
     
     private let subtotal: Double
-    let formattedSubtotal: String
+    var formattedSubtotal: String {
+        return self.subtotal.currency
+    }
     var showDiscounts: Bool = false
     var discounts: [Discount]
     private let total: Double
-    let formattedTotal: String
+    var formattedTotal: String {
+        return self.total.currency
+    }
     private(set) var items: [CartItemViewModel]
     
     init(cart: Cart) {
@@ -33,7 +38,6 @@ struct CartViewModel {
         // Subtotal
         let subtotal = items.compactMap { $0.totalPrice }.reduce(0, +)
         self.subtotal = subtotal
-        self.formattedSubtotal = subtotal.currency
         
         // Discounts
         self.discounts = items.compactMap { anItem -> Discount? in
@@ -43,8 +47,8 @@ struct CartViewModel {
         self.showDiscounts = !self.discounts.isEmpty
         
         // Total
-        self.total = subtotal
-        self.formattedTotal = subtotal.currency
+        let total = items.compactMap { $0.totalPriceWithDiscounts ?? $0.totalPrice }.reduce(0, +)
+        self.total = total
         
         // Items
         self.items = items

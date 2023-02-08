@@ -16,16 +16,20 @@ struct CartDetailView: View {
     var body: some View {
         LoadableContentView(source: viewModel) { cart in
             NavigationView {
-                List(cart.items) { aCartItem in
-                    CartItemCell(
-                        cartItemViewModel: aCartItem,
-                        onIncreaseAction: {
-                            // self.viewModel.addItemToCart(aCartItem)
-                            
-                        }, onDecreaseAction: {
-                            // self.viewModel.removeItemFromCart(aCartItem)
-                        }
-                    )
+                VStack {
+                    CartSummaryView(cartViewModel: cart)
+                    
+                    List(cart.items) { aCartItem in
+                        CartItemCell(
+                            cartItemViewModel: aCartItem,
+                            onIncreaseAction: {
+                                // self.viewModel.addItemToCart(aCartItem)
+                                
+                            }, onDecreaseAction: {
+                                // self.viewModel.removeItemFromCart(aCartItem)
+                            }
+                        )
+                    }
                 }
                 .navigationTitle("Place your order")
                 .navigationBarTitleDisplayMode(.inline)
