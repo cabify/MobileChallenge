@@ -26,12 +26,33 @@ struct CartItemViewModel: Identifiable {
     // Regular price
     private let price: Double
     let formattedPrice: String
+    // Special price
+    private var specialPrice: Double? {
+        switch self.productType {
+        case .tShirt: return self.cartQuantity < 3 ? nil : self.price - 1.0
+        default: return nil
+        }
+    }
     var showSpecialPrice: Bool {
         return self.specialPrice != nil
     }
     var formattedSpecialPrice: String? {
         guard let specialPrice = self.specialPrice?.currency else { return nil }
         return specialPrice
+    }
+    // Discounts
+    var totalDiscounts: Double {
+        switch self.productType {
+        case .voucher:
+            guard self.cartQuantity >= 2 else { return 0.0 }
+            if self.cartQuantity % 2 == 0 {
+                return (Double(self.cartQuantity) / 2.0) * self.price
+            }
+            return ((Double(self.cartQuantity) / 2.0) * self.price) - (Double(self.cartQuantity % 2) * (self.price / 2.0))
+            
+        case .tShirt: return self.cartQuantity < 3 ? 0.0 : Double(self.cartQuantity) * 1.0
+        default: return 0.0
+        }
     }
     }
     // To domain
