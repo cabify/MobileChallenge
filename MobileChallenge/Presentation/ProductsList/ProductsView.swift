@@ -14,6 +14,7 @@ struct ProductsView: View {
     enum Actions {
         case add(CartLayoutViewModel.CartItem)
         case remove(CartLayoutViewModel.CartItem)
+        case clearCart
     }
     typealias ProductsViewActionBlock = ((Actions) -> Void)
     
@@ -44,6 +45,7 @@ struct ProductsView: View {
                     switch anAction {
                     case .add(let cartItem): self.viewModel.addItemToCart(cartItem)
                     case .remove(let cartItem): self.viewModel.removeItemFromCart(cartItem)
+                    case .clearCart: break
                     }
                 }
             }

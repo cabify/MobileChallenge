@@ -30,12 +30,10 @@ struct ProductsListView: View {
 #if DEBUG
 struct ProductsListView_Previews: PreviewProvider {
     static var previews: some View {
-        List(CartLayoutViewModel.CartItem.productsListPreview) { aCartItem in
-            ProductListCell(
-                cartItem: aCartItem,
-                onChangeQuantityAction: { _ in }
-            )
-        }
+        ProductsListView(
+            cart: CartLayoutViewModel.preview,
+            onChangeQuantityAction: { _ in }
+        )
     }
 }
 #endif

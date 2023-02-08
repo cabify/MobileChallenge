@@ -20,26 +20,19 @@ struct CartDetailView: View {
                 VStack(spacing: 10) {
                     CartSummaryView(cartViewModel: cart)
                     
-                    if !cart.items.isEmpty {
-                        Section(content: {
-                            List(cart.items) { aCartItem in
-                                CartItemCell(cartItem: aCartItem) { anAction in
-                                    switch anAction {
-                                    case .add(let cartItem): self.viewModel.addItemToCart(cartItem)
-                                    case .remove(let cartItem): self.viewModel.removeItemFromCart(cartItem)
-                                    }
-                                }
-                            }
-                        }, header: {
-                            PrimaryButtonView(buttonText: "Clear cart", onTapAction: {
-                                self.viewModel.clearCart()
-                            })
-                        })
+                    if cart.items.isEmpty {
+                        EmptyStateView(emptyType: .cart) {
+                            dismiss()
+                        }
                         
                     } else {
-                        EmptyStateView(emptyType: .cart, onRetryAction: {
-                            dismiss()
-                        })
+                        CartItemsView(cart: cart) { anAction in
+                            switch anAction {
+                            case .add(let cartItem): self.viewModel.addItemToCart(cartItem)
+                            case .remove(let cartItem): self.viewModel.removeItemFromCart(cartItem)
+                            case .clearCart: self.viewModel.clearCart()
+                            }
+                        }
                     }
                 }
                 .navigationTitle("Place your order")
