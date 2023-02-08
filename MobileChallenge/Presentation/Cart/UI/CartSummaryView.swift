@@ -33,7 +33,6 @@ struct CartSummaryView: View {
             }
             
             Divider()
-                .frame(width: .infinity)
             
             // Total
             summaryItem(
