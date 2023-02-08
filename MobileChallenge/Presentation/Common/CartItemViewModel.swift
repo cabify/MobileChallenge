@@ -70,6 +70,15 @@ struct CartItemViewModel: Identifiable {
         self.formattedPrice = product.price.currency
         self.cartQuantity = cartQuantity
     }
+    // From product
+    init?(cartItem: Cart.Item) {
+        guard let productType = ProductType(rawValue: cartItem.code) else { return nil }
+        self.productType = productType
+        self.name = cartItem.name
+        self.price = cartItem.price
+        self.formattedPrice = cartItem.price.currency
+        self.cartQuantity = cartItem.quantity
+    }
     
     // MARK: - Setter
     mutating func updateCartQuantity(_ cartQuantity: Int) {
