@@ -19,6 +19,7 @@
 		337927FF29931CF300CD219A /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337927FE29931CF300CD219A /* CartViewModel.swift */; };
 		3379280129931E7500CD219A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3379280029931E7500CD219A /* Double+Extension.swift */; };
 		337928042993CCCA00CD219A /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337928032993CCCA00CD219A /* CartItemCell.swift */; };
+		337928062993D10900CD219A /* CartSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337928052993D10900CD219A /* CartSummaryView.swift */; };
 		3385CDDE29843AC1002CD30A /* ProductsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDDD29843AC1002CD30A /* ProductsList.swift */; };
 		3385CDDF29843AD1002CD30A /* ProductsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDDD29843AC1002CD30A /* ProductsList.swift */; };
 		3385CDE429843C80002CD30A /* GetProductsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE329843C80002CD30A /* GetProductsListUseCase.swift */; };
@@ -107,6 +108,7 @@
 		337927FE29931CF300CD219A /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		3379280029931E7500CD219A /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		337928032993CCCA00CD219A /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
+		337928052993D10900CD219A /* CartSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartSummaryView.swift; sourceTree = "<group>"; };
 		3385CDDD29843AC1002CD30A /* ProductsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsList.swift; sourceTree = "<group>"; };
 		3385CDE329843C80002CD30A /* GetProductsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductsListUseCase.swift; sourceTree = "<group>"; };
 		3385CDE82987E8C7002CD30A /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		337928022993C8CF00CD219A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				337928052993D10900CD219A /* CartSummaryView.swift */,
 				337928032993CCCA00CD219A /* CartItemCell.swift */,
 			);
 			path = UI;
@@ -642,6 +645,7 @@
 				3371D984298933FA00774082 /* CartDetailViewModel.swift in Sources */,
 				338F7FC2298D24CA00BBA7DC /* StorageStoreCoordinator.swift in Sources */,
 				339697C4298ADB6B009091CB /* DiscountBadgeView.swift in Sources */,
+				337928062993D10900CD219A /* CartSummaryView.swift in Sources */,
 				3385CDEF2987EADC002CD30A /* ApiClient.swift in Sources */,
 				338F7FCD298D545A00BBA7DC /* Cart.swift in Sources */,
 				338F7FE5298D84B000BBA7DC /* RemoveItemFromCartUseCase.swift in Sources */,
