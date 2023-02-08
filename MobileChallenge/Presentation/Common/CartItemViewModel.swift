@@ -101,8 +101,12 @@ struct CartItemViewModel: Identifiable {
 
 #if DEBUG
 extension CartItemViewModel {
-    static var preview: [Self] {
+    static var productsListPreview: [Self] {
         ProductsList.preview.products.compactMap({ .init(product: $0) })
+    }
+    
+    static var cartItemsPreview: [Self] {
+        Cart.preview.items.compactMap({ .init(cartItem: $0) })
     }
 }
 #endif

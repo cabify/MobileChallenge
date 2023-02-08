@@ -53,7 +53,7 @@ struct ProductListCell: View {
 #if DEBUG
 struct ProductListCell_Previews: PreviewProvider {
     static var previews: some View {
-        List(CartItemViewModel.preview) { aCartItem in
+        List(CartItemViewModel.productsListPreview) { aCartItem in
             ProductListCell(
                 cartItemViewModel: aCartItem,
                 onIncreaseAction: { },

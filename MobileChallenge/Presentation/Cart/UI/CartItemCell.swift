@@ -51,7 +51,6 @@ struct CartItemCell: View {
                 .frame(minWidth: 60, alignment: .trailing)
             }
         }
-        .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
     }
 }
 
@@ -59,7 +58,7 @@ struct CartItemCell: View {
 #if DEBUG
 struct CartItemCell_Previews: PreviewProvider {
     static var previews: some View {
-        List(CartItemViewModel.preview) { aCartItem in
+        List(CartItemViewModel.cartItemsPreview) { aCartItem in
             CartItemCell(
                 cartItemViewModel: aCartItem,
                 onIncreaseAction: { },
