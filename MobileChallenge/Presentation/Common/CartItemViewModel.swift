@@ -61,11 +61,12 @@ struct CartItemViewModel: Identifiable {
     var formattedTotalPrice: String {
         return self.totalPrice.currency
     }
-    var totalPriceWithDiscounts: Double {
-        return (self.specialPrice ?? self.price) * Double(self.cartQuantity)
+    var totalPriceWithDiscounts: Double? {
+        guard let specialPrice = self.specialPrice else { return nil }
+        return specialPrice * Double(self.cartQuantity)
     }
-    var formattedTotalPriceWithDiscounts: String {
-        return self.totalPriceWithDiscounts.currency
+    var formattedTotalPriceWithDiscounts: String? {
+        return self.totalPriceWithDiscounts?.currency
     }
     // To domain
     var domainObject: Cart.Item {
