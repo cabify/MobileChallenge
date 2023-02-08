@@ -13,24 +13,40 @@ struct PriceView: View {
     var price: String
     var specialPrice: String?
     private let showSpecialPrice: Bool
+    private let showPriceInline: Bool
     
     // Init
-    init(price: String, specialPrice: String? = nil) {
+    init(price: String, specialPrice: String? = nil, inline: Bool = false) {
         self.price = price
-        self.showSpecialPrice = specialPrice != nil
         self.specialPrice = specialPrice
+        self.showSpecialPrice = specialPrice != nil
+        self.showPriceInline = inline
     }
     
     var body: some View {
-        VStack(alignment: .trailing) {
-            // Special price
-            if let specialPrice = self.specialPrice,
-               showSpecialPrice {
-                specialPriceLabel(specialPrice)
+        if showPriceInline {
+            HStack(alignment: .firstTextBaseline, spacing: 10) {
+                // Price
+                priceLabel
+                
+                // Special price
+                if let specialPrice = self.specialPrice,
+                   showSpecialPrice {
+                    specialPriceLabel(specialPrice)
+                }
             }
             
-            // Price
-            priceLabel
+        } else {
+            VStack(alignment: .trailing) {
+                // Special price
+                if let specialPrice = self.specialPrice,
+                   showSpecialPrice {
+                    specialPriceLabel(specialPrice)
+                }
+                
+                // Price
+                priceLabel
+            }
         }
     }
     
@@ -46,9 +62,9 @@ struct PriceView: View {
     }
     
     @ViewBuilder
-    private func specialPriceLabel(_ specialPrice: String) -> some View {
+    private func specialPriceLabel(_ specialPrice: String, inline: Bool = false) -> some View {
         Text(specialPrice)
-            .font(.system(size: 18, weight: .bold))
+            .font(.system(size: inline ? 20 : 18, weight: .bold))
             .foregroundColor(.purple)
     }
 }
@@ -60,6 +76,7 @@ struct PriceView_Previews: PreviewProvider {
         VStack {
             PriceView(price: "20€", specialPrice: nil)
             PriceView(price: "20€", specialPrice: "19€")
+            PriceView(price: "20€", specialPrice: "19€", inline: true)
         }
     }
 }
