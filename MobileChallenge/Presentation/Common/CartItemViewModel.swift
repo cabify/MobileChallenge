@@ -10,7 +10,6 @@ import Foundation
 struct CartItemViewModel: Identifiable {
     
     static let defaultType: ProductType = .voucher(quantity: 0, price: 0)
-    static let priceFormat: String = "%.2f€"
     
     typealias Identifier = UUID
     
@@ -24,8 +23,8 @@ struct CartItemViewModel: Identifiable {
         return productType.specialPrice != nil
     }
     var formattedSpecialPrice: String? {
-        guard let specialPrice = productType.specialPrice else { return nil }
-        return String(format: CartItemViewModel.priceFormat, specialPrice)
+        guard let specialPrice = productType.specialPrice?.currency else { return nil }
+        return specialPrice
     }
     var showDiscountBadge: Bool {
         return productType.discountBadgeText != nil
@@ -39,7 +38,7 @@ struct CartItemViewModel: Identifiable {
         self.productType = productType
         self.name = product.name
         self.price = product.price
-        self.formattedPrice = String(format: CartItemViewModel.priceFormat, product.price)
+        self.formattedPrice = product.price.currency
         self.cartQuantity = cartQuantity
     }
     
