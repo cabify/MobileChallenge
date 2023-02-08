@@ -23,8 +23,8 @@ struct Cart {
 extension Cart {
     static var preview: Self {
         .init(items: [
-            .init(code: 0, name: "Cabify Voucher", quantity: 0, price: 5),
-            .init(code: 1, name: "Cabify T-Shirt", quantity: 0, price: 20),
+            .init(code: 0, name: "Cabify Voucher", quantity: 2, price: 5),
+            .init(code: 1, name: "Cabify T-Shirt", quantity: 4, price: 20),
             .init(code: 2, name: "Cabify Coffee Mug", quantity: 0, price: 7.5)
         ])
     }
