@@ -62,8 +62,10 @@ struct CartItemViewModel: Identifiable {
         return self.totalPrice.currency
     }
     var totalPriceWithDiscounts: Double? {
-        guard let specialPrice = self.specialPrice else { return nil }
-        return specialPrice * Double(self.cartQuantity)
+        if let specialPrice = self.specialPrice {
+            return specialPrice * Double(self.cartQuantity)
+        }
+        return self.totalPrice - self.totalDiscounts
     }
     var formattedTotalPriceWithDiscounts: String? {
         return self.totalPriceWithDiscounts?.currency
