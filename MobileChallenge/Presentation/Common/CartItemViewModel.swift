@@ -97,10 +97,12 @@ struct CartItemViewModel: Identifiable {
     mutating func updateCartQuantity(_ cartQuantity: Int) {
         self.cartQuantity = cartQuantity
     }
-    
-    #if DEBUG
+}
+
+#if DEBUG
+extension CartItemViewModel {
     static var preview: [Self] {
         ProductsList.preview.products.compactMap({ .init(product: $0) })
     }
-    #endif
 }
+#endif
