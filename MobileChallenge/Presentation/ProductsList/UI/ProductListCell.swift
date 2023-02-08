@@ -53,9 +53,9 @@ struct ProductListCell: View {
 #if DEBUG
 struct ProductListCell_Previews: PreviewProvider {
     static var previews: some View {
-        List(CartItemViewModel.preview) { aProduct in
+        List(CartItemViewModel.preview) { aCartItem in
             ProductListCell(
-                singleCartItem: aProduct,
+                singleCartItem: aCartItem,
                 onIncreaseAction: { },
                 onDecreaseAction: { }
             )
