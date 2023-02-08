@@ -36,7 +36,7 @@ struct ProductsView: View {
         case .failed(let error):
             EmptyStateView(emptyType: .error(error))
             
-        case .loaded(let cart):
+        case .loaded(let cart, _):
             if cart.items.isEmpty {
                 EmptyStateView(emptyType: .products)
                 

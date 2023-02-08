@@ -15,15 +15,16 @@ struct ProductsListCoordinatorView: View {
     
     var body: some View {
         NavigationView {
-            ProductsView(viewModel: coordinatorObject.productsListViewModel)
+            ProductsView(viewModel: coordinatorObject.productsViewModel)
             .navigationTitle(Text("Products list"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 CartButtonView(onTapAction: {
                     self.showingSheet.toggle()
+                    coordinatorObject.openCart()
                 })
                 .sheet(isPresented: $showingSheet) {
-                    CartDetailView(viewModel: coordinatorObject.productsListViewModel)
+                    CartDetailView(viewModel: coordinatorObject.cartDetailViewModel!)
                 }
             }
         }

@@ -11,19 +11,17 @@ import Combine
 struct CartDetailView: View {
     
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel: ProductsViewModel
+    @ObservedObject var viewModel: CartDetailViewModel
     
     var body: some View {
         NavigationView {
             switch viewModel.state {
-            case .loaded(let cart):
+            case .loaded(let cart, _):
                 VStack(spacing: 10) {
                     CartSummaryView(cartViewModel: cart)
                     
                     if cart.items.isEmpty {
-                        EmptyStateView(emptyType: .cart) {
-                            dismiss()
-                        }
+                        EmptyStateView(emptyType: .cart, onRetryAction: dismiss.callAsFunction)
                         
                     } else {
                         CartItemsView(cart: cart) { anAction in
@@ -38,9 +36,7 @@ struct CartDetailView: View {
                 .navigationTitle("Place your order")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar() {
-                    Button("Close") {
-                        dismiss()
-                    }
+                    Button("Close", action: dismiss.callAsFunction)
                     .tint(.purple)
                 }
                 // Hack to disable row selection to allow
@@ -48,9 +44,7 @@ struct CartDetailView: View {
                 .onTapGesture { return }
                 
             default:
-                EmptyStateView(emptyType: .cart, onRetryAction: {
-                    dismiss()
-                })
+                EmptyStateView(emptyType: .cart, onRetryAction: dismiss.callAsFunction)
             }
         }
     }
@@ -60,7 +54,7 @@ struct CartDetailView: View {
 #if DEBUG
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
-        CartDetailView(viewModel: ProductsViewModel.preview)
+        CartDetailView(viewModel: CartDetailViewModel.preview)
     }
 }
 #endif

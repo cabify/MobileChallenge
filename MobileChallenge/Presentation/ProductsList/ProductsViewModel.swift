@@ -14,7 +14,7 @@ final class ProductsViewModel: ObservableObject {
         case idle
         case loading
         case failed(Error)
-        case loaded(CartLayoutViewModel)
+        case loaded(cart: CartLayoutViewModel, filteredItems: [CartLayoutViewModel]? = nil)
     }
     
     private unowned let coordinator: ProductsListCoordinator
@@ -22,17 +22,15 @@ final class ProductsViewModel: ObservableObject {
     private let getCartUseCase: GetCartUseCase
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
-    private let clearCartUseCase: ClearCartUseCase
     @Published private(set) var state = State.idle
     private var cancellables = Set<AnyCancellable>()
     
-    init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase, clearCartUseCase: ClearCartUseCase) {
+    init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
         self.coordinator = coordinator
         self.getProductsListUseCase = getProductsListUseCase
         self.getCartUseCase = getCartUseCase
         self.addItemToCartUseCase = addItemToCartUseCase
         self.removeItemToCartUseCase = removeItemToCartUseCase
-        self.clearCartUseCase = clearCartUseCase
     }
     
     // MARK: - Fetch
@@ -48,7 +46,7 @@ final class ProductsViewModel: ObservableObject {
                             let cartQuantity = cart.items.first(where: { cartItem in cartItem.code == productType.intValue })?.quantity ?? 0
                             return Cart.Item(code: productType.intValue, name: product.name, quantity: cartQuantity, price: product.price)
                         })
-                        return .loaded(CartLayoutViewModel(cart: Cart(items: products)))
+                        return .loaded(cart: CartLayoutViewModel(cart: Cart(items: products)))
                     }
             }
             .catch { error in
@@ -62,12 +60,12 @@ final class ProductsViewModel: ObservableObject {
     
     // MARK: - Add/remove items
     private func updateItem(_ item: CartLayoutViewModel.CartItem, newCartQuantity: Int) {
-        guard case .loaded(let cart) = self.state else { return }
+        guard case .loaded(let cart, _) = self.state else { return }
         
         var updatedCart = cart
         updatedCart.updateItem(item, newCartQuantity: newCartQuantity)
         
-        self.state = .loaded(updatedCart)
+        self.state = .loaded(cart: updatedCart)
     }
     
     func addItemToCart(_ item: CartLayoutViewModel.CartItem) {
@@ -85,14 +83,6 @@ final class ProductsViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
-    
-    func clearCart() {
-        clearCartUseCase.clearCart()
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] clearedCart in
-                self?.state = .loaded(.init(cart: clearedCart))
-            })
-            .store(in: &cancellables)
-    }
 }
 
 #if DEBUG
@@ -103,8 +93,7 @@ extension ProductsViewModel {
             getProductsListUseCase: DefaultGetProductsListUseCase.preview,
             getCartUseCase: DefaultGetCartUseCase.preview,
             addItemToCartUseCase: DefaultAddItemToCartUseCase.preview,
-            removeItemToCartUseCase: DefaultRemoveItemFromCartUseCase.preview,
-            clearCartUseCase: DefaultClearCartUseCase.preview
+            removeItemToCartUseCase: DefaultRemoveItemFromCartUseCase.preview
         )
     }
 }

@@ -10,22 +10,38 @@ import Combine
 final class ProductsListCoordinator: ObservableObject {
     
     // MARK: - Properties
-    @Published private(set) var productsListViewModel: ProductsViewModel!
+    @Published private(set) var productsViewModel: ProductsViewModel!
+    private(set) var cartDetailViewModel: CartDetailViewModel?
+    private let cartRepository: CartRepository
     
     init(productsListRepository: ProductsListRepository, cartRepository: CartRepository) {
+        self.cartRepository = cartRepository
+        
         let defaultGetProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: productsListRepository)
         let defaultGetCartUseCase = DefaultGetCartUseCase(cartRepository: cartRepository)
         let defaultAddItemToCartUseCase = DefaultAddItemToCartUseCase(cartRepository: cartRepository)
         let defaultRemoveItemToCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: cartRepository)
-        let defaultClearCartUseCase = DefaultClearCartUseCase(cartRepository: cartRepository)
         
-        self.productsListViewModel = ProductsViewModel(
+        self.productsViewModel = ProductsViewModel(
             coordinator: self,
             getProductsListUseCase: defaultGetProductsListUseCase,
             getCartUseCase: defaultGetCartUseCase,
             addItemToCartUseCase: defaultAddItemToCartUseCase,
+            removeItemToCartUseCase: defaultRemoveItemToCartUseCase
+        )
+    }
+    
+    func openCart() {
+        let defaultAddItemToCartUseCase = DefaultAddItemToCartUseCase(cartRepository: cartRepository)
+        let defaultRemoveItemToCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: cartRepository)
+        let defaultClearCartUseCase = DefaultClearCartUseCase(cartRepository: cartRepository)
+        
+        self.cartDetailViewModel = CartDetailViewModel(
+            coordinator: self,
+            addItemToCartUseCase: defaultAddItemToCartUseCase,
             removeItemToCartUseCase: defaultRemoveItemToCartUseCase,
-            clearCartUseCase: defaultClearCartUseCase
+            clearCartUseCase: defaultClearCartUseCase,
+            state: self.productsViewModel.state
         )
     }
 }
