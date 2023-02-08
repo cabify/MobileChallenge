@@ -9,6 +9,16 @@ import Foundation
 
 struct CartViewModel {
     
+    // Subtotal
+    private var subtotal: Double {
+        return self.items.compactMap { $0.totalPrice }.reduce(0, +)
+    }
+    var formattedSubtotal: String {
+        return self.subtotal.currency
+    }
+    
+    // Discounts
+    // UI representation
     struct Discount: Identifiable {
         let id = UUID()
         let text: String
@@ -17,14 +27,22 @@ struct CartViewModel {
             return value.currency
         }
     }
-    
-    private let subtotal: Double
-    var formattedSubtotal: String {
-        return self.subtotal.currency
+    // Show discounts
+    var showDiscounts: Bool {
+        return !self.discounts.isEmpty
     }
-    var showDiscounts: Bool = false
-    var discounts: [Discount]
-    private let total: Double
+    // Discounts list
+    var discounts: [Discount] {
+        return items.compactMap { anItem -> Discount? in
+            guard let discountText = anItem.productType.discountBadgeText, anItem.totalDiscounts > 0 else { return nil }
+            return .init(text: discountText, value: anItem.totalDiscounts)
+        }
+    }
+    
+    // Total
+    var total: Double {
+        return items.compactMap { $0.totalPriceWithDiscounts ?? $0.totalPrice }.reduce(0, +)
+    }
     var formattedTotal: String {
         return self.total.currency
     }
@@ -35,17 +53,14 @@ struct CartViewModel {
             .filter { $0.quantity > 0 }
             .compactMap { .init(cartItem: $0) }
         
-        // Subtotal
-        let subtotal = items.compactMap { $0.totalPrice }.reduce(0, +)
-        self.subtotal = subtotal
+        // Items
+        self.items = items
+    }
+    
     // MARK: - Setter
     mutating func updateItem(_ item: CartItemViewModel, newCartQuantity: Int) {
         guard let indexOf = self.items.firstIndex(where: { $0.productType == item.productType }) else { return }
         
-        // Discounts
-        self.discounts = items.compactMap { anItem -> Discount? in
-            guard let discountText = anItem.productType.discountBadgeText, anItem.totalDiscounts > 0 else { return nil }
-            return .init(text: discountText, value: anItem.totalDiscounts)
         var updatedItems = self.items
         // Remove item when quantity reaches 0
         if newCartQuantity == 0 {
@@ -57,14 +72,7 @@ struct CartViewModel {
             updatedItem.updateCartQuantity(newCartQuantity)
             updatedItems[indexOf] = updatedItem
         }
-        self.showDiscounts = !self.discounts.isEmpty
         
-        // Total
-        let total = items.compactMap { $0.totalPriceWithDiscounts ?? $0.totalPrice }.reduce(0, +)
-        self.total = total
-        
-        // Items
-        self.items = items
         self.items = updatedItems
     }
 }
