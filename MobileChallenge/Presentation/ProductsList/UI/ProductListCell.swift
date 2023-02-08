@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductListCell: View {
     
     // Properties
-    var singleCartItem: CartItemViewModel
+    var cartItemViewModel: CartItemViewModel
     var onIncreaseAction: () -> Void
     var onDecreaseAction: () -> Void
     
@@ -21,7 +21,7 @@ struct ProductListCell: View {
                 // Product name and cart counting
                 HStack {
                     // Name
-                    Text(singleCartItem.name)
+                    Text(cartItemViewModel.name)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.black)
                     
@@ -29,20 +29,20 @@ struct ProductListCell: View {
                     
                     // Cart counting
                     CartQuantityView(
-                        cartQuantity: singleCartItem.cartQuantity,
+                        cartQuantity: cartItemViewModel.cartQuantity,
                         onIncreaseAction: onIncreaseAction,
                         onDecreaseAction: onDecreaseAction
                     )
                 }
                 
                 // Badge
-                if let badgeText = singleCartItem.productType.discountBadgeText {
+                if let badgeText = cartItemViewModel.productType.discountBadgeText {
                     DiscountBadgeView(badgeText: badgeText)
                 }
             }
             
             // Product price
-            PriceView(price: singleCartItem.formattedPrice, specialPrice: singleCartItem.formattedSpecialPrice)
+            PriceView(price: cartItemViewModel.formattedPrice, specialPrice: cartItemViewModel.formattedSpecialPrice)
                 .frame(minWidth: 60, alignment: .trailing)
         }
         .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
@@ -55,7 +55,7 @@ struct ProductListCell_Previews: PreviewProvider {
     static var previews: some View {
         List(CartItemViewModel.preview) { aCartItem in
             ProductListCell(
-                singleCartItem: aCartItem,
+                cartItemViewModel: aCartItem,
                 onIncreaseAction: { },
                 onDecreaseAction: { }
             )

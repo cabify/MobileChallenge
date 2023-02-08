@@ -18,10 +18,12 @@ struct CartDetailView: View {
             NavigationView {
                 List(cart.items) { aCartItem in
                     CartItemCell(
-                        singleCartItem: aCartItem,
+                        cartItemViewModel: aCartItem,
                         onIncreaseAction: {
+                            // self.viewModel.addItemToCart(aCartItem)
                             
                         }, onDecreaseAction: {
+                            // self.viewModel.removeItemFromCart(aCartItem)
                         }
                     )
                 }

@@ -17,7 +17,7 @@ struct ProductsListView<CartModifier: ViewModifier>: View {
         LoadableContentView(source: viewModel) { products in
             List(products) { aCartItem in
                 ProductListCell(
-                    singleCartItem: aCartItem,
+                    cartItemViewModel: aCartItem,
                     onIncreaseAction: {
                         self.viewModel.addItemToCart(aCartItem)
                         

@@ -10,7 +10,7 @@ import SwiftUI
 struct CartItemCell: View {
     
     // Properties
-    var singleCartItem: CartItemViewModel
+    var cartItemViewModel: CartItemViewModel
     var onIncreaseAction: () -> Void
     var onDecreaseAction: () -> Void
     
@@ -19,14 +19,14 @@ struct CartItemCell: View {
             // Product name and discount badge
             HStack(alignment: .center) {
                 // Name
-                Text(singleCartItem.name)
+                Text(cartItemViewModel.name)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.black)
                 
                 Spacer()
                 
                 // Badge
-                if let badgeText = singleCartItem.productType.discountBadgeText {
+                if let badgeText = cartItemViewModel.productType.discountBadgeText {
                     DiscountBadgeView(badgeText: badgeText)
                         .frame(alignment: .trailing)
                 }
@@ -35,7 +35,7 @@ struct CartItemCell: View {
             HStack(alignment: .center) {
                 // Cart counting
                 CartQuantityView(
-                    cartQuantity: singleCartItem.cartQuantity,
+                    cartQuantity: cartItemViewModel.cartQuantity,
                     onIncreaseAction: onIncreaseAction,
                     onDecreaseAction: onDecreaseAction
                 )
@@ -44,8 +44,8 @@ struct CartItemCell: View {
                 
                 // Product price
                 PriceView(
-                    price: singleCartItem.formattedTotalPrice,
-                    specialPrice: singleCartItem.formattedTotalPriceWithDiscounts,
+                    price: cartItemViewModel.formattedTotalPrice,
+                    specialPrice: cartItemViewModel.formattedTotalPriceWithDiscounts,
                     inline: true
                 )
                 .frame(minWidth: 60, alignment: .trailing)
@@ -61,7 +61,7 @@ struct CartItemCell_Previews: PreviewProvider {
     static var previews: some View {
         List(CartItemViewModel.preview) { aCartItem in
             CartItemCell(
-                singleCartItem: aCartItem,
+                cartItemViewModel: aCartItem,
                 onIncreaseAction: { },
                 onDecreaseAction: { }
             )
