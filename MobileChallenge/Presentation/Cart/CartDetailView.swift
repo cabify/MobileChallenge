@@ -16,19 +16,32 @@ struct CartDetailView: View {
     var body: some View {
         LoadableContentView(source: viewModel) { cart in
             NavigationView {
-                VStack {
+                VStack(spacing: 10) {
                     CartSummaryView(cartViewModel: cart)
                     
-                    List(cart.items) { aCartItem in
-                        CartItemCell(
-                            cartItemViewModel: aCartItem,
-                            onIncreaseAction: {
-                                self.viewModel.addItemToCart(aCartItem)
-                                
-                            }, onDecreaseAction: {
-                                self.viewModel.removeItemFromCart(aCartItem)
+                    if !cart.items.isEmpty {
+                        Section(content: {
+                            List(cart.items) { aCartItem in
+                                CartItemCell(
+                                    cartItemViewModel: aCartItem,
+                                    onIncreaseAction: {
+                                        self.viewModel.addItemToCart(aCartItem)
+                                        
+                                    }, onDecreaseAction: {
+                                        self.viewModel.removeItemFromCart(aCartItem)
+                                    }
+                                )
                             }
-                        )
+                        }, header: {
+                            PrimaryButtonView(buttonText: "Clear cart", onTapAction: {
+                                self.viewModel.clearCart()
+                            })
+                        })
+                        
+                    } else {
+                        EmptyStateView(emptyType: .cart, onRetryAction: {
+                            dismiss()
+                        })
                     }
                 }
                 .navigationTitle("Place your order")

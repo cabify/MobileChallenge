@@ -70,6 +70,14 @@ final class CartDetailViewModel: LoadableObject, Identifiable {
             })
             .store(in: &cancellables)
     }
+    
+    func clearCart() {
+        clearCartUseCase.clearCart()
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] clearedCart in
+                self?.state = .loaded(.init(cart: clearedCart))
+            })
+            .store(in: &cancellables)
+    }
 }
 
 #if DEBUG
