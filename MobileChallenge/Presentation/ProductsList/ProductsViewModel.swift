@@ -14,7 +14,7 @@ final class ProductsViewModel: ObservableObject {
         case idle
         case loading
         case failed(Error)
-        case loaded(cart: CartLayoutViewModel, filteredItems: [CartLayoutViewModel]? = nil)
+        case loaded(cart: CartLayoutViewModel)
     }
     
     private unowned let coordinator: ProductsListCoordinator

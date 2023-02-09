@@ -82,7 +82,7 @@ struct CartLayoutViewModel {
         
         // MARK: - Init
         // From product
-        init?(product: ProductsList.Product, cartQuantity: Int) {
+        init?(product: ProductsList.Product, cartQuantity: Int = 0) {
             guard let productType = ProductType(code: product.code) else { return nil }
             self.productType = productType
             self.name = product.name

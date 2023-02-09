@@ -16,11 +16,11 @@ struct CartDetailView: View {
     var body: some View {
         NavigationView {
             switch viewModel.state {
-            case .loaded(let cart, _):
+            case .loaded(let cart):
                 VStack(spacing: 10) {
                     CartSummaryView(cartViewModel: cart)
                     
-                    if cart.items.isEmpty {
+                    if cart.cartItems.isEmpty {
                         EmptyStateView(emptyType: .cart, onRetryAction: dismiss.callAsFunction)
                         
                     } else {
