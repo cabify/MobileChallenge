@@ -16,17 +16,19 @@ struct ProductsListCoordinatorView: View {
     var body: some View {
         NavigationView {
             ProductsView(viewModel: coordinatorObject.productsViewModel)
-            .navigationTitle(Text("Products list"))
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                CartButtonView(onTapAction: {
-                    self.showingSheet.toggle()
-                    coordinatorObject.openCart()
-                })
-                .sheet(isPresented: $showingSheet) {
-                    CartDetailView(viewModel: coordinatorObject.cartDetailViewModel!)
+                .environmentObject(coordinatorObject.viewState)
+                .navigationTitle(Text("Products list"))
+                .navigationBarTitleDisplayMode(.large)
+                .toolbar {
+                    CartButtonView(onTapAction: {
+                        self.showingSheet.toggle()
+                        coordinatorObject.openCart()
+                    })
+                    .sheet(isPresented: $showingSheet) {
+                        CartDetailView(viewModel: coordinatorObject.cartDetailViewModel!)
+                            .environmentObject(coordinatorObject.viewState)
+                    }
                 }
-            }
         }
     }
 }

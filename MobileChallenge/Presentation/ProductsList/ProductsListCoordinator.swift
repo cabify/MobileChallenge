@@ -9,12 +9,33 @@ import Combine
 
 final class ProductsListCoordinator: ObservableObject {
     
+    final class ViewState: ObservableObject {
+        enum State {
+            case idle
+            case loading
+            case failed(Error)
+            case loaded(cart: CartLayoutViewModel)
+        }
+        
+        @Published private(set) var state: State
+        
+        init(state: State) {
+            self.state = state
+        }
+        
+        func setNew(_ state: State) {
+            self.state = state
+        }
+    }
+    
     // MARK: - Properties
-    @Published private(set) var productsViewModel: ProductsViewModel!
+    @Published private(set) var viewState: ViewState
+    private(set) var productsViewModel: ProductsViewModel!
     private(set) var cartDetailViewModel: CartDetailViewModel?
     private let cartRepository: CartRepository
     
     init(productsListRepository: ProductsListRepository, cartRepository: CartRepository) {
+        self.viewState = ViewState(state: .idle)
         self.cartRepository = cartRepository
         
         let defaultGetProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: productsListRepository)
@@ -40,8 +61,7 @@ final class ProductsListCoordinator: ObservableObject {
             coordinator: self,
             addItemToCartUseCase: defaultAddItemToCartUseCase,
             removeItemToCartUseCase: defaultRemoveItemToCartUseCase,
-            clearCartUseCase: defaultClearCartUseCase,
-            state: self.productsViewModel.state
+            clearCartUseCase: defaultClearCartUseCase
         )
     }
 }

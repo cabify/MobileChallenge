@@ -10,19 +10,11 @@ import Combine
 
 final class ProductsViewModel: ObservableObject {
     
-    enum State {
-        case idle
-        case loading
-        case failed(Error)
-        case loaded(cart: CartLayoutViewModel)
-    }
-    
     private unowned let coordinator: ProductsListCoordinator
     private let getProductsListUseCase: GetProductsListUseCase
     private let getCartUseCase: GetCartUseCase
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
-    @Published private(set) var state = State.idle
     private var cancellables = Set<AnyCancellable>()
     
     init(coordinator: ProductsListCoordinator, getProductsListUseCase: GetProductsListUseCase, getCartUseCase: GetCartUseCase, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase) {
@@ -35,7 +27,7 @@ final class ProductsViewModel: ObservableObject {
     
     // MARK: - Fetch
     func load() {
-        state = .loading
+        coordinator.viewState.setNew(.loading)
         
         getCartUseCase.getCart()
             .flatMap { cart in
@@ -52,20 +44,20 @@ final class ProductsViewModel: ObservableObject {
             .catch { error in
                 Just(.failed(error))
             }
-            .sink { [weak self] state in
-                self?.state = state
+            .sink { [weak self] aNewState in
+                self?.coordinator.viewState.setNew(aNewState)
             }
             .store(in: &cancellables)
     }
     
     // MARK: - Add/remove items
     private func updateItem(_ item: CartLayoutViewModel.CartItem, newCartQuantity: Int) {
-        guard case .loaded(let cart) = self.state else { return }
+        guard case .loaded(let cart) = self.coordinator.viewState.state else { return }
         
         var updatedCart = cart
         updatedCart.updateItem(item, newCartQuantity: newCartQuantity)
         
-        self.state = .loaded(cart: updatedCart)
+        self.coordinator.viewState.setNew(.loaded(cart: updatedCart))
     }
     
     func addItemToCart(_ item: CartLayoutViewModel.CartItem) {

@@ -14,29 +14,23 @@ final class CartDetailViewModel: ObservableObject {
     private let addItemToCartUseCase: AddItemToCartUseCase
     private let removeItemToCartUseCase: RemoveItemFromCartUseCase
     private let clearCartUseCase: ClearCartUseCase
-    @Published private(set) var state = ProductsViewModel.State.idle
     private var cancellables = Set<AnyCancellable>()
     
-    init(coordinator: ProductsListCoordinator, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase, clearCartUseCase: ClearCartUseCase, state: ProductsViewModel.State) {
+    init(coordinator: ProductsListCoordinator, addItemToCartUseCase: AddItemToCartUseCase, removeItemToCartUseCase: RemoveItemFromCartUseCase, clearCartUseCase: ClearCartUseCase) {
         self.coordinator = coordinator
         self.addItemToCartUseCase = addItemToCartUseCase
         self.removeItemToCartUseCase = removeItemToCartUseCase
         self.clearCartUseCase = clearCartUseCase
-        self.state = state
-    }
-    
-    // MARK: - Fetch
-    func load() {
     }
     
     // MARK: - Add/remove items
     private func updateItem(_ item: CartLayoutViewModel.CartItem, newCartQuantity: Int) {
-        guard case .loaded(let cart) = self.state else { return }
+        guard case .loaded(let cart) = self.coordinator.viewState.state else { return }
         
         var updatedCart = cart
-        updatedCart.updateItem(item, newCartQuantity: newCartQuantity, hideZero: true)
+        updatedCart.updateItem(item, newCartQuantity: newCartQuantity)
         
-        self.state = .loaded(cart: updatedCart)
+        self.coordinator.viewState.setNew(.loaded(cart: updatedCart))
     }
     
     func addItemToCart(_ item: CartLayoutViewModel.CartItem) {
@@ -58,7 +52,7 @@ final class CartDetailViewModel: ObservableObject {
     func clearCart() {
         clearCartUseCase.clearCart()
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] clearedCart in
-                self?.state = .loaded(cart: .init(cart: clearedCart))
+                self?.coordinator.viewState.setNew(.loaded(cart: .init(cart: clearedCart)))
             })
             .store(in: &cancellables)
     }
@@ -71,8 +65,7 @@ extension CartDetailViewModel {
             coordinator: ProductsListCoordinator.preview,
             addItemToCartUseCase: DefaultAddItemToCartUseCase.preview,
             removeItemToCartUseCase: DefaultRemoveItemFromCartUseCase.preview,
-            clearCartUseCase: DefaultClearCartUseCase.preview,
-            state: ProductsViewModel.State.loaded(cart: CartLayoutViewModel.preview)
+            clearCartUseCase: DefaultClearCartUseCase.preview
         )
     }
 }

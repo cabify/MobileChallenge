@@ -18,10 +18,15 @@ struct ProductsView: View {
     }
     typealias ProductsViewActionBlock = ((Actions) -> Void)
     
-    @ObservedObject var viewModel: ProductsViewModel
+    @EnvironmentObject var viewState: ProductsListCoordinator.ViewState
+    private let viewModel: ProductsViewModel
+    
+    init(viewModel: ProductsViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
-        switch viewModel.state {
+        switch viewState.state {
         case .idle:
             // Render a clear color and start the loading process
             // when the view first appears, which should make the

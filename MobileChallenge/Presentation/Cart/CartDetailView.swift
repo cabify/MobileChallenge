@@ -11,11 +11,16 @@ import Combine
 struct CartDetailView: View {
     
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel: CartDetailViewModel
+    @EnvironmentObject var viewState: ProductsListCoordinator.ViewState
+    private let viewModel: CartDetailViewModel
+    
+    init(viewModel: CartDetailViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationView {
-            switch viewModel.state {
+            switch viewState.state {
             case .loaded(let cart):
                 VStack(spacing: 10) {
                     CartSummaryView(cartViewModel: cart)
