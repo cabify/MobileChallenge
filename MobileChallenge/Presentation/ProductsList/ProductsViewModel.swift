@@ -60,7 +60,7 @@ final class ProductsViewModel: ObservableObject {
     
     // MARK: - Add/remove items
     private func updateItem(_ item: CartLayoutViewModel.CartItem, newCartQuantity: Int) {
-        guard case .loaded(let cart, _) = self.state else { return }
+        guard case .loaded(let cart) = self.state else { return }
         
         var updatedCart = cart
         updatedCart.updateItem(item, newCartQuantity: newCartQuantity)

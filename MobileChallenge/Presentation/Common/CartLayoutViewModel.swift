@@ -68,6 +68,8 @@ struct CartLayoutViewModel {
             if let specialPrice = self.specialPrice {
                 return specialPrice * Double(self.cartQuantity)
             }
+            
+            guard self.totalDiscounts > 0.0 else { return nil }
             return self.totalPrice - self.totalDiscounts
         }
         var formattedTotalPriceWithDiscounts: String? {
@@ -80,7 +82,7 @@ struct CartLayoutViewModel {
         
         // MARK: - Init
         // From product
-        init?(product: ProductsList.Product, cartQuantity: Int = 0) {
+        init?(product: ProductsList.Product, cartQuantity: Int) {
             guard let productType = ProductType(code: product.code) else { return nil }
             self.productType = productType
             self.name = product.name
@@ -142,10 +144,12 @@ struct CartLayoutViewModel {
         return self.total.currency
     }
     private(set) var items: [CartItem]
+    var cartItems: [CartItem] {
+        return items.filter { $0.cartQuantity > 0 }
+    }
     
     init(cart: Cart) {
         let items: [CartItem] = cart.items
-            .filter { $0.quantity > 0 }
             .compactMap { .init(cartItem: $0) }
         
         // Items
