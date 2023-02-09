@@ -157,20 +157,13 @@ struct CartLayoutViewModel {
     }
     
     // MARK: - Setter
-    mutating func updateItem(_ item: CartItem, newCartQuantity: Int, hideZero: Bool = false) {
+    mutating func updateItem(_ item: CartItem, newCartQuantity: Int) {
         guard let indexOf = self.items.firstIndex(where: { $0.productType == item.productType }) else { return }
         
         var updatedItems = self.items
-        // Remove item when quantity reaches 0
-        if newCartQuantity == 0, hideZero {
-            updatedItems.remove(at: indexOf)
-            
-        } else {
-            // Update item quantity
-            var updatedItem = item
-            updatedItem.updateCartQuantity(newCartQuantity)
-            updatedItems[indexOf] = updatedItem
-        }
+        var updatedItem = item
+        updatedItem.updateCartQuantity(newCartQuantity)
+        updatedItems[indexOf] = updatedItem
         
         self.items = updatedItems
     }
