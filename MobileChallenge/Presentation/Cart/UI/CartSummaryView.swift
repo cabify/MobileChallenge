@@ -9,7 +9,11 @@ import SwiftUI
 
 struct CartSummaryView: View {
     
-    var cartViewModel: CartLayoutViewModel
+    private let cartViewModel: CartLayoutViewModel
+    
+    init(cartViewModel: CartLayoutViewModel) {
+        self.cartViewModel = cartViewModel
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {

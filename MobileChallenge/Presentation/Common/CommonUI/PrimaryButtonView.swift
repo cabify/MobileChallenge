@@ -9,8 +9,13 @@ import SwiftUI
 
 struct PrimaryButtonView: View {
     
-    var buttonText: String
-    var onTapAction: (() -> Void)
+    private let buttonText: String
+    private let onTapAction: (() -> Void)
+    
+    init(buttonText: String, onTapAction: @escaping () -> Void) {
+        self.buttonText = buttonText
+        self.onTapAction = onTapAction
+    }
     
     var body: some View {
         HStack {

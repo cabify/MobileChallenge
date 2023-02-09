@@ -10,8 +10,13 @@ import SwiftUI
 struct ProductListCell: View {
     
     // Properties
-    var cartItem: CartLayoutViewModel.CartItem
-    var onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    private let cartItem: CartLayoutViewModel.CartItem
+    private let onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    
+    init(cartItem: CartLayoutViewModel.CartItem, onChangeQuantityAction: @escaping ProductsView.ProductsViewActionBlock) {
+        self.cartItem = cartItem
+        self.onChangeQuantityAction = onChangeQuantityAction
+    }
     
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {

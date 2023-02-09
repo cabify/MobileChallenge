@@ -10,8 +10,13 @@ import SwiftUI
 struct CartItemCell: View {
     
     // Properties
-    var cartItem: CartLayoutViewModel.CartItem
-    var onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    private let cartItem: CartLayoutViewModel.CartItem
+    private let onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    
+    init(cartItem: CartLayoutViewModel.CartItem, onChangeQuantityAction: @escaping ProductsView.ProductsViewActionBlock) {
+        self.cartItem = cartItem
+        self.onChangeQuantityAction = onChangeQuantityAction
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {

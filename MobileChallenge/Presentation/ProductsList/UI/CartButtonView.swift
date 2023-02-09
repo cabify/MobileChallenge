@@ -9,7 +9,11 @@ import SwiftUI
 
 struct CartButtonView: View {
     
-    var onTapAction: () -> Void
+    private let onTapAction: () -> Void
+    
+    init(onTapAction: @escaping () -> Void) {
+        self.onTapAction = onTapAction
+    }
     
     var body: some View {
         Button {

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CartQuantityView: View {
     
-    var cartItem: CartLayoutViewModel.CartItem
+    private let cartItem: CartLayoutViewModel.CartItem
     @State private var cartQuantity: Int
-    var onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    private let onChangeQuantityAction: ProductsView.ProductsViewActionBlock
     
     init(cartItem: CartLayoutViewModel.CartItem, onChangeQuantityAction: @escaping ProductsView.ProductsViewActionBlock) {
         self.cartItem = cartItem

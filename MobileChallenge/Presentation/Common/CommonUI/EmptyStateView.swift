@@ -43,8 +43,13 @@ struct EmptyStateView: View {
         }
     }
     
-    var emptyType: EmptyType
-    var onRetryAction: (() -> Void)?
+    private let emptyType: EmptyType
+    private let onRetryAction: (() -> Void)?
+    
+    init(emptyType: EmptyType, onRetryAction: (() -> Void)? = nil) {
+        self.emptyType = emptyType
+        self.onRetryAction = onRetryAction
+    }
     
     var body: some View {
         VStack {

@@ -9,7 +9,11 @@ import SwiftUI
 
 struct DiscountBadgeView: View {
     
-    var badgeText: String
+    private let badgeText: String
+    
+    init(badgeText: String) {
+        self.badgeText = badgeText
+    }
     
     var body: some View {
         HStack {

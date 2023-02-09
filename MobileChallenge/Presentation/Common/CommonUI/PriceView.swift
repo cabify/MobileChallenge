@@ -10,8 +10,8 @@ import SwiftUI
 struct PriceView: View {
     
     // Properties
-    var price: String
-    var specialPrice: String?
+    private let price: String
+    private let specialPrice: String?
     private let showSpecialPrice: Bool
     private let showPriceInline: Bool
     

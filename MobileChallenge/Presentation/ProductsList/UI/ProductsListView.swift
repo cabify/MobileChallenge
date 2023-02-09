@@ -10,8 +10,13 @@ import SwiftUI
 struct ProductsListView: View {
     
     // Properties
-    var cart: CartLayoutViewModel
-    var onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    private let cart: CartLayoutViewModel
+    private let onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    
+    init(cart: CartLayoutViewModel, onChangeQuantityAction: @escaping ProductsView.ProductsViewActionBlock) {
+        self.cart = cart
+        self.onChangeQuantityAction = onChangeQuantityAction
+    }
     
     var body: some View {
         List(cart.items) { aCartItem in
