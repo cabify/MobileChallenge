@@ -23,6 +23,7 @@
 		3362B4542996931100B99241 /* GetCartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337927F5299198F600CD219A /* GetCartUseCase.swift */; };
 		3362B4552996932800B99241 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FCC298D545A00BBA7DC /* Cart.swift */; };
 		3362B45829969A3C00B99241 /* XCTestCase+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3362B45729969A3C00B99241 /* XCTestCase+Extension.swift */; };
+		3362B4592996A36100B99241 /* ProductsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D9852989386000774082 /* ProductsListCoordinator.swift */; };
 		3371D97D298932B600774082 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97C298932B600774082 /* ProductsView.swift */; };
 		3371D97F2989333A00774082 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97E2989333A00774082 /* ProductsViewModel.swift */; };
 		3371D982298933F200774082 /* CartDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D981298933F200774082 /* CartDetailView.swift */; };
@@ -717,6 +718,7 @@
 				3385CDF92987FFC7002CD30A /* ParameterEncodable.swift in Sources */,
 				3362B4552996932800B99241 /* Cart.swift in Sources */,
 				3362B449299692D600B99241 /* Double+Extension.swift in Sources */,
+				3362B4592996A36100B99241 /* ProductsListCoordinator.swift in Sources */,
 				3385CDFF29885607002CD30A /* ProductsListRepository.swift in Sources */,
 				3362B44A299692E200B99241 /* ProductType.swift in Sources */,
 				3375D72129967EC600FADDC0 /* GetProductsListUseCaseTests.swift in Sources */,

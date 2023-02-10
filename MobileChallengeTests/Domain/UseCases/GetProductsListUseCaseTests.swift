@@ -18,7 +18,7 @@ final class GetProductsListUseCaseTests: XCTestCase {
         self.cancellables = []
     }
     
-    // MARK: - Success
+    // Success
     func testGetProductsListUseCase_whenSuccessfullyFetchesProductsList_thenValidateProducts() throws {
         // Given
         let mockedRepository = MockedProductsListRepository()
@@ -38,4 +38,21 @@ final class GetProductsListUseCaseTests: XCTestCase {
         XCTAssertEqual(productList.products.last?.name, "Cabify Coffee Mug")
         XCTAssertEqual(productList.products.last?.price, 7.5)
     }
+    
+    // Failed
+    func testGetProductsListUseCase_whenFailedFetchesProductsList_thenProductsListIsEmpty() throws {
+        // Given
+        let mockedRepository = MockedProductsListRepository(error: APIError.noData)
+        let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
+        
+        do {
+            // When
+            _ = try awaitPublisher(getProductsListUseCase.getProductsList())
+            
+        } catch let error {
+            // Then
+            XCTAssertEqual(error.localizedDescription, "Could not received data from the server. Please retry.")
+        }
+    }
+
 }

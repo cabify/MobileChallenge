@@ -5,13 +5,14 @@
 //  Created by thomas pereira on 10/02/2023.
 //
 
+import Foundation
 import Combine
 
 final class MockedProductsListRepository {
     
-    private let error: Error?
+    private let error: LocalizedError?
     
-    init(error: Error? = nil) {
+    init(error: LocalizedError? = nil) {
         self.error = error
     }
 }
