@@ -8,25 +8,13 @@
 import Foundation
 import Combine
 
-final class MockedCartRepository {
-    
-    private let error: LocalizedError?
-    
-    init(error: LocalizedError? = nil) {
-        self.error = error
-    }
-}
+final class MockedCartRepository { }
 
 extension MockedCartRepository: CartRepository {
     
     func getCart() -> AnyPublisher<Cart, Error> {
         Future { promise in
-            if let anError = self.error {
-                promise(.failure(anError))
-                
-            } else {
-                promise(.success(Cart.preview))
-            }
+            promise(.success(Cart.preview))
         }
         .eraseToAnyPublisher()
     }
