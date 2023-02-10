@@ -16,7 +16,7 @@ extension CartEntity {
     
     var itemEntities: [CartItemEntity] {
         guard let itemEntities = items?.allObjects as? [CartItemEntity] else { return [] }
-        return itemEntities
+        return itemEntities.sorted(by: { $0.code < $1.code })
     }
 }
 
