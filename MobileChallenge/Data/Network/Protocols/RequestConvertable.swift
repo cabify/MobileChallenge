@@ -18,6 +18,7 @@ extension RequestConvertable {
         guard let baseURL = URL(string: ApiClientConstants.baseURL) else { throw RequestableError.invalidURL() }
         let completeURL = baseURL.appendingPathComponent(path)
         var urlRequest =  URLRequest(url: completeURL)
+        urlRequest.timeoutInterval = 20.0
         
         urlRequest.httpMethod = method
         
