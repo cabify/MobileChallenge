@@ -247,7 +247,23 @@
 			path = Cart;
 			sourceTree = "<group>";
 		};
+		3375D71E29967E9100FADDC0 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				3375D71F29967E9B00FADDC0 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		3375D71F29967E9B00FADDC0 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
 				3362B445299690FB00B99241 /* Mocks */,
+				3375D72029967EC600FADDC0 /* GetProductsListUseCaseTests.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		337927F229916ADD00CD219A /* Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +507,7 @@
 		33D6A2792982EBEA005CF1D0 /* MobileChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
+				3375D71E29967E9100FADDC0 /* Domain */,
 				3362B45629969A1A00B99241 /* Helper */,
 			);
 			path = MobileChallengeTests;
@@ -702,6 +719,7 @@
 				3362B449299692D600B99241 /* Double+Extension.swift in Sources */,
 				3385CDFF29885607002CD30A /* ProductsListRepository.swift in Sources */,
 				3362B44A299692E200B99241 /* ProductType.swift in Sources */,
+				3375D72129967EC600FADDC0 /* GetProductsListUseCaseTests.swift in Sources */,
 				3362B4532996931100B99241 /* GetProductsListUseCase.swift in Sources */,
 				3362B4542996931100B99241 /* GetCartUseCase.swift in Sources */,
 				3362B448299692BE00B99241 /* ProductsListRequest.swift in Sources */,
