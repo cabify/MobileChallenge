@@ -66,7 +66,7 @@ extension DefaultCartRepository: CartRepository {
                         updatedItem.quantity -= 1
                     }
                 })
-                .compactMap { Int($0.quantity)}
+                .compactMap { Int($0.quantity) }
             }
             .eraseToAnyPublisher()
     }
@@ -83,12 +83,15 @@ extension DefaultCartRepository: CartRepository {
     
     func clearCart() -> AnyPublisher<Cart, Error> {
         return cartOrNew()
-            .compactMap { cartEntity in
-                cartEntity.itemEntities.forEach { _ = self.cartItemRepository.delete($0) }
-                cartEntity.items = nil
+            .flatMap { cartEntity in
+                let updatedItems = cartEntity.itemEntities
+                updatedItems.forEach { $0.quantity = Int16(0) }
                 
-                _ = self.cartRepository.update(cartEntity)
-                return cartEntity.domainObject
+                return self.cartRepository.update(cartEntity, body: { updatedCart in
+                    updatedCart.items = NSSet(array: updatedItems)
+                })
+                .eraseToAnyPublisher()
+                .compactMap { $0.domainObject }
             }
             .eraseToAnyPublisher()
     }
