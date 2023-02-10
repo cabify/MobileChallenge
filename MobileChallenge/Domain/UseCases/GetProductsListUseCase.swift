@@ -25,7 +25,7 @@ final class DefaultGetProductsListUseCase: GetProductsListUseCase {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension DefaultGetProductsListUseCase {
     static var preview: Self {
         .init(productsListRepository: DefaultProductsListRepository.preview)

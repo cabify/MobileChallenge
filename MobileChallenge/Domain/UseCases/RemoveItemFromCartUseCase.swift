@@ -25,7 +25,7 @@ final class DefaultRemoveItemFromCartUseCase: RemoveItemFromCartUseCase {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension DefaultRemoveItemFromCartUseCase {
     static var preview: Self {
         .init(cartRepository: DefaultCartRepository.preview)

@@ -58,7 +58,7 @@ final class CartDetailViewModel: ObservableObject {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension CartDetailViewModel {
     static var preview: Self {
         .init(

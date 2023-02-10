@@ -77,7 +77,7 @@ final class ProductsViewModel: ObservableObject {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension ProductsViewModel {
     static var preview: Self {
         .init(

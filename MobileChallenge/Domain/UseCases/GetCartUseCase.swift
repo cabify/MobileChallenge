@@ -25,7 +25,7 @@ final class DefaultGetCartUseCase: GetCartUseCase {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension DefaultGetCartUseCase {
     static var preview: Self {
         .init(cartRepository: DefaultCartRepository.preview)

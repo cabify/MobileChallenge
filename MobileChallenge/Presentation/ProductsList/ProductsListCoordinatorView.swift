@@ -34,7 +34,7 @@ struct ProductsListCoordinatorView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct ProductsListCoordinatorView_Previews: PreviewProvider {
     static var previews: some View {
         ProductsListCoordinatorView(coordinatorObject: ProductsListCoordinator.preview)

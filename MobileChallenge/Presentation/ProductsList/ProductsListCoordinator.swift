@@ -66,7 +66,7 @@ final class ProductsListCoordinator: ObservableObject {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension ProductsListCoordinator {
     static var preview: Self {
         .init(productsListRepository: DefaultProductsListRepository.preview, cartRepository: DefaultCartRepository.preview)

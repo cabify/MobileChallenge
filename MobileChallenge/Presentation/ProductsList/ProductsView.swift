@@ -59,7 +59,7 @@ struct ProductsView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct ProductsView_Previews: PreviewProvider {
     static var previews: some View {
         ProductsView(viewModel: ProductsViewModel.preview)
