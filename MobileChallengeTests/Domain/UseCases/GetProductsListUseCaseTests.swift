@@ -33,7 +33,7 @@ final class GetProductsListUseCaseTests: XCTestCase {
     }
     
     // Failed
-    func testGetProductsListUseCase_whenFailedFetchesProductsList_thenProductsListIsEmpty() throws {
+    func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowAnError() throws {
         // Given
         let mockedRepository = MockedProductsListRepository(error: APIError.noData)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
@@ -44,7 +44,7 @@ final class GetProductsListUseCaseTests: XCTestCase {
             
         } catch let error {
             // Then
-            XCTAssertEqual(error.localizedDescription, "Could not received data from the server. Please retry.")
+            XCTAssertEqual(error.localizedDescription, TestsError.noDataMessage)
         }
     }
 }
