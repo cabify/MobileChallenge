@@ -21,22 +21,14 @@ extension MockedCartRepository: CartRepository {
     
     func addItem(_ item: Cart.Item) -> AnyPublisher<Int, Error> {
         Future { promise in
-            if let anError = self.error {
-                promise(.failure(anError))
-                
-            } else {
-                promise(.success(item.quantity + 1))
-            }
+            promise(.success(item.quantity + 1))
         }
         .eraseToAnyPublisher()
     }
     
     func removeItem(_ item: Cart.Item) -> AnyPublisher<Int, Error> {
         Future { promise in
-            if let anError = self.error {
-                promise(.failure(anError))
-                
-            } else if item.quantity > 0 {
+            if item.quantity > 0 {
                 promise(.success(item.quantity - 1))
                 
             } else {
@@ -48,15 +40,10 @@ extension MockedCartRepository: CartRepository {
     
     func clearCart() -> AnyPublisher<Cart, Error> {
         Future { promise in
-            if let anError = self.error {
-                promise(.failure(anError))
-                
-            } else {
-                let cartItems = Cart.preview.items.compactMap {
-                    Cart.Item(code: $0.code, name: $0.name, quantity: 0, price: $0.price)
-                }
-                promise(.success(Cart(items: cartItems)))
+            let cartItems = Cart.preview.items.compactMap {
+                Cart.Item(code: $0.code, name: $0.name, quantity: 0, price: $0.price)
             }
+            promise(.success(Cart(items: cartItems)))
         }
         .eraseToAnyPublisher()
     }
