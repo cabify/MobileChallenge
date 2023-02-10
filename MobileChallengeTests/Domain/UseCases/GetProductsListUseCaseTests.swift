@@ -11,13 +11,6 @@ import Combine
 
 final class GetProductsListUseCaseTests: XCTestCase {
     
-    private var cancellables: Set<AnyCancellable>!
-    
-    override func setUp() {
-        super.setUp()
-        self.cancellables = []
-    }
-    
     // Success
     func testGetProductsListUseCase_whenSuccessfullyFetchesProductsList_thenValidateProducts() throws {
         // Given
@@ -54,5 +47,4 @@ final class GetProductsListUseCaseTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, "Could not received data from the server. Please retry.")
         }
     }
-
 }
