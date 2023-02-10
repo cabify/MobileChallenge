@@ -58,7 +58,7 @@ struct CartItemCell: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct CartItemCell_Previews: PreviewProvider {
     static var previews: some View {
         List(CartLayoutViewModel.CartItem.cartItemsPreview) { aCartItem in

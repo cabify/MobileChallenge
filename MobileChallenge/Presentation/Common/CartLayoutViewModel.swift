@@ -169,7 +169,7 @@ struct CartLayoutViewModel: Equatable {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension CartLayoutViewModel {
     static var preview: Self {
         .init(cart: Cart.preview)

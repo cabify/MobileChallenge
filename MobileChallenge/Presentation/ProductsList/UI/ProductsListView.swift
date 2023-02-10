@@ -32,7 +32,7 @@ struct ProductsListView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct ProductsListView_Previews: PreviewProvider {
     static var previews: some View {
         ProductsListView(

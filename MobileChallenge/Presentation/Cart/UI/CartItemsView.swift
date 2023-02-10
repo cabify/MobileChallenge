@@ -39,7 +39,7 @@ struct CartItemsView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct CartItemsView_Previews: PreviewProvider {
     static var previews: some View {
         CartItemsView(
