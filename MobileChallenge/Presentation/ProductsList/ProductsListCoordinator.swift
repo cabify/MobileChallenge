@@ -9,8 +9,22 @@ import Combine
 
 final class ProductsListCoordinator: ObservableObject {
     
-    final class ViewState: ObservableObject {
-        enum State {
+    final class ViewState: ObservableObject, Equatable {
+        static func == (lhs: ProductsListCoordinator.ViewState, rhs: ProductsListCoordinator.ViewState) -> Bool {
+            return lhs.state == rhs.state
+        }
+        
+        enum State: Equatable {
+            static func == (lhs: ProductsListCoordinator.ViewState.State, rhs: ProductsListCoordinator.ViewState.State) -> Bool {
+                switch (lhs, rhs) {
+                case (.idle, .idle): return true
+                case (.loading, .loading): return true
+                case (.failed(let lError), .failed(let rError)): return lError.localizedDescription == rError.localizedDescription
+                case (.loaded(let lCart), .loaded(let rCart)): return lCart == rCart
+                default: return false
+                }
+            }
+            
             case idle
             case loading
             case failed(Error)

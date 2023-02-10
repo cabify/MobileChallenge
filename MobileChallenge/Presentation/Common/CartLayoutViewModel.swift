@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct CartLayoutViewModel {
+struct CartLayoutViewModel: Equatable {
     
     // MARK:
-    struct CartItem: Identifiable {
+    struct CartItem: Identifiable, Equatable {
         
         static let defaultType: ProductType = .voucher
         
@@ -116,7 +116,7 @@ struct CartLayoutViewModel {
     
     // Discounts
     // UI representation
-    struct Discount: Identifiable {
+    struct Discount: Identifiable, Equatable {
         let id = UUID()
         let text: String
         let value: Double
