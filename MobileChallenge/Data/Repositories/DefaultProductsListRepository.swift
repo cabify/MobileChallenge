@@ -11,7 +11,7 @@ import Combine
 final class DefaultProductsListRepository {
     
     private let apiClient: ApiExecutable
-    let productsListRequest: ProductsListRequest
+    private let productsListRequest: ProductsListRequest
     
     init(productsListRequest: any RequestConvertable = ProductsListRequest()) {
         self.apiClient = ApiClient()
