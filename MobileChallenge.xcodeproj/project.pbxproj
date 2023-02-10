@@ -30,6 +30,7 @@
 		3362B4622996A70500B99241 /* RemoveItemFromCartUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3362B4612996A70500B99241 /* RemoveItemFromCartUseCaseTests.swift */; };
 		3362B4642996A71200B99241 /* ClearCartUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3362B4632996A71200B99241 /* ClearCartUseCaseTests.swift */; };
 		3362B4662996A7D400B99241 /* TestsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3362B4652996A7D400B99241 /* TestsError.swift */; };
+		3362B46C2996B5A900B99241 /* ProductsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3362B46B2996B5A900B99241 /* ProductsViewModelTests.swift */; };
 		3371D97D298932B600774082 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97C298932B600774082 /* ProductsView.swift */; };
 		3371D97F2989333A00774082 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97E2989333A00774082 /* ProductsViewModel.swift */; };
 		3371D982298933F200774082 /* CartDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D981298933F200774082 /* CartDetailView.swift */; };
@@ -124,6 +125,7 @@
 		3362B4612996A70500B99241 /* RemoveItemFromCartUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveItemFromCartUseCaseTests.swift; sourceTree = "<group>"; };
 		3362B4632996A71200B99241 /* ClearCartUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCartUseCaseTests.swift; sourceTree = "<group>"; };
 		3362B4652996A7D400B99241 /* TestsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsError.swift; sourceTree = "<group>"; };
+		3362B46B2996B5A900B99241 /* ProductsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModelTests.swift; sourceTree = "<group>"; };
 		3371D97C298932B600774082 /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		3371D97E2989333A00774082 /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
 		3371D981298933F200774082 /* CartDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDetailView.swift; sourceTree = "<group>"; };
@@ -229,6 +231,37 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		3362B4672996B4EA00B99241 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				3362B46B2996B5A900B99241 /* ProductsViewModelTests.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		3362B46D2996B76A00B99241 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3362B46E2996B79F00B99241 /* Repositories */,
+				3362B46F2996B7A700B99241 /* Storage */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3362B46E2996B79F00B99241 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		3362B46F2996B7A700B99241 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		3371D9752989218600774082 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +299,8 @@
 			isa = PBXGroup;
 			children = (
 				3375D71F29967E9B00FADDC0 /* UseCases */,
+				3362B4672996B4EA00B99241 /* Presentation */,
+				3362B46D2996B76A00B99241 /* Data */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -742,6 +777,7 @@
 				3362B4622996A70500B99241 /* RemoveItemFromCartUseCaseTests.swift in Sources */,
 				3362B44A299692E200B99241 /* ProductType.swift in Sources */,
 				3375D72129967EC600FADDC0 /* GetProductsListUseCaseTests.swift in Sources */,
+				3362B46C2996B5A900B99241 /* ProductsViewModelTests.swift in Sources */,
 				3362B4642996A71200B99241 /* ClearCartUseCaseTests.swift in Sources */,
 				3362B45E2996A6EC00B99241 /* GetCartUseCaseTests.swift in Sources */,
 				3362B4532996931100B99241 /* GetProductsListUseCase.swift in Sources */,
