@@ -21,6 +21,7 @@
 		3362B4532996931100B99241 /* GetProductsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CDE329843C80002CD30A /* GetProductsListUseCase.swift */; };
 		3362B4542996931100B99241 /* GetCartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337927F5299198F600CD219A /* GetCartUseCase.swift */; };
 		3362B4552996932800B99241 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FCC298D545A00BBA7DC /* Cart.swift */; };
+		3362B45829969A3C00B99241 /* XCTestCase+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3362B45729969A3C00B99241 /* XCTestCase+Extension.swift */; };
 		3371D97D298932B600774082 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97C298932B600774082 /* ProductsView.swift */; };
 		3371D97F2989333A00774082 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97E2989333A00774082 /* ProductsViewModel.swift */; };
 		3371D982298933F200774082 /* CartDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D981298933F200774082 /* CartDetailView.swift */; };
@@ -196,6 +197,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3362B45629969A1A00B99241 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3362B45729969A3C00B99241 /* XCTestCase+Extension.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		3371D9752989218600774082 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,6 +481,7 @@
 		33D6A2792982EBEA005CF1D0 /* MobileChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
+				3362B45629969A1A00B99241 /* Helper */,
 			);
 			path = MobileChallengeTests;
 			sourceTree = "<group>";
@@ -674,6 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3362B45829969A3C00B99241 /* XCTestCase+Extension.swift in Sources */,
 				3362B44D299692FB00B99241 /* ProductsViewModel.swift in Sources */,
 				3385CDEA2987E8C7002CD30A /* Requestable.swift in Sources */,
 				3385CDF92987FFC7002CD30A /* ParameterEncodable.swift in Sources */,
