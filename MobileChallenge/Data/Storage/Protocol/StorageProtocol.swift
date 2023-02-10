@@ -19,10 +19,14 @@ protocol StorageProtocol {
     
     // Fetch list
     func fetch(predicate: NSPredicate?, sorted: [StorageSort]) -> AnyPublisher<[Entity], Error>
+    
     // Create
     func create(_ entity: Entity?, body: ((inout Entity) -> Void)?) -> AnyPublisher<Entity, Error>
+    
     // Update
+    // Single object
     func update(_ entity: Entity, body: ((inout Entity) -> Void)?) -> AnyPublisher<Entity, Error>
+    
     // Delete
     func delete(_ entity: Entity) -> AnyPublisher<Void, Error>
 }

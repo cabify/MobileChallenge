@@ -67,7 +67,6 @@ extension CoreDataRepository: StorageProtocol where Entity: Storable {
     func update(_ entity: Entity, body: ((inout Entity) -> Void)? = nil) -> AnyPublisher<Entity, Error> {
         Deferred { [context] in
             Future { promise in
-                
                 context.perform {
                     var updatedEntity = entity
                     body?(&updatedEntity)
