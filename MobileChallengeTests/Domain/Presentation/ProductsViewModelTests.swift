@@ -155,6 +155,82 @@ extension ProductsViewModelTests {
         XCTAssertEqual(firstItem?.cartQuantity, 1)
         XCTAssertEqual(firstItem?.formattedPrice, "5.00€")
     }
+    
+    // Add and see special price
+    func testProductsViewModel_whenSuccessfullyAddManyProductsToCart_thenShowProductsUpdatedWithSpecialPrice() throws {
+        // Given
+        let expectationLoad = XCTestExpectation(description: "View model fetches products")
+        let coordinator = ProductsListCoordinator(
+            productsListRepository: MockedProductsListRepository(),
+            cartRepository: MockedCartRepository()
+        )
+        
+        var cart: CartLayoutViewModel?
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationLoad.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        let viewModel = coordinator.productsViewModel
+        XCTAssertEqual(coordinator.viewState.state, .idle)
+        viewModel?.load()
+        
+        wait(for: [expectationLoad], timeout: 0.5)
+        XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
+        
+        // When
+        let productType = ProductType.tShirt
+        let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
+        // Add 1
+        let expectationAddProduct1 = XCTestExpectation(description: "View model adds new product to cart")
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationAddProduct1.fulfill()
+            }
+        }.store(in: &cancellables)
+        viewModel?.addItemToCart(addItem)
+        // Add 2
+        let expectationAddProduct2 = XCTestExpectation(description: "View model adds one more from same product to cart")
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationAddProduct2.fulfill()
+            }
+        }.store(in: &cancellables)
+        viewModel?.addItemToCart(addItem)
+        // Add 3
+        let expectationAddProduct3 = XCTestExpectation(description: "View model adds one more from same product to cart")
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationAddProduct3.fulfill()
+            }
+        }.store(in: &cancellables)
+        viewModel?.addItemToCart(addItem)
+        
+        wait(for: [expectationAddProduct1, expectationAddProduct2, expectationAddProduct3], timeout: 0.5)
+        
+        // Then
+        XCTAssertFalse(cart?.cartItems.isEmpty ?? true)
+        let firstItem = cart?.cartItems.first
+        XCTAssertEqual(firstItem?.productType, productType)
+        XCTAssertEqual(firstItem?.name, "Cabify T-Shirt")
+        XCTAssertTrue(firstItem?.showDiscountBadge ?? false)
+        XCTAssertEqual(firstItem?.cartQuantity, 3)
+        XCTAssertEqual(firstItem?.formattedPrice, "20.00€")
+        XCTAssertTrue(firstItem?.showSpecialPrice ?? false)
+        XCTAssertEqual(firstItem?.formattedSpecialPrice, "19.00€")
     }
     
     // Remove
