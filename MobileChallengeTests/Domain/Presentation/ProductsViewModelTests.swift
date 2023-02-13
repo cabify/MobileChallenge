@@ -121,3 +121,65 @@ extension ProductsViewModelTests {
         XCTAssertEqual(errorMessage, "Unknown error")
     }
 }
+
+// MARK: - Add/Remove products from cart
+extension ProductsViewModelTests {
+    // Success
+    func testProductsViewModel_whenSuccessfullyAddItemToCart_thenShowProductsUpdated() throws {
+        // Given
+        let expectationLoad = XCTestExpectation(description: "View model fetches products")
+        let coordinator = ProductsListCoordinator(
+            productsListRepository: MockedProductsListRepository(),
+            cartRepository: MockedCartRepository()
+        )
+        
+        var cart: CartLayoutViewModel?
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationLoad.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        let viewModel = coordinator.productsViewModel
+        XCTAssertEqual(coordinator.viewState.state, .idle)
+        viewModel?.load()
+        
+        wait(for: [expectationLoad], timeout: 0.5)
+        XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
+        
+        // When
+        let expectationAddItem = XCTestExpectation(description: "View model adds new product to cart")
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationAddItem.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
+        viewModel?.addItemToCart(addItem)
+        
+        wait(for: [expectationAddItem], timeout: 0.5)
+        
+        // Then
+        XCTAssertFalse(cart?.cartItems.isEmpty ?? true)
+        let firstItem = cart?.items.first
+        XCTAssertEqual(firstItem?.productType, .voucher)
+        XCTAssertEqual(firstItem?.name, "Cabify Voucher")
+        XCTAssertTrue(firstItem?.showDiscountBadge ?? false)
+        XCTAssertEqual(firstItem?.cartQuantity, 1)
+        XCTAssertEqual(firstItem?.formattedPrice, "5.00€")
+        XCTAssertFalse(firstItem?.showSpecialPrice ?? true)
+        XCTAssertNil(firstItem?.formattedSpecialPrice)
+        XCTAssertEqual(firstItem?.totalDiscounts, 0.0)
+        XCTAssertEqual(firstItem?.totalPrice, 5.0)
+        XCTAssertEqual(firstItem?.formattedTotalPrice, "5.00€")
+        XCTAssertNil(firstItem?.totalPriceWithDiscounts)
+        XCTAssertNil(firstItem?.formattedTotalPriceWithDiscounts)
+    }
+}
