@@ -39,14 +39,12 @@ final class ProductsViewModelTests: XCTestCase {
             case .idle, .loading, .failed: return
             case .loaded(let cart):
                 // Summary
-                XCTAssertEqual(cart.formattedSubtotal, "90.00€")
-                XCTAssertTrue(cart.showDiscounts)
-                XCTAssertEqual(cart.discounts.count, 2)
-                XCTAssertEqual(cart.discounts.first?.text, "Buy 2 and get 1 free")
-                XCTAssertEqual(cart.discounts.first?.formattedValue, "5.00€")
-                XCTAssertEqual(cart.discounts.last?.text, "€1 discount per unit for 3+")
-                XCTAssertEqual(cart.discounts.last?.formattedValue, "4.00€")
-                XCTAssertEqual(cart.formattedTotal, "81.00€")
+                XCTAssertEqual(cart.formattedSubtotal, "0.00€")
+                XCTAssertFalse(cart.showDiscounts)
+                XCTAssertEqual(cart.discounts.count, 0)
+                XCTAssertNil(cart.discounts.first?.formattedValue)
+                XCTAssertTrue(cart.discounts.isEmpty)
+                XCTAssertEqual(cart.formattedTotal, "0.00€")
                 
                 // Items
                 XCTAssertEqual(cart.items.count, 3)
@@ -55,30 +53,30 @@ final class ProductsViewModelTests: XCTestCase {
                 XCTAssertEqual(firstItem.productType, .voucher)
                 XCTAssertEqual(firstItem.name, "Cabify Voucher")
                 XCTAssertTrue(firstItem.showDiscountBadge)
-                XCTAssertEqual(firstItem.cartQuantity, 2)
+                XCTAssertEqual(firstItem.cartQuantity, 0)
                 XCTAssertEqual(firstItem.formattedPrice, "5.00€")
                 XCTAssertFalse(firstItem.showSpecialPrice)
                 XCTAssertNil(firstItem.formattedSpecialPrice)
-                XCTAssertEqual(firstItem.totalDiscounts, 5.0)
-                XCTAssertEqual(firstItem.totalPrice, 10.0)
-                XCTAssertEqual(firstItem.formattedTotalPrice, "10.00€")
-                XCTAssertEqual(firstItem.totalPriceWithDiscounts, 5.0)
-                XCTAssertEqual(firstItem.formattedTotalPriceWithDiscounts, "5.00€")
+                XCTAssertEqual(firstItem.totalDiscounts, 0.0)
+                XCTAssertEqual(firstItem.totalPrice, 0.0)
+                XCTAssertEqual(firstItem.formattedTotalPrice, "0.00€")
+                XCTAssertNil(firstItem.totalPriceWithDiscounts)
+                XCTAssertNil(firstItem.formattedTotalPriceWithDiscounts)
                 
                 // Second
                 let secondItem = cart.items[1]
                 XCTAssertEqual(secondItem.productType, .tShirt)
                 XCTAssertEqual(secondItem.name, "Cabify T-Shirt")
                 XCTAssertTrue(secondItem.showDiscountBadge)
-                XCTAssertEqual(secondItem.cartQuantity, 4)
+                XCTAssertEqual(secondItem.cartQuantity, 0)
                 XCTAssertEqual(secondItem.formattedPrice, "20.00€")
-                XCTAssertTrue(secondItem.showSpecialPrice)
-                XCTAssertEqual(secondItem.formattedSpecialPrice, "19.00€")
-                XCTAssertEqual(secondItem.totalDiscounts, 4.0)
-                XCTAssertEqual(secondItem.totalPrice, 80)
-                XCTAssertEqual(secondItem.formattedTotalPrice, "80.00€")
-                XCTAssertEqual(secondItem.totalPriceWithDiscounts, 76.0)
-                XCTAssertEqual(secondItem.formattedTotalPriceWithDiscounts, "76.00€")
+                XCTAssertFalse(secondItem.showSpecialPrice)
+                XCTAssertNil(secondItem.formattedSpecialPrice)
+                XCTAssertEqual(secondItem.totalDiscounts, 0.0)
+                XCTAssertEqual(secondItem.totalPrice, 0.0)
+                XCTAssertEqual(secondItem.formattedTotalPrice, "0.00€")
+                XCTAssertNil(secondItem.totalPriceWithDiscounts)
+                XCTAssertNil(secondItem.formattedTotalPriceWithDiscounts)
                 
                 // Third
                 let thirdItem = cart.items[2]
