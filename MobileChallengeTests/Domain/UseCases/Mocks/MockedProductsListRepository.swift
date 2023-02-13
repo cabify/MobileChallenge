@@ -10,6 +10,12 @@ import Combine
 
 final class MockedProductsListRepository {
     
+    static let productsList: ProductsList = .init(products: [
+        .init(code: "VOUCHER", name: "Cabify Voucher", price: 5),
+        .init(code: "TSHIRT", name: "Cabify T-Shirt", price: 20),
+        .init(code: "MUG", name: "Cabify Coffee Mug", price: 7.5)
+    ])
+    
     private let error: LocalizedError?
     
     init(error: LocalizedError? = nil) {
@@ -23,7 +29,7 @@ extension MockedProductsListRepository: ProductsListRepository {
             if let anError = self.error {
                 promise(.failure(anError))
             } else {
-                promise(.success(ProductsList.preview))
+                promise(.success(MockedProductsListRepository.productsList))
             }
         }
         .eraseToAnyPublisher()
