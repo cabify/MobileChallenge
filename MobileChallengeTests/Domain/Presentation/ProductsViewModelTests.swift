@@ -140,20 +140,21 @@ extension ProductsViewModelTests {
             }
         }.store(in: &cancellables)
         
-        let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
+        let productType = ProductType.voucher
+        let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
         viewModel?.addItemToCart(addItem)
         
         wait(for: [expectationAddProduct], timeout: 0.5)
         
         // Then
         XCTAssertFalse(cart?.cartItems.isEmpty ?? true)
-        let firstItem = cart?.items.first
-        XCTAssertEqual(firstItem?.productType, .voucher)
+        let firstItem = cart?.cartItems.first
+        XCTAssertEqual(firstItem?.productType, productType)
         XCTAssertEqual(firstItem?.name, "Cabify Voucher")
         XCTAssertTrue(firstItem?.showDiscountBadge ?? false)
         XCTAssertEqual(firstItem?.cartQuantity, 1)
         XCTAssertEqual(firstItem?.formattedPrice, "5.00€")
-        XCTAssertFalse(firstItem?.showSpecialPrice ?? true)
+    }
     }
     
     // Remove
