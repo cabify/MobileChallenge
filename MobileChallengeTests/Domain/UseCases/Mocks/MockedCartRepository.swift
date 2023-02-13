@@ -41,7 +41,6 @@ extension MockedCartRepository: CartRepository {
                 return promise(.failure(TestsError.itemNotFound))
             }
             
-            let currentQuantity = updatedItem.quantity
             var newQuantity = updatedItem.quantity + 1
             if !increase {
                 newQuantity = updatedItem.quantity - 1

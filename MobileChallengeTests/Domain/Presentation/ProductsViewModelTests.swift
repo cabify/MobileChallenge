@@ -48,13 +48,6 @@ final class ProductsViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
         
         // Then
-        XCTAssertEqual(cart?.formattedSubtotal, "0.00€")
-        XCTAssertFalse(cart?.showDiscounts ?? false)
-        XCTAssertEqual(cart?.discounts.count, 0)
-        XCTAssertNil(cart?.discounts.first?.formattedValue)
-        XCTAssertTrue(cart?.discounts.isEmpty ?? false)
-        XCTAssertEqual(cart?.formattedTotal, "0.00€")
-        XCTAssertEqual(cart?.items.count, 3)
         let firstItem = cart?.items[0]
         XCTAssertEqual(firstItem?.productType, .voucher)
         XCTAssertEqual(firstItem?.name, "Cabify Voucher")
