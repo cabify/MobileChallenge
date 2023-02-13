@@ -21,10 +21,10 @@ final class AddItemToCartUseCaseTests: XCTestCase {
         // When
         let cart = try awaitPublisher(getCartUseCase.getCart())
         if let item = cart.items.first(where: { ProductType.init(rawValue: $0.code) == .tShirt }) {
-            XCTAssertEqual(item.quantity, 4)
+            XCTAssertEqual(item.quantity, 0)
             
             let newQuantity = try awaitPublisher(addItemToCartUseCase.addItem(item))
-            XCTAssertEqual(newQuantity, 5)
+            XCTAssertEqual(newQuantity, 1)
         }
     }
 }

@@ -25,7 +25,7 @@ final class GetCartUseCaseTests: XCTestCase {
         // First product
         XCTAssertEqual(cart.items.first?.code, 0)
         XCTAssertEqual(cart.items.first?.name, "Cabify Voucher")
-        XCTAssertEqual(cart.items.first?.quantity, 2)
+        XCTAssertEqual(cart.items.first?.quantity, 0)
         XCTAssertEqual(cart.items.first?.price, 5.0)
         // Last product
         XCTAssertEqual(cart.items.last?.code, 2)

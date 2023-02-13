@@ -24,7 +24,7 @@ final class ClearCartUseCaseTests: XCTestCase {
         
         // Then
         let clearedCart = try awaitPublisher(clearCartUseCase.clearCart())
-        XCTAssertEqual(cartItems.count, 2)
+        XCTAssertEqual(cartItems.count, 0)
         XCTAssertEqual(clearedCart.items.filter { $0.quantity > 0 }.count, 0)
     }
 }

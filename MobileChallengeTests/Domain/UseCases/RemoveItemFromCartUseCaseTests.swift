@@ -16,15 +16,18 @@ final class RemoveItemFromCartUseCaseTests: XCTestCase {
         // Given
         let mockedRepository = MockedCartRepository()
         let getCartUseCase = DefaultGetCartUseCase(cartRepository: mockedRepository)
+        let addItemToCartUseCase = DefaultAddItemToCartUseCase(cartRepository: mockedRepository)
         let removeItemFromCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: mockedRepository)
         
         // When
         let cart = try awaitPublisher(getCartUseCase.getCart())
         if let item = cart.items.first(where: { ProductType.init(rawValue: $0.code) == .voucher }) {
-            XCTAssertEqual(item.quantity, 2)
+            let addedItem = try awaitPublisher(addItemToCartUseCase.addItem(item))
+            XCTAssertEqual(addedItem, 1)
             
+            // Then
             let newQuantity = try awaitPublisher(removeItemFromCartUseCase.removeItem(item))
-            XCTAssertEqual(newQuantity, 1)
+            XCTAssertEqual(newQuantity, 0)
         }
     }
     
