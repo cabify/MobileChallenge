@@ -11,13 +11,22 @@ import Combine
 
 final class ProductsViewModelTests: XCTestCase {
     
+    private var coordinator: ProductsListCoordinator?
     private var cancellables: Set<AnyCancellable> = []
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+        
+        // Coordinator with empty cart
+        self.coordinator = ProductsListCoordinator(
+            productsListRepository: MockedProductsListRepository(),
+            cartRepository: MockedCartRepository()
+        )
     }
     
     override func tearDownWithError() throws {
+        self.coordinator = nil
+        
         try super.tearDownWithError()
     }
 }
@@ -28,12 +37,8 @@ extension ProductsViewModelTests {
     func testProductsViewModel_whenSuccessfullyLoadsContent_thenShowProductsList() throws {
         // Given
         let expectation = XCTestExpectation(description: "View model fetches products")
-        let coordinator = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository(),
-            cartRepository: MockedCartRepository()
-        )
         var cart: CartLayoutViewModel?
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -43,8 +48,8 @@ extension ProductsViewModelTests {
         }.store(in: &cancellables)
         
         // When
-        let viewModel = coordinator.productsViewModel
-        XCTAssertEqual(coordinator.viewState.state, .idle)
+        let viewModel = self.coordinator?.productsViewModel
+        XCTAssertEqual(self.coordinator?.viewState.state, .idle)
         viewModel?.load()
         
         wait(for: [expectation], timeout: 0.5)
@@ -74,6 +79,7 @@ extension ProductsViewModelTests {
     func testProductsViewModel_whenFailedLoadsContent_thenThrowAnError() throws {
         // Given
         let expectation = XCTestExpectation(description: "View model fails to fetch products")
+        // Custom coordinator with mocked error for repository
         let coordinator = ProductsListCoordinator(
             productsListRepository: MockedProductsListRepository(error: APIError.unknown(nil, "Unknown error")),
             cartRepository: MockedCartRepository()
@@ -106,13 +112,8 @@ extension ProductsViewModelTests {
     func testProductsViewModel_whenSuccessfullyAddProductToCart_thenShowProductsUpdated() throws {
         // Given
         let expectationLoad = XCTestExpectation(description: "View model fetches products")
-        let coordinator = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository(),
-            cartRepository: MockedCartRepository()
-        )
-        
         var cart: CartLayoutViewModel?
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -121,8 +122,8 @@ extension ProductsViewModelTests {
             }
         }.store(in: &cancellables)
         
-        let viewModel = coordinator.productsViewModel
-        XCTAssertEqual(coordinator.viewState.state, .idle)
+        let viewModel = self.coordinator?.productsViewModel
+        XCTAssertEqual(self.coordinator?.viewState.state, .idle)
         viewModel?.load()
         
         wait(for: [expectationLoad], timeout: 0.5)
@@ -132,7 +133,7 @@ extension ProductsViewModelTests {
         let productType = ProductType.voucher
         let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
         let expectationAddProduct = XCTestExpectation(description: "View model adds new product to cart")
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -158,13 +159,8 @@ extension ProductsViewModelTests {
     func testProductsViewModel_whenSuccessfullyAddManyProductsToCart_thenShowProductsUpdatedWithSpecialPrice() throws {
         // Given
         let expectationLoad = XCTestExpectation(description: "View model fetches products")
-        let coordinator = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository(),
-            cartRepository: MockedCartRepository()
-        )
-        
         var cart: CartLayoutViewModel?
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -173,8 +169,8 @@ extension ProductsViewModelTests {
             }
         }.store(in: &cancellables)
         
-        let viewModel = coordinator.productsViewModel
-        XCTAssertEqual(coordinator.viewState.state, .idle)
+        let viewModel = self.coordinator?.productsViewModel
+        XCTAssertEqual(self.coordinator?.viewState.state, .idle)
         viewModel?.load()
         
         wait(for: [expectationLoad], timeout: 0.5)
@@ -185,7 +181,7 @@ extension ProductsViewModelTests {
         let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
         // Add 1
         let expectationAddProduct1 = XCTestExpectation(description: "View model adds new product to cart")
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -196,7 +192,7 @@ extension ProductsViewModelTests {
         viewModel?.addItemToCart(addProduct)
         // Add 2
         let expectationAddProduct2 = XCTestExpectation(description: "View model adds one more from same product to cart")
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -207,7 +203,7 @@ extension ProductsViewModelTests {
         viewModel?.addItemToCart(addProduct)
         // Add 3
         let expectationAddProduct3 = XCTestExpectation(description: "View model adds one more from same product to cart")
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -235,13 +231,8 @@ extension ProductsViewModelTests {
     func testProductsViewModel_whenSuccessfullyRemoveProductFromCart_thenShowProductsUpdated() throws {
         // Given
         let expectationLoad = XCTestExpectation(description: "View model fetches products")
-        let coordinator = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository(),
-            cartRepository: MockedCartRepository()
-        )
-        
         var cart: CartLayoutViewModel?
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -250,8 +241,8 @@ extension ProductsViewModelTests {
             }
         }.store(in: &cancellables)
         
-        let viewModel = coordinator.productsViewModel
-        XCTAssertEqual(coordinator.viewState.state, .idle)
+        let viewModel = self.coordinator?.productsViewModel
+        XCTAssertEqual(self.coordinator?.viewState.state, .idle)
         viewModel?.load()
         
         wait(for: [expectationLoad], timeout: 0.5)
@@ -259,7 +250,7 @@ extension ProductsViewModelTests {
         
         let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
         let expectationAddProduct = XCTestExpectation(description: "View model adds new product to cart")
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -273,7 +264,7 @@ extension ProductsViewModelTests {
         // When
         let removeProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
         let expectationRemoveProduct = XCTestExpectation(description: "View model removes new product to cart")
-        coordinator.viewState.$state.sink { state in
+        self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
