@@ -98,6 +98,30 @@ final class ProductsViewModelTests: XCTestCase {
     
     // Fail
     func testProductsViewModel_whenFailedLoadsContent_thenThrowAnError() throws {
+        // Given
+        let expectation = XCTestExpectation(description: "View model fails to fetch products")
+        let coordinator = ProductsListCoordinator(
+            productsListRepository: MockedProductsListRepository(error: APIError.unknown(nil, "Unknown error")),
+            cartRepository: MockedCartRepository()
+        )
+        var errorMessage: String?
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .loaded: return
+            case .failed(let error):
+                errorMessage = (error as? APIError)?.errorDescription
+                expectation.fulfill()
+            }
+        }.store(in: &cancellables)
         
+        // When
+        let viewModel = coordinator.productsViewModel
+        XCTAssertEqual(coordinator.viewState.state, .idle)
+        viewModel?.load()
+        
+        wait(for: [expectation], timeout: 0.5)
+        
+        // Then
+        XCTAssertEqual(errorMessage, "Unknown error")
     }
 }
