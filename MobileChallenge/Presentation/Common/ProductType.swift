@@ -33,14 +33,6 @@ enum ProductType: Int {
         default: return nil
         }
     }
-    // Value
-    var stringValue: String {
-        switch self {
-        case .voucher: return "VOUCHER"
-        case .tShirt: return "TSHIRT"
-        case .mug: return "MUG"
-        }
-    }
     
     // MARK: - Custom infos
     // Badge discount text

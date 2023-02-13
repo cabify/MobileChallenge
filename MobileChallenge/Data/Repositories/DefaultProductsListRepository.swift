@@ -27,7 +27,7 @@ extension DefaultProductsListRepository: ProductsListRepository {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension DefaultProductsListRepository {
     static var preview: Self {
         .init(productsListRequest: ProductsListRequest.preview)

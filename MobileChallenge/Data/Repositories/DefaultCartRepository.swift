@@ -97,7 +97,7 @@ extension DefaultCartRepository: CartRepository {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension DefaultCartRepository {
     static var preview: Self {
         .init(context: CoreDataStorage.preview.context!)

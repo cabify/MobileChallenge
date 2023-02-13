@@ -29,7 +29,6 @@ extension RequestConvertable {
         }
         
         switch method {
-        case "POST": urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameter)
         case "GET": urlRequest = try URLEncoding.default.encode(urlRequest, with: parameter)
         default: break
         }

@@ -28,7 +28,7 @@ struct ProductsListRequest: RequestConvertable {
     var parameter: [String: Any]? { nil }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension ProductsListRequest {
     static var preview: Self {
         .init()

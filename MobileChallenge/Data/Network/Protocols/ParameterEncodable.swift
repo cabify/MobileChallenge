@@ -13,32 +13,6 @@ protocol ParameterEncodable {
     func encode(_ urlRequest: URLRequest, with parameters: Parameters?) throws -> URLRequest
 }
 
-struct JSONEncoding: ParameterEncodable {
-    
-    public static var `default`: URLEncoding { return URLEncoding() }
-    
-    func encode(_ urlRequest: URLRequest, with parameters: Parameters?) throws -> URLRequest {
-        var urlRequest = urlRequest
-        
-        guard let parameters = parameters else { return urlRequest }
-        
-        do {
-            let data = try JSONSerialization.data(withJSONObject: parameters, options: [])
-            
-            if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            }
-            
-            urlRequest.httpBody = data
-            
-        } catch {
-            throw RequestableError.parameterEncodingFailed(error, "JSON encoding failed")
-        }
-        
-        return urlRequest
-    }
-}
-
 struct URLEncoding: ParameterEncodable {
     
     public static var `default`: URLEncoding { return URLEncoding() }
