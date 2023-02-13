@@ -82,15 +82,6 @@ struct CartLayoutViewModel: Equatable {
         
         // MARK: - Init
         // From product
-        init?(product: ProductsList.Product, cartQuantity: Int = 0) {
-            guard let productType = ProductType(code: product.code) else { return nil }
-            self.productType = productType
-            self.name = product.name
-            self.price = product.price
-            self.formattedPrice = product.price.currency
-            self.cartQuantity = cartQuantity
-        }
-        // From product
         init?(cartItem: Cart.Item) {
             guard let productType = ProductType(rawValue: cartItem.code) else { return nil }
             self.productType = productType
