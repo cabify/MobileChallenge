@@ -20,7 +20,6 @@ final class ProductsViewModelTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
     }
-    
 }
 
 // MARK: - Load
@@ -130,6 +129,8 @@ extension ProductsViewModelTests {
         XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
         
         // When
+        let productType = ProductType.voucher
+        let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
         let expectationAddProduct = XCTestExpectation(description: "View model adds new product to cart")
         coordinator.viewState.$state.sink { state in
             switch state {
@@ -139,10 +140,7 @@ extension ProductsViewModelTests {
                 expectationAddProduct.fulfill()
             }
         }.store(in: &cancellables)
-        
-        let productType = ProductType.voucher
-        let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
-        viewModel?.addItemToCart(addItem)
+        viewModel?.addItemToCart(addProduct)
         
         wait(for: [expectationAddProduct], timeout: 0.5)
         
@@ -184,7 +182,7 @@ extension ProductsViewModelTests {
         
         // When
         let productType = ProductType.tShirt
-        let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
+        let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
         // Add 1
         let expectationAddProduct1 = XCTestExpectation(description: "View model adds new product to cart")
         coordinator.viewState.$state.sink { state in
@@ -195,7 +193,7 @@ extension ProductsViewModelTests {
                 expectationAddProduct1.fulfill()
             }
         }.store(in: &cancellables)
-        viewModel?.addItemToCart(addItem)
+        viewModel?.addItemToCart(addProduct)
         // Add 2
         let expectationAddProduct2 = XCTestExpectation(description: "View model adds one more from same product to cart")
         coordinator.viewState.$state.sink { state in
@@ -206,7 +204,7 @@ extension ProductsViewModelTests {
                 expectationAddProduct2.fulfill()
             }
         }.store(in: &cancellables)
-        viewModel?.addItemToCart(addItem)
+        viewModel?.addItemToCart(addProduct)
         // Add 3
         let expectationAddProduct3 = XCTestExpectation(description: "View model adds one more from same product to cart")
         coordinator.viewState.$state.sink { state in
@@ -217,7 +215,7 @@ extension ProductsViewModelTests {
                 expectationAddProduct3.fulfill()
             }
         }.store(in: &cancellables)
-        viewModel?.addItemToCart(addItem)
+        viewModel?.addItemToCart(addProduct)
         
         wait(for: [expectationAddProduct1, expectationAddProduct2, expectationAddProduct3], timeout: 0.5)
         
@@ -259,6 +257,7 @@ extension ProductsViewModelTests {
         wait(for: [expectationLoad], timeout: 0.5)
         XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
         
+        let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
         let expectationAddProduct = XCTestExpectation(description: "View model adds new product to cart")
         coordinator.viewState.$state.sink { state in
             switch state {
@@ -268,13 +267,11 @@ extension ProductsViewModelTests {
                 expectationAddProduct.fulfill()
             }
         }.store(in: &cancellables)
-        
-        let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
-        viewModel?.addItemToCart(addItem)
-        
+        viewModel?.addItemToCart(addProduct)
         wait(for: [expectationAddProduct], timeout: 0.5)
         
         // When
+        let removeProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
         let expectationRemoveProduct = XCTestExpectation(description: "View model removes new product to cart")
         coordinator.viewState.$state.sink { state in
             switch state {
@@ -284,9 +281,7 @@ extension ProductsViewModelTests {
                 expectationRemoveProduct.fulfill()
             }
         }.store(in: &cancellables)
-        
-        let removeItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
-        viewModel?.removeItemFromCart(removeItem)
+        viewModel?.removeItemFromCart(removeProduct)
         
         wait(for: [expectationRemoveProduct], timeout: 0.5)
         
