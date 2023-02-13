@@ -21,7 +21,10 @@ final class ProductsViewModelTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    // MARK: - Load
+}
+
+// MARK: - Load
+extension ProductsViewModelTests {
     // Success
     func testProductsViewModel_whenSuccessfullyLoadsContent_thenShowProductsList() throws {
         // Given
