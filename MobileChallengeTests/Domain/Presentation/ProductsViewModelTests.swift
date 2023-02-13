@@ -103,8 +103,8 @@ extension ProductsViewModelTests {
 
 // MARK: - Add/Remove products from cart
 extension ProductsViewModelTests {
-    // Success
-    func testProductsViewModel_whenSuccessfullyAddItemToCart_thenShowProductsUpdated() throws {
+    // Add
+    func testProductsViewModel_whenSuccessfullyAddProductToCart_thenShowProductsUpdated() throws {
         // Given
         let expectationLoad = XCTestExpectation(description: "View model fetches products")
         let coordinator = ProductsListCoordinator(
@@ -130,20 +130,20 @@ extension ProductsViewModelTests {
         XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
         
         // When
-        let expectationAddItem = XCTestExpectation(description: "View model adds new product to cart")
+        let expectationAddProduct = XCTestExpectation(description: "View model adds new product to cart")
         coordinator.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
                 cart = loadedCart
-                expectationAddItem.fulfill()
+                expectationAddProduct.fulfill()
             }
         }.store(in: &cancellables)
         
         let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
         viewModel?.addItemToCart(addItem)
         
-        wait(for: [expectationAddItem], timeout: 0.5)
+        wait(for: [expectationAddProduct], timeout: 0.5)
         
         // Then
         XCTAssertFalse(cart?.cartItems.isEmpty ?? true)
@@ -154,5 +154,66 @@ extension ProductsViewModelTests {
         XCTAssertEqual(firstItem?.cartQuantity, 1)
         XCTAssertEqual(firstItem?.formattedPrice, "5.00€")
         XCTAssertFalse(firstItem?.showSpecialPrice ?? true)
+    }
+    
+    // Remove
+    func testProductsViewModel_whenSuccessfullyRemoveProductFromCart_thenShowProductsUpdated() throws {
+        // Given
+        let expectationLoad = XCTestExpectation(description: "View model fetches products")
+        let coordinator = ProductsListCoordinator(
+            productsListRepository: MockedProductsListRepository(),
+            cartRepository: MockedCartRepository()
+        )
+        
+        var cart: CartLayoutViewModel?
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationLoad.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        let viewModel = coordinator.productsViewModel
+        XCTAssertEqual(coordinator.viewState.state, .idle)
+        viewModel?.load()
+        
+        wait(for: [expectationLoad], timeout: 0.5)
+        XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
+        
+        let expectationAddProduct = XCTestExpectation(description: "View model adds new product to cart")
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationAddProduct.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        let addItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
+        viewModel?.addItemToCart(addItem)
+        
+        wait(for: [expectationAddProduct], timeout: 0.5)
+        
+        // When
+        let expectationRemoveProduct = XCTestExpectation(description: "View model removes new product to cart")
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationRemoveProduct.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        let removeItem = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
+        viewModel?.removeItemFromCart(removeItem)
+        
+        wait(for: [expectationRemoveProduct], timeout: 0.5)
+        
+        // Then
+        XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
     }
 }
