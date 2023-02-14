@@ -469,7 +469,6 @@
 		338F7FBC298D220600BBA7DC /* CoreDataStack */ = {
 			isa = PBXGroup;
 			children = (
-				338F7FBD298D222100BBA7DC /* CoreDataStorageConfiguration.swift */,
 				338F7FC1298D24CA00BBA7DC /* StorageStoreCoordinator.swift */,
 			);
 			path = CoreDataStack;
@@ -518,6 +517,7 @@
 			children = (
 				338F7FC5298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld */,
 				338F7FE2298D65AF00BBA7DC /* CoreDataManager.swift */,
+				338F7FBD298D222100BBA7DC /* CoreDataStorageConfiguration.swift */,
 				338F7FBF298D230500BBA7DC /* CoreDataStorage.swift */,
 				338F7FB1298D178F00BBA7DC /* CoreDataRepository.swift */,
 				338F7FB7298D217E00BBA7DC /* Protocol */,
