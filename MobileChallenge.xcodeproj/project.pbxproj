@@ -15,7 +15,6 @@
 		334B5950299BE12500B29EA8 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FB1298D178F00BBA7DC /* CoreDataRepository.swift */; };
 		334B5951299BE16400B29EA8 /* StorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FB8298D21B200BBA7DC /* StorageProtocol.swift */; };
 		334B5952299BE16600B29EA8 /* StorableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBA298D21DB00BBA7DC /* StorableObject.swift */; };
-		334B5953299BE16900B29EA8 /* CoreDataStorageConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBD298D222100BBA7DC /* CoreDataStorageConfiguration.swift */; };
 		334B5954299BE16C00B29EA8 /* StorageStoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC1298D24CA00BBA7DC /* StorageStoreCoordinator.swift */; };
 		334B5955299BE16E00B29EA8 /* CartEntity+Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FE0298D633A00BBA7DC /* CartEntity+Storable.swift */; };
 		334B5956299BE17100B29EA8 /* CartItemEntity+Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FE8298D8D6300BBA7DC /* CartItemEntity+Storable.swift */; };
@@ -85,7 +84,6 @@
 		338F7FB2298D178F00BBA7DC /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FB1298D178F00BBA7DC /* CoreDataRepository.swift */; };
 		338F7FB9298D21B200BBA7DC /* StorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FB8298D21B200BBA7DC /* StorageProtocol.swift */; };
 		338F7FBB298D21DB00BBA7DC /* StorableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBA298D21DB00BBA7DC /* StorableObject.swift */; };
-		338F7FBE298D222100BBA7DC /* CoreDataStorageConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBD298D222100BBA7DC /* CoreDataStorageConfiguration.swift */; };
 		338F7FC0298D230500BBA7DC /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBF298D230500BBA7DC /* CoreDataStorage.swift */; };
 		338F7FC2298D24CA00BBA7DC /* StorageStoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC1298D24CA00BBA7DC /* StorageStoreCoordinator.swift */; };
 		338F7FC7298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC5298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld */; };
@@ -175,7 +173,6 @@
 		338F7FB1298D178F00BBA7DC /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		338F7FB8298D21B200BBA7DC /* StorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProtocol.swift; sourceTree = "<group>"; };
 		338F7FBA298D21DB00BBA7DC /* StorableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableObject.swift; sourceTree = "<group>"; };
-		338F7FBD298D222100BBA7DC /* CoreDataStorageConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageConfiguration.swift; sourceTree = "<group>"; };
 		338F7FBF298D230500BBA7DC /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		338F7FC1298D24CA00BBA7DC /* StorageStoreCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageStoreCoordinator.swift; sourceTree = "<group>"; };
 		338F7FC6298D4D0900BBA7DC /* MobileChallenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MobileChallenge.xcdatamodel; sourceTree = "<group>"; };
@@ -517,7 +514,6 @@
 			children = (
 				338F7FC5298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld */,
 				338F7FE2298D65AF00BBA7DC /* CoreDataManager.swift */,
-				338F7FBD298D222100BBA7DC /* CoreDataStorageConfiguration.swift */,
 				338F7FBF298D230500BBA7DC /* CoreDataStorage.swift */,
 				338F7FB1298D178F00BBA7DC /* CoreDataRepository.swift */,
 				338F7FB7298D217E00BBA7DC /* Protocol */,
@@ -761,7 +757,6 @@
 				3385CDF82987FFC7002CD30A /* ParameterEncodable.swift in Sources */,
 				33C4F9DB298B1DB4004B8352 /* PriceView.swift in Sources */,
 				33C4F9DD298B24BD004B8352 /* ProductListCell.swift in Sources */,
-				338F7FBE298D222100BBA7DC /* CoreDataStorageConfiguration.swift in Sources */,
 				33B3496F298C1F2000BED8C2 /* PrimaryButtonView.swift in Sources */,
 				338F7FC2298D24CA00BBA7DC /* StorageStoreCoordinator.swift in Sources */,
 				339697C4298ADB6B009091CB /* DiscountBadgeView.swift in Sources */,
@@ -835,7 +830,6 @@
 				3362B45C2996A4AB00B99241 /* MockedCartRepository.swift in Sources */,
 				3362B44E2996930200B99241 /* CartDetailViewModel.swift in Sources */,
 				3385CDDF29843AD1002CD30A /* ProductsList.swift in Sources */,
-				334B5953299BE16900B29EA8 /* CoreDataStorageConfiguration.swift in Sources */,
 				3385CDF32987EBC1002CD30A /* ApiErrors.swift in Sources */,
 				334B594E299BE11F00B29EA8 /* CoreDataManager.swift in Sources */,
 				3362B4502996930D00B99241 /* ClearCartUseCase.swift in Sources */,
