@@ -268,17 +268,9 @@
 			isa = PBXGroup;
 			children = (
 				3356E70D299AB42A00127F8B /* Network */,
-				3362B46E2996B79F00B99241 /* Repositories */,
 				3362B46F2996B7A700B99241 /* Storage */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		3362B46E2996B79F00B99241 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repositories;
 			sourceTree = "<group>";
 		};
 		3362B46F2996B7A700B99241 /* Storage */ = {
@@ -326,7 +318,6 @@
 			children = (
 				3375D71F29967E9B00FADDC0 /* UseCases */,
 				3362B4672996B4EA00B99241 /* Presentation */,
-				3362B46D2996B76A00B99241 /* Data */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -588,6 +579,7 @@
 			isa = PBXGroup;
 			children = (
 				3375D71E29967E9100FADDC0 /* Domain */,
+				3362B46D2996B76A00B99241 /* Data */,
 				3362B45629969A1A00B99241 /* Helper */,
 			);
 			path = MobileChallengeTests;
