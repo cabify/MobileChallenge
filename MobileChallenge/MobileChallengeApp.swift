@@ -8,6 +8,16 @@
 import SwiftUI
 
 @main
+struct AppLauncher {
+    static func main() throws {
+        if NSClassFromString("XCTestCase") == nil {
+            MobileChallengeApp.main()
+        } else {
+            TestApp.main()
+        }
+    }
+}
+
 struct MobileChallengeApp: App {
     
     @StateObject var coordinator = ProductsListCoordinator(
@@ -24,5 +34,11 @@ struct MobileChallengeApp: App {
         WindowGroup {
             ProductsListCoordinatorView(coordinatorObject: coordinator)
         }
+    }
+}
+
+struct TestApp: App {
+    var body: some Scene {
+        WindowGroup { Text("Running Unit Tests") }
     }
 }
