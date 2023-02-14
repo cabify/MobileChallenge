@@ -20,7 +20,7 @@ final class ProductsViewModelTests: XCTestCase {
         // Coordinator with empty cart
         self.coordinator = ProductsListCoordinator(
             productsListRepository: MockedProductsListRepository.mockedDefaultRepository,
-            cartRepository: MockedCartRepository()
+            cartRepository: MockedCartRepository.mockedDefaultRepository
         )
     }
     
@@ -82,7 +82,7 @@ extension ProductsViewModelTests {
         // Custom coordinator with mocked error for repository
         let coordinator = ProductsListCoordinator(
             productsListRepository: MockedProductsListRepository.mockedRepository(statusCode: 600),
-            cartRepository: MockedCartRepository()
+            cartRepository: MockedCartRepository.mockedDefaultRepository
         )
         var errorMessage: String?
         coordinator.viewState.$state.sink { state in

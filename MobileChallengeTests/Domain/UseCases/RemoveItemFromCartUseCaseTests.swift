@@ -14,7 +14,7 @@ final class RemoveItemFromCartUseCaseTests: XCTestCase {
     // Success
     func testRemoveItemFromCart_whenSuccessfullyRemovesItemFromCart_thenValidateNewQuantity() throws {
         // Given
-        let mockedRepository = MockedCartRepository()
+        let mockedRepository = MockedCartRepository.mockedDefaultRepository
         let getCartUseCase = DefaultGetCartUseCase(cartRepository: mockedRepository)
         let addItemToCartUseCase = DefaultAddItemToCartUseCase(cartRepository: mockedRepository)
         let removeItemFromCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: mockedRepository)
@@ -34,7 +34,7 @@ final class RemoveItemFromCartUseCaseTests: XCTestCase {
     // Fail
     func testRemoveItemFromCart_whenFailedRemovesItemFromCart_thenThrowAnError() throws {
         // Given
-        let mockedRepository = MockedCartRepository()
+        let mockedRepository = MockedCartRepository.mockedDefaultRepository
         let getCartUseCase = DefaultGetCartUseCase(cartRepository: mockedRepository)
         let removeItemFromCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: mockedRepository)
         

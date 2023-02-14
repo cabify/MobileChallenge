@@ -14,7 +14,7 @@ final class AddItemToCartUseCaseTests: XCTestCase {
     // Success
     func testAddItemToCart_whenSuccessfullyAddsItemToCart_thenValidateNewQuantity() throws {
         // Given
-        let mockedRepository = MockedCartRepository()
+        let mockedRepository = MockedCartRepository.mockedDefaultRepository
         let getCartUseCase = DefaultGetCartUseCase(cartRepository: mockedRepository)
         let addItemToCartUseCase = DefaultAddItemToCartUseCase(cartRepository: mockedRepository)
         

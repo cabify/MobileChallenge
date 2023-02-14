@@ -14,7 +14,7 @@ final class ClearCartUseCaseTests: XCTestCase {
     // Success
     func testClearCart_whenSuccessfullyClearsCart_thenValidateItemQuantities() throws {
         // Given
-        let mockedRepository = MockedCartRepository()
+        let mockedRepository = MockedCartRepository.mockedDefaultRepository
         let getCartUseCase = DefaultGetCartUseCase(cartRepository: mockedRepository)
         let clearCartUseCase = DefaultClearCartUseCase(cartRepository: mockedRepository)
         

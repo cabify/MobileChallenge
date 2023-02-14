@@ -16,12 +16,14 @@ final class MockedCartRepository {
         .init(code: 2, name: "Cabify Coffee Mug", quantity: 0, price: 7.5)
     ])
     
-    private var mockedCart: Cart!
-    private let error: LocalizedError?
+    static var mockedDefaultRepository: MockedCartRepository {
+        return MockedCartRepository()
+    }
     
-    init(error: LocalizedError? = nil) {
+    private var mockedCart: Cart!
+    
+    private init() {
         self.mockedCart = MockedCartRepository.mockedModel
-        self.error = error
     }
 }
 
@@ -54,7 +56,7 @@ extension MockedCartRepository: CartRepository {
                 if anItem.code == updatedItem.code {
                     return .init(code: anItem.code, name: anItem.name, quantity: newQuantity, price: anItem.price)
                 }
-                    
+                
                 return .init(code: anItem.code, name: anItem.name, quantity: anItem.quantity, price: anItem.price)
             }
             self.mockedCart = Cart(items: updatedItems)
