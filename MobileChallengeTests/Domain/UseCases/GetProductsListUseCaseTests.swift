@@ -11,26 +11,7 @@ import Combine
 
 final class GetProductsListUseCaseTests: XCTestCase {
     
-    static private func mockedURL(base: String?, path: String?) -> URL? {
-        guard let aBase = base, let aPath = path else { return nil }
-        var mockedURL = URLComponents(string: aBase)
-        mockedURL?.path.append(aPath)
-        return mockedURL?.url
-    }
-    
-    static private var encodedMockedModel: Data? {
-        let mockedModel: ProductsListDTO = .init(products: [
-            .init(code: "VOUCHER", name: "Cabify Voucher", price: 5),
-            .init(code: "TSHIRT", name: "Cabify T-Shirt", price: 20),
-            .init(code: "MUG", name: "Cabify Coffee Mug", price: 7.5)
-        ])
-        return try? JSONEncoder().encode(mockedModel)
-    }
-}
-
-// MARK: - Success tests
-extension GetProductsListUseCaseTests {
-    
+    // MARK: - Success tests
     func testGetProductsListUseCase_whenSuccessfullyFetchesProductsList_thenValidateProducts() throws {
         
         // Given
