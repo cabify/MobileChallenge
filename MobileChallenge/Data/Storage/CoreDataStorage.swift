@@ -20,7 +20,7 @@ final class CoreDataStorage: CoreDataStorable {
     init(configuration: StorageConfiguration) {
         switch configuration {
         case .basic:
-            initDB(modelName: configuration.identifier(), storeType: .sqLiteStoreType)
+            initDB(modelName: configuration.identifier, storeType: .sqLiteStoreType)
             
         case .inMemory:
             initDB(storeType: .inMemoryStoreType)
