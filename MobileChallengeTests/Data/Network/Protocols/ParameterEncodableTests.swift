@@ -11,7 +11,7 @@ import Combine
 
 final class ParameterEncodableTests: XCTestCase {
     
-    func testGetProductsListUseCase_whenSuccessfullyFetchesProductsList_thenValidateProducts() throws {
+    func testRequestConvertable_whenURLEncodeParameters_thenValidateURLWithParams() throws {
         
         // Given
         let mockedRequest = ProductsListRequest(parameter: ["sort": "ascending"])
