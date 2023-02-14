@@ -1,5 +1,5 @@
 //
-//  StorageConfiguration.swift
+//  CoreDataStorageConfiguration.swift
 //  MobileChallenge
 //
 //  Created by thomas pereira on 03/02/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum StorageConfiguration {
+public enum CoreDataStorageConfiguration {
     case basic(identifier: String)
     case inMemory(identifier: String? = nil)
     

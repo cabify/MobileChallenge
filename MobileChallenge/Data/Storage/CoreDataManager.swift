@@ -13,14 +13,14 @@ final class CoreDataManager {
     // MARK: - Static
     // Custom configuration
     struct Config {
-        let storageConfig: StorageConfiguration
+        let storageConfig: CoreDataStorageConfiguration
     }
     private static var storageConfig: Config?
     // Shared
     static var shared = CoreDataManager()
     
     // Setup
-    static func setup(with storageConfig: StorageConfiguration) {
+    static func setup(with storageConfig: CoreDataStorageConfiguration) {
         CoreDataManager.storageConfig = Config(storageConfig: storageConfig)
     }
     

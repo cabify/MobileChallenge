@@ -10,14 +10,14 @@ import CoreData
 
 protocol CoreDataStorable {
     var context: NSManagedObjectContext? { get }
-    init(configuration: StorageConfiguration)
+    init(configuration: CoreDataStorageConfiguration)
 }
 
 final class CoreDataStorage: CoreDataStorable {
     
     var context: NSManagedObjectContext?
     
-    init(configuration: StorageConfiguration) {
+    init(configuration: CoreDataStorageConfiguration) {
         switch configuration {
         case .basic:
             initDB(modelName: configuration.identifier, storeType: .sqLiteStoreType)
