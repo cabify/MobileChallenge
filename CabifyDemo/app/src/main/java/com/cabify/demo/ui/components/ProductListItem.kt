@@ -4,7 +4,6 @@ import android.icu.util.Currency
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -20,25 +19,24 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.cabify.demo.R
 import com.cabify.demo.data.model.Product
+import java.math.BigDecimal
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.N)
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CabifyProductListItem(
     productItem: Product,
     isSelectable: Boolean = false,
     isSelected: Boolean = false,
     modifier: Modifier = Modifier,
-    navigateToDetail: (String) -> Unit
+    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
 ) {
     val semanticsModifier = if (isSelectable) modifier
         .padding(horizontal = 16.dp, vertical = 4.dp)
         .semantics { selected = isSelected }
     else modifier.padding(horizontal = 16.dp, vertical = 4.dp)
     Card(
-        modifier = semanticsModifier.clickable { navigateToDetail(productItem.code) },
-        colors = CardDefaults.cardColors(
+        modifier = semanticsModifier, colors = CardDefaults.cardColors(
             containerColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer
             else MaterialTheme.colorScheme.surfaceVariant
         )
@@ -63,13 +61,17 @@ fun CabifyProductListItem(
                         text = productItem.name, style = MaterialTheme.typography.labelMedium
                     )
                     Text(
-                        text = "",
+                        text = productItem.code,
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.outline
                     )
                 }
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        onAddToCartClicked(
+                            productItem.code, productItem.name, productItem.price
+                        )
+                    },
                     modifier = Modifier
                         .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.surface)
@@ -85,10 +87,10 @@ fun CabifyProductListItem(
             val symbol = Currency.getInstance(Locale.getDefault()).symbol
 
             Text(
-                text = if (productItem.price == 0.0) {
-                    ""
+                text = if (productItem.price == BigDecimal.ZERO) {
+                    String()
                 } else {
-                    "Cost: " + productItem.price.toString() + symbol
+                    stringResource(id = R.string.list_item_cost, symbol, productItem.price)
                 },
                 style = MaterialTheme.typography.bodyLarge,
                 color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer

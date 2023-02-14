@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import com.cabify.demo.R
 import com.cabify.demo.data.model.Product
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(modifier: Modifier = Modifier) {
     Row(

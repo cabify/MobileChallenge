@@ -1,20 +1,24 @@
 package com.cabify.demo.data.repository
 
 import com.cabify.demo.data.model.ResponseApi
-import com.cabify.demo.data.service.ProductApiService
-import kotlinx.coroutines.delay
+import com.cabify.demo.data.service.ProductLocalDataSource
+import com.cabify.demo.data.service.ProductLocalDataSourceImpl
+import com.cabify.demo.data.service.ProductRemoteDataSource
+import com.cabify.demo.data.service.ProductRemoteDataSourceImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class ProductRepositoryImpl : ProductRepository {
-    private val remoteDataSource: ProductApiService = ProductApiService.getInstance()
+    private val remoteDataSource: ProductRemoteDataSource = ProductRemoteDataSourceImpl()
+    private val localDataSource: ProductLocalDataSource = ProductLocalDataSourceImpl()
     private val refreshIntervalMs: Long = 5000
 
     override fun getProducts(): Flow<ResponseApi> = flow {
-        // Suspends the coroutine for some time
-        // add delay to show skeleton
-        delay(refreshIntervalMs)
-        val latestNews = remoteDataSource.getProducts()
-        emit(latestNews)
+        val latestProducts = remoteDataSource.getProducts()
+        emit(latestProducts)
     }
+
+    override fun getLocalProducts(): ResponseApi = localDataSource.getProducts()
+
+
 }

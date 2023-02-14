@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Cabify</string>
+
     <string name="navigation_drawer">Navigation Drawer</string>
     <string name="tab_products">Products</string>
     <string name="tab_cart">Cart</string>
@@ -17,7 +18,24 @@
     <string name="empty_screen_title">Screen under construction</string>
     <string name="empty_screen_subtitle">This screen is still under construction.</string>
 
+    <string name="remove_button">Remove</string>
     <string name="back_button">Back</string>
     <string name="more_options_button">More options</string>
     <string name="messages">Messages</string>
+
+    <string name="pay">Pay</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="cart_quantity">%1$s x </string>
+    <string name="amount_unit">%1$s %2$s</string>
+
+    <string name="list_item_cost">Cost %1$s %2$s</string>
+    <string name="shopping_cart_header_label_last">Shopping Cart</string>
+    <string name="shopping_cart_price_label">Total price: %1$s %2$s</string>
+    <string name="shopping_cart_cta_label">Check Out: %1$s %2$s</string>
+    <string name="shopping_cart_no_items_cta_label">No Items</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="discount_value">Discount Applied. You are saving: %1$s %2$s</string>
+    <string name="payment_dialog_text">You will pay: %1$s %2$s</string>
+    <string name="payment">Payment</string>
 </resources>

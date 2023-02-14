@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface ProductRepository {
 
     fun getProducts(): Flow<ResponseApi>
+    fun getLocalProducts(): ResponseApi
 }

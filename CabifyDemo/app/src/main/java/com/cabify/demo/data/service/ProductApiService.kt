@@ -12,14 +12,16 @@ interface ProductApiService {
     suspend fun getProducts(): ResponseApi
 
     companion object {
-        var productApiService: ProductApiService? = null
+        private var productApiService: ProductApiService? = null
+
         fun getInstance(): ProductApiService {
             if (productApiService == null) {
                 productApiService = Retrofit.Builder().baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create()).build()
                     .create(ProductApiService::class.java)
             }
-            return productApiService!!
+
+            return productApiService as ProductApiService
         }
     }
 }

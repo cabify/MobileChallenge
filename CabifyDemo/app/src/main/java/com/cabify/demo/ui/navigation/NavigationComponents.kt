@@ -248,8 +248,7 @@ fun PermanentNavigationDrawerContent(
 fun ModalNavigationDrawerContent(
     selectedDestination: String,
     navigationContentPosition: NavigationContentPosition,
-    navigateToTopLevelDestination: (TopLevelDestination) -> Unit,
-    onDrawerClicked: () -> Unit = {}
+    navigateToTopLevelDestination: (TopLevelDestination) -> Unit
 ) {
     ModalDrawerSheet {
         Layout(modifier = Modifier
@@ -272,7 +271,7 @@ fun ModalNavigationDrawerContent(
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.primary
                     )
-                    IconButton(onClick = onDrawerClicked) {
+                    IconButton({}) {
                         Icon(
                             imageVector = Icons.Default.MenuOpen,
                             contentDescription = stringResource(id = R.string.navigation_drawer)

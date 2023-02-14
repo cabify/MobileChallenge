@@ -20,6 +20,7 @@ import com.google.accompanist.adaptive.calculateDisplayFeatures
 class MainActivity : ComponentActivity() {
 
     private val homeViewModel: HomeViewModel by viewModels()
+    private val shoppingCartViewModel: ShoppingCartViewModel by viewModels()
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalLifecycleComposeApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +36,10 @@ class MainActivity : ComponentActivity() {
                     windowSize = windowSize,
                     displayFeatures = displayFeatures,
                     homeUIState = uiState,
-                    closeDetailScreen = {
-                        homeViewModel.closeDetailScreen()
+                    onAddToCartClicked = { code, name, price ->
+                        shoppingCartViewModel.addItemToCart(code, name, price)
                     },
-                    navigateToDetail = { productId, pane ->
-                        homeViewModel.setSelectedEmail(productId, pane)
-                    }
+                    shoppingCartViewModel = shoppingCartViewModel
                 )
             }
         }
@@ -56,6 +55,8 @@ fun CabifyAppPreview() {
             homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(400.dp, 900.dp)),
             displayFeatures = emptyList(),
+            shoppingCartViewModel = ShoppingCartViewModel(),
+            onAddToCartClicked = { _, _, _ -> },
         )
     }
 }
@@ -69,6 +70,8 @@ fun CabifyAppPreviewTablet() {
             homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(700.dp, 500.dp)),
             displayFeatures = emptyList(),
+            onAddToCartClicked = { _, _, _ -> },
+            shoppingCartViewModel = ShoppingCartViewModel(),
         )
     }
 }
@@ -82,6 +85,8 @@ fun CabifyAppPreviewTabletPortrait() {
             homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(500.dp, 700.dp)),
             displayFeatures = emptyList(),
+            onAddToCartClicked = { _, _, _ -> },
+            shoppingCartViewModel = ShoppingCartViewModel(),
         )
     }
 }
@@ -95,6 +100,8 @@ fun CabifyAppPreviewDesktop() {
             homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(1100.dp, 600.dp)),
             displayFeatures = emptyList(),
+            onAddToCartClicked = { _, _, _ -> },
+            shoppingCartViewModel = ShoppingCartViewModel(),
         )
     }
 }
@@ -108,6 +115,8 @@ fun CabifyAppPreviewDesktopPortrait() {
             homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(600.dp, 1100.dp)),
             displayFeatures = emptyList(),
+            onAddToCartClicked = { _, _, _ -> },
+            shoppingCartViewModel = ShoppingCartViewModel(),
         )
     }
 }

@@ -1,5 +1,7 @@
 package com.cabify.demo.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,7 +14,6 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -23,16 +24,15 @@ import androidx.window.layout.DisplayFeature
 import androidx.window.layout.FoldingFeature
 import com.cabify.demo.ui.navigation.*
 import com.cabify.demo.ui.utils.*
-import kotlinx.coroutines.launch
+import java.math.BigDecimal
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CabifyApp(
     windowSize: WindowSizeClass,
     displayFeatures: List<DisplayFeature>,
     homeUIState: HomeUIState,
-    closeDetailScreen: () -> Unit = {},
-    navigateToDetail: (String, ContentType) -> Unit = { _, _ -> }
+    shoppingCartViewModel: ShoppingCartViewModel,
+    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
 ) {
     /**
      * This will help us select type of navigation and content type depending on window size and
@@ -108,8 +108,9 @@ fun CabifyApp(
         displayFeatures = displayFeatures,
         navigationContentPosition = navigationContentPosition,
         cabifyHomeUIState = homeUIState,
-        closeDetailScreen = closeDetailScreen,
-        navigateToDetail = navigateToDetail
+        onAddToCartClicked = onAddToCartClicked,
+        shoppingCartViewModel = shoppingCartViewModel
+
     )
 }
 
@@ -121,12 +122,9 @@ private fun NavigationWrapper(
     displayFeatures: List<DisplayFeature>,
     navigationContentPosition: NavigationContentPosition,
     cabifyHomeUIState: HomeUIState,
-    closeDetailScreen: () -> Unit,
-    navigateToDetail: (String, ContentType) -> Unit
+    shoppingCartViewModel: ShoppingCartViewModel,
+    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
 ) {
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-
     val navController = rememberNavController()
     val navigationActions = remember(navController) {
         NavigationActions(navController)
@@ -151,22 +149,19 @@ private fun NavigationWrapper(
                 navController = navController,
                 selectedDestination = selectedDestination,
                 navigateToTopLevelDestination = navigationActions::navigateTo,
-                closeDetailScreen = closeDetailScreen,
-                navigateToDetail = navigateToDetail
+                onAddToCartClicked = onAddToCartClicked,
+                shoppingCartViewModel = shoppingCartViewModel,
             )
         }
     } else {
         ModalNavigationDrawer(
             drawerContent = {
-                ModalNavigationDrawerContent(selectedDestination = selectedDestination,
+                ModalNavigationDrawerContent(
+                    selectedDestination = selectedDestination,
                     navigationContentPosition = navigationContentPosition,
                     navigateToTopLevelDestination = navigationActions::navigateTo,
-                    onDrawerClicked = {
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    })
-            }, drawerState = drawerState
+                )
+            },
         ) {
             CabifyAppContent(
                 navigationType = navigationType,
@@ -177,17 +172,14 @@ private fun NavigationWrapper(
                 navController = navController,
                 selectedDestination = selectedDestination,
                 navigateToTopLevelDestination = navigationActions::navigateTo,
-                closeDetailScreen = closeDetailScreen,
-                navigateToDetail = navigateToDetail
-            ) {
-                scope.launch {
-                    drawerState.open()
-                }
-            }
+                onAddToCartClicked = onAddToCartClicked,
+                shoppingCartViewModel = shoppingCartViewModel,
+            )
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun CabifyAppContent(
     modifier: Modifier = Modifier,
@@ -199,9 +191,8 @@ fun CabifyAppContent(
     navController: NavHostController,
     selectedDestination: String,
     navigateToTopLevelDestination: (TopLevelDestination) -> Unit,
-    closeDetailScreen: () -> Unit,
-    navigateToDetail: (String, ContentType) -> Unit,
-    onDrawerClicked: () -> Unit = {}
+    shoppingCartViewModel: ShoppingCartViewModel,
+    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
 ) {
     Row(modifier = modifier.fillMaxSize()) {
         AnimatedVisibility(visible = navigationType == NavigationType.NAVIGATION_RAIL) {
@@ -209,7 +200,6 @@ fun CabifyAppContent(
                 selectedDestination = selectedDestination,
                 navigationContentPosition = navigationContentPosition,
                 navigateToTopLevelDestination = navigateToTopLevelDestination,
-                onDrawerClicked = onDrawerClicked,
             )
         }
         Column(
@@ -222,10 +212,9 @@ fun CabifyAppContent(
                 contentType = contentType,
                 displayFeatures = displayFeatures,
                 homeUIState = cabifyHomeUIState,
-                navigationType = navigationType,
-                closeDetailScreen = closeDetailScreen,
-                navigateToDetail = navigateToDetail,
+                shoppingCartViewModel = shoppingCartViewModel,
                 modifier = Modifier.weight(1f),
+                onAddToCartClicked = onAddToCartClicked
             )
             AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
                 CabifyBottomNavigationBar(
@@ -237,16 +226,16 @@ fun CabifyAppContent(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 private fun NavHost(
     navController: NavHostController,
     contentType: ContentType,
     displayFeatures: List<DisplayFeature>,
     homeUIState: HomeUIState,
-    navigationType: NavigationType,
-    closeDetailScreen: () -> Unit,
-    navigateToDetail: (String, ContentType) -> Unit,
+    shoppingCartViewModel: ShoppingCartViewModel,
     modifier: Modifier = Modifier,
+    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
 ) {
     NavHost(
         modifier = modifier,
@@ -257,17 +246,15 @@ private fun NavHost(
             ProductsScreen(
                 contentType = contentType,
                 homeUIState = homeUIState,
-                navigationType = navigationType,
                 displayFeatures = displayFeatures,
-                closeDetailScreen = closeDetailScreen,
-                navigateToDetail = navigateToDetail,
+                onAddToCartClicked = onAddToCartClicked
             )
         }
         composable(CabifyRoute.EXTRA) {
             EmptyComingSoon()
         }
         composable(CabifyRoute.SHOPPINGCART) {
-            EmptyComingSoon()
+            ShoppingCartContent(shoppingCartViewModel)
         }
         composable(CabifyRoute.ABOUTME) {
             EmptyComingSoon()

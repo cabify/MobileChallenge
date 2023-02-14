@@ -1,6 +1,7 @@
 package com.cabify.demo.ui
 
-import androidx.activity.compose.BackHandler
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +13,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.DisplayFeature
@@ -21,29 +21,19 @@ import com.cabify.demo.ui.components.CabifyProductListItem
 import com.cabify.demo.ui.components.DetailAppBar
 import com.cabify.demo.ui.components.SearchBar
 import com.cabify.demo.ui.utils.ContentType
-import com.cabify.demo.ui.utils.NavigationType
 import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
 import com.google.accompanist.adaptive.TwoPane
+import java.math.BigDecimal
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun ProductsScreen(
     contentType: ContentType,
     homeUIState: HomeUIState,
-    navigationType: NavigationType,
     displayFeatures: List<DisplayFeature>,
-    closeDetailScreen: () -> Unit,
-    navigateToDetail: (String, ContentType) -> Unit,
+    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    /**
-     * When moving from LIST_AND_DETAIL page to LIST page clear the selection and user should see LIST screen.
-     */
-    LaunchedEffect(key1 = contentType) {
-        if (contentType == ContentType.SINGLE_PANE && !homeUIState.isDetailOnlyOpen) {
-            closeDetailScreen()
-        }
-    }
-
     val productLazyListState = rememberLazyListState()
 
     if (contentType == ContentType.DUAL_PANE) {
@@ -52,13 +42,12 @@ fun ProductsScreen(
                 CabifyProductList(
                     products = homeUIState.products,
                     lazyListState = productLazyListState,
-                    navigateToDetail = navigateToDetail
+                    onAddToCartClicked = onAddToCartClicked
                 )
             },
             second = {
                 CabifyProductDetail(
-                    item = (homeUIState.selectedProduct ?: homeUIState.products.first()),
-                    isFullScreen = false
+                    item = (homeUIState.products.first()), isFullScreen = false
                 )
             },
             strategy = HorizontalTwoPaneStrategy(splitFraction = 0.5f, gapWidth = 16.dp),
@@ -70,44 +59,35 @@ fun ProductsScreen(
                 cabifyHomeUIState = homeUIState,
                 productLazyListState = productLazyListState,
                 modifier = Modifier.fillMaxSize(),
-                closeDetailScreen = closeDetailScreen,
-                navigateToDetail = navigateToDetail
+                onAddToCartClicked = onAddToCartClicked,
             )
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun SinglePaneContent(
     cabifyHomeUIState: HomeUIState,
     productLazyListState: LazyListState,
     modifier: Modifier = Modifier,
-    closeDetailScreen: () -> Unit,
-    navigateToDetail: (String, ContentType) -> Unit
+    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
 ) {
-    if (cabifyHomeUIState.selectedProduct != null && cabifyHomeUIState.isDetailOnlyOpen) {
-        BackHandler {
-            closeDetailScreen()
-        }
-        CabifyProductDetail(item = cabifyHomeUIState.selectedProduct) {
-            closeDetailScreen()
-        }
-    } else {
-        CabifyProductList(
-            products = cabifyHomeUIState.products,
-            lazyListState = productLazyListState,
-            modifier = modifier,
-            navigateToDetail = navigateToDetail
-        )
-    }
+    CabifyProductList(
+        products = cabifyHomeUIState.products,
+        lazyListState = productLazyListState,
+        modifier = modifier,
+        onAddToCartClicked = onAddToCartClicked,
+    )
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun CabifyProductList(
     products: List<Product>,
     lazyListState: LazyListState,
     modifier: Modifier = Modifier,
-    navigateToDetail: (String, ContentType) -> Unit
+    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
 ) {
     LazyColumn(modifier = modifier, state = lazyListState) {
         item {
@@ -115,20 +95,20 @@ fun CabifyProductList(
         }
         if (products.isEmpty()) {
             item {
-                CabifyProductListItem(Product()) { productId ->
-                    //navigateToDetail(productId, ContentType.SINGLE_PANE)
-                }
+                CabifyProductListItem(
+                    productItem = Product(), onAddToCartClicked = onAddToCartClicked
+                )
             }
             item {
-                CabifyProductListItem(Product()) { productId ->
-                    //navigateToDetail(productId, ContentType.SINGLE_PANE)
-                }
+                CabifyProductListItem(
+                    productItem = Product(), onAddToCartClicked = onAddToCartClicked
+                )
             }
         } else {
             items(items = products, key = { it.code }) { product ->
-                CabifyProductListItem(productItem = product) { productId ->
-                    //navigateToDetail(productId, ContentType.SINGLE_PANE)
-                }
+                CabifyProductListItem(
+                    productItem = product, onAddToCartClicked = onAddToCartClicked
+                )
             }
         }
     }
