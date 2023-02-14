@@ -237,13 +237,13 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		3362B445299690FB00B99241 /* Mocks */ = {
+		3362B445299690FB00B99241 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				334B594A299BA76200B29EA8 /* MockedProductsListRepository.swift */,
 				3362B45B2996A4AB00B99241 /* MockedCartRepository.swift */,
 			);
-			path = Mocks;
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		3362B45629969A1A00B99241 /* Helper */ = {
@@ -267,6 +267,7 @@
 		3362B46D2996B76A00B99241 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3362B445299690FB00B99241 /* Repositories */,
 				3356E70D299AB42A00127F8B /* Network */,
 				3362B46F2996B7A700B99241 /* Storage */,
 			);
@@ -325,7 +326,6 @@
 		3375D71F29967E9B00FADDC0 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				3362B445299690FB00B99241 /* Mocks */,
 				3375D72029967EC600FADDC0 /* GetProductsListUseCaseTests.swift */,
 				3362B45D2996A6EC00B99241 /* GetCartUseCaseTests.swift */,
 				3362B45F2996A6F800B99241 /* AddItemToCartUseCaseTests.swift */,
