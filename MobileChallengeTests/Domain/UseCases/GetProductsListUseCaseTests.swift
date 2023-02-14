@@ -34,14 +34,7 @@ extension GetProductsListUseCaseTests {
     func testGetProductsListUseCase_whenSuccessfullyFetchesProductsList_thenValidateProducts() throws {
         
         // Given
-        let mockedRequest = ProductsListRequest()
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Self.encodedMockedModel
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient)
+        let mockedRepository = MockedProductsListRepository.mockedDefaultRepository
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         // When
@@ -67,13 +60,7 @@ extension GetProductsListUseCaseTests {
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowInvalidURLError() throws {
         // Given
         let mockedRequest: any RequestConvertable = ProductsListRequest(baseURL: "Invalid Base URL", path: "Invalid Path")
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Self.encodedMockedModel
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient, productsListRequest: mockedRequest)
+        let mockedRepository = MockedProductsListRepository.mockedRepository(request: mockedRequest)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -89,15 +76,7 @@ extension GetProductsListUseCaseTests {
     // Invalid response
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowInvalidResponseError() throws {
         // Given
-        let mockedRequest: any RequestConvertable = ProductsListRequest()
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Self.encodedMockedModel,
-            statusCode: -1
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient, productsListRequest: mockedRequest)
+        let mockedRepository = MockedProductsListRepository.mockedRepository(statusCode: -1)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -113,14 +92,7 @@ extension GetProductsListUseCaseTests {
     // No data
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowNoDataError() throws {
         // Given
-        let mockedRequest: any RequestConvertable = ProductsListRequest()
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Data("{ }".utf8)
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient, productsListRequest: mockedRequest)
+        let mockedRepository = MockedProductsListRepository.mockedRepository(encodedData: Data("{ }".utf8))
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -137,13 +109,7 @@ extension GetProductsListUseCaseTests {
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowParserError() throws {
         // Given
         let mockedRequest: any RequestConvertable = ProductsListRequest(parser: nil)
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Data("{ }".utf8)
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient, productsListRequest: mockedRequest)
+        let mockedRepository = MockedProductsListRepository.mockedRepository(request: mockedRequest, encodedData: Data("{ }".utf8))
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -159,15 +125,7 @@ extension GetProductsListUseCaseTests {
     // Not found
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowBadRequestError() throws {
         // Given
-        let mockedRequest: any RequestConvertable = ProductsListRequest(parser: nil)
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Self.encodedMockedModel,
-            statusCode: 400
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient, productsListRequest: mockedRequest)
+        let mockedRepository = MockedProductsListRepository.mockedRepository(statusCode: 400)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -183,15 +141,7 @@ extension GetProductsListUseCaseTests {
     // Not found
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowNotFoundError() throws {
         // Given
-        let mockedRequest: any RequestConvertable = ProductsListRequest(parser: nil)
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Self.encodedMockedModel,
-            statusCode: 404
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient, productsListRequest: mockedRequest)
+        let mockedRepository = MockedProductsListRepository.mockedRepository(statusCode: 404)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -207,15 +157,7 @@ extension GetProductsListUseCaseTests {
     // Server error
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowServerError() throws {
         // Given
-        let mockedRequest: any RequestConvertable = ProductsListRequest(parser: nil)
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Self.encodedMockedModel,
-            statusCode: 500
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient, productsListRequest: mockedRequest)
+        let mockedRepository = MockedProductsListRepository.mockedRepository(statusCode: 500)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -231,15 +173,7 @@ extension GetProductsListUseCaseTests {
     // Unknown error
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowUnknownError() throws {
         // Given
-        let mockedRequest: any RequestConvertable = ProductsListRequest(parser: nil)
-        let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
-            url: Self.mockedURL(base: mockedRequest.baseURL, path: mockedRequest.path),
-            encoded: Self.encodedMockedModel,
-            statusCode: 600
-        )
-        
-        let mockedApiClient: ApiExecutable = ApiClient(sessionConfiguration: mockedSessionConfig)
-        let mockedRepository = DefaultProductsListRepository(apiClient: mockedApiClient, productsListRequest: mockedRequest)
+        let mockedRepository = MockedProductsListRepository.mockedRepository(statusCode: 600)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {

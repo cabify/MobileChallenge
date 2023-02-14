@@ -11,41 +11,39 @@ import Combine
 
 final class CartDetailViewModelTests: XCTestCase {
     
-    private var coordinatorEmptyCart: ProductsListCoordinator?
-    private var coordinatorPrefetchedCart: ProductsListCoordinator?
+    private var coordinatorPrefetchedCart: ProductsListCoordinator!
     private var cancellables: Set<AnyCancellable> = []
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        // Coordinator with empty cart
-        self.coordinatorEmptyCart = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository(),
-            cartRepository: MockedCartRepository()
-        )
-        // Pre-fetched products list with empty cart
-        let productsListViewModelEmptyCart = coordinatorEmptyCart?.productsViewModel
-        productsListViewModelEmptyCart?.load()
-        
         // Coordinator with pre-fetched cart
         self.coordinatorPrefetchedCart = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository(),
+            productsListRepository: MockedProductsListRepository.mockedDefaultRepository,
             cartRepository: MockedCartRepository()
         )
         // Pre-fetched products list with empty cart
-        let productsListViewModelPrefetchedCart = coordinatorPrefetchedCart?.productsViewModel
-        productsListViewModelPrefetchedCart?.load()
-        // Add a t-shirt product to cart
         var cart: CartLayoutViewModel?
-        if case .loaded(let loadedCart) = self.coordinatorEmptyCart?.viewState.state {
-            cart = loadedCart
-        }
+        let expectationLoadProducts = XCTestExpectation(description: "View model adds new product to cart")
+        self.coordinatorPrefetchedCart?.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationLoadProducts.fulfill()
+            }
+        }.store(in: &cancellables)
+        let productsListViewModelPrefetchedCart = coordinatorPrefetchedCart.productsViewModel
+        productsListViewModelPrefetchedCart?.load()
+        // Wait for products load
+        wait(for: [expectationLoadProducts], timeout: 0.5)
+        
+        // Add a t-shirt product to cart
         let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
         productsListViewModelPrefetchedCart?.addItemToCart(addProduct)
     }
     
     override func tearDownWithError() throws {
-        self.coordinatorEmptyCart = nil
         self.coordinatorPrefetchedCart = nil
         
         try super.tearDownWithError()
@@ -57,13 +55,28 @@ extension CartDetailViewModelTests {
     // Empty cart
     func testCartDetailViewModel_whenSuccessfullyLoadsEmptyCart_thenShowCartSummary() throws {
         // Given
+        let coordinator = ProductsListCoordinator(
+            productsListRepository: MockedProductsListRepository.mockedDefaultRepository,
+            cartRepository: MockedCartRepository()
+        )
+        
         var cart: CartLayoutViewModel?
-        if case .loaded(let loadedCart) = self.coordinatorEmptyCart?.viewState.state {
-            cart = loadedCart
-        }
+        let expectationLoad = XCTestExpectation(description: "View model fetches products")
+        coordinator.viewState.$state.sink { state in
+            switch state {
+            case .idle, .loading, .failed: return
+            case .loaded(let loadedCart):
+                cart = loadedCart
+                expectationLoad.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        let productsListViewModel = coordinator.productsViewModel
+        productsListViewModel?.load()
+        wait(for: [expectationLoad], timeout: 0.5)
         
         // When
-        coordinatorEmptyCart?.openCart()
+        coordinator.openCart()
         
         // Then
         XCTAssertTrue(cart?.cartItems.isEmpty ?? false)

@@ -19,7 +19,7 @@ final class ProductsViewModelTests: XCTestCase {
         
         // Coordinator with empty cart
         self.coordinator = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository(),
+            productsListRepository: MockedProductsListRepository.mockedDefaultRepository,
             cartRepository: MockedCartRepository()
         )
     }
@@ -81,7 +81,7 @@ extension ProductsViewModelTests {
         let expectation = XCTestExpectation(description: "View model fails to fetch products")
         // Custom coordinator with mocked error for repository
         let coordinator = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository(error: APIError.unknown(nil, "Unknown error")),
+            productsListRepository: MockedProductsListRepository.mockedRepository(statusCode: 600),
             cartRepository: MockedCartRepository()
         )
         var errorMessage: String?
@@ -102,7 +102,7 @@ extension ProductsViewModelTests {
         wait(for: [expectation], timeout: 0.5)
         
         // Then
-        XCTAssertEqual(errorMessage, "Unknown error")
+        XCTAssertEqual(errorMessage, "Some error occured, Please try again.")
     }
 }
 
