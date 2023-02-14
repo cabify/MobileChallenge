@@ -14,7 +14,7 @@ final class CoreDataManagerTests: XCTestCase {
     func testCoreDataManager_whenSetup_thenValidateManagedObjectContext() throws {
         
         // Given
-        let configuration: StorageConfiguration = .inMemory(identifier: "MobileChallangeTests")
+        let configuration: CoreDataStorage.Configuration = .inMemory(identifier: "MobileChallangeTests")
         
         // When
         CoreDataManager.setup(with: configuration)

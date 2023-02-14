@@ -16,7 +16,7 @@ struct MobileChallengeApp: App {
     )
     
     init() {
-        let configuration: CoreDataStorageConfiguration = .basic(identifier: "MobileChallenge")
+        let configuration: CoreDataStorage.Configuration = .basic(identifier: "MobileChallenge")
         CoreDataManager.setup(with: configuration)
     }
     

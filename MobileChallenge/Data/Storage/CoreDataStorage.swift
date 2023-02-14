@@ -10,14 +10,26 @@ import CoreData
 
 protocol CoreDataStorable {
     var context: NSManagedObjectContext? { get }
-    init(configuration: CoreDataStorageConfiguration)
+    init(configuration: CoreDataStorage.Configuration)
 }
 
 final class CoreDataStorage: CoreDataStorable {
     
+    public enum Configuration {
+        case basic(identifier: String)
+        case inMemory(identifier: String? = nil)
+        
+        var identifier: String? {
+            switch self {
+            case .basic(let identifier): return identifier
+            case .inMemory(let identifier): return identifier
+            }
+        }
+    }
+    
     var context: NSManagedObjectContext?
     
-    init(configuration: CoreDataStorageConfiguration) {
+    init(configuration: CoreDataStorage.Configuration) {
         switch configuration {
         case .basic:
             initDB(modelName: configuration.identifier, storeType: .sqLiteStoreType)
