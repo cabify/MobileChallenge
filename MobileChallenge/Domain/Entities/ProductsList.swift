@@ -18,7 +18,7 @@ struct ProductsList: Equatable {
     let products: [Product]
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension ProductsList {
     static var preview: Self {
         .init(products: [

@@ -19,7 +19,7 @@ struct Cart {
     let items: [Item]
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension Cart {
     static var preview: Self {
         .init(items: [

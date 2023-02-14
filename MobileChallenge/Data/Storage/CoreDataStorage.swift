@@ -28,7 +28,7 @@ final class CoreDataStorage {
     }
 }
 
-#if DEBUG
+#if DEBUG && TESTING
 extension CoreDataStorage {
     static var preview: Self {
         .init(configuration: .basic(identifier: "MobileChallenge"))
