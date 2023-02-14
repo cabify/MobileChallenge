@@ -7,4 +7,4 @@
 
 import Foundation
 
-extension CartEntity: Storable { }
+extension CartEntity: StorableObject { }

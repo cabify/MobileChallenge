@@ -18,7 +18,7 @@ final class CoreDataRepository<Entity: NSManagedObject> {
     }
 }
 
-extension CoreDataRepository: StorageProtocol where Entity: Storable {
+extension CoreDataRepository: StorageProtocol where Entity: StorableObject {
     
     func fetch(predicate: NSPredicate? = nil, sorted: [StorageSort] = []) -> AnyPublisher<[Entity], Error> {
         Deferred { [context] in

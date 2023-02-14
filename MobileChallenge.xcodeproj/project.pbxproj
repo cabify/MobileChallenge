@@ -72,7 +72,7 @@
 		3385CE0929885F45002CD30A /* DefaultProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */; };
 		338F7FB2298D178F00BBA7DC /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FB1298D178F00BBA7DC /* CoreDataRepository.swift */; };
 		338F7FB9298D21B200BBA7DC /* StorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FB8298D21B200BBA7DC /* StorageProtocol.swift */; };
-		338F7FBB298D21DB00BBA7DC /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBA298D21DB00BBA7DC /* Storable.swift */; };
+		338F7FBB298D21DB00BBA7DC /* StorableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBA298D21DB00BBA7DC /* StorableObject.swift */; };
 		338F7FBE298D222100BBA7DC /* StorageConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBD298D222100BBA7DC /* StorageConfiguration.swift */; };
 		338F7FC0298D230500BBA7DC /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBF298D230500BBA7DC /* CoreDataStorage.swift */; };
 		338F7FC2298D24CA00BBA7DC /* StorageStoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC1298D24CA00BBA7DC /* StorageStoreCoordinator.swift */; };
@@ -161,7 +161,7 @@
 		3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProductsListRepository.swift; sourceTree = "<group>"; };
 		338F7FB1298D178F00BBA7DC /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		338F7FB8298D21B200BBA7DC /* StorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProtocol.swift; sourceTree = "<group>"; };
-		338F7FBA298D21DB00BBA7DC /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		338F7FBA298D21DB00BBA7DC /* StorableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableObject.swift; sourceTree = "<group>"; };
 		338F7FBD298D222100BBA7DC /* StorageConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageConfiguration.swift; sourceTree = "<group>"; };
 		338F7FBF298D230500BBA7DC /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		338F7FC1298D24CA00BBA7DC /* StorageStoreCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageStoreCoordinator.swift; sourceTree = "<group>"; };
@@ -447,7 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				338F7FB8298D21B200BBA7DC /* StorageProtocol.swift */,
-				338F7FBA298D21DB00BBA7DC /* Storable.swift */,
+				338F7FBA298D21DB00BBA7DC /* StorableObject.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -743,7 +743,7 @@
 				337928042993CCCA00CD219A /* CartItemCell.swift in Sources */,
 				3385CDF22987EBC1002CD30A /* ApiErrors.swift in Sources */,
 				337927F429916AEE00CD219A /* ProductsListRequest.swift in Sources */,
-				338F7FBB298D21DB00BBA7DC /* Storable.swift in Sources */,
+				338F7FBB298D21DB00BBA7DC /* StorableObject.swift in Sources */,
 				3385CDF82987FFC7002CD30A /* ParameterEncodable.swift in Sources */,
 				33C4F9DB298B1DB4004B8352 /* PriceView.swift in Sources */,
 				33C4F9DD298B24BD004B8352 /* ProductListCell.swift in Sources */,

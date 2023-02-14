@@ -15,7 +15,7 @@ public struct StorageSort {
 }
 
 protocol StorageProtocol {
-    associatedtype Entity = Storable
+    associatedtype Entity = StorableObject
     
     // Fetch list
     func fetch(predicate: NSPredicate?, sorted: [StorageSort]) -> AnyPublisher<[Entity], Error>
