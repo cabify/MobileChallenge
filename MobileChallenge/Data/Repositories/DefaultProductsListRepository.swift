@@ -11,17 +11,21 @@ import Combine
 final class DefaultProductsListRepository {
     
     private let apiClient: ApiExecutable
-    private let productsListRequest: ProductsListRequest
+    private let productsListRequest: any RequestConvertable
     
-    init(productsListRequest: any RequestConvertable = ProductsListRequest()) {
-        self.apiClient = ApiClient()
-        self.productsListRequest = productsListRequest as! ProductsListRequest
+    init(apiClient: ApiExecutable = ApiClient(), productsListRequest: any RequestConvertable = ProductsListRequest()) {
+        self.apiClient = apiClient
+        self.productsListRequest = productsListRequest
     }
 }
 
 extension DefaultProductsListRepository: ProductsListRepository {
     func fetchProductsList() -> AnyPublisher<ProductsList, Error> {
-        return apiClient.executeRequest(request: productsListRequest)
+        guard let aProductsListRequest = productsListRequest as? ProductsListRequest else {
+            return Fail(error: RequestableError.invalidURL()).eraseToAnyPublisher()
+        }
+        
+        return apiClient.executeRequest(request: aProductsListRequest)
             .tryMap { $0.domainObject }
             .eraseToAnyPublisher()
     }

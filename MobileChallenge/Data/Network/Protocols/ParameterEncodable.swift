@@ -23,7 +23,7 @@ struct URLEncoding: ParameterEncodable {
         guard let parameters = parameters else { return urlRequest }
         
         if urlRequest.httpMethod != nil {
-            guard let url = urlRequest.url else { throw RequestableError.parameterEncodingFailed(nil, "URL not found") }
+            guard let url = urlRequest.url else { throw RequestableError.invalidURL() }
             
             if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), !parameters.isEmpty {
                 urlComponents.queryItems = parameters.map { (key, value) -> URLQueryItem in

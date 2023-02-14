@@ -19,47 +19,63 @@ final class ApiClient: ApiExecutable {
     private var session: URLSession
     
     init(sessionConfiguration: URLSessionConfiguration = URLSessionConfiguration.default) {
-        configuration = URLSession.shared.configuration
-        session = URLSession(configuration: configuration)
+        self.configuration = sessionConfiguration
+        self.session = URLSession(configuration: sessionConfiguration)
     }
     
     func executeRequest<R>(request: R) -> AnyPublisher<R.Response, Error> where R : RequestConvertable {
         
-        guard let urlRequest = try? request.asURLRequest() else { return Fail(error: APIError.badRequest()).eraseToAnyPublisher() }
-        
-        return session.dataTaskPublisher(for: urlRequest)
-            .tryMap { [weak self] data, response -> Data in
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    throw APIError.invalidResponse()
+        do {
+            let urlRequest = try request.asURLRequest()
+            return session.dataTaskPublisher(for: urlRequest)
+                .tryMap { [weak self] data, response -> Data in
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        throw APIError.invalidResponse()
+                    }
+                    
+                    guard ApiClientConstants.reponseValidRange.contains(httpResponse.statusCode) else {
+                        throw self?.parseError(data: data, response: response, errorParser: request.errorParser) ?? APIError.unknown()
+                    }
+                    
+                    return data
                 }
-                
-                guard ApiClientConstants.reponseValidRange.contains(httpResponse.statusCode) else {
-                    throw self?.parseError(data: data, response: response, errorParser: request.errorParser) ?? APIError.unknown()
-                }
-                
-                return data
-            }
-            .tryMap { data in
-                guard let parser = request.parser, let parsed = try parser.parse(data: data) else {
+                .tryMap { data in
+                    if let parser = request.parser {
+                        do {
+                            guard let parsed = try parser.parse(data: data) else {
+                                throw APIError.parseError()
+                            }
+                            return parsed
+                            
+                        } catch {
+                            throw APIError.noData
+                        }
+                    }
+                    
                     do {
                         return try JSONDecoder().decode(R.Response.self, from: data)
                         
                     } catch {
-                        throw APIError.parseError(error)
+                        throw APIError.parseError()
                     }
                 }
-                
-                return parsed
-            }
-            .mapError { error in
-                if let error = error as? APIError {
-                    return error
+                .mapError { error in
+                    if let error = error as? RequestableError {
+                        return error
+                        
+                    } else if let error = error as? APIError {
+                        return error
+                    }
+                    
+                    return APIError.unknown(error)
                 }
-                
-                return APIError.unknown(error)
-            }
-            .receive(on: RunLoop.main)
-            .eraseToAnyPublisher()
+                .receive(on: RunLoop.main)
+                .eraseToAnyPublisher()
+            
+        } catch {
+            return Fail(error: error)
+                .eraseToAnyPublisher()
+        }
     }
     
     private func parseError(data: Data, response: URLResponse, errorParser: ErrorParserType?) -> Error {
@@ -78,7 +94,6 @@ final class ApiClient: ApiExecutable {
         
         switch httpUrlResponse.statusCode {
         case 400: return APIError.badRequest(errorToReturn)
-        case 401: return APIError.unauthorised(errorToReturn)
         case 404: return APIError.notFound(errorToReturn)
         case 500...599: return APIError.serverError()
         default: return APIError.unknown()

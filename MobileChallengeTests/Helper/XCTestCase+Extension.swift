@@ -25,21 +25,21 @@ extension XCTestCase {
                 case .finished:
                     break
                 }
-
+                
                 expectation.fulfill()
             },
             receiveValue: { value in
                 result = .success(value)
             }
         )
-
+        
         // Just like before, we await the expectation that we
         // created at the top of our test, and once done, we
         // also cancel our cancellable to avoid getting any
         // unused variable warnings:
         waitForExpectations(timeout: timeout)
         cancellable.cancel()
-
+        
         // Here we pass the original file and line number that
         // our utility was called at, to tell XCTest to report
         // any encountered errors at that original call site:
@@ -49,7 +49,7 @@ extension XCTestCase {
             file: file,
             line: line
         )
-
+        
         return try unwrappedResult.get()
     }
 }

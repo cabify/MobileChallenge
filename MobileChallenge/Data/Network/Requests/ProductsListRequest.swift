@@ -20,12 +20,23 @@ struct ProductsListRequest: RequestConvertable {
     typealias Response = ProductsListDTO
     typealias ResponseParser = Parser
     
-    var path: String = "/Products.json"
-    var method: String = "GET"
+    var baseURL: String
+    var path: String
+    var method: String
     var header: [String : String]?
-    var parser: ResponseParser? = Parser()
+    var parser: ResponseParser?
     var errorParser: ErrorParserType?
-    var parameter: [String: Any]? { nil }
+    var parameter: [String: Any]?
+    
+    init(baseURL: String = ApiClientConstants.baseURL, path: String = "/Products.json", method: String = "GET", header: [String : String]? = nil, parser: ResponseParser? = Parser(), errorParser: ErrorParserType? = nil, parameter: [String: Any]? = nil) {
+        self.baseURL = baseURL
+        self.path = path
+        self.method = method
+        self.header = header
+        self.parser = parser
+        self.errorParser = errorParser
+        self.parameter = parameter
+    }
 }
 
 #if DEBUG && TESTING

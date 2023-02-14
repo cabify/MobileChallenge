@@ -8,9 +8,9 @@
 import Foundation
 
 // MARK: - Data Transfer Object - DTO
-struct ProductsListDTO: Equatable, Decodable {
+struct ProductsListDTO: Equatable, Codable {
     
-    struct Product: Equatable, Decodable {
+    struct Product: Equatable, Codable {
         let code: String
         let name: String
         let price: Double

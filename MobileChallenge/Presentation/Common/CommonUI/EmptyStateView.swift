@@ -18,11 +18,7 @@ struct EmptyStateView: View {
             switch self {
             case .products: return "tray.fill"
             case .cart: return "cart.fill"
-            case .error(let error):
-                switch error {
-                case ConnectionError.noNetworkAvailable: return "wifi.slash"
-                default: return "icloud.slash.fill"
-                }
+            case .error: return "icloud.slash.fill"
             }
         }
         

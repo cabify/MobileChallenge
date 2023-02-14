@@ -35,8 +35,3 @@ protocol Requestable {
     var errorParser: ErrorParserType? { get }
     var parameter: [String: Any]? { get }
 }
-
-// Default values
-extension Requestable {
-    var baseURL: String { ApiClientConstants.baseURL }
-}
