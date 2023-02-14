@@ -16,7 +16,8 @@ struct MobileChallengeApp: App {
     )
     
     init() {
-        CoreDataManager.setup(storage: CoreDataStorage())
+        let configuration: StorageConfiguration = .basic(identifier: "MobileChallenge")
+        CoreDataManager.setup(with: configuration)
     }
     
     var body: some Scene {

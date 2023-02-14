@@ -8,14 +8,20 @@
 import Foundation
 import CoreData
 
-final class CoreDataStorage {
+protocol CoreDataStorable {
+    var context: NSManagedObjectContext? { get }
+    init(configuration: StorageConfiguration)
+}
+
+final class CoreDataStorage: CoreDataStorable {
     
     var context: NSManagedObjectContext?
     
-    required init(configuration: StorageConfiguration = .basic(identifier: "MobileChallenge")) {
+    init(configuration: StorageConfiguration) {
         switch configuration {
         case .basic:
             initDB(modelName: configuration.identifier(), storeType: .sqLiteStoreType)
+            
         case .inMemory:
             initDB(storeType: .inMemoryStoreType)
         }
