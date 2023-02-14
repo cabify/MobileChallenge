@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		334B5949299BA35F00B29EA8 /* ParameterEncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334B5948299BA35F00B29EA8 /* ParameterEncodableTests.swift */; };
 		334B594B299BA76200B29EA8 /* MockedProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334B594A299BA76200B29EA8 /* MockedProductsListRepository.swift */; };
+		334B594E299BE11F00B29EA8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FE2298D65AF00BBA7DC /* CoreDataManager.swift */; };
+		334B594F299BE12200B29EA8 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBF298D230500BBA7DC /* CoreDataStorage.swift */; };
+		334B5950299BE12500B29EA8 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FB1298D178F00BBA7DC /* CoreDataRepository.swift */; };
+		334B5951299BE16400B29EA8 /* StorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FB8298D21B200BBA7DC /* StorageProtocol.swift */; };
+		334B5952299BE16600B29EA8 /* StorableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBA298D21DB00BBA7DC /* StorableObject.swift */; };
+		334B5953299BE16900B29EA8 /* StorageConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FBD298D222100BBA7DC /* StorageConfiguration.swift */; };
+		334B5954299BE16C00B29EA8 /* StorageStoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC1298D24CA00BBA7DC /* StorageStoreCoordinator.swift */; };
+		334B5955299BE16E00B29EA8 /* CartEntity+Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FE0298D633A00BBA7DC /* CartEntity+Storable.swift */; };
+		334B5956299BE17100B29EA8 /* CartItemEntity+Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FE8298D8D6300BBA7DC /* CartItemEntity+Storable.swift */; };
+		334B5957299BE17400B29EA8 /* CartEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FDD298D608E00BBA7DC /* CartEntity+Mapping.swift */; };
+		334B5958299BE18800B29EA8 /* MobileChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 338F7FC5298D4D0900BBA7DC /* MobileChallenge.xcdatamodeld */; };
 		3356E70C299A927A00127F8B /* CartDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356E70B299A927A00127F8B /* CartDetailViewModelTests.swift */; };
 		3356E70F299AB4CE00127F8B /* MockedURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356E70E299AB4CE00127F8B /* MockedURLProtocol.swift */; };
 		3356E710299AD61D00127F8B /* DefaultProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385CE0829885F45002CD30A /* DefaultProductsListRepository.swift */; };
@@ -794,9 +805,13 @@
 				3356E70F299AB4CE00127F8B /* MockedURLProtocol.swift in Sources */,
 				3362B4592996A36100B99241 /* ProductsListCoordinator.swift in Sources */,
 				3385CDFF29885607002CD30A /* ProductsListRepository.swift in Sources */,
+				334B5955299BE16E00B29EA8 /* CartEntity+Storable.swift in Sources */,
 				3362B4622996A70500B99241 /* RemoveItemFromCartUseCaseTests.swift in Sources */,
 				3362B44A299692E200B99241 /* ProductType.swift in Sources */,
+				334B5954299BE16C00B29EA8 /* StorageStoreCoordinator.swift in Sources */,
+				334B5958299BE18800B29EA8 /* MobileChallenge.xcdatamodeld in Sources */,
 				3375D72129967EC600FADDC0 /* GetProductsListUseCaseTests.swift in Sources */,
+				334B5957299BE17400B29EA8 /* CartEntity+Mapping.swift in Sources */,
 				3362B46C2996B5A900B99241 /* ProductsViewModelTests.swift in Sources */,
 				3362B4642996A71200B99241 /* ClearCartUseCaseTests.swift in Sources */,
 				3362B45E2996A6EC00B99241 /* GetCartUseCaseTests.swift in Sources */,
@@ -812,14 +827,20 @@
 				3362B4602996A6F800B99241 /* AddItemToCartUseCaseTests.swift in Sources */,
 				3362B4512996931100B99241 /* AddItemToCartUseCase.swift in Sources */,
 				334B594B299BA76200B29EA8 /* MockedProductsListRepository.swift in Sources */,
+				334B5950299BE12500B29EA8 /* CoreDataRepository.swift in Sources */,
 				3362B45C2996A4AB00B99241 /* MockedCartRepository.swift in Sources */,
 				3362B44E2996930200B99241 /* CartDetailViewModel.swift in Sources */,
 				3385CDDF29843AD1002CD30A /* ProductsList.swift in Sources */,
+				334B5953299BE16900B29EA8 /* StorageConfiguration.swift in Sources */,
 				3385CDF32987EBC1002CD30A /* ApiErrors.swift in Sources */,
+				334B594E299BE11F00B29EA8 /* CoreDataManager.swift in Sources */,
 				3362B4502996930D00B99241 /* ClearCartUseCase.swift in Sources */,
+				334B5956299BE17100B29EA8 /* CartItemEntity+Storable.swift in Sources */,
+				334B5951299BE16400B29EA8 /* StorageProtocol.swift in Sources */,
 				334B5949299BA35F00B29EA8 /* ParameterEncodableTests.swift in Sources */,
 				3362B4522996931100B99241 /* RemoveItemFromCartUseCase.swift in Sources */,
 				3385CE0329885A71002CD30A /* ProductsListDTO.swift in Sources */,
+				334B5952299BE16600B29EA8 /* StorableObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
