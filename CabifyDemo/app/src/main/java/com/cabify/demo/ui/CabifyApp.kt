@@ -24,15 +24,11 @@ import androidx.window.layout.DisplayFeature
 import androidx.window.layout.FoldingFeature
 import com.cabify.demo.ui.navigation.*
 import com.cabify.demo.ui.utils.*
-import java.math.BigDecimal
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CabifyApp(
-    windowSize: WindowSizeClass,
-    displayFeatures: List<DisplayFeature>,
-    homeUIState: HomeUIState,
-    shoppingCartViewModel: ShoppingCartViewModel,
-    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
+    windowSize: WindowSizeClass, displayFeatures: List<DisplayFeature>
 ) {
     /**
      * This will help us select type of navigation and content type depending on window size and
@@ -52,8 +48,7 @@ fun CabifyApp(
         isBookPosture(foldingFeature) -> DevicePosture.BookPosture(foldingFeature.bounds)
 
         isSeparating(foldingFeature) -> DevicePosture.Separating(
-            foldingFeature.bounds,
-            foldingFeature.orientation
+            foldingFeature.bounds, foldingFeature.orientation
         )
 
         else -> DevicePosture.NormalPosture
@@ -106,11 +101,7 @@ fun CabifyApp(
         navigationType = navigationType,
         contentType = contentType,
         displayFeatures = displayFeatures,
-        navigationContentPosition = navigationContentPosition,
-        cabifyHomeUIState = homeUIState,
-        onAddToCartClicked = onAddToCartClicked,
-        shoppingCartViewModel = shoppingCartViewModel
-
+        navigationContentPosition = navigationContentPosition
     )
 }
 
@@ -120,10 +111,7 @@ private fun NavigationWrapper(
     navigationType: NavigationType,
     contentType: ContentType,
     displayFeatures: List<DisplayFeature>,
-    navigationContentPosition: NavigationContentPosition,
-    cabifyHomeUIState: HomeUIState,
-    shoppingCartViewModel: ShoppingCartViewModel,
-    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
+    navigationContentPosition: NavigationContentPosition
 ) {
     val navController = rememberNavController()
     val navigationActions = remember(navController) {
@@ -145,12 +133,9 @@ private fun NavigationWrapper(
                 contentType = contentType,
                 displayFeatures = displayFeatures,
                 navigationContentPosition = navigationContentPosition,
-                cabifyHomeUIState = cabifyHomeUIState,
                 navController = navController,
                 selectedDestination = selectedDestination,
-                navigateToTopLevelDestination = navigationActions::navigateTo,
-                onAddToCartClicked = onAddToCartClicked,
-                shoppingCartViewModel = shoppingCartViewModel,
+                navigateToTopLevelDestination = navigationActions::navigateTo
             )
         }
     } else {
@@ -168,12 +153,9 @@ private fun NavigationWrapper(
                 contentType = contentType,
                 displayFeatures = displayFeatures,
                 navigationContentPosition = navigationContentPosition,
-                cabifyHomeUIState = cabifyHomeUIState,
                 navController = navController,
                 selectedDestination = selectedDestination,
-                navigateToTopLevelDestination = navigationActions::navigateTo,
-                onAddToCartClicked = onAddToCartClicked,
-                shoppingCartViewModel = shoppingCartViewModel,
+                navigateToTopLevelDestination = navigationActions::navigateTo
             )
         }
     }
@@ -187,12 +169,9 @@ fun CabifyAppContent(
     contentType: ContentType,
     displayFeatures: List<DisplayFeature>,
     navigationContentPosition: NavigationContentPosition,
-    cabifyHomeUIState: HomeUIState,
     navController: NavHostController,
     selectedDestination: String,
-    navigateToTopLevelDestination: (TopLevelDestination) -> Unit,
-    shoppingCartViewModel: ShoppingCartViewModel,
-    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
+    navigateToTopLevelDestination: (TopLevelDestination) -> Unit
 ) {
     Row(modifier = modifier.fillMaxSize()) {
         AnimatedVisibility(visible = navigationType == NavigationType.NAVIGATION_RAIL) {
@@ -211,10 +190,7 @@ fun CabifyAppContent(
                 navController = navController,
                 contentType = contentType,
                 displayFeatures = displayFeatures,
-                homeUIState = cabifyHomeUIState,
-                shoppingCartViewModel = shoppingCartViewModel,
-                modifier = Modifier.weight(1f),
-                onAddToCartClicked = onAddToCartClicked
+                modifier = Modifier.weight(1f)
             )
             AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
                 CabifyBottomNavigationBar(
@@ -232,11 +208,9 @@ private fun NavHost(
     navController: NavHostController,
     contentType: ContentType,
     displayFeatures: List<DisplayFeature>,
-    homeUIState: HomeUIState,
-    shoppingCartViewModel: ShoppingCartViewModel,
-    modifier: Modifier = Modifier,
-    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
+    modifier: Modifier = Modifier
 ) {
+    val shoppingCartViewModel = koinViewModel<ShoppingCartViewModel>()
     NavHost(
         modifier = modifier,
         navController = navController,
@@ -245,9 +219,8 @@ private fun NavHost(
         composable(CabifyRoute.PRODUCTS) {
             ProductsScreen(
                 contentType = contentType,
-                homeUIState = homeUIState,
                 displayFeatures = displayFeatures,
-                onAddToCartClicked = onAddToCartClicked
+                shoppingCartViewModel = shoppingCartViewModel
             )
         }
         composable(CabifyRoute.EXTRA) {

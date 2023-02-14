@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cabify.demo.data.model.Product
 import com.cabify.demo.data.repository.ProductRepository
-import com.cabify.demo.data.repository.ProductRepositoryImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -13,7 +12,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class HomeViewModel(
-    private val productRepository: ProductRepository = ProductRepositoryImpl(),
+    private val productRepository: ProductRepository
 ) : ViewModel() {
 
     // UI state exposed to the UI

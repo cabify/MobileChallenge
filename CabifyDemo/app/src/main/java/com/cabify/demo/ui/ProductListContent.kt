@@ -13,8 +13,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.layout.DisplayFeature
 import com.cabify.demo.data.model.Product
 import com.cabify.demo.ui.components.CabifyProductListItem
@@ -23,26 +25,27 @@ import com.cabify.demo.ui.components.SearchBar
 import com.cabify.demo.ui.utils.ContentType
 import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
 import com.google.accompanist.adaptive.TwoPane
-import java.math.BigDecimal
+import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun ProductsScreen(
     contentType: ContentType,
-    homeUIState: HomeUIState,
     displayFeatures: List<DisplayFeature>,
-    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    shoppingCartViewModel: ShoppingCartViewModel
 ) {
+    val homeViewModel: HomeViewModel = koinViewModel()
+    val homeUIState by homeViewModel.uiState.collectAsStateWithLifecycle()
+
     val productLazyListState = rememberLazyListState()
 
     if (contentType == ContentType.DUAL_PANE) {
         TwoPane(
             first = {
                 CabifyProductList(
-                    products = homeUIState.products,
-                    lazyListState = productLazyListState,
-                    onAddToCartClicked = onAddToCartClicked
+                    products = homeUIState.products, lazyListState = productLazyListState,
+                    shoppingCartViewModel = shoppingCartViewModel
                 )
             },
             second = {
@@ -56,10 +59,9 @@ fun ProductsScreen(
     } else {
         Box(modifier = modifier.fillMaxSize()) {
             SinglePaneContent(
-                cabifyHomeUIState = homeUIState,
                 productLazyListState = productLazyListState,
                 modifier = Modifier.fillMaxSize(),
-                onAddToCartClicked = onAddToCartClicked,
+                shoppingCartViewModel = shoppingCartViewModel
             )
         }
     }
@@ -68,16 +70,18 @@ fun ProductsScreen(
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun SinglePaneContent(
-    cabifyHomeUIState: HomeUIState,
     productLazyListState: LazyListState,
     modifier: Modifier = Modifier,
-    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
+    shoppingCartViewModel: ShoppingCartViewModel
 ) {
+    val homeViewModel: HomeViewModel = koinViewModel()
+    val homeUIState by homeViewModel.uiState.collectAsStateWithLifecycle()
+
     CabifyProductList(
-        products = cabifyHomeUIState.products,
+        products = homeUIState.products,
         lazyListState = productLazyListState,
         modifier = modifier,
-        onAddToCartClicked = onAddToCartClicked,
+        shoppingCartViewModel = shoppingCartViewModel
     )
 }
 
@@ -87,7 +91,7 @@ fun CabifyProductList(
     products: List<Product>,
     lazyListState: LazyListState,
     modifier: Modifier = Modifier,
-    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
+    shoppingCartViewModel: ShoppingCartViewModel
 ) {
     LazyColumn(modifier = modifier, state = lazyListState) {
         item {
@@ -96,18 +100,21 @@ fun CabifyProductList(
         if (products.isEmpty()) {
             item {
                 CabifyProductListItem(
-                    productItem = Product(), onAddToCartClicked = onAddToCartClicked
+                    productItem = Product(),
+                    shoppingCartViewModel = shoppingCartViewModel
                 )
             }
             item {
                 CabifyProductListItem(
-                    productItem = Product(), onAddToCartClicked = onAddToCartClicked
+                    productItem = Product(),
+                    shoppingCartViewModel = shoppingCartViewModel
                 )
             }
         } else {
             items(items = products, key = { it.code }) { product ->
                 CabifyProductListItem(
-                    productItem = product, onAddToCartClicked = onAddToCartClicked
+                    productItem = product,
+                    shoppingCartViewModel = shoppingCartViewModel
                 )
             }
         }

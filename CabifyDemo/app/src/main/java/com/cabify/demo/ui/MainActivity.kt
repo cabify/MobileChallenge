@@ -3,26 +3,19 @@ package com.cabify.demo.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cabify.demo.ui.theme.CabifyTheme
 import com.google.accompanist.adaptive.calculateDisplayFeatures
 
 class MainActivity : ComponentActivity() {
 
-    private val homeViewModel: HomeViewModel by viewModels()
-    private val shoppingCartViewModel: ShoppingCartViewModel by viewModels()
-
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalLifecycleComposeApi::class)
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,16 +23,9 @@ class MainActivity : ComponentActivity() {
             CabifyTheme {
                 val windowSize = calculateWindowSizeClass(this)
                 val displayFeatures = calculateDisplayFeatures(this)
-                val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
                 CabifyApp(
-                    windowSize = windowSize,
-                    displayFeatures = displayFeatures,
-                    homeUIState = uiState,
-                    onAddToCartClicked = { code, name, price ->
-                        shoppingCartViewModel.addItemToCart(code, name, price)
-                    },
-                    shoppingCartViewModel = shoppingCartViewModel
+                    windowSize = windowSize, displayFeatures = displayFeatures
                 )
             }
         }
@@ -52,11 +38,8 @@ class MainActivity : ComponentActivity() {
 fun CabifyAppPreview() {
     CabifyTheme {
         CabifyApp(
-            homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(400.dp, 900.dp)),
-            displayFeatures = emptyList(),
-            shoppingCartViewModel = ShoppingCartViewModel(),
-            onAddToCartClicked = { _, _, _ -> },
+            displayFeatures = emptyList()
         )
     }
 }
@@ -67,11 +50,8 @@ fun CabifyAppPreview() {
 fun CabifyAppPreviewTablet() {
     CabifyTheme {
         CabifyApp(
-            homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(700.dp, 500.dp)),
-            displayFeatures = emptyList(),
-            onAddToCartClicked = { _, _, _ -> },
-            shoppingCartViewModel = ShoppingCartViewModel(),
+            displayFeatures = emptyList()
         )
     }
 }
@@ -82,11 +62,8 @@ fun CabifyAppPreviewTablet() {
 fun CabifyAppPreviewTabletPortrait() {
     CabifyTheme {
         CabifyApp(
-            homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(500.dp, 700.dp)),
-            displayFeatures = emptyList(),
-            onAddToCartClicked = { _, _, _ -> },
-            shoppingCartViewModel = ShoppingCartViewModel(),
+            displayFeatures = emptyList()
         )
     }
 }
@@ -97,11 +74,8 @@ fun CabifyAppPreviewTabletPortrait() {
 fun CabifyAppPreviewDesktop() {
     CabifyTheme {
         CabifyApp(
-            homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(1100.dp, 600.dp)),
-            displayFeatures = emptyList(),
-            onAddToCartClicked = { _, _, _ -> },
-            shoppingCartViewModel = ShoppingCartViewModel(),
+            displayFeatures = emptyList()
         )
     }
 }
@@ -112,11 +86,8 @@ fun CabifyAppPreviewDesktop() {
 fun CabifyAppPreviewDesktopPortrait() {
     CabifyTheme {
         CabifyApp(
-            homeUIState = HomeUIState(),
             windowSize = WindowSizeClass.calculateFromSize(DpSize(600.dp, 1100.dp)),
-            displayFeatures = emptyList(),
-            onAddToCartClicked = { _, _, _ -> },
-            shoppingCartViewModel = ShoppingCartViewModel(),
+            displayFeatures = emptyList()
         )
     }
 }

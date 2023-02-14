@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -95,8 +96,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     // custom declaration for latest versions of material 3 and adaptive accompanist
-    implementation("androidx.compose.material3:material3:1.0.0-rc01")
-    implementation("com.google.accompanist:accompanist-adaptive:0.26.2-beta")
+    implementation("androidx.compose.material3:material3:1.1.0-alpha06")
+    implementation("com.google.accompanist:accompanist-adaptive:0.29.1-alpha")
 
     implementation(libs.androidx.compose.materialWindow)
     implementation(libs.androidx.compose.material.iconsExtended)
@@ -128,4 +129,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation("com.squareup.moshi:moshi:1.9.3")
+
+    implementation("io.insert-koin:koin-core:3.3.3")
+    implementation("io.insert-koin:koin-androidx-compose:3.3.0")
+    implementation("io.insert-koin:koin-android:3.3.2")
 }

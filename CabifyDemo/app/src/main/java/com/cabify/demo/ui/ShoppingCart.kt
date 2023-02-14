@@ -28,17 +28,20 @@ import com.cabify.demo.data.model.ProductDiscount
 import com.cabify.demo.ui.Buttons.CTAButtonGreen
 import com.cabify.demo.ui.Image.CartProductIcon
 import com.cabify.demo.ui.utils.AlertDialog.StartCashOutProcess
+import org.koin.androidx.compose.koinViewModel
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
-fun ShoppingCartContent(viewModel: ShoppingCartViewModel) {
-
-    val shoppingCartItemList: List<ShoppingCartItemViewModel> = viewModel.shoppingCartItems
-    val totalPrice by viewModel.shoppingCartTotalPriceState
-    val isCtaButtonEnabled by viewModel.isCtaButtonEnabledState
+fun ShoppingCartContent(
+    shoppingCartViewModel: ShoppingCartViewModel = koinViewModel()
+) {
+    val shoppingCartItemList: List<ShoppingCartItemViewModel> =
+        shoppingCartViewModel.shoppingCartItems
+    val totalPrice by shoppingCartViewModel.shoppingCartTotalPriceState
+    val isCtaButtonEnabled by shoppingCartViewModel.isCtaButtonEnabledState
     val productLazyListState = rememberLazyListState()
 
     ShoppingCartContent(
@@ -46,15 +49,15 @@ fun ShoppingCartContent(viewModel: ShoppingCartViewModel) {
         totalPrice = totalPrice,
         lazyListState = productLazyListState,
         isCtaButtonEnabled = isCtaButtonEnabled,
-        startCashOutProcess = viewModel::onOpenDialogClicked
+        startCashOutProcess = shoppingCartViewModel::onOpenDialogClicked
     )
 
-    val showDialogState: Boolean by viewModel.showDialog.collectAsState()
+    val showDialogState: Boolean by shoppingCartViewModel.showDialog.collectAsState()
 
     StartCashOutProcess(
         showDialogState,
-        viewModel::onDialogDismiss,
-        viewModel::onDialogConfirm,
+        shoppingCartViewModel::onDialogDismiss,
+        shoppingCartViewModel::onDialogConfirm,
         totalPrice,
     )
 }

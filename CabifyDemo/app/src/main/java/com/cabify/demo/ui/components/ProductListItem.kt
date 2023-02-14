@@ -19,6 +19,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.cabify.demo.R
 import com.cabify.demo.data.model.Product
+import com.cabify.demo.ui.ShoppingCartViewModel
+import org.koin.androidx.compose.koinViewModel
 import java.math.BigDecimal
 import java.util.*
 
@@ -29,8 +31,9 @@ fun CabifyProductListItem(
     isSelectable: Boolean = false,
     isSelected: Boolean = false,
     modifier: Modifier = Modifier,
-    onAddToCartClicked: (String, String, BigDecimal) -> Unit,
+    shoppingCartViewModel: ShoppingCartViewModel
 ) {
+
     val semanticsModifier = if (isSelectable) modifier
         .padding(horizontal = 16.dp, vertical = 4.dp)
         .semantics { selected = isSelected }
@@ -68,7 +71,7 @@ fun CabifyProductListItem(
                 }
                 IconButton(
                     onClick = {
-                        onAddToCartClicked(
+                        shoppingCartViewModel.addItemToCart(
                             productItem.code, productItem.name, productItem.price
                         )
                     },
