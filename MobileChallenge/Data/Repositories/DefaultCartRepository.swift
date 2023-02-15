@@ -44,7 +44,9 @@ extension DefaultCartRepository: CartRepository {
     private func cartItemOrNew(cartEntity: CartEntity, item: Cart.Item) -> AnyPublisher<CartItemEntity, Error> {
         let predicate = NSPredicate(format: "self.cart == %@ AND self.code == %d", cartEntity, item.code)
         return cartItemRepository.fetch(predicate: predicate)
-            .flatMap { Just($0.first) }
+            .flatMap { cartItemEntities in
+                Just(cartItemEntities.first)
+            }
             .flatMap { cartItemQuantity in
                 self.cartItemRepository.create(cartItemQuantity, body: { newItem in
                     newItem.cart = cartEntity
