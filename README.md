@@ -46,3 +46,23 @@ Examples:
 - Consider explaning the solution and why certain things are included and others are left out.
 - Be written either in Swift or Kotlin, preferably in the latest stable version of the language.
 - If possible, use the latest stable version (no Betas) of Xcode or Android Studio.
+
+
+
+# Technologies Uses:
+  - Kotlin 
+  - Jetpack Compose
+  - Material Theme 3
+  - Koin
+  - Retrofit
+  - Moshi 
+
+# Patterns
+  - MVVM + Clean architecture 
+  - Repository (Used for Product)
+  - Builder Pattern (Used for AlertDialog)
+  - Dependency Injection (Koin)
+
+# Extra info
+  - In config files can be setted the URL BASE of the API. Variable name "BASE_URL"
+  - In Product.kt file the method amountUnit() contains the price and the discount pattern of each product

@@ -29,6 +29,7 @@ data class Product(
         return (price * quantity.toBigDecimal()).minus(amountTotal())
     }
 
+    //This method contains the price and the discount pattern of each product
     fun amountUnit(): BigDecimal {
         when (code) {
             ProductDiscount.VOUCHER.name -> {
