@@ -1,5 +1,5 @@
 //
-//  MockedProductsListRepository.swift
+//  MockedDefaultProductsListRepository.swift
 //  MobileChallengeTests
 //
 //  Created by thomas pereira on 14/02/2023.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class MockedProductsListRepository {
+final class MockedDefaultProductsListRepository {
     
     static private func mockedURL(base: String?, path: String?) -> URL? {
         guard let aBase = base, let aPath = path else { return nil }
@@ -38,7 +38,7 @@ final class MockedProductsListRepository {
         return DefaultProductsListRepository(apiClient: mockedApiClient)
     }
     
-    static func mockedRepository(request: any RequestConvertable = ProductsListRequest(), encodedData: Data? = MockedProductsListRepository.encodedMockedModel, statusCode: Int = 200) -> DefaultProductsListRepository {
+    static func mockedRepository(request: any RequestConvertable = ProductsListRequest(), encodedData: Data? = MockedDefaultProductsListRepository.encodedMockedModel, statusCode: Int = 200) -> DefaultProductsListRepository {
         
         let mockedRequest = ProductsListRequest()
         let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(

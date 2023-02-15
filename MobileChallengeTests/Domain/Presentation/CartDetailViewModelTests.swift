@@ -19,7 +19,7 @@ final class CartDetailViewModelTests: XCTestCase {
         
         // Coordinator with pre-fetched cart
         self.coordinatorPrefetchedCart = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository.mockedDefaultRepository,
+            productsListRepository: MockedDefaultProductsListRepository.mockedDefaultRepository,
             cartRepository: MockedCartRepository.mockedDefaultRepository
         )
         // Pre-fetched products list with empty cart
@@ -56,7 +56,7 @@ extension CartDetailViewModelTests {
     func testCartDetailViewModel_whenSuccessfullyLoadsEmptyCart_thenShowCartSummary() throws {
         // Given
         let coordinator = ProductsListCoordinator(
-            productsListRepository: MockedProductsListRepository.mockedDefaultRepository,
+            productsListRepository: MockedDefaultProductsListRepository.mockedDefaultRepository,
             cartRepository: MockedCartRepository.mockedDefaultRepository
         )
         
