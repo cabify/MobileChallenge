@@ -42,14 +42,9 @@ extension CartDetailViewModelTests {
     // Empty cart
     func testCartDetailViewModel_whenSuccessfullyLoadsEmptyCart_thenShowCartSummary() throws {
         // Given
-        let coordinator = ProductsListCoordinator(
-            productsListRepository: MockedDefaultProductsListRepository.repository,
-            cartRepository: MockedCartRepository.mockedDefaultRepository
-        )
-        
         var cart: CartLayoutViewModel?
         let expectationLoad = XCTestExpectation(description: "View model fetches products")
-        var cancellable: AnyCancellable? = coordinator.viewState.$state.sink { state in
+        var cancellable: AnyCancellable? = self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
@@ -58,12 +53,12 @@ extension CartDetailViewModelTests {
             }
         }
         
-        let productsListViewModel = coordinator.productsViewModel
+        let productsListViewModel = self.coordinator?.productsViewModel
         productsListViewModel?.load()
         wait(for: [expectationLoad], timeout: 0.5)
         
         // When
-        coordinator.openCart()
+        self.coordinator?.openCart()
         
         cancellable?.cancel()
         cancellable = nil

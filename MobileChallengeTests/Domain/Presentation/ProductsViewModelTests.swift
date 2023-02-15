@@ -90,7 +90,7 @@ extension ProductsViewModelTests {
         // Custom coordinator with mocked error for repository
         let coordinator = ProductsListCoordinator(
             productsListRepository: MockedDefaultProductsListRepository.customRepository(statusCode: 600),
-            cartRepository: MockedCartRepository.mockedDefaultRepository
+            cartRepository: self.mockedRepository
         )
         var errorMessage: String?
         var cancellable: AnyCancellable? = coordinator.viewState.$state.sink { state in

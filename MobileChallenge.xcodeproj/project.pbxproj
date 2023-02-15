@@ -21,7 +21,6 @@
 		3347D7D7299D2AFA00E6A28E /* MockedDefaultCartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3347D791299CF78600E6A28E /* MockedDefaultCartRepository.swift */; };
 		3347D7D8299D2AFA00E6A28E /* MockedURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356E70E299AB4CE00127F8B /* MockedURLProtocol.swift */; };
 		3347D7DA299D2AFA00E6A28E /* MockedCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3347D78F299CF3E800E6A28E /* MockedCoreDataStorage.swift */; };
-		3347D7E1299D32B900E6A28E /* MockedCartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3347D7E0299D32B900E6A28E /* MockedCartRepository.swift */; };
 		3362B44429968D2600B99241 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3362B44329968D2600B99241 /* LaunchScreen.storyboard */; };
 		3371D97D298932B600774082 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97C298932B600774082 /* ProductsView.swift */; };
 		3371D97F2989333A00774082 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97E2989333A00774082 /* ProductsViewModel.swift */; };
@@ -763,7 +762,6 @@
 				3347D7CA299D2AFA00E6A28E /* TestsError.swift in Sources */,
 				3347D7CC299D2AFA00E6A28E /* CoreDataManagerTests.swift in Sources */,
 				3347D7CE299D2AFA00E6A28E /* NSPersistentContainer+Extension.swift in Sources */,
-				3347D7E1299D32B900E6A28E /* MockedCartRepository.swift in Sources */,
 				3347D7D8299D2AFA00E6A28E /* MockedURLProtocol.swift in Sources */,
 				3347D7D7299D2AFA00E6A28E /* MockedDefaultCartRepository.swift in Sources */,
 				3347D7D0299D2AFA00E6A28E /* CartDetailViewModelTests.swift in Sources */,
