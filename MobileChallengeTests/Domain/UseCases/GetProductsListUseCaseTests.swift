@@ -15,7 +15,7 @@ final class GetProductsListUseCaseTests: XCTestCase {
     func testGetProductsListUseCase_whenSuccessfullyFetchesProductsList_thenValidateProducts() throws {
         
         // Given
-        let mockedRepository = MockedDefaultProductsListRepository.mockedDefaultRepository
+        let mockedRepository = MockedDefaultProductsListRepository.repository
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         // When
@@ -41,7 +41,7 @@ extension GetProductsListUseCaseTests {
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowInvalidURLError() throws {
         // Given
         let mockedRequest: any RequestConvertable = ProductsListRequest(baseURL: "Invalid Base URL", path: "Invalid Path")
-        let mockedRepository = MockedDefaultProductsListRepository.mockedRepository(request: mockedRequest)
+        let mockedRepository = MockedDefaultProductsListRepository.customRepository(request: mockedRequest)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -57,7 +57,7 @@ extension GetProductsListUseCaseTests {
     // Invalid response
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowInvalidResponseError() throws {
         // Given
-        let mockedRepository = MockedDefaultProductsListRepository.mockedRepository(statusCode: -1)
+        let mockedRepository = MockedDefaultProductsListRepository.customRepository(statusCode: -1)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -73,7 +73,7 @@ extension GetProductsListUseCaseTests {
     // No data
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowNoDataError() throws {
         // Given
-        let mockedRepository = MockedDefaultProductsListRepository.mockedRepository(encodedData: Data("{ }".utf8))
+        let mockedRepository = MockedDefaultProductsListRepository.customRepository(encodedData: Data("{ }".utf8))
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -90,7 +90,7 @@ extension GetProductsListUseCaseTests {
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowParserError() throws {
         // Given
         let mockedRequest: any RequestConvertable = ProductsListRequest(parser: nil)
-        let mockedRepository = MockedDefaultProductsListRepository.mockedRepository(request: mockedRequest, encodedData: Data("{ }".utf8))
+        let mockedRepository = MockedDefaultProductsListRepository.customRepository(request: mockedRequest, encodedData: Data("{ }".utf8))
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -106,7 +106,7 @@ extension GetProductsListUseCaseTests {
     // Not found
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowBadRequestError() throws {
         // Given
-        let mockedRepository = MockedDefaultProductsListRepository.mockedRepository(statusCode: 400)
+        let mockedRepository = MockedDefaultProductsListRepository.customRepository(statusCode: 400)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -122,7 +122,7 @@ extension GetProductsListUseCaseTests {
     // Not found
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowNotFoundError() throws {
         // Given
-        let mockedRepository = MockedDefaultProductsListRepository.mockedRepository(statusCode: 404)
+        let mockedRepository = MockedDefaultProductsListRepository.customRepository(statusCode: 404)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -138,7 +138,7 @@ extension GetProductsListUseCaseTests {
     // Server error
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowServerError() throws {
         // Given
-        let mockedRepository = MockedDefaultProductsListRepository.mockedRepository(statusCode: 500)
+        let mockedRepository = MockedDefaultProductsListRepository.customRepository(statusCode: 500)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {
@@ -154,7 +154,7 @@ extension GetProductsListUseCaseTests {
     // Unknown error
     func testGetProductsListUseCase_whenFailedFetchesProductsList_thenThrowUnknownError() throws {
         // Given
-        let mockedRepository = MockedDefaultProductsListRepository.mockedRepository(statusCode: 600)
+        let mockedRepository = MockedDefaultProductsListRepository.customRepository(statusCode: 600)
         let getProductsListUseCase = DefaultGetProductsListUseCase(productsListRepository: mockedRepository)
         
         do {

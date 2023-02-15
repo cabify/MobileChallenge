@@ -26,7 +26,7 @@ final class MockedDefaultProductsListRepository {
         return try? JSONEncoder().encode(mockedModel)
     }
     
-    static var mockedDefaultRepository: DefaultProductsListRepository {
+    static var repository: DefaultProductsListRepository {
         
         let mockedRequest = ProductsListRequest()
         let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(
@@ -38,7 +38,7 @@ final class MockedDefaultProductsListRepository {
         return DefaultProductsListRepository(apiClient: mockedApiClient)
     }
     
-    static func mockedRepository(request: any RequestConvertable = ProductsListRequest(), encodedData: Data? = MockedDefaultProductsListRepository.encodedMockedModel, statusCode: Int = 200) -> DefaultProductsListRepository {
+    static func customRepository(request: any RequestConvertable = ProductsListRequest(), encodedData: Data? = MockedDefaultProductsListRepository.encodedMockedModel, statusCode: Int = 200) -> DefaultProductsListRepository {
         
         let mockedRequest = ProductsListRequest()
         let mockedSessionConfig = MockedURLProtocol.configureMockedURLSession(

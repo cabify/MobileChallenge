@@ -19,7 +19,7 @@ final class ProductsViewModelTests: XCTestCase {
         
         // Coordinator with empty cart
         self.coordinator = ProductsListCoordinator(
-            productsListRepository: MockedDefaultProductsListRepository.mockedDefaultRepository,
+            productsListRepository: MockedDefaultProductsListRepository.repository,
             cartRepository: MockedCartRepository.mockedDefaultRepository
         )
     }
@@ -81,7 +81,7 @@ extension ProductsViewModelTests {
         let expectation = XCTestExpectation(description: "View model fails to fetch products")
         // Custom coordinator with mocked error for repository
         let coordinator = ProductsListCoordinator(
-            productsListRepository: MockedDefaultProductsListRepository.mockedRepository(statusCode: 600),
+            productsListRepository: MockedDefaultProductsListRepository.customRepository(statusCode: 600),
             cartRepository: MockedCartRepository.mockedDefaultRepository
         )
         var errorMessage: String?
