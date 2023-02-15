@@ -12,20 +12,26 @@ import Combine
 final class ProductsViewModelTests: XCTestCase {
     
     private var coordinator: ProductsListCoordinator?
-    private var cancellables: Set<AnyCancellable> = []
+    private var mockedCoreDataStorage: MockedCoreDataStorage!
+    private var mockedRepository: CartRepository!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
+        self.mockedCoreDataStorage = MockedCoreDataStorage()
+        self.mockedRepository = MockedDefaultCartRepository.repository(backgroundContext: self.mockedCoreDataStorage.backgroundContext)
+        
         // Coordinator with empty cart
         self.coordinator = ProductsListCoordinator(
             productsListRepository: MockedDefaultProductsListRepository.repository,
-            cartRepository: MockedCartRepository.mockedDefaultRepository
+            cartRepository: self.mockedRepository
         )
     }
     
     override func tearDownWithError() throws {
         self.coordinator = nil
+        self.mockedRepository = nil
+        self.mockedCoreDataStorage = nil
         
         try super.tearDownWithError()
     }
@@ -38,21 +44,23 @@ extension ProductsViewModelTests {
         // Given
         let expectation = XCTestExpectation(description: "View model fetches products")
         var cart: CartLayoutViewModel?
-        self.coordinator?.viewState.$state.sink { state in
+        var cancellable: AnyCancellable? = self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
                 cart = loadedCart
                 expectation.fulfill()
             }
-        }.store(in: &cancellables)
+        }
         
         // When
         let viewModel = self.coordinator?.productsViewModel
         XCTAssertEqual(self.coordinator?.viewState.state, .idle)
         viewModel?.load()
-        
         wait(for: [expectation], timeout: 0.5)
+        
+        cancellable?.cancel()
+        cancellable = nil
         
         // Then
         let firstItem = cart?.items[0]
@@ -85,21 +93,23 @@ extension ProductsViewModelTests {
             cartRepository: MockedCartRepository.mockedDefaultRepository
         )
         var errorMessage: String?
-        coordinator.viewState.$state.sink { state in
+        var cancellable: AnyCancellable? = coordinator.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .loaded: return
             case .failed(let error):
                 errorMessage = (error as? APIError)?.errorDescription
                 expectation.fulfill()
             }
-        }.store(in: &cancellables)
+        }
         
         // When
         let viewModel = coordinator.productsViewModel
         XCTAssertEqual(coordinator.viewState.state, .idle)
         viewModel?.load()
-        
         wait(for: [expectation], timeout: 0.5)
+        
+        cancellable?.cancel()
+        cancellable = nil
         
         // Then
         XCTAssertEqual(errorMessage, "Some error occured, Please try again.")
@@ -112,40 +122,39 @@ extension ProductsViewModelTests {
     func testProductsViewModel_whenSuccessfullyAddProductToCart_thenShowProductsUpdated() throws {
         // Given
         let expectationLoad = XCTestExpectation(description: "View model fetches products")
+        let expectationAddProduct = XCTestExpectation(description: "View model adds a product to cart")
+        var emptyCart: CartLayoutViewModel?
         var cart: CartLayoutViewModel?
-        self.coordinator?.viewState.$state.sink { state in
+        var cancellable: AnyCancellable? = self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
-                cart = loadedCart
-                expectationLoad.fulfill()
+                if emptyCart == nil {
+                    emptyCart = loadedCart
+                    expectationLoad.fulfill()
+                    
+                } else if cart == nil {
+                    cart = loadedCart
+                    expectationAddProduct.fulfill()
+                }
             }
-        }.store(in: &cancellables)
-        
+        }
         let viewModel = self.coordinator?.productsViewModel
         XCTAssertEqual(self.coordinator?.viewState.state, .idle)
         viewModel?.load()
-        
         wait(for: [expectationLoad], timeout: 0.5)
-        XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
         
         // When
         let productType = ProductType.voucher
-        let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
-        let expectationAddProduct = XCTestExpectation(description: "View model adds new product to cart")
-        self.coordinator?.viewState.$state.sink { state in
-            switch state {
-            case .idle, .loading, .failed: return
-            case .loaded(let loadedCart):
-                cart = loadedCart
-                expectationAddProduct.fulfill()
-            }
-        }.store(in: &cancellables)
+        let addProduct = try XCTUnwrap(emptyCart?.items.first(where: { $0.productType == productType }))
         viewModel?.addItemToCart(addProduct)
-        
         wait(for: [expectationAddProduct], timeout: 0.5)
         
+        cancellable?.cancel()
+        cancellable = nil
+        
         // Then
+        XCTAssertTrue(emptyCart?.cartItems.isEmpty ?? false)
         XCTAssertFalse(cart?.cartItems.isEmpty ?? true)
         let firstItem = cart?.cartItems.first
         XCTAssertEqual(firstItem?.productType, productType)
@@ -159,65 +168,62 @@ extension ProductsViewModelTests {
     func testProductsViewModel_whenSuccessfullyAddManyProductsToCart_thenShowProductsUpdatedWithSpecialPrice() throws {
         // Given
         let expectationLoad = XCTestExpectation(description: "View model fetches products")
+        let expectationAddProduct = XCTestExpectation(description: "View model adds a product to cart")
+        let expectationAddProductOneMore = XCTestExpectation(description: "View model adds one more of the same product to cart")
+        let expectationAddProductOneMoreAgain = XCTestExpectation(description: "View model adds one more from same product to cart")
+        var emptyCart: CartLayoutViewModel?
         var cart: CartLayoutViewModel?
-        self.coordinator?.viewState.$state.sink { state in
+        var cartOneMore: CartLayoutViewModel?
+        var cartOneMoreAgain: CartLayoutViewModel?
+        var cancellable: AnyCancellable? = self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
-                cart = loadedCart
+                if emptyCart == nil {
+                    emptyCart = loadedCart
+                    expectationLoad.fulfill()
+                    
+                } else if cart == nil {
+                    cart = loadedCart
+                    expectationAddProduct.fulfill()
+                    
+                } else if cartOneMore == nil {
+                    cartOneMore = loadedCart
+                    expectationAddProductOneMore.fulfill()
+                    
+                } else if cartOneMoreAgain == nil {
+                    cartOneMoreAgain = loadedCart
+                    expectationAddProductOneMoreAgain.fulfill()
+                }
+                
+                emptyCart = loadedCart
                 expectationLoad.fulfill()
             }
-        }.store(in: &cancellables)
-        
+        }
         let viewModel = self.coordinator?.productsViewModel
         XCTAssertEqual(self.coordinator?.viewState.state, .idle)
         viewModel?.load()
-        
         wait(for: [expectationLoad], timeout: 0.5)
-        XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
         
         // When
+        // Add product
         let productType = ProductType.tShirt
-        let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == productType }))
-        // Add 1
-        let expectationAddProduct1 = XCTestExpectation(description: "View model adds new product to cart")
-        self.coordinator?.viewState.$state.sink { state in
-            switch state {
-            case .idle, .loading, .failed: return
-            case .loaded(let loadedCart):
-                cart = loadedCart
-                expectationAddProduct1.fulfill()
-            }
-        }.store(in: &cancellables)
+        let addProduct = try XCTUnwrap(emptyCart?.items.first(where: { $0.productType == productType }))
         viewModel?.addItemToCart(addProduct)
-        // Add 2
-        let expectationAddProduct2 = XCTestExpectation(description: "View model adds one more from same product to cart")
-        self.coordinator?.viewState.$state.sink { state in
-            switch state {
-            case .idle, .loading, .failed: return
-            case .loaded(let loadedCart):
-                cart = loadedCart
-                expectationAddProduct2.fulfill()
-            }
-        }.store(in: &cancellables)
+        wait(for: [expectationAddProduct], timeout: 0.5)
+        // Add one more
         viewModel?.addItemToCart(addProduct)
-        // Add 3
-        let expectationAddProduct3 = XCTestExpectation(description: "View model adds one more from same product to cart")
-        self.coordinator?.viewState.$state.sink { state in
-            switch state {
-            case .idle, .loading, .failed: return
-            case .loaded(let loadedCart):
-                cart = loadedCart
-                expectationAddProduct3.fulfill()
-            }
-        }.store(in: &cancellables)
+        wait(for: [expectationAddProductOneMore], timeout: 0.5)
+        // Add one more again
         viewModel?.addItemToCart(addProduct)
+        wait(for: [expectationAddProductOneMoreAgain], timeout: 0.5)
         
-        wait(for: [expectationAddProduct1, expectationAddProduct2, expectationAddProduct3], timeout: 0.5)
+        cancellable?.cancel()
+        cancellable = nil
         
         // Then
-        XCTAssertFalse(cart?.cartItems.isEmpty ?? true)
-        let firstItem = cart?.cartItems.first
+        XCTAssertFalse(emptyCart?.cartItems.isEmpty ?? true)
+        let firstItem = cartOneMoreAgain?.cartItems.first
         XCTAssertEqual(firstItem?.productType, productType)
         XCTAssertEqual(firstItem?.name, "Cabify T-Shirt")
         XCTAssertTrue(firstItem?.showDiscountBadge ?? false)
@@ -231,52 +237,48 @@ extension ProductsViewModelTests {
     func testProductsViewModel_whenSuccessfullyRemoveProductFromCart_thenShowProductsUpdated() throws {
         // Given
         let expectationLoad = XCTestExpectation(description: "View model fetches products")
+        let expectationAddProduct = XCTestExpectation(description: "View model adds a product to cart")
+        let expectationRemoveProduct = XCTestExpectation(description: "View model removes the product from cart")
+        var emptyCart: CartLayoutViewModel?
         var cart: CartLayoutViewModel?
-        self.coordinator?.viewState.$state.sink { state in
+        var cancellable: AnyCancellable? = self.coordinator?.viewState.$state.sink { state in
             switch state {
             case .idle, .loading, .failed: return
             case .loaded(let loadedCart):
-                cart = loadedCart
-                expectationLoad.fulfill()
+                if emptyCart == nil {
+                    emptyCart = loadedCart
+                    expectationLoad.fulfill()
+                    
+                } else if cart == nil {
+                    cart = loadedCart
+                    expectationAddProduct.fulfill()
+                    
+                } else {
+                    cart = loadedCart
+                    expectationRemoveProduct.fulfill()
+                }
             }
-        }.store(in: &cancellables)
-        
+        }
         let viewModel = self.coordinator?.productsViewModel
         XCTAssertEqual(self.coordinator?.viewState.state, .idle)
         viewModel?.load()
-        
         wait(for: [expectationLoad], timeout: 0.5)
-        XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
-        
-        let addProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
-        let expectationAddProduct = XCTestExpectation(description: "View model adds new product to cart")
-        self.coordinator?.viewState.$state.sink { state in
-            switch state {
-            case .idle, .loading, .failed: return
-            case .loaded(let loadedCart):
-                cart = loadedCart
-                expectationAddProduct.fulfill()
-            }
-        }.store(in: &cancellables)
+        // Add
+        let productType = ProductType.voucher
+        let addProduct = try XCTUnwrap(emptyCart?.items.first(where: { $0.productType == productType }))
         viewModel?.addItemToCart(addProduct)
         wait(for: [expectationAddProduct], timeout: 0.5)
         
         // When
         let removeProduct = try XCTUnwrap(cart?.items.first(where: { $0.productType == .voucher }))
-        let expectationRemoveProduct = XCTestExpectation(description: "View model removes new product to cart")
-        self.coordinator?.viewState.$state.sink { state in
-            switch state {
-            case .idle, .loading, .failed: return
-            case .loaded(let loadedCart):
-                cart = loadedCart
-                expectationRemoveProduct.fulfill()
-            }
-        }.store(in: &cancellables)
         viewModel?.removeItemFromCart(removeProduct)
-        
         wait(for: [expectationRemoveProduct], timeout: 0.5)
         
+        cancellable?.cancel()
+        cancellable = nil
+        
         // Then
+        XCTAssertTrue(emptyCart?.cartItems.isEmpty ?? false)
         XCTAssertTrue(cart?.cartItems.isEmpty ?? false)
     }
 }
