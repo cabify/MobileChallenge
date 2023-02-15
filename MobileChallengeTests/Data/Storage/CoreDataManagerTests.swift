@@ -7,19 +7,80 @@
 
 import XCTest
 import Combine
+import CoreData
 @testable import MobileChallenge
 
 final class CoreDataManagerTests: XCTestCase {
     
-    func testCoreDataManager_whenSetup_thenValidateManagedObjectContext() throws {
+    // MARK: - Persistent container
+    func testCoreDataManager_whenSetup_thenFinalizeSetup() throws {
         
         // Given
-        let configuration: CoreDataStorage.Configuration = .inMemory(identifier: "MobileChallangeTests")
+        let expectation = XCTestExpectation(description: "Core Data loads persistent container")
+        let coreDataManager = CoreDataManager()
         
         // When
-        CoreDataManager.setup(with: configuration)
+        var finished = false
+        let configuration: CoreDataStorage.Configuration = .inMemory(identifier: "MobileChallenge")
+        coreDataManager.setup(with: configuration, onConfigureCompletionBlock: {
+            finished = true
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 0.5)
         
         // Then
-        XCTAssertNotNil(CoreDataManager.shared.context)
+        XCTAssertTrue(finished)
+    }
+    
+    func testCoreDataManager_whenSetup_thenPersistentStoreCreated() throws {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Core Data loads persistent container")
+        let coreDataManager = CoreDataManager()
+        
+        // When
+        let configuration: CoreDataStorage.Configuration = .inMemory(identifier: "MobileChallenge")
+        coreDataManager.setup(with: configuration, onConfigureCompletionBlock: {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 0.5)
+        
+        // Then
+        XCTAssertTrue(coreDataManager.persistentContainer.persistentStoreCoordinator.persistentStores.count > 0)
+    }
+    
+    func testCoreDataManager_whenSetupOnDisk_thenPersistentStoreLoadedOnDisk() throws {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Core Data loads persistent container")
+        let coreDataManager = CoreDataManager()
+        
+        // When
+        coreDataManager.setup(onConfigureCompletionBlock: {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 0.5)
+        
+        // Then
+        XCTAssertEqual(coreDataManager.persistentContainer.persistentStoreDescriptions.first?.type, NSSQLiteStoreType)
+        coreDataManager.persistentContainer.destroyPersistentStore()
+    }
+    
+    func testCoreDataManager_whenSetup_thenPersistentStoreLoadedOnMemory() throws {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Core Data loads persistent container")
+        let coreDataManager = CoreDataManager()
+        
+        // When
+        let configuration: CoreDataStorage.Configuration = .inMemory(identifier: "MobileChallenge")
+        coreDataManager.setup(with: configuration, onConfigureCompletionBlock: {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 0.5)
+        
+        // Then
+        XCTAssertEqual(coreDataManager.persistentContainer.persistentStoreDescriptions.first?.type, NSInMemoryStoreType)
+        coreDataManager.persistentContainer.destroyPersistentStore()
     }
 }
