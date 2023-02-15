@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+@testable import MobileChallenge
 
 final class MockedDefaultProductsListRepository {
     

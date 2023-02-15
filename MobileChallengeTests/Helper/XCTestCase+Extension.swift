@@ -8,6 +8,7 @@
 import Foundation
 import XCTest
 import Combine
+@testable import MobileChallenge
 
 extension XCTestCase {
     func awaitPublisher<T: Publisher>(_ publisher: T, timeout: TimeInterval = 10, file: StaticString = #file, line: UInt = #line) throws -> T.Output {

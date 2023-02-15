@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import MobileChallenge
 
 enum TestsError: Error {
     static let itemNotFoundMessage = "Can't find the item on the list"
