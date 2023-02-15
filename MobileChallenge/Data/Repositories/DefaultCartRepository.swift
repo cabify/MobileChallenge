@@ -24,7 +24,9 @@ extension DefaultCartRepository: CartRepository {
     
     private func cartOrNew() -> AnyPublisher<CartEntity, Error> {
         return cartRepository.fetch()
-            .flatMap { Just($0.first) }
+            .flatMap { cartEntities in
+                Just(cartEntities.first)
+            }
             .flatMap { cartEntity in
                 self.cartRepository.create(cartEntity)
             }
@@ -33,7 +35,9 @@ extension DefaultCartRepository: CartRepository {
     
     func getCart() -> AnyPublisher<Cart, Error> {
         return cartOrNew()
-            .flatMap { Just($0.domainObject) }
+            .flatMap { cartEntity in
+                Just(cartEntity.domainObject)
+            }
             .eraseToAnyPublisher()
     }
     
