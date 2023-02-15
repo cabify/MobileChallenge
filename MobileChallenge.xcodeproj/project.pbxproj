@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3347D78A299CEB6600E6A28E /* NSPersistentContainer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3347D789299CEB6600E6A28E /* NSPersistentContainer+Extension.swift */; };
+		3347D78C299CF33700E6A28E /* NSManagedObjectContextSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3347D78B299CF33700E6A28E /* NSManagedObjectContextSpy.swift */; };
 		334B5949299BA35F00B29EA8 /* ParameterEncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334B5948299BA35F00B29EA8 /* ParameterEncodableTests.swift */; };
 		334B594B299BA76200B29EA8 /* MockedProductsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334B594A299BA76200B29EA8 /* MockedProductsListRepository.swift */; };
 		334B594D299BD65C00B29EA8 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334B594C299BD65C00B29EA8 /* CoreDataManagerTests.swift */; };
@@ -130,6 +131,7 @@
 
 /* Begin PBXFileReference section */
 		3347D789299CEB6600E6A28E /* NSPersistentContainer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Extension.swift"; sourceTree = "<group>"; };
+		3347D78B299CF33700E6A28E /* NSManagedObjectContextSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextSpy.swift; sourceTree = "<group>"; };
 		334B5948299BA35F00B29EA8 /* ParameterEncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodableTests.swift; sourceTree = "<group>"; };
 		334B594A299BA76200B29EA8 /* MockedProductsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedProductsListRepository.swift; sourceTree = "<group>"; };
 		334B594C299BD65C00B29EA8 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				3362B45729969A3C00B99241 /* XCTestCase+Extension.swift */,
 				3347D789299CEB6600E6A28E /* NSPersistentContainer+Extension.swift */,
+				3347D78B299CF33700E6A28E /* NSManagedObjectContextSpy.swift */,
 				3362B4652996A7D400B99241 /* TestsError.swift */,
 			);
 			path = Helper;
@@ -797,6 +800,7 @@
 				334B5955299BE16E00B29EA8 /* CartEntity+Storable.swift in Sources */,
 				3362B4622996A70500B99241 /* RemoveItemFromCartUseCaseTests.swift in Sources */,
 				3362B44A299692E200B99241 /* ProductType.swift in Sources */,
+				3347D78C299CF33700E6A28E /* NSManagedObjectContextSpy.swift in Sources */,
 				334B5958299BE18800B29EA8 /* MobileChallenge.xcdatamodeld in Sources */,
 				3375D72129967EC600FADDC0 /* GetProductsListUseCaseTests.swift in Sources */,
 				334B5957299BE17400B29EA8 /* CartEntity+Mapping.swift in Sources */,
