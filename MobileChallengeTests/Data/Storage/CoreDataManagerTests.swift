@@ -84,3 +84,41 @@ final class CoreDataManagerTests: XCTestCase {
         coreDataManager.persistentContainer.destroyPersistentStore()
     }
 }
+
+// MARK: - Contexts
+extension CoreDataManagerTests {
+    
+    func testCoreDataManager_whenMainContext_thenCheckConcurrencyType() throws {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Core Data loads persistent container")
+        let coreDataManager = CoreDataManager()
+        
+        // When
+        let configuration: CoreDataStorage.Configuration = .inMemory(identifier: "MobileChallenge")
+        coreDataManager.setup(with: configuration, onConfigureCompletionBlock: {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 0.5)
+        
+        // Then
+        XCTAssertEqual(coreDataManager.mainContext.concurrencyType, .mainQueueConcurrencyType)
+    }
+    
+    func testCoreDataManager_whenBackgroundContext_thenCheckConcurrencyType() throws {
+        
+        // Given
+        let expectation = XCTestExpectation(description: "Core Data loads persistent container")
+        let coreDataManager = CoreDataManager()
+        
+        // When
+        let configuration: CoreDataStorage.Configuration = .inMemory(identifier: "MobileChallenge")
+        coreDataManager.setup(with: configuration, onConfigureCompletionBlock: {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 0.5)
+        
+        // Then
+        XCTAssertEqual(coreDataManager.backgroundContext.concurrencyType, .privateQueueConcurrencyType)
+    }
+}
