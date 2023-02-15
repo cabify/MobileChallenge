@@ -17,13 +17,12 @@ final class CartUseCasesTests: XCTestCase {
     private var addItemToCartUseCase: AddItemToCartUseCase!
     private var removeItemFromCartUseCase: RemoveItemFromCartUseCase!
     private var clearCartUseCase: ClearCartUseCase!
-    private var cancellables: Set<AnyCancellable>! = []
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
         self.mockedCoreDataStorage = MockedCoreDataStorage()
-        self.mockedRepository = DefaultCartRepository(backgroundContext: self.mockedCoreDataStorage.backgroundContext)
+        self.mockedRepository = MockedDefaultCartRepository.repository(backgroundContext: self.mockedCoreDataStorage.backgroundContext)
         self.getCartUseCase = DefaultGetCartUseCase(cartRepository: self.mockedRepository)
         self.addItemToCartUseCase = DefaultAddItemToCartUseCase(cartRepository: self.mockedRepository)
         self.removeItemFromCartUseCase = DefaultRemoveItemFromCartUseCase(cartRepository: self.mockedRepository)
@@ -37,7 +36,6 @@ final class CartUseCasesTests: XCTestCase {
         self.clearCartUseCase = nil
         self.mockedRepository = nil
         self.mockedCoreDataStorage = nil
-        self.cancellables = nil
         
         try super.tearDownWithError()
     }
