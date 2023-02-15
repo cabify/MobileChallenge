@@ -22,7 +22,7 @@ struct MobileChallengeApp: App {
     
     @StateObject var coordinator = ProductsListCoordinator(
         productsListRepository: DefaultProductsListRepository(),
-        cartRepository: DefaultCartRepository(context: CoreDataManager.shared.mainContext)
+        cartRepository: DefaultCartRepository(backgroundContext: CoreDataManager.shared.backgroundContext)
     )
     
     init() {

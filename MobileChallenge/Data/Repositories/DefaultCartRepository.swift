@@ -14,9 +14,9 @@ final class DefaultCartRepository {
     private let cartRepository: CoreDataRepository<CartEntity>
     private let cartItemRepository: CoreDataRepository<CartItemEntity>
     
-    init(context: NSManagedObjectContext) {
-        self.cartRepository = CoreDataRepository<CartEntity>(context: context)
-        self.cartItemRepository = CoreDataRepository<CartItemEntity>(context: context)
+    init(backgroundContext: NSManagedObjectContext) {
+        self.cartRepository = CoreDataRepository<CartEntity>(backgroundContext: backgroundContext)
+        self.cartItemRepository = CoreDataRepository<CartItemEntity>(backgroundContext: backgroundContext)
     }
 }
 
@@ -100,7 +100,7 @@ extension DefaultCartRepository: CartRepository {
 #if DEBUG && TESTING
 extension DefaultCartRepository {
     static var preview: Self {
-        .init(context: CoreDataStorage.preview.context!)
+        .init(mainContext: CoreDataStorage.preview.backgroundContext)
     }
 }
 #endif
