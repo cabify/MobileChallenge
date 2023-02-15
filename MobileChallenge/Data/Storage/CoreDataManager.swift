@@ -11,35 +11,38 @@ import CoreData
 final class CoreDataManager {
     
     // MARK: - Static
-    // Custom configuration
-    struct Config {
-        let storageConfig: CoreDataStorage.Configuration
-    }
-    private static var storageConfig: Config?
     // Shared
     static var shared = CoreDataManager()
     
     // Setup
-    static func setup(with storageConfig: CoreDataStorage.Configuration) {
-        CoreDataManager.storageConfig = Config(storageConfig: storageConfig)
+    func setup(
+        with storageConfig: CoreDataStorage.Configuration = .basic(identifier: "MobileChallenge"),
+        onConfigureCompletionBlock: (() -> Void)? = nil) {
+            
+        self.coreDataStorage = CoreDataStorage(
+            configuration: storageConfig,
+            onConfigureCompletionBlock: onConfigureCompletionBlock
+        )
     }
     
     // MARK: - Properties
-    // Private
-    private var coreDataStorage: any CoreDataStorable
-    var context: NSManagedObjectContext {
-        guard let context = coreDataStorage.context else {
+    private var coreDataStorage: (any CoreDataStorable)?
+    private var mainCoreDataStorage: CoreDataStorage {
+        guard let mainCoreDataStorage = self.coreDataStorage as? CoreDataStorage else {
             fatalError("Error - you must call setup to configure the StoreContext before accessing any dao")
         }
-        return context
+        return mainCoreDataStorage
     }
-    
-    // MARK: - Init
-    private init() {
-        guard let coreDataConfig = CoreDataManager.storageConfig else {
-            fatalError("Error - you must call setup before accessing CoreDataManager.shared")
-        }
-        
-        coreDataStorage = CoreDataStorage(configuration: coreDataConfig.storageConfig)
+    // PersistentContainer
+    var persistentContainer: NSPersistentContainer {
+        return mainCoreDataStorage.persistentContainer
+    }
+    // Main context
+    var mainContext: NSManagedObjectContext {
+        return mainCoreDataStorage.mainContext
+    }
+    // Background context
+    var backgroundContext: NSManagedObjectContext {
+        return mainCoreDataStorage.backgroundContext
     }
 }

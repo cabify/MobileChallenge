@@ -22,12 +22,12 @@ struct MobileChallengeApp: App {
     
     @StateObject var coordinator = ProductsListCoordinator(
         productsListRepository: DefaultProductsListRepository(),
-        cartRepository: DefaultCartRepository(context: CoreDataManager.shared.context)
+        cartRepository: DefaultCartRepository(context: CoreDataManager.shared.mainContext)
     )
     
     init() {
         let configuration: CoreDataStorage.Configuration = .basic(identifier: "MobileChallenge")
-        CoreDataManager.setup(with: configuration)
+        CoreDataManager.shared.setup(with: configuration)
     }
     
     var body: some Scene {

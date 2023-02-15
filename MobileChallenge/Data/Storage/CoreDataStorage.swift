@@ -9,40 +9,78 @@ import Foundation
 import CoreData
 
 protocol CoreDataStorable {
-    var context: NSManagedObjectContext? { get }
-    init(configuration: CoreDataStorage.Configuration)
+    var persistentContainer: NSPersistentContainer! { get }
+    var mainContext: NSManagedObjectContext { get }
+    var backgroundContext: NSManagedObjectContext { get }
+    
+    init(configuration: CoreDataStorage.Configuration, onConfigureCompletionBlock: (() -> Void)?)
+    func setup(onConfigureCompletionBlock: (() -> Void)?)
 }
 
 final class CoreDataStorage: CoreDataStorable {
     
+    // MARK: - Configuration types
     public enum Configuration {
         case basic(identifier: String)
-        case inMemory(identifier: String? = nil)
+        case inMemory(identifier: String)
         
-        var identifier: String? {
+        var identifier: String {
             switch self {
             case .basic(let identifier): return identifier
             case .inMemory(let identifier): return identifier
             }
         }
-    }
-    
-    var context: NSManagedObjectContext?
-    
-    init(configuration: CoreDataStorage.Configuration) {
-        switch configuration {
-        case .basic:
-            initDB(modelName: configuration.identifier, storeType: .sqLiteStoreType)
-            
-        case .inMemory:
-            initDB(storeType: .inMemoryStoreType)
+        
+        var storeType: String {
+            switch self {
+            case .basic: return NSSQLiteStoreType
+            case .inMemory: return NSInMemoryStoreType
+            }
         }
     }
     
-    private func initDB(modelName: String? = nil, storeType: StorageStoreCoordinator.StoreType) {
-        let coordinator = StorageStoreCoordinator.persistentStoreCoordinator(modelName: modelName, storeType: storeType)
-        self.context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        self.context?.persistentStoreCoordinator = coordinator
+    // MARK: - Stack
+    // Container
+    lazy var persistentContainer: NSPersistentContainer! = {
+        let persistentContainer = NSPersistentContainer(name: storageConfiguration.identifier)
+        let description = persistentContainer.persistentStoreDescriptions.first
+        description?.type = storageConfiguration.storeType
+        return persistentContainer
+    }()
+    // Main context
+    lazy var mainContext: NSManagedObjectContext = {
+        let context = self.persistentContainer.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        return context
+    }()
+    // Background context
+    lazy var backgroundContext: NSManagedObjectContext = {
+        let context = self.persistentContainer.newBackgroundContext()
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
+    }()
+    
+    // MARK: - Properties
+    private let storageConfiguration: Configuration
+    
+    // MARK: - Init
+    init(configuration: CoreDataStorage.Configuration, onConfigureCompletionBlock: (() -> Void)? = nil) {
+        self.storageConfiguration = configuration
+        self.setup(onConfigureCompletionBlock: onConfigureCompletionBlock)
+    }
+    
+    // MARK: - Setup
+    func setup(onConfigureCompletionBlock: (() -> Void)? = nil) {
+        loadPersistentStore(onConfigureCompletionBlock: onConfigureCompletionBlock)
+    }
+    
+    private func loadPersistentStore(onConfigureCompletionBlock: (() -> Void)? = nil) {
+        persistentContainer.loadPersistentStores { description, error in
+            guard error == nil else {
+                fatalError("Was unable to load store \(error!)")
+            }
+            onConfigureCompletionBlock?()
+        }
     }
 }
 
