@@ -19,9 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.layout.DisplayFeature
 import com.cabify.demo.data.model.Product
+import com.cabify.demo.ui.cart.ShoppingCartViewModel
 import com.cabify.demo.ui.components.CabifyProductListItem
 import com.cabify.demo.ui.components.DetailAppBar
 import com.cabify.demo.ui.components.SearchBar
+import com.cabify.demo.ui.home.HomeViewModel
 import com.cabify.demo.ui.utils.ContentType
 import com.google.accompanist.adaptive.HorizontalTwoPaneStrategy
 import com.google.accompanist.adaptive.TwoPane

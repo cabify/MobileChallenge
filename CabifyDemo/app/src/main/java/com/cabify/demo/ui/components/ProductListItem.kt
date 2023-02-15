@@ -19,8 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.cabify.demo.R
 import com.cabify.demo.data.model.Product
-import com.cabify.demo.ui.ShoppingCartViewModel
-import org.koin.androidx.compose.koinViewModel
+import com.cabify.demo.ui.cart.ShoppingCartViewModel
 import java.math.BigDecimal
 import java.util.*
 

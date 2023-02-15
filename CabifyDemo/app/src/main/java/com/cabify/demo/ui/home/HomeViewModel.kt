@@ -1,15 +1,14 @@
-package com.cabify.demo.ui
+package com.cabify.demo.ui.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cabify.demo.data.model.Product
 import com.cabify.demo.data.repository.ProductRepository
+import com.cabify.demo.ui.HomeUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import java.util.*
 
 class HomeViewModel(
     private val productRepository: ProductRepository
@@ -38,22 +37,5 @@ class HomeViewModel(
                 )
             }
         }
-    }
-}
-
-data class HomeUIState(
-    val products: List<Product> = emptyList(),
-    val loading: Boolean = false,
-    val error: String? = null
-)
-
-sealed class ShoppingCartStates {
-    object Initial : ShoppingCartStates()
-    data class RemoveProductItemFromShoppingCartEvent(val productId: UUID) : ShoppingCartStates()
-}
-
-abstract class CartItemSuperViewModel(open val cartItemProductData: Product) {
-    open fun removeProductItemFromShoppingCart() {
-        Log.d(this.toString(), "Product ${cartItemProductData.productId} was removed!")
     }
 }

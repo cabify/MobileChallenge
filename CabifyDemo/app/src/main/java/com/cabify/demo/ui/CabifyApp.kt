@@ -22,10 +22,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.layout.DisplayFeature
 import androidx.window.layout.FoldingFeature
+import com.cabify.demo.ui.cart.ShoppingCartContent
+import com.cabify.demo.ui.cart.ShoppingCartViewModel
 import com.cabify.demo.ui.navigation.*
 import com.cabify.demo.ui.utils.*
 import org.koin.androidx.compose.koinViewModel
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun CabifyApp(
     windowSize: WindowSizeClass, displayFeatures: List<DisplayFeature>
@@ -105,6 +108,7 @@ fun CabifyApp(
     )
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun NavigationWrapper(

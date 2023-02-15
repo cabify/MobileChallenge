@@ -1,4 +1,4 @@
-package com.cabify.demo.ui
+package com.cabify.demo.ui.cart
 
 import android.icu.util.Currency
 import android.os.Build
@@ -25,10 +25,9 @@ import androidx.compose.ui.unit.dp
 import com.cabify.demo.R
 import com.cabify.demo.data.model.Product
 import com.cabify.demo.data.model.ProductDiscount
-import com.cabify.demo.ui.Buttons.CTAButtonGreen
-import com.cabify.demo.ui.Image.CartProductIcon
+import com.cabify.demo.ui.cart.Buttons.CTAButtonGreen
+import com.cabify.demo.ui.cart.Image.CartProductIcon
 import com.cabify.demo.ui.utils.AlertDialog.StartCashOutProcess
-import org.koin.androidx.compose.koinViewModel
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.*
@@ -36,9 +35,9 @@ import java.util.*
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun ShoppingCartContent(
-    shoppingCartViewModel: ShoppingCartViewModel = koinViewModel()
+    shoppingCartViewModel: ShoppingCartViewModel
 ) {
-    val shoppingCartItemList: List<ShoppingCartItemViewModel> =
+    val shoppingCartItemList: List<ShoppingCartItem> =
         shoppingCartViewModel.shoppingCartItems
     val totalPrice by shoppingCartViewModel.shoppingCartTotalPriceState
     val isCtaButtonEnabled by shoppingCartViewModel.isCtaButtonEnabledState
@@ -65,7 +64,7 @@ fun ShoppingCartContent(
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun ShoppingCartContent(
-    shoppingCartItemList: List<ShoppingCartItemViewModel>,
+    shoppingCartItemList: List<ShoppingCartItem>,
     totalPrice: BigDecimal,
     lazyListState: LazyListState,
     isCtaButtonEnabled: Boolean,
@@ -111,7 +110,7 @@ fun ShoppingCartHeaderPreview() {
 @Composable
 fun ShoppingCartList(
     lazyListState: LazyListState,
-    shoppingCartItemList: List<ShoppingCartItemViewModel>,
+    shoppingCartItemList: List<ShoppingCartItem>,
     totalPrice: BigDecimal,
     isCtaButtonEnabled: Boolean,
     startCashOutProcess: () -> Unit
@@ -205,7 +204,7 @@ fun ShoppingCartListPreview(
 ) {
     ShoppingCartList(
         lazyListState = lazyListState, listOf(
-            ShoppingCartItemViewModel(cartItemProductData = Product(
+            ShoppingCartItem(cartItemProductData = Product(
                 productId = UUID.randomUUID(),
                 code = ProductDiscount.VOUCHER.name,
                 name = ProductDiscount.VOUCHER.name,
@@ -213,7 +212,7 @@ fun ShoppingCartListPreview(
                 quantity = 2
             ),
                 onShoppingCartStateEvent = remember { mutableStateOf(ShoppingCartStates.Initial) }),
-            ShoppingCartItemViewModel(cartItemProductData = Product(
+            ShoppingCartItem(cartItemProductData = Product(
                 productId = UUID.randomUUID(),
                 code = ProductDiscount.TSHIRT.name,
                 name = ProductDiscount.TSHIRT.name,

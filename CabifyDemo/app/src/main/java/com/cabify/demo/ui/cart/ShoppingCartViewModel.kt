@@ -1,4 +1,4 @@
-package com.cabify.demo.ui
+package com.cabify.demo.ui.cart
 
 import android.util.Log
 import androidx.compose.runtime.State
@@ -15,7 +15,7 @@ import java.util.*
 
 class ShoppingCartViewModel : ViewModel() {
 
-    var shoppingCartItems = mutableStateListOf<ShoppingCartItemViewModel>()
+    var shoppingCartItems = mutableStateListOf<ShoppingCartItem>()
 
     val shoppingCartTotalPriceState: State<BigDecimal>
         get() = mutableStateOf(shoppingCartItems.sumOf { it.cartItemProductData.amountTotal() })
@@ -45,8 +45,8 @@ class ShoppingCartViewModel : ViewModel() {
 
     fun addItemToCart(code: String, name: String, price: BigDecimal) {
         shoppingCartItems.firstOrNull { x -> x.cartItemProductData.code == code }?.let {
-                it.cartItemProductData.quantity += 1
-            } ?: kotlin.run {
+            it.cartItemProductData.quantity += 1
+        } ?: kotlin.run {
             shoppingCartItems.add(
                 toShoppingCartItemViewModel(
                     UUID.randomUUID(), code, name, price, 1
@@ -60,15 +60,15 @@ class ShoppingCartViewModel : ViewModel() {
 
     private fun handleShoppingCartState() =
         snapshotFlow { onShoppingCartStateEvent.value }.onEach { shoppingCartStateEvent ->
-                when (shoppingCartStateEvent) {
-                    is ShoppingCartStates.Initial -> {
-                        // nothing to do
-                    }
-                    is ShoppingCartStates.RemoveProductItemFromShoppingCartEvent -> {
-                        removeProductItemFromShoppingCart(shoppingCartStateEvent.productId)
-                    }
+            when (shoppingCartStateEvent) {
+                is ShoppingCartStates.Initial -> {
+                    // nothing to do
                 }
-            }.launchIn(viewModelScope)
+                is ShoppingCartStates.RemoveProductItemFromShoppingCartEvent -> {
+                    removeProductItemFromShoppingCart(shoppingCartStateEvent.productId)
+                }
+            }
+        }.launchIn(viewModelScope)
 
     private fun removeProductItemFromShoppingCart(productId: UUID) {
         shoppingCartItems.firstOrNull { it.cartItemProductData.productId == productId }?.also {
@@ -100,7 +100,7 @@ class ShoppingCartViewModel : ViewModel() {
 
     private fun toShoppingCartItemViewModel(
         productId: UUID, code: String, name: String, price: BigDecimal, quantity: Int
-    ) = ShoppingCartItemViewModel(
+    ) = ShoppingCartItem(
         cartItemProductData = Product(
             productId = productId,
             code = code,
