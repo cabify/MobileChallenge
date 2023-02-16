@@ -21,6 +21,18 @@ final class DefaultGetProductsListUseCase: GetProductsListUseCase {
     }
     
     func getProductsList() -> AnyPublisher<ProductsList, Error> {
+        let testingUI = ProcessInfo.processInfo.arguments.contains("IS_UI_TESTING")
+        guard !testingUI else {
+            let mockedModel: ProductsListDTO = .init(products: [
+                .init(code: "VOUCHER", name: "Cabify Voucher", price: 5),
+                .init(code: "TSHIRT", name: "Cabify T-Shirt", price: 20),
+                .init(code: "MUG", name: "Cabify Coffee Mug", price: 7.5)
+            ])
+            return Just(mockedModel.domainObject)
+                .mapError { _ in APIError.parseError() }
+                .eraseToAnyPublisher()
+        }
+        
         return productsListRepository.fetchProductsList()
     }
 }
