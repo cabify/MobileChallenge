@@ -72,7 +72,7 @@ struct EmptyStateView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct EmptyStateView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {

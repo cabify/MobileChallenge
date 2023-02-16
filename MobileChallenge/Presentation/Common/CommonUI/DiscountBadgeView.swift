@@ -28,7 +28,7 @@ struct DiscountBadgeView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct DiscountBadgeView_Previews: PreviewProvider {
     static var previews: some View {
         DiscountBadgeView(badgeText: CartLayoutViewModel.CartItem.defaultType.discountBadgeText ?? "")

@@ -27,7 +27,7 @@ struct CartButtonView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct OpenCartButtonView_Previews: PreviewProvider {
     static var previews: some View {
         CartButtonView(onTapAction: { })

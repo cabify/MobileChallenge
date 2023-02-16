@@ -70,7 +70,7 @@ struct PriceView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
+#if DEBUG && TESTING
 struct PriceView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
