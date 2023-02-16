@@ -10,13 +10,11 @@ import SwiftUI
 struct CartQuantityView: View {
     
     private let cartItem: CartLayoutViewModel.CartItem
-    @State private var cartQuantity: Int
     private let onChangeQuantityAction: ProductsView.ProductsViewActionBlock
     
     init(cartItem: CartLayoutViewModel.CartItem, onChangeQuantityAction: @escaping ProductsView.ProductsViewActionBlock) {
         self.cartItem = cartItem
         self.onChangeQuantityAction = onChangeQuantityAction
-        _cartQuantity = State(initialValue: cartItem.cartQuantity)
     }
     
     var body: some View {
@@ -25,8 +23,7 @@ struct CartQuantityView: View {
                 // Minus button
                 quantityButton(imageNamed: "minus.rectangle") {
                     onChangeQuantityAction(.remove(cartItem))
-                    cartQuantity -= 1
-                }.disabled(cartQuantity <= 0)
+                }.disabled(cartItem.cartQuantity <= 0)
                 
                 // Current quantity
                 Text("\(cartItem.cartQuantity)")
@@ -35,7 +32,6 @@ struct CartQuantityView: View {
                 // Plus button
                 quantityButton(imageNamed: "plus.rectangle") {
                     onChangeQuantityAction(.add(cartItem))
-                    cartQuantity += 1
                 }
             }
         }
