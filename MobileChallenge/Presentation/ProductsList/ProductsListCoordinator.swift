@@ -78,6 +78,10 @@ final class ProductsListCoordinator: ObservableObject {
             clearCartUseCase: defaultClearCartUseCase
         )
     }
+    
+    func closeCart() {
+        self.cartDetailViewModel = nil
+    }
 }
 
 #if DEBUG && TESTING

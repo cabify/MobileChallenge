@@ -23,6 +23,10 @@ final class CartDetailViewModel: ObservableObject {
         self.clearCartUseCase = clearCartUseCase
     }
     
+    func closeCart() {
+        self.coordinator.closeCart()
+    }
+    
     // MARK: - Add/remove items
     private func updateItem(_ item: CartLayoutViewModel.CartItem, newCartQuantity: Int) {
         guard case .loaded(let cart) = self.coordinator.viewState.state else { return }

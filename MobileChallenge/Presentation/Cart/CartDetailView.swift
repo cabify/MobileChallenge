@@ -44,7 +44,7 @@ struct CartDetailView: View {
                 .navigationTitle(AccessibilityID.Navigation.Cart)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar() {
-                    Button("Close", action: dismiss.callAsFunction)
+                    Button("Close", action: closeCart)
                     .tint(.purple)
                     .accessibilityIdentifier(AccessibilityID.CartDetailView.CloseButton)
                 }
@@ -56,6 +56,11 @@ struct CartDetailView: View {
                 EmptyStateView(emptyType: .cart, onRetryAction: dismiss.callAsFunction)
             }
         }
+    }
+    
+    private func closeCart() {
+        dismiss.callAsFunction()
+        self.viewModel.closeCart()
     }
 }
 
