@@ -32,7 +32,7 @@ struct EmptyStateView: View {
         
         var retryButtonText: String? {
             switch self {
-            case .cart: return "Continue shopping"
+            case .cart: return AccessibilityID.CartDetailView.EmptyCartButton
             case .error: return "Retry"
             default: return nil
             }

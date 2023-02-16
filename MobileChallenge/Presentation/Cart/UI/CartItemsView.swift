@@ -31,7 +31,7 @@ struct CartItemsView: View {
             .onTapGesture { return }
             
         }, header: {
-            PrimaryButtonView(buttonText: "Clear cart", onTapAction: {
+            PrimaryButtonView(buttonText: AccessibilityID.CartDetailView.ClearCart, onTapAction: {
                 onChangeQuantityAction(.clearCart)
             })
         })

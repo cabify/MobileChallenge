@@ -29,6 +29,8 @@ enum AccessibilityID {
         static let CloseButton = "CloseButton"
         static let Summary = "Summary"
         static let EmptyCart = "EmptyCart"
+        static let EmptyCartButton = "Continue shopping"
+        static let ClearCart = "Clear cart"
         static let ItemList = "ItemList"
         
         struct Cell {
