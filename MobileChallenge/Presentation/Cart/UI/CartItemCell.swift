@@ -26,6 +26,7 @@ struct CartItemCell: View {
                 Text(cartItem.name)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.black)
+                    .accessibilityIdentifier(AccessibilityID.CartDetailView.Cell.Name)
                 
                 Spacer()
                 

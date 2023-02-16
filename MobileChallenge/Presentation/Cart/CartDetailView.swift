@@ -24,9 +24,11 @@ struct CartDetailView: View {
             case .loaded(let cart):
                 VStack(spacing: 10) {
                     CartSummaryView(cartViewModel: cart)
+                        .accessibilityIdentifier(AccessibilityID.CartDetailView.Summary)
                     
                     if cart.cartItems.isEmpty {
                         EmptyStateView(emptyType: .cart, onRetryAction: dismiss.callAsFunction)
+                            .accessibilityIdentifier(AccessibilityID.CartDetailView.EmptyCart)
                         
                     } else {
                         CartItemsView(cart: cart) { anAction in
@@ -36,13 +38,15 @@ struct CartDetailView: View {
                             case .clearCart: self.viewModel.clearCart()
                             }
                         }
+                        .accessibilityIdentifier(AccessibilityID.CartDetailView.ItemList)
                     }
                 }
-                .navigationTitle("Place your order")
+                .navigationTitle(AccessibilityID.Navigation.Cart)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar() {
                     Button("Close", action: dismiss.callAsFunction)
                     .tint(.purple)
+                    .accessibilityIdentifier(AccessibilityID.CartDetailView.CloseButton)
                 }
                 // Hack to disable row selection to allow
                 // the tap on inner buttons

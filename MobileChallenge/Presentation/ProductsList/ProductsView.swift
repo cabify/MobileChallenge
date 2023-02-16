@@ -32,6 +32,7 @@ struct ProductsView: View {
             // when the view first appears, which should make the
             // view model transition into its loading state:
             Color.clear.onAppear(perform: viewModel.load)
+                .accessibilityIdentifier(AccessibilityID.Navigation.ProductsList)
             
         case .loading:
             ProgressView()
@@ -53,6 +54,7 @@ struct ProductsView: View {
                     case .clearCart: break
                     }
                 }
+                .accessibilityIdentifier(AccessibilityID.Products.ProductList)
             }
         }
     }

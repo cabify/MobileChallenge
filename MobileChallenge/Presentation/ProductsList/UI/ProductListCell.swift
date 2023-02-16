@@ -28,6 +28,7 @@ struct ProductListCell: View {
                     Text(cartItem.name)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.black)
+                        .accessibilityIdentifier(AccessibilityID.Products.Cell.Name)
                     
                     Spacer()
                     
@@ -36,11 +37,13 @@ struct ProductListCell: View {
                         cartItem: cartItem,
                         onChangeQuantityAction: onChangeQuantityAction
                     )
+                    .accessibilityIdentifier(AccessibilityID.Products.Cell.Quantity)
                 }
                 
                 // Badge
                 if let badgeText = cartItem.productType.discountBadgeText {
                     DiscountBadgeView(badgeText: badgeText)
+                        .accessibilityIdentifier(AccessibilityID.Products.Cell.DiscountBadge)
                 }
             }
             
@@ -50,6 +53,7 @@ struct ProductListCell: View {
                 specialPrice: cartItem.formattedSpecialPrice
             )
             .frame(minWidth: 60, alignment: .trailing)
+            .accessibilityIdentifier(AccessibilityID.Products.Cell.Prices)
         }
         .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
     }

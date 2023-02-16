@@ -22,6 +22,7 @@ struct CartButtonView: View {
             Image(systemName: "cart")
         }
         .tint(.purple)
+        .accessibilityIdentifier(AccessibilityID.Navigation.CartButton)
     }
 }
 

@@ -21,6 +21,8 @@
 		3347D7D7299D2AFA00E6A28E /* MockedDefaultCartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3347D791299CF78600E6A28E /* MockedDefaultCartRepository.swift */; };
 		3347D7D8299D2AFA00E6A28E /* MockedURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356E70E299AB4CE00127F8B /* MockedURLProtocol.swift */; };
 		3347D7DA299D2AFA00E6A28E /* MockedCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3347D78F299CF3E800E6A28E /* MockedCoreDataStorage.swift */; };
+		33480175299E7355009BA875 /* AccessibilityIdentifier+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33480174299E7355009BA875 /* AccessibilityIdentifier+Helper.swift */; };
+		33480176299E739D009BA875 /* AccessibilityIdentifier+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33480174299E7355009BA875 /* AccessibilityIdentifier+Helper.swift */; };
 		3362B44429968D2600B99241 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3362B44329968D2600B99241 /* LaunchScreen.storyboard */; };
 		3371D97D298932B600774082 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97C298932B600774082 /* ProductsView.swift */; };
 		3371D97F2989333A00774082 /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3371D97E2989333A00774082 /* ProductsViewModel.swift */; };
@@ -97,6 +99,7 @@
 		3347D78B299CF33700E6A28E /* NSManagedObjectContextSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextSpy.swift; sourceTree = "<group>"; };
 		3347D78F299CF3E800E6A28E /* MockedCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedCoreDataStorage.swift; sourceTree = "<group>"; };
 		3347D791299CF78600E6A28E /* MockedDefaultCartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedDefaultCartRepository.swift; sourceTree = "<group>"; };
+		33480174299E7355009BA875 /* AccessibilityIdentifier+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccessibilityIdentifier+Helper.swift"; sourceTree = "<group>"; };
 		334B5948299BA35F00B29EA8 /* ParameterEncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodableTests.swift; sourceTree = "<group>"; };
 		334B594A299BA76200B29EA8 /* MockedDefaultProductsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedDefaultProductsListRepository.swift; sourceTree = "<group>"; };
 		334B594C299BD65C00B29EA8 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
@@ -196,6 +199,14 @@
 				3347D78F299CF3E800E6A28E /* MockedCoreDataStorage.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		33480152299E3805009BA875 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				33480174299E7355009BA875 /* AccessibilityIdentifier+Helper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		334B5947299BA34D00B29EA8 /* Protocols */ = {
@@ -557,6 +568,7 @@
 		33D6A2832982EBEA005CF1D0 /* MobileChallengeUITests */ = {
 			isa = PBXGroup;
 			children = (
+				33480152299E3805009BA875 /* Helper */,
 			);
 			path = MobileChallengeUITests;
 			sourceTree = "<group>";
@@ -723,6 +735,7 @@
 				338F7FB2298D178F00BBA7DC /* CoreDataRepository.swift in Sources */,
 				3371D982298933F200774082 /* CartDetailView.swift in Sources */,
 				3371D9862989386000774082 /* ProductsListCoordinator.swift in Sources */,
+				33480176299E739D009BA875 /* AccessibilityIdentifier+Helper.swift in Sources */,
 				338F7FCA298D502200BBA7DC /* ProductType.swift in Sources */,
 				33C4F9EE298BFEE5004B8352 /* EmptyStateView.swift in Sources */,
 				339697C6298ADDDE009091CB /* CartQuantityView.swift in Sources */,
@@ -769,6 +782,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33480175299E7355009BA875 /* AccessibilityIdentifier+Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

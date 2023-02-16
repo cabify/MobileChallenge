@@ -17,7 +17,7 @@ struct ProductsListCoordinatorView: View {
         NavigationView {
             ProductsView(viewModel: coordinatorObject.productsViewModel)
                 .environmentObject(coordinatorObject.viewState)
-                .navigationTitle(Text("Products list"))
+                .navigationTitle(Text(AccessibilityID.Navigation.ProductsList))
                 .navigationBarTitleDisplayMode(.large)
                 .toolbar {
                     CartButtonView(onTapAction: {
