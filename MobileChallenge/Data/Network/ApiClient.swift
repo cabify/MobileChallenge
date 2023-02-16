@@ -60,10 +60,7 @@ final class ApiClient: ApiExecutable {
                     }
                 }
                 .mapError { error in
-                    if let error = error as? RequestableError {
-                        return error
-                        
-                    } else if let error = error as? APIError {
+                    if let error = error as? APIError {
                         return error
                     }
                     
