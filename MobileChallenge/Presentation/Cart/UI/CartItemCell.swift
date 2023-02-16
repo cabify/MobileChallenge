@@ -34,6 +34,7 @@ struct CartItemCell: View {
                 if let badgeText = cartItem.productType.discountBadgeText {
                     DiscountBadgeView(badgeText: badgeText)
                         .frame(alignment: .trailing)
+                        .accessibilityIdentifier(AccessibilityID.CartDetailView.Cell.DiscountBadge)
                 }
             }
             // Cart counting and price
@@ -43,6 +44,7 @@ struct CartItemCell: View {
                     cartItem: cartItem,
                     onChangeQuantityAction: onChangeQuantityAction
                 )
+                .accessibilityIdentifier(AccessibilityID.CartDetailView.Cell.Quantity)
                 
                 Spacer()
                 
@@ -53,6 +55,7 @@ struct CartItemCell: View {
                     inline: true
                 )
                 .frame(minWidth: 60, alignment: .trailing)
+                .accessibilityIdentifier(AccessibilityID.CartDetailView.Cell.Prices)
             }
         }
     }
