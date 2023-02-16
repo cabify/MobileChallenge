@@ -73,8 +73,6 @@
 		33D6A2652982EBE8005CF1D0 /* MobileChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2642982EBE8005CF1D0 /* MobileChallengeApp.swift */; };
 		33D6A2692982EBE9005CF1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A2682982EBE9005CF1D0 /* Assets.xcassets */; };
 		33D6A26C2982EBE9005CF1D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D6A26B2982EBE9005CF1D0 /* Preview Assets.xcassets */; };
-		33D6A2852982EBEA005CF1D0 /* MobileChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2842982EBEA005CF1D0 /* MobileChallengeUITests.swift */; };
-		33D6A2872982EBEA005CF1D0 /* MobileChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D6A2862982EBEA005CF1D0 /* MobileChallengeUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,8 +163,6 @@
 		33D6A26B2982EBE9005CF1D0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		33D6A2762982EBEA005CF1D0 /* MobileChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D6A2802982EBEA005CF1D0 /* MobileChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		33D6A2842982EBEA005CF1D0 /* MobileChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeUITests.swift; sourceTree = "<group>"; };
-		33D6A2862982EBEA005CF1D0 /* MobileChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -561,8 +557,6 @@
 		33D6A2832982EBEA005CF1D0 /* MobileChallengeUITests */ = {
 			isa = PBXGroup;
 			children = (
-				33D6A2842982EBEA005CF1D0 /* MobileChallengeUITests.swift */,
-				33D6A2862982EBEA005CF1D0 /* MobileChallengeUITestsLaunchTests.swift */,
 			);
 			path = MobileChallengeUITests;
 			sourceTree = "<group>";
@@ -775,8 +769,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33D6A2872982EBEA005CF1D0 /* MobileChallengeUITestsLaunchTests.swift in Sources */,
-				33D6A2852982EBEA005CF1D0 /* MobileChallengeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
