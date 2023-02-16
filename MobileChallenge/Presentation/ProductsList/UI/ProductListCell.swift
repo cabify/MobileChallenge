@@ -1,0 +1,74 @@
+//
+//  ProductListCell.swift
+//  MobileChallenge
+//
+//  Created by thomas pereira on 01/02/2023.
+//
+
+import SwiftUI
+
+struct ProductListCell: View {
+    
+    // Properties
+    private let cartItem: CartLayoutViewModel.CartItem
+    private let onChangeQuantityAction: ProductsView.ProductsViewActionBlock
+    
+    init(cartItem: CartLayoutViewModel.CartItem, onChangeQuantityAction: @escaping ProductsView.ProductsViewActionBlock) {
+        self.cartItem = cartItem
+        self.onChangeQuantityAction = onChangeQuantityAction
+    }
+    
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 10) {
+            // Product name, badge and cart counting
+            VStack(alignment: .leading, spacing: 5) {
+                // Product name and cart counting
+                HStack {
+                    // Name
+                    Text(cartItem.name)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.black)
+                        .accessibilityIdentifier(AccessibilityID.Products.Cell.Name)
+                    
+                    Spacer()
+                    
+                    // Cart counting
+                    CartQuantityView(
+                        cartItem: cartItem,
+                        onChangeQuantityAction: onChangeQuantityAction
+                    )
+                    .accessibilityIdentifier(AccessibilityID.Products.Cell.Quantity)
+                }
+                
+                // Badge
+                if let badgeText = cartItem.productType.discountBadgeText {
+                    DiscountBadgeView(badgeText: badgeText)
+                        .accessibilityIdentifier(AccessibilityID.Products.Cell.DiscountBadge)
+                }
+            }
+            
+            // Product price
+            PriceView(
+                price: cartItem.formattedPrice,
+                specialPrice: cartItem.formattedSpecialPrice
+            )
+            .frame(minWidth: 60, alignment: .trailing)
+            .accessibilityIdentifier(AccessibilityID.Products.Cell.Prices)
+        }
+        .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+    }
+}
+
+// MARK: - Preview
+#if DEBUG && TESTING
+struct ProductListCell_Previews: PreviewProvider {
+    static var previews: some View {
+        List(CartLayoutViewModel.CartItem.productsListPreview) { aCartItem in
+            ProductListCell(
+                cartItem: aCartItem,
+                onChangeQuantityAction: { _ in }
+            )
+        }
+    }
+}
+#endif
