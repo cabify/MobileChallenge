@@ -14,8 +14,6 @@
 		8435BAFC2A32DF14007538CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8435BAFB2A32DF14007538CF /* Assets.xcassets */; };
 		8435BAFF2A32DF14007538CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8435BAFD2A32DF14007538CF /* LaunchScreen.storyboard */; };
 		8435BB0A2A32DF15007538CF /* DemoCabifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB092A32DF15007538CF /* DemoCabifyTests.swift */; };
-		8435BB142A32DF15007538CF /* DemoCabifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB132A32DF15007538CF /* DemoCabifyUITests.swift */; };
-		8435BB162A32DF15007538CF /* DemoCabifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB152A32DF15007538CF /* DemoCabifyUITestsLaunchTests.swift */; };
 		8435BB252A32DF72007538CF /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB232A32DF72007538CF /* ProductListViewController.swift */; };
 		8435BB262A32DF72007538CF /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435BB242A32DF72007538CF /* ProductListViewController.xib */; };
 		8435BB292A32DF86007538CF /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB282A32DF86007538CF /* ProductListViewModel.swift */; };
@@ -23,13 +21,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		8435BB062A32DF15007538CF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8435BAE72A32DF14007538CF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8435BAEE2A32DF14007538CF;
-			remoteInfo = DemoCabify;
-		};
-		8435BB102A32DF15007538CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8435BAE72A32DF14007538CF /* Project object */;
 			proxyType = 1;
@@ -49,7 +40,6 @@
 		8435BB002A32DF14007538CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8435BB052A32DF15007538CF /* DemoCabifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoCabifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8435BB092A32DF15007538CF /* DemoCabifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCabifyTests.swift; sourceTree = "<group>"; };
-		8435BB0F2A32DF15007538CF /* DemoCabifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoCabifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8435BB132A32DF15007538CF /* DemoCabifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCabifyUITests.swift; sourceTree = "<group>"; };
 		8435BB152A32DF15007538CF /* DemoCabifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCabifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8435BB232A32DF72007538CF /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
@@ -66,13 +56,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8435BB022A32DF15007538CF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8435BB0C2A32DF15007538CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -97,7 +80,6 @@
 			children = (
 				8435BAEF2A32DF14007538CF /* DemoCabify.app */,
 				8435BB052A32DF15007538CF /* DemoCabifyTests.xctest */,
-				8435BB0F2A32DF15007538CF /* DemoCabifyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,24 +172,6 @@
 			productReference = 8435BB052A32DF15007538CF /* DemoCabifyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8435BB0E2A32DF15007538CF /* DemoCabifyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8435BB1F2A32DF15007538CF /* Build configuration list for PBXNativeTarget "DemoCabifyUITests" */;
-			buildPhases = (
-				8435BB0B2A32DF15007538CF /* Sources */,
-				8435BB0C2A32DF15007538CF /* Frameworks */,
-				8435BB0D2A32DF15007538CF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8435BB112A32DF15007538CF /* PBXTargetDependency */,
-			);
-			name = DemoCabifyUITests;
-			productName = DemoCabifyUITests;
-			productReference = 8435BB0F2A32DF15007538CF /* DemoCabifyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -222,10 +186,6 @@
 						CreatedOnToolsVersion = 14.3;
 					};
 					8435BB042A32DF15007538CF = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 8435BAEE2A32DF14007538CF;
-					};
-					8435BB0E2A32DF15007538CF = {
 						CreatedOnToolsVersion = 14.3;
 						TestTargetID = 8435BAEE2A32DF14007538CF;
 					};
@@ -246,7 +206,6 @@
 			targets = (
 				8435BAEE2A32DF14007538CF /* DemoCabify */,
 				8435BB042A32DF15007538CF /* DemoCabifyTests */,
-				8435BB0E2A32DF15007538CF /* DemoCabifyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -264,13 +223,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8435BB032A32DF15007538CF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8435BB0D2A32DF15007538CF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,15 +252,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8435BB0B2A32DF15007538CF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8435BB142A32DF15007538CF /* DemoCabifyUITests.swift in Sources */,
-				8435BB162A32DF15007538CF /* DemoCabifyUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -316,11 +259,6 @@
 			isa = PBXTargetDependency;
 			target = 8435BAEE2A32DF14007538CF /* DemoCabify */;
 			targetProxy = 8435BB062A32DF15007538CF /* PBXContainerItemProxy */;
-		};
-		8435BB112A32DF15007538CF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8435BAEE2A32DF14007538CF /* DemoCabify */;
-			targetProxy = 8435BB102A32DF15007538CF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -548,40 +486,6 @@
 			};
 			name = Release;
 		};
-		8435BB202A32DF15007538CF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jfcadillo951.DemoCabifyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = DemoCabify;
-			};
-			name = Debug;
-		};
-		8435BB212A32DF15007538CF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jfcadillo951.DemoCabifyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = DemoCabify;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -608,15 +512,6 @@
 			buildConfigurations = (
 				8435BB1D2A32DF15007538CF /* Debug */,
 				8435BB1E2A32DF15007538CF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8435BB1F2A32DF15007538CF /* Build configuration list for PBXNativeTarget "DemoCabifyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8435BB202A32DF15007538CF /* Debug */,
-				8435BB212A32DF15007538CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
