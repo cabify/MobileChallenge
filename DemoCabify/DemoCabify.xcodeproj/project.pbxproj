@@ -16,6 +16,9 @@
 		8435BB0A2A32DF15007538CF /* DemoCabifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB092A32DF15007538CF /* DemoCabifyTests.swift */; };
 		8435BB142A32DF15007538CF /* DemoCabifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB132A32DF15007538CF /* DemoCabifyUITests.swift */; };
 		8435BB162A32DF15007538CF /* DemoCabifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB152A32DF15007538CF /* DemoCabifyUITestsLaunchTests.swift */; };
+		8435BB252A32DF72007538CF /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB232A32DF72007538CF /* ProductListViewController.swift */; };
+		8435BB262A32DF72007538CF /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435BB242A32DF72007538CF /* ProductListViewController.xib */; };
+		8435BB292A32DF86007538CF /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435BB282A32DF86007538CF /* ProductListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		8435BB0F2A32DF15007538CF /* DemoCabifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoCabifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8435BB132A32DF15007538CF /* DemoCabifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCabifyUITests.swift; sourceTree = "<group>"; };
 		8435BB152A32DF15007538CF /* DemoCabifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCabifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8435BB232A32DF72007538CF /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
+		8435BB242A32DF72007538CF /* ProductListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListViewController.xib; sourceTree = "<group>"; };
+		8435BB282A32DF86007538CF /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,8 @@
 		8435BAF12A32DF14007538CF /* DemoCabify */ = {
 			isa = PBXGroup;
 			children = (
+				8435BB272A32DF76007538CF /* ViewModel */,
+				8435BB222A32DF56007538CF /* View */,
 				8435BAF22A32DF14007538CF /* AppDelegate.swift */,
 				8435BAF42A32DF14007538CF /* SceneDelegate.swift */,
 				8435BAF62A32DF14007538CF /* ViewController.swift */,
@@ -125,6 +133,23 @@
 				8435BB152A32DF15007538CF /* DemoCabifyUITestsLaunchTests.swift */,
 			);
 			path = DemoCabifyUITests;
+			sourceTree = "<group>";
+		};
+		8435BB222A32DF56007538CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8435BB232A32DF72007538CF /* ProductListViewController.swift */,
+				8435BB242A32DF72007538CF /* ProductListViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8435BB272A32DF76007538CF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8435BB282A32DF86007538CF /* ProductListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +258,7 @@
 			files = (
 				8435BAFF2A32DF14007538CF /* LaunchScreen.storyboard in Resources */,
 				8435BAFC2A32DF14007538CF /* Assets.xcassets in Resources */,
+				8435BB262A32DF72007538CF /* ProductListViewController.xib in Resources */,
 				8435BAFA2A32DF14007538CF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,7 +285,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8435BAF72A32DF14007538CF /* ViewController.swift in Sources */,
+				8435BB292A32DF86007538CF /* ProductListViewModel.swift in Sources */,
 				8435BAF32A32DF14007538CF /* AppDelegate.swift in Sources */,
+				8435BB252A32DF72007538CF /* ProductListViewController.swift in Sources */,
 				8435BAF52A32DF14007538CF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
